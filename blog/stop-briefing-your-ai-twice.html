@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stop Briefing Your AI Twice — DaRoy Perkins</title>
+  <meta name="description" content="The real AI unlock isn't prompts or job titles — it's one shared brief that every assistant reads, so you never start from zero.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"><span class="bolt">⚡</span> DaRoy Perkins</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="index.html">Writing</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="article">
+    <div class="wrap">
+      <p><a href="index.html">← All writing</a></p>
+      <h1>Stop Briefing Your AI Twice</h1>
+      <p class="meta">Sep 2026 · DaRoy Perkins</p>
+
+      <p>You've heard "give your AI a job" a hundred times by now. Fine advice. But it's not the unlock.</p>
+
+      <p>Here's what actually changed the game for me: I stopped briefing every AI assistant from scratch.</p>
+
+      <p>I run two of them. One handles my day-job work — production reports, crew logistics, the thousand small decisions on a commercial solar jobsite. The other runs my personal life — money, schedule, research, reminders. Different jobs, different lanes.</p>
+
+      <p>For months, each one started dumb. New chat, same twenty questions: what do you do, what are your preferences, what's the context here. I was paying an amnesia tax on every single conversation.</p>
+
+      <p>Then I did the obvious thing: I wrote it all down once.</p>
+
+      <h2>The brief</h2>
+      <p>One page. Who I am, what I do, the projects I'm running, how I like things done, decisions I've already made, what's still open. Nothing fancy — just the context I'd give a new hire on day one.</p>
+      <p>Now every assistant reads the same brief. Drop it into custom instructions, project files, or paste it at the top of a big chat. Day one, full context. No ramp-up, no twenty questions.</p>
+
+      <blockquote class="pullquote">"The assistants don't talk to each other. They don't need to. They all read the same file, so they all stay in sync through me."</blockquote>
+
+      <h2>The loop that makes it compound</h2>
+      <p>Here's the part most people miss: the brief isn't write-once. When an assistant figures out something worth keeping — a preference, a decision, a detail about a project — I copy it back into the brief. One line. Now every assistant knows it.</p>
+      <p>My work assistant learns how I like a report formatted → goes in the brief → my personal assistant stops asking me about it. Context flows one direction: into the brief, then out to all of them.</p>
+
+      <h2>Why this beats prompt collections</h2>
+      <p>Prompt lists are trivia. A hundred clever questions, each one starting from zero. The brief is infrastructure — every conversation starts where the last one ended, across every assistant you use.</p>
+      <p>The assistants don't talk to each other. They don't need to. They all read the same file, so they all stay in sync through me. I'm the router — thirty seconds of copying, and the whole system gets smarter.</p>
+
+      <h2>The superintendent's take</h2>
+      <p>On a jobsite, you don't re-brief the crew every morning on what the project is. You brief once. After that it's toolbox talks — short updates, what's changed, what to watch today.</p>
+      <p>Same principle. Brief your AI once. Then just send updates.</p>
+      <p>Stop paying the amnesia tax. Write the brief.</p>
+
+      <div class="bio-footer">
+        I'm Roy — commercial solar superintendent, 14 years and 35 MW+ in the trade, building TradeStack and studying for my Maryland Journeyman Electrician license. I write about running jobsites and building software that survives the field.
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 DaRoy Perkins</span>
+    <span>Built for the field. ⚡</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
