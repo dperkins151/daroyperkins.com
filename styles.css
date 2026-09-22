@@ -184,6 +184,22 @@ section { padding: 72px 0; }
   color: var(--text);
 }
 
+/* Prompt block (copy-paste callout) */
+.prompt-block {
+  background: #141417;
+  border: 1px solid #2a2a2e;
+  border-left: 4px solid var(--amber);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin: 32px 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.prompt-block p { margin: 0 0 12px; }
+.prompt-block p:last-child { margin-bottom: 0; }
+.prompt-block ol { margin: 12px 0 12px 20px; }
+
 /* Steps */
 .steps { list-style: none; counter-reset: step; }
 .steps li {
