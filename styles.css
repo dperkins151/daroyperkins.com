@@ -200,6 +200,25 @@ section { padding: 72px 0; }
 .prompt-block p:last-child { margin-bottom: 0; }
 .prompt-block ol { margin: 12px 0 12px 20px; }
 
+/* Template block (copy-paste markdown) */
+.template-block {
+  background: #141417;
+  border: 1px solid #2a2a2e;
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin: 32px 0;
+  overflow-x: auto;
+}
+.template-block pre {
+  margin: 0;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #d4d4d8;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 /* Steps */
 .steps { list-style: none; counter-reset: step; }
 .steps li {
