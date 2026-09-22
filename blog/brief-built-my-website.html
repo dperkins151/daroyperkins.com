@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Brief Built My Website — DaRoy Perkins</title>
+  <meta name="description" content="I shipped daroyperkins.com in an afternoon without writing a line of code. The secret wasn't the AI — it was the brief.md it built from.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"><span class="bolt">⚡</span> DaRoy Perkins</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="index.html">Writing</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="article">
+    <div class="wrap">
+      <p><a href="index.html">← All writing</a></p>
+      <h1>My Brief Built My Website</h1>
+      <p class="meta">Sep 2026 · DaRoy Perkins</p>
+
+      <p>I shipped daroyperkins.com today. Design, copy, GitHub repo, hosting, custom domain — live in an afternoon. I didn't write a line of code.</p>
+
+      <p>Here's the part nobody talks about: the website wasn't the hard part. Knowing what to say was. And I already had that written down.</p>
+
+      <h2>The brief did the heavy lifting</h2>
+      <p>Before I ever said "build me a website," I had a brief: who I am, what I'm building, how I talk, what I'm known for. Fourteen years in commercial solar. The superintendent who ships software. TradeStack, Mari0, the journeyman license I'm chasing. The positioning was already decided — sitting in a markdown file.</p>
+      <p>So when I told Muse "build my personal site," there was no blank page. No twenty questions about who I am or what I do. It already knew the headline, the projects, the voice. It just had to execute.</p>
+      <p>That's the part people miss. The brief isn't just for chat — it's build material.</p>
+
+      <h2>What Muse actually did</h2>
+      <ul>
+        <li>Designed the site around what it knew about me: near-black, electric amber, the ⚡ that's basically my signature at this point</li>
+        <li>Wrote the copy in my voice — not generic "welcome to my portfolio" filler</li>
+        <li>Built it as a pure static site: HTML and CSS, no framework, no build step, nothing to maintain</li>
+        <li>Created the GitHub repo and pushed every change</li>
+        <li>Turned on GitHub Pages and wired up the custom domain</li>
+        <li>Walked me through the DNS records, then verified the whole thing was live</li>
+      </ul>
+      <p>I approved things. It did things. That's the division of labor.</p>
+
+      <h2>What I still had to do</h2>
+      <p>Honest accounting:</p>
+      <ul>
+        <li>I made the calls — design direction, what goes on the homepage, what each post says</li>
+        <li>I touched DNS myself — the A records and CNAME went in by my hand</li>
+        <li>I approved every publish before it went live</li>
+      </ul>
+      <p>The human checkpoints are the point. You stay the superintendent. The AI runs the crew.</p>
+
+      <h2>The playbook</h2>
+      <ol>
+        <li>Write your brief — who you are, what you're building, how you sound. (There's a fill-in-the-blank template in my <a href="stop-briefing-your-ai-twice.html">last post</a>.)</li>
+        <li>Tell your assistant the outcome, not the steps: "build my personal site and get it live."</li>
+        <li>Let it pick the boring stack: static site, GitHub Pages, a domain you already own.</li>
+        <li>You handle the checkpoints: design approval, DNS, the final ship-it.</li>
+      </ol>
+      <p>Total cost: a domain I already owned and an afternoon of decisions.</p>
+
+      <blockquote class="pullquote">"Your brief is the most undervalued file on your computer. Stop briefing. Start building."</blockquote>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 DaRoy Perkins</span>
+    <span>Built for the field. ⚡</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
