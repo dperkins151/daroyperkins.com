@@ -64,7 +64,12 @@ const review = [...questions.filter((q) => q.review), ...cards.filter((c) => c.r
 let md = `# Content review queue — Journeyman HQ v${manifest.banks.questions.version} banks\n\nGenerated ${today}. Items flagged \`review: true\` are uncertain and must be verified against the NEC 2020 book before Roy relies on them. Everything else was drafted from NEC 2020 article references and basic theory; Luigi samples for accuracy, Roy spot-checks.\n\n`;
 md += `| Bank | Items | Flagged |\n|---|---|---|\n| questions | ${questions.length} | ${manifest.banks.questions.reviewFlagged} |\n| flashcards | ${cards.length} | ${manifest.banks.flashcards.reviewFlagged} |\n\nQuestions by topic: ${Object.entries(qOut.byTopic).map(([t, n]) => `${t} ${n}`).join(" · ")} (exam blueprint per sim: ${Object.entries(bp).map(([t, n]) => `${t} ${n}`).join(" · ")})\n\n`;
 if (short.length) md += `Pool depth warning (less than 2× blueprint): ${short.map(([t]) => t).join(", ")}. Add questions there in v2.\n\n`;
-md += `## Flagged items\n\n| ID | Article | What to verify |\n|---|---|---|\n` + review.map((x) => `| ${x.id} | ${x.article} | ${x.note} |`).join("\n") + "\n";
+md += `## Flagged items\n\n` + (review.length ? `| ID | Article | What to verify |\n|---|---|---|\n` + review.map((x) => `| ${x.id} | ${x.article} | ${x.note} |`).join("\n") + "\n" : "None open.\n");
+const logPath = path.join(root, "content/review-log.json");
+if (fs.existsSync(logPath)) {
+  const log = JSON.parse(fs.readFileSync(logPath, "utf8")).resolved || [];
+  md += `\n## Resolved\n\n| ID | Date | Outcome | Detail | Source |\n|---|---|---|---|---|\n` + log.map((r) => `| ${r.id} | ${r.date} | ${r.outcome} | ${r.detail} | ${(r.sources || []).map((u) => `[link](${u})`).join(" ")} |`).join("\n") + "\n";
+}
 fs.writeFileSync(path.join(root, "CONTENT-REVIEW.md"), md);
 console.log(`OK: ${questions.length} questions, ${cards.length} cards, ${plan.days.length} plan days → data/. Flagged for review: ${review.length}.`);
 console.log("by topic:", qOut.byTopic);

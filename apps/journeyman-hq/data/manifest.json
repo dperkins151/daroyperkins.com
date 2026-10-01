@@ -56,7 +56,7 @@
       "count": 192,
       "updated": "2026-10-01",
       "reviewed": null,
-      "reviewFlagged": 3
+      "reviewFlagged": 0
     },
     "flashcards": {
       "version": 1,
@@ -64,7 +64,7 @@
       "count": 104,
       "updated": "2026-10-01",
       "reviewed": null,
-      "reviewFlagged": 3
+      "reviewFlagged": 0
     },
     "plan": {
       "version": 1,

@@ -90,11 +90,9 @@
  {
   "id": "F-S12",
   "topic": "special",
-  "article": "547 / 550 / 551",
+  "article": "547 / 550 / 551.71",
   "difficulty": 2,
   "front": "Ag buildings, mobile homes, RV parks — one-liners",
-  "back": "Ag (547): equipotential planes in livestock areas, GFCI receptacles, corrosion-resistant methods\nMobile home (550): feeder 4-wire, min 100 A service equipment\nRV sites (551): 20% min of sites with 50 A 125/250 V receptacles (check current table)",
-  "review": true,
-  "note": "Verify 551.71 RV-site percentage table for 2020."
+  "back": "Ag (547): equipotential planes in livestock areas, GFCI on 125 V 15/20 A receptacles in listed areas, corrosion-resistant methods\nMobile home (550): 4-wire feeder, service equipment min 100 A\nRV sites (551.71, 2020): every site 20 A · ≥ 70% with 30 A 125 V · ≥ 40% with 50 A 125/250 V (was 20% in 2017) · every 50 A site also gets a 30 A"
  }
 ]

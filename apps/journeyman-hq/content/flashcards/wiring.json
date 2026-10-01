@@ -189,9 +189,7 @@
   "article": "250.118",
   "difficulty": 1,
   "front": "Raceways that count as an EGC",
-  "back": "RMC, IMC, EMT: yes, as-is\nFMC/LFMC: only with listed fittings, OCPD ≤ 20 A (FMC) / 60 A (LFMC ¾ in. and smaller), ≤ 6 ft total\nPVC, ENT, LFNC: never",
-  "review": true,
-  "note": "Verify 250.118(5)/(6) OCPD limits per trade size for FMC/LFMC."
+  "back": "RMC, IMC, EMT: yes, as-is\nFMC (250.118(5)): listed fittings, OCPD ≤ 20 A, ≤ 6 ft of flex in the fault path; add an EGC where used for flexibility\nLFMC (250.118(6)): ⅜ and ½ in. → OCPD ≤ 20 A; ¾ through 1¼ in. → OCPD ≤ 60 A (no smaller LFMC in the path); ≤ 6 ft total\nPVC, ENT, LFNC: never"
  },
  {
   "id": "F-W25",

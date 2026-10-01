@@ -32,3 +32,22 @@ Config defaults: `passPct 70`, `minTopicSample 3`, `timeLimitSec 12600`.
 That file lives on Luigi's VM and was **not reachable from this lane** (cloud container with only the daroyperkins.com repo). The rails above follow the house contract the sibling Jev engines document in the brain: one JSON in / one JSON out, explicit abstain (`uncertain` / `incomplete` / `invalid`) instead of invented conclusions, and no forced choice where the evidence is thin.
 
 **Reconcile before calling this final:** diff `exam-grader.py`'s verdict enum, pass threshold handling, per-topic thresholds, and any time-based rails against the table above; if the Python uses different names (e.g. `needs_review`), map them here and update `test/grader.test.js`. The test file is the spec — 10 cases cover each rail.
+
+## Reconciliation (2026-10-01)
+
+Luigi ran the comparison against `exam-grader.py` from his side (it is reachable from his VM, not from this lane). Verdict: **compatible, no code changes needed**; `test/grader.test.js` re-run there, 10/10 green.
+
+**Different grain, not competing graders**
+
+| | `exam-grader.py` | `js/grader.js` |
+|---|---|---|
+| Unit graded | one free-text **answer** | one multiple-choice **attempt** |
+| Engine | Jev-powered judgment | pure function, no model, no network |
+| Verdicts | `correct` / `partial` / `incorrect` / `cannot_grade` | `pass` / `fail` / `incomplete` / `invalid` |
+
+**Three shared rails**
+1. Unanswered = wrong on both.
+2. Explicit abstain states — neither grader invents a verdict when it can't grade.
+3. Small-sample caution — the in-browser `uncertain` topic status plays the role of the Python's disagreement rail.
+
+**Name mapping:** `cannot_grade` ↔ the invalid family in the browser (`invalid` when the attempt itself can't be scored, `incomplete` when it was never submitted). Per-answer `correct`/`incorrect` roll up into the attempt's `score`; `partial` has no multiple-choice equivalent.
