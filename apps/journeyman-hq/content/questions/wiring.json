@@ -719,7 +719,7 @@
    "The water pipe diameter"
   ],
   "answer": 1,
-  "explain": "Sized from the service-entrance conductors using Table 250.102(C)(1) (the 2020 edition points here rather than to Table 250.66).",
+  "explain": "Sized from the service-entrance conductors using Table 250.102(C)(1), and in the 2020 edition it need not be larger than 3/0 copper or 250 kcmil aluminum. (The 2017 edition pointed to this table too; earlier editions used Table 250.66.)",
   "tags": [
    "bonding",
    "water-pipe"

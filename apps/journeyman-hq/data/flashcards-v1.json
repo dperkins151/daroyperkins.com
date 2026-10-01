@@ -59,7 +59,7 @@
    "article": "422.16(B)",
    "difficulty": 1,
    "front": "Appliance cord lengths",
-   "back": "Waste disposer: 18–36 in.\nDishwasher / trash compactor: 3 ft to 6½ ft\nRange hood: 18 in. to 4 ft (2020 change from 18–36 in.)"
+   "back": "Waste disposer: 18–36 in.\nDishwasher / trash compactor: 3 ft to 6½ ft\nRange hood / microwave-hood: 18 in. to 4 ft (422.16(B)(4))"
   },
   {
    "id": "F-E07",
@@ -456,10 +456,12 @@
   {
    "id": "F-S12",
    "topic": "special",
-   "article": "547 / 550 / 551",
+   "article": "547 / 550 / 551.71",
    "difficulty": 2,
    "front": "Ag buildings, mobile homes, RV parks — one-liners",
-   "back": "Ag (547): equipotential planes in livestock areas, GFCI receptacles, corrosion-resistant methods\nMobile home (550): feeder 4-wire, min 100 A service equipment\nRV sites (551.71): every site 20 A GFCI; 70% with 30 A; 20% min with 50 A 125/250 V"
+   "back": "Ag (547): equipotential planes in livestock areas, GFCI on 125 V 15/20 A receptacles in listed areas, corrosion-resistant methods\nMobile home (550): 4-wire feeder, service equipment min 100 A\nRV sites (551.71, 2020): every site 20 A · ≥ 70% with 30 A 125 V · ≥ 40% with 50 A 125/250 V (was 20% in 2017) · every 50 A site also gets a 30 A",
+   "review": true,
+   "note": "DISPUTED 2026-10-01: this lane's sources (ECM 'Recreational Vehicles and RV Parks', NEC 2020) read 551.71(C) as 40% of sites with 50 A; Luigi's pass on main (PR #1) kept 20%. Card shows 40%. Confirm against the 2020 book: 551.71(C)."
   },
   {
    "id": "F-T01",
@@ -811,7 +813,7 @@
    "article": "250.118",
    "difficulty": 1,
    "front": "Raceways that count as an EGC",
-   "back": "RMC, IMC, EMT: yes, as-is\nFMC: only with listed fittings, OCPD ≤ 20 A, ≤ 6 ft total\nLFMC: listed fittings, ≤ 6 ft; OCPD ≤ 20 A (3/8–1/2 in.) or ≤ 60 A (3/4–1¼ in.)\nPVC, ENT, LFNC: never"
+   "back": "RMC, IMC, EMT: yes, as-is\nFMC (250.118(5)): listed fittings, OCPD ≤ 20 A, ≤ 6 ft of flex in the fault path; add an EGC where used for flexibility\nLFMC (250.118(6)): ⅜ and ½ in. → OCPD ≤ 20 A; ¾ through 1¼ in. → OCPD ≤ 60 A (no smaller LFMC in the path); ≤ 6 ft total\nPVC, ENT, LFNC: never"
   },
   {
    "id": "F-W25",

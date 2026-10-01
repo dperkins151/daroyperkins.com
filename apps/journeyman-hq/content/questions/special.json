@@ -57,7 +57,7 @@
  {
   "id": "S-004",
   "topic": "special",
-  "article": "511.3(C)(1)",
+  "article": "511.3(C)(1)(b)",
   "difficulty": 2,
   "q": "In a major repair garage with no mechanical ventilation, the space up to what height above the floor is classified as Class I, Division 2?",
   "choices": [
@@ -67,7 +67,7 @@
    "24 in."
   ],
   "answer": 2,
-  "explain": "Up to 18 in. above the floor across the whole floor area. With ventilation providing at least 4 air changes per hour (or the equivalent), the area may be unclassified.",
+  "explain": "Where ventilation is not provided, the entire floor area up to 18 in. above the floor is Class I, Division 2. With mechanical ventilation of at least 4 air changes per hour (or 1 cfm/ft²), exhausted within 12 in. of the floor, the floor area may be unclassified. Pits without ventilation are Division 1.",
   "tags": [
    "garages",
    "hazardous"
@@ -343,7 +343,7 @@
    "No special protection"
   ],
   "answer": 1,
-  "explain": "GFCI protection for receptacles in those agricultural-building locations and in dirt-confinement areas for livestock.",
+  "explain": "547.5(G): GFCI for 125 V, 15 and 20 A general-purpose receptacles in areas with an equipotential plane, outdoors, in damp or wet locations, and in dirt confinement areas for livestock. 2020 clarified it applies only to those 125 V 15/20 A receptacles; a dedicated-load receptacle is exempt when a GFCI-protected receptacle is within 3 ft.",
   "tags": [
    "agricultural"
   ]
