@@ -1,0 +1,22 @@
+[
+ {"id":"F-T01","topic":"theory","article":"Ohm's law","difficulty":1,"front":"Ohm's law — three forms","back":"E = I × R\nI = E ÷ R\nR = E ÷ I"},
+ {"id":"F-T02","topic":"theory","article":"Power formulas","difficulty":1,"front":"Four ways to write power (P)","back":"P = E × I\nP = I² × R\nP = E² ÷ R\nI = P ÷ E"},
+ {"id":"F-T03","topic":"theory","article":"Series circuits","difficulty":1,"front":"Series circuit rules","back":"Current is the same everywhere.\nResistances add.\nVoltage drops add up to the source voltage."},
+ {"id":"F-T04","topic":"theory","article":"Parallel circuits","difficulty":1,"front":"Parallel circuit rules","back":"Voltage is the same across each branch.\nBranch currents add.\nTotal R is less than the smallest branch: 1/Rt = 1/R1 + 1/R2 ...\nTwo resistors: product ÷ sum. Equal resistors: R ÷ n."},
+ {"id":"F-T05","topic":"theory","article":"AC values","difficulty":1,"front":"Peak ↔ RMS","back":"Peak = RMS × 1.414\nRMS = Peak × 0.707\n120 V RMS ≈ 170 V peak"},
+ {"id":"F-T06","topic":"theory","article":"Impedance","difficulty":2,"front":"Impedance of R and X in series","back":"Z = √(R² + X²)\nNet reactance X = XL − XC\n30 Ω R + 40 Ω XL → 50 Ω"},
+ {"id":"F-T07","topic":"theory","article":"Reactance","difficulty":2,"front":"XL and XC formulas — what happens as frequency rises?","back":"XL = 2πfL → rises with frequency\nXC = 1 ÷ (2πfC) → falls with frequency"},
+ {"id":"F-T08","topic":"theory","article":"Power factor","difficulty":2,"front":"Power triangle","back":"True power W = VA × PF\nApparent power VA = E × I\nReactive VAR = √(VA² − W²)\nPF = W ÷ VA = cos θ"},
+ {"id":"F-T09","topic":"theory","article":"Three-phase power","difficulty":2,"front":"Three-phase power and current","back":"P = 1.732 × E(line) × I(line) × PF\nI = VA ÷ (1.732 × E)\nkVA = 1.732 × E × I ÷ 1000"},
+ {"id":"F-T10","topic":"theory","article":"Wye vs delta","difficulty":2,"front":"Wye vs delta relationships","back":"WYE: E(line) = 1.732 × E(phase); I(line) = I(phase)\nDELTA: E(line) = E(phase); I(line) = 1.732 × I(phase)\n480Y/277: 480 ÷ 1.732 = 277"},
+ {"id":"F-T11","topic":"theory","article":"Transformers","difficulty":1,"front":"Transformer ratios","back":"Ep ÷ Es = Np ÷ Ns = Is ÷ Ip\nkVA in = kVA out (ignoring losses)\nSecondary current = VA ÷ Es (1-ph) or VA ÷ (1.732 × Es) (3-ph)"},
+ {"id":"F-T12","topic":"theory","article":"Horsepower","difficulty":1,"front":"Horsepower ↔ watts, and efficiency","back":"1 hp = 746 W\nInput W = output W ÷ efficiency\nEfficiency = output ÷ input"},
+ {"id":"F-T13","topic":"theory","article":"Voltage drop","difficulty":3,"front":"Voltage drop formulas (K-method)","back":"Single-phase: VD = 2 × K × I × L ÷ CM\nThree-phase: VD = 1.732 × K × I × L ÷ CM\nK ≈ 12.9 copper, 21.2 aluminum (75°C)\nL = one-way length in ft; CM from Ch. 9 Table 8"},
+ {"id":"F-T14","topic":"theory","article":"210.19(A) Info. Note","difficulty":1,"front":"Recommended voltage drop limits","back":"3% for a branch circuit\n5% total for feeder + branch circuit\n(Informational — recommended, not mandatory)"},
+ {"id":"F-T15","topic":"theory","article":"Neutral current","difficulty":2,"front":"Neutral current on a 120/240 V 3-wire circuit","back":"Neutral carries the difference between the two line currents.\n20 A and 14 A → 6 A on the neutral.\nBalanced 3-phase wye linear loads → 0 A."},
+ {"id":"F-T16","topic":"theory","article":"Conductor resistance","difficulty":1,"front":"What changes conductor resistance?","back":"Longer → more R (proportional)\nLarger area (CM) → less R (inverse)\nHotter copper → more R\nMaterial: copper lower than aluminum"},
+ {"id":"F-T17","topic":"theory","article":"Phase angle","difficulty":2,"front":"'ELI the ICE man'","back":"Inductor (L): voltage E leads current I\nCapacitor (C): current I leads voltage E\nPure inductive/capacitive → 90° shift"},
+ {"id":"F-T18","topic":"theory","article":"Energy","difficulty":1,"front":"Energy cost formula","back":"kWh = kW × hours\nCost = kWh × rate\n1.5 kW × 8 h × 30 d = 360 kWh"},
+ {"id":"F-T19","topic":"theory","article":"Ch. 9 Table 8","difficulty":2,"front":"Common circular-mil areas (Ch. 9 Table 8)","back":"14 AWG: 4,110\n12 AWG: 6,530\n10 AWG: 10,380\n8 AWG: 16,510\n6 AWG: 26,240\n4 AWG: 41,740\n1/0: 105,600"},
+ {"id":"F-T20","topic":"theory","article":"Kirchhoff","difficulty":1,"front":"Kirchhoff's two laws","back":"Current law: currents into a node = currents out.\nVoltage law: sum of voltage drops around any closed loop = source voltage."}
+]

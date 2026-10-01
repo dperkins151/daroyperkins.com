@@ -1,0 +1,79 @@
+{
+  "app": "Journeyman HQ",
+  "appVersion": "1.0.0",
+  "code": "NEC 2020",
+  "exam": {
+    "name": "Maryland Journeyman Electrician (PSI)",
+    "questions": 70,
+    "minutes": 210,
+    "passPct": 70,
+    "blueprint": {
+      "theory": 20,
+      "wiring": 20,
+      "methods": 10,
+      "equipment": 8,
+      "special": 6,
+      "general": 6
+    },
+    "blueprintNote": "Electrical Theory and Wiring & Protection each ~29% of the PSI outline; remaining 40% split across methods, equipment, special, general."
+  },
+  "topics": [
+    {
+      "id": "theory",
+      "name": "Electrical Theory",
+      "nec": "Ohm's law, power, series/parallel, AC, 3-phase, transformers, voltage drop"
+    },
+    {
+      "id": "wiring",
+      "name": "Wiring & Protection",
+      "nec": "Chapter 2: Art. 200–250"
+    },
+    {
+      "id": "methods",
+      "name": "Wiring Methods & Materials",
+      "nec": "Chapter 3: Art. 300–399, Chapter 9 tables"
+    },
+    {
+      "id": "equipment",
+      "name": "Equipment for General Use",
+      "nec": "Chapter 4: Art. 400–490"
+    },
+    {
+      "id": "special",
+      "name": "Special Occupancies & Systems",
+      "nec": "Chapters 5–7: Art. 500–770"
+    },
+    {
+      "id": "general",
+      "name": "General Requirements",
+      "nec": "Art. 90, 100, 110"
+    }
+  ],
+  "banks": {
+    "questions": {
+      "version": 1,
+      "file": "questions-v1.json",
+      "count": 192,
+      "updated": "2026-10-01",
+      "reviewed": null,
+      "reviewFlagged": 0
+    },
+    "flashcards": {
+      "version": 1,
+      "file": "flashcards-v1.json",
+      "count": 104,
+      "updated": "2026-10-01",
+      "reviewed": null,
+      "reviewFlagged": 0
+    },
+    "plan": {
+      "version": 1,
+      "file": "plan-v1.json",
+      "count": 30,
+      "updated": "2026-10-01",
+      "reviewed": null
+    }
+  },
+  "contentPolicy": "Paraphrase concepts and cite NEC 2020 article numbers. Never reproduce Code text verbatim (NFPA copyright). Items with review=true are flagged uncertain and must be verified before relying on them.",
+  "generated": "2026-10-01"
+}

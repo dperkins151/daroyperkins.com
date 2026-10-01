@@ -1,0 +1,468 @@
+{
+ "version": 1,
+ "title": "30-day PSI plan",
+ "note": "Default plan weighted toward Electrical Theory and Wiring & Protection (each ~29% of the exam). Day 30 lands on exam day when an exam date is set. Edit freely — progress is tracked per task.",
+ "days": [
+  {
+   "day": 1,
+   "topic": "general",
+   "title": "Orientation + tab the book",
+   "articles": [
+    "90",
+    "100",
+    "110"
+   ],
+   "tasks": [
+    "Read Art. 90 (scope, how the Code is arranged) and skim Art. 100 definitions",
+    "Tab the NEC: Ch. 2, 3, 4 starts, Tables 310.16, 250.66, 250.122, 314.16, Ch. 9 Tables 1/4/5/8, Annex C (Avery Swift Tabs or Redi-Tag only)",
+    "Set exam date in the app and run a 10-question quick drill for a baseline"
+   ]
+  },
+  {
+   "day": 2,
+   "topic": "theory",
+   "title": "Ohm's law + power",
+   "articles": [],
+   "tasks": [
+    "Drill E=IR, P=IE, P=I²R, P=E²/R until each is automatic",
+    "Work 15 single-step problems: solve for the missing variable",
+    "Flashcards: Electrical Theory deck"
+   ]
+  },
+  {
+   "day": 3,
+   "topic": "theory",
+   "title": "Series, parallel, combination circuits",
+   "articles": [],
+   "tasks": [
+    "Series: total R, current, voltage across each resistor",
+    "Parallel: reciprocal and product-over-sum methods; equal resistors shortcut",
+    "Combination circuits: reduce step by step; Kirchhoff's voltage and current laws"
+   ]
+  },
+  {
+   "day": 4,
+   "topic": "theory",
+   "title": "AC fundamentals",
+   "articles": [],
+   "tasks": [
+    "Peak vs RMS (×1.414 / ×0.707), frequency, period",
+    "Impedance triangle: Z = √(R² + X²); XL and XC behavior with frequency",
+    "Power triangle: true W, apparent VA, reactive VAR, power factor"
+   ]
+  },
+  {
+   "day": 5,
+   "topic": "theory",
+   "title": "Three-phase + transformers",
+   "articles": [
+    "450"
+   ],
+   "tasks": [
+    "Wye vs delta: line/phase voltage and current relationships (√3)",
+    "3-phase power P = 1.732 × E × I × PF; kVA to amps both ways",
+    "Transformer turns ratio, primary/secondary current, kVA sizing"
+   ]
+  },
+  {
+   "day": 6,
+   "topic": "wiring",
+   "title": "Branch circuits — Art. 210",
+   "articles": [
+    "210.8",
+    "210.11",
+    "210.12",
+    "210.19",
+    "210.21",
+    "210.52"
+   ],
+   "tasks": [
+    "Receptacle placement rules for dwellings (walls, countertops, bathrooms, garages, outdoors, hallways)",
+    "GFCI and AFCI required locations — make a two-column list",
+    "Continuous loads (125%), receptacle ratings per circuit size",
+    "Flashcards: Wiring & Protection deck"
+   ]
+  },
+  {
+   "day": 7,
+   "topic": "wiring",
+   "title": "Week 1 review + baseline sim",
+   "articles": [],
+   "tasks": [
+    "Full 70-question timed simulation (baseline — don't skip the timer)",
+    "Review every miss; add a flashcard for each one in the app",
+    "Note weakest two topics on the dashboard"
+   ]
+  },
+  {
+   "day": 8,
+   "topic": "wiring",
+   "title": "Feeders + load calcs I — Art. 215, 220",
+   "articles": [
+    "215.2",
+    "220.12",
+    "220.14",
+    "220.42",
+    "220.52"
+   ],
+   "tasks": [
+    "General lighting VA per square foot; small-appliance and laundry circuits",
+    "Demand factors for general lighting (Table 220.42)",
+    "Work 3 dwelling standard-method calcs end to end"
+   ]
+  },
+  {
+   "day": 9,
+   "topic": "wiring",
+   "title": "Load calcs II — ranges, dryers, optional",
+   "articles": [
+    "220.54",
+    "220.55",
+    "220.82"
+   ],
+   "tasks": [
+    "Range demand (Table 220.55) and dryer demand (220.54)",
+    "Optional method for dwellings (220.82): what's at 100%, what's at 40%",
+    "Neutral load basics (220.61)"
+   ]
+  },
+  {
+   "day": 10,
+   "topic": "wiring",
+   "title": "Services — Art. 230",
+   "articles": [
+    "230.6",
+    "230.24",
+    "230.42",
+    "230.70",
+    "230.71",
+    "230.79"
+   ],
+   "tasks": [
+    "Clearances for service drops and conductors (230.24, 230.9)",
+    "Service disconnect: location, max number, minimum ratings",
+    "When conductors are considered 'outside' a building (230.6)"
+   ]
+  },
+  {
+   "day": 11,
+   "topic": "wiring",
+   "title": "Overcurrent protection — Art. 240",
+   "articles": [
+    "240.4",
+    "240.6",
+    "240.21",
+    "240.24"
+   ],
+   "tasks": [
+    "Standard OCPD ratings (240.6) and the next-size-up rule (240.4(B))",
+    "Small-conductor limits (240.4(D))",
+    "Tap rules: 10 ft and 25 ft (240.21(B))",
+    "OCPD location rules (240.24)"
+   ]
+  },
+  {
+   "day": 12,
+   "topic": "wiring",
+   "title": "Grounding I — Art. 250 system grounding",
+   "articles": [
+    "250.24",
+    "250.50",
+    "250.52",
+    "250.53",
+    "250.64",
+    "250.66"
+   ],
+   "tasks": [
+    "Grounding electrode system: which electrodes, how they're bonded",
+    "Rod electrodes: supplemental rod rule, spacing",
+    "GEC sizing (Table 250.66) and installation (250.64)"
+   ]
+  },
+  {
+   "day": 13,
+   "topic": "wiring",
+   "title": "Grounding II — bonding + EGCs",
+   "articles": [
+    "250.28",
+    "250.32",
+    "250.102",
+    "250.104",
+    "250.118",
+    "250.119",
+    "250.122"
+   ],
+   "tasks": [
+    "EGC sizing (Table 250.122) with the upsizing rule",
+    "Main bonding jumper and supply-side bonding jumper sizing (250.102(C))",
+    "Separate buildings (250.32) — where the neutral is and isn't bonded",
+    "Flashcards: catch up all due cards"
+   ]
+  },
+  {
+   "day": 14,
+   "topic": "wiring",
+   "title": "Week 2 review",
+   "articles": [],
+   "tasks": [
+    "Two quick drills; re-work every missed calc by hand",
+    "Rewrite Table 250.66 and Table 250.122 from memory, then check",
+    "Flashcards until the due count hits zero"
+   ]
+  },
+  {
+   "day": 15,
+   "topic": "methods",
+   "title": "General wiring methods — Art. 300",
+   "articles": [
+    "300.3",
+    "300.4",
+    "300.5",
+    "300.11",
+    "300.14"
+   ],
+   "tasks": [
+    "Burial depths (Table 300.5) — memorize the common five",
+    "Protection from physical damage: 1¼ in. rule, steel plates",
+    "Free conductor length at boxes"
+   ]
+  },
+  {
+   "day": 16,
+   "topic": "methods",
+   "title": "Conductors — Art. 310",
+   "articles": [
+    "310.10",
+    "310.12",
+    "310.15",
+    "310.16"
+   ],
+   "tasks": [
+    "Table 310.16 ampacities: 14 AWG through 500 kcmil copper at 75°C",
+    "Adjustment for more than 3 current-carrying conductors (310.15(C))",
+    "Temperature correction (310.15(B)) and the 83% dwelling rule (310.12)",
+    "Work 5 derating problems ending with the OCPD choice"
+   ]
+  },
+  {
+   "day": 17,
+   "topic": "methods",
+   "title": "Boxes + fill — Art. 312, 314",
+   "articles": [
+    "314.16",
+    "314.23",
+    "314.28",
+    "314.29"
+   ],
+   "tasks": [
+    "Box fill volumes (Table 314.16(B)) and what counts as a conductor",
+    "Pull/junction box sizing: straight pulls (8×) and angle pulls (6× + others)",
+    "Box support and accessibility rules"
+   ]
+  },
+  {
+   "day": 18,
+   "topic": "methods",
+   "title": "Raceways + conduit fill",
+   "articles": [
+    "342",
+    "344",
+    "348",
+    "352",
+    "358",
+    "Ch. 9 Tables 1, 4, 5",
+    "Annex C"
+   ],
+   "tasks": [
+    "Securing/supporting intervals for RMC, IMC, EMT, FMC, PVC",
+    "Raceway fill: 53% / 31% / 40% and the 24-in. nipple rule",
+    "Practice 5 Annex C lookups and 3 Table 4/5 calculations",
+    "PVC expansion fittings (352.44)"
+   ]
+  },
+  {
+   "day": 19,
+   "topic": "methods",
+   "title": "Cables + cords",
+   "articles": [
+    "320",
+    "330",
+    "334",
+    "338",
+    "340",
+    "400"
+   ],
+   "tasks": [
+    "NM, AC, MC, SE, UF: uses permitted / not permitted, support intervals",
+    "NM ampacity limit (334.80)",
+    "Flexible cords: where they can't replace fixed wiring (400.12)"
+   ]
+  },
+  {
+   "day": 20,
+   "topic": "equipment",
+   "title": "Devices + luminaires — Art. 404–410",
+   "articles": [
+    "404.2",
+    "404.8",
+    "406.4",
+    "406.9",
+    "406.12",
+    "408.4",
+    "410.10",
+    "410.16"
+   ],
+   "tasks": [
+    "Switch rules: grounded conductor at switch locations, mounting height",
+    "Receptacles: replacement rules, wet-location covers, tamper-resistant",
+    "Panelboard directory and ratings",
+    "Luminaires: bathtub zone, clothes closet clearances"
+   ]
+  },
+  {
+   "day": 21,
+   "topic": "wiring",
+   "title": "Second full sim",
+   "articles": [],
+   "tasks": [
+    "Full 70-question timed simulation",
+    "Compare topic breakdown with the baseline — what moved?",
+    "Add a flashcard for every miss"
+   ]
+  },
+  {
+   "day": 22,
+   "topic": "equipment",
+   "title": "Motors — Art. 430",
+   "articles": [
+    "430.6",
+    "430.22",
+    "430.32",
+    "430.52",
+    "430.102",
+    "430.110",
+    "430.248",
+    "430.250"
+   ],
+   "tasks": [
+    "Use the FLC tables, not nameplate, for conductors and OCPD",
+    "Branch-circuit conductors 125%; overloads 115%/125%",
+    "Short-circuit/ground-fault protection percentages (Table 430.52)",
+    "Disconnect rules: within sight, 115% rating"
+   ]
+  },
+  {
+   "day": 23,
+   "topic": "equipment",
+   "title": "HVAC + transformers — Art. 440, 450",
+   "articles": [
+    "440.14",
+    "440.32",
+    "450.3",
+    "450.21"
+   ],
+   "tasks": [
+    "HVAC conductor and disconnect rules",
+    "Transformer primary OCPD percentages (Table 450.3(B))",
+    "Transformer location/ventilation basics",
+    "Flashcards: Equipment deck"
+   ]
+  },
+  {
+   "day": 24,
+   "topic": "special",
+   "title": "Hazardous + special occupancies",
+   "articles": [
+    "500.5",
+    "501.15",
+    "511",
+    "517.18",
+    "517.19"
+   ],
+   "tasks": [
+    "Class I/II/III and Division 1/2 — definitions and examples",
+    "Seals: where and how close",
+    "Commercial garages and health-care patient bed locations"
+   ]
+  },
+  {
+   "day": 25,
+   "topic": "special",
+   "title": "Pools, PV, emergency systems",
+   "articles": [
+    "680.22",
+    "680.23",
+    "680.26",
+    "690.7",
+    "690.8",
+    "690.12",
+    "700.12",
+    "701.12",
+    "705.12"
+   ],
+   "tasks": [
+    "Pool receptacle distances, luminaire depth, equipotential bonding",
+    "PV: max voltage, 125% current rule, rapid shutdown limits",
+    "Emergency (10 s) vs legally required standby (60 s); the 120% busbar rule"
+   ]
+  },
+  {
+   "day": 26,
+   "topic": "theory",
+   "title": "Voltage drop + conductor properties",
+   "articles": [
+    "210.19(A) Info. Note",
+    "Ch. 9 Table 8"
+   ],
+   "tasks": [
+    "VD = 2KIL/CM (single-phase) and 1.732KIL/CM (three-phase); K ≈ 12.9 Cu / 21.2 Al",
+    "Solve for voltage drop, then for minimum conductor size",
+    "Resistance vs length, area, temperature (Ch. 9 Table 8)"
+   ]
+  },
+  {
+   "day": 27,
+   "topic": "theory",
+   "title": "Theory calc sprint",
+   "articles": [],
+   "tasks": [
+    "20 mixed theory problems under a 30-minute timer",
+    "Efficiency, horsepower/kW/kVA conversions, neutral current",
+    "Flashcards: Electrical Theory deck to zero due"
+   ]
+  },
+  {
+   "day": 28,
+   "topic": "wiring",
+   "title": "Third full sim",
+   "articles": [],
+   "tasks": [
+    "Full 70-question timed simulation — treat it like the real day",
+    "Target: 80%+ overall, no topic under 70%",
+    "Quick drill on anything still weak"
+   ]
+  },
+  {
+   "day": 29,
+   "topic": "general",
+   "title": "Weak-topic cleanup + logistics",
+   "articles": [],
+   "tasks": [
+    "Two quick drills on the dashboard's weakest topics",
+    "Confirm PSI appointment, ID, route to College Park, what you may bring (tabbed NEC 2020, permitted tab types only)",
+    "Re-check every tab; practice finding 10 random articles in under 20 seconds each"
+   ]
+  },
+  {
+   "day": 30,
+   "topic": "general",
+   "title": "Exam day",
+   "articles": [],
+   "tasks": [
+    "Light flashcard pass only — no new material",
+    "Pace: 70 questions / 210 min = 3 min each; flag and move on",
+    "Eat, hydrate, arrive early"
+   ]
+  }
+ ]
+}
