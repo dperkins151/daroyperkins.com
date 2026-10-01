@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0d">
+<meta name="robots" content="noindex, nofollow">
+<title>Journeyman HQ</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div id="banner" class="banner hidden" role="alert"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand"><span class="bolt">⚡</span> Journeyman HQ</span>
+    <span id="top-countdown" class="top-countdown" title="Days to exam"></span>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- ================= HOME / DASHBOARD ================= -->
+  <section id="tab-home" class="tab active">
+    <div id="home-setup" class="card setup hidden">
+      <h2>Set your exam date</h2>
+      <p class="hint">PSI · Maryland Journeyman Electrician · NEC 2020 · 70 questions · 210 minutes · 70% to pass.</p>
+      <label>Exam date
+        <input id="setup-date" type="date">
+      </label>
+      <button id="setup-save" class="primary-btn">Start the countdown</button>
+    </div>
+
+    <div id="home-main" class="hidden">
+      <div class="hero-card">
+        <div class="hero-num" id="cd-days">—</div>
+        <div class="hero-label" id="cd-label">days to exam</div>
+        <div class="hero-sub" id="cd-date"></div>
+        <button id="cd-edit" class="link-btn">change date</button>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat"><span class="stat-label">Study streak</span><span class="stat-value" id="st-streak">0</span><span class="stat-unit">days</span></div>
+        <div class="stat"><span class="stat-label">Cards due</span><span class="stat-value" id="st-due">0</span><span class="stat-unit">today</span></div>
+        <div class="stat"><span class="stat-label">Last sim</span><span class="stat-value" id="st-last">—</span><span class="stat-unit" id="st-last-verdict"></span></div>
+        <div class="stat"><span class="stat-label">Plan</span><span class="stat-value" id="st-plan">0%</span><span class="stat-unit">complete</span></div>
+      </div>
+
+      <h2 class="section-h">Weakest topics</h2>
+      <div id="weak-topics" class="list"></div>
+
+      <h2 class="section-h">Today</h2>
+      <div class="action-grid">
+        <button class="action" data-go="cards"><b>Review cards</b><small id="act-cards">due now</small></button>
+        <button class="action" data-go="drill"><b>Quick drill</b><small>10 Qs · weak topics + misses</small></button>
+        <button class="action" data-go="exam"><b>Full simulation</b><small>70 · 210 min · 70%</small></button>
+        <button class="action" data-go="plan"><b>Study plan</b><small id="act-plan">day 1 of 30</small></button>
+      </div>
+
+      <h2 class="section-h">Recent attempts</h2>
+      <div id="home-attempts" class="list"></div>
+    </div>
+  </section>
+
+  <!-- ================= FLASHCARDS ================= -->
+  <section id="tab-cards" class="tab">
+    <div id="cards-picker">
+      <h2 class="section-h">Decks</h2>
+      <p class="hint">Spaced repetition (SM-2 lite). Cards you mark <b>needs work</b> come back sooner; <b>got it</b> pushes them out.</p>
+      <div id="deck-list" class="list"></div>
+    </div>
+    <div id="cards-session" class="hidden">
+      <div class="session-bar">
+        <button id="cards-exit" class="ghost-btn">← decks</button>
+        <span id="cards-progress" class="muted"></span>
+      </div>
+      <div id="flashcard" class="flashcard" tabindex="0" role="button" aria-label="Flip card">
+        <div class="fc-meta"><span id="fc-topic" class="chip"></span><span id="fc-article" class="chip chip-amber"></span></div>
+        <div id="fc-text" class="fc-text"></div>
+        <div id="fc-flip-hint" class="fc-hint">tap to flip</div>
+      </div>
+      <div id="fc-grade" class="grade-row hidden">
+        <button class="grade-btn again" data-grade="1">Needs work<small>again soon</small></button>
+        <button class="grade-btn good" data-grade="4">Got it<small id="g-good"></small></button>
+        <button class="grade-btn easy" data-grade="5">Easy<small id="g-easy"></small></button>
+      </div>
+      <div id="cards-done" class="card center hidden">
+        <h3>Deck clear for now</h3>
+        <p class="hint" id="cards-done-text"></p>
+        <button id="cards-done-back" class="primary-btn">Back to decks</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXAM ================= -->
+  <section id="tab-exam" class="tab">
+    <div id="exam-lobby">
+      <div class="card">
+        <h2>Practice exam</h2>
+        <p class="hint">Full PSI-format simulation: <b id="lobby-count">70</b> questions, <b id="lobby-min">210</b> minutes, <b id="lobby-pass">70%</b> to pass. Unanswered counts wrong. Mix weighted toward Electrical Theory and Wiring &amp; Protection.</p>
+        <div id="lobby-blueprint" class="blueprint"></div>
+        <button id="exam-start" class="primary-btn">Start full simulation</button>
+        <button id="drill-start" class="secondary-btn">Quick drill (10 questions, untimed)</button>
+        <div id="exam-resume-box" class="resume hidden">
+          <span>You have an attempt in progress.</span>
+          <button id="exam-resume" class="ghost-btn">Resume</button>
+          <button id="exam-abandon" class="link-btn danger">Abandon</button>
+        </div>
+      </div>
+      <h2 class="section-h">Attempt history</h2>
+      <div id="attempt-list" class="list"></div>
+    </div>
+
+    <div id="exam-run" class="hidden">
+      <div class="exam-bar">
+        <span id="ex-pos" class="ex-pos"></span>
+        <span id="ex-timer" class="ex-timer"></span>
+        <button id="ex-review-btn" class="ghost-btn">Review</button>
+      </div>
+      <div class="q-card">
+        <div class="q-meta"><span id="q-topic" class="chip"></span><button id="q-flag" class="flag-btn" aria-pressed="false">⚑ Flag</button></div>
+        <div id="q-text" class="q-text"></div>
+        <div id="q-choices" class="choices"></div>
+      </div>
+      <div class="exam-nav">
+        <button id="ex-prev" class="ghost-btn">← Prev</button>
+        <button id="ex-next" class="primary-btn">Next →</button>
+      </div>
+    </div>
+
+    <div id="exam-review" class="hidden">
+      <div class="session-bar">
+        <button id="rv-back" class="ghost-btn">← back to questions</button>
+        <span id="rv-summary" class="muted"></span>
+      </div>
+      <div id="rv-grid" class="rv-grid"></div>
+      <button id="ex-submit" class="primary-btn">Submit exam</button>
+    </div>
+
+    <div id="exam-result" class="hidden">
+      <div id="res-hero" class="hero-card">
+        <div class="hero-num" id="res-pct">—</div>
+        <div class="hero-label" id="res-verdict"></div>
+        <div class="hero-sub" id="res-sub"></div>
+      </div>
+      <h2 class="section-h">By topic</h2>
+      <div id="res-topics" class="list"></div>
+      <h2 class="section-h">Missed questions</h2>
+      <div id="res-missed" class="list"></div>
+      <button id="res-done" class="primary-btn">Done</button>
+    </div>
+  </section>
+
+  <!-- ================= PLAN ================= -->
+  <section id="tab-plan" class="tab">
+    <div class="card">
+      <div class="plan-head">
+        <div><h2>30-day plan</h2><p class="hint" id="plan-sub"></p></div>
+        <div class="ring" id="plan-ring"><span id="plan-pct">0%</span></div>
+      </div>
+      <div class="bar"><div id="plan-bar" class="bar-fill"></div></div>
+    </div>
+    <div id="plan-days" class="list"></div>
+  </section>
+
+  <!-- ================= LIBRARY / MORE ================= -->
+  <section id="tab-more" class="tab">
+    <div class="card">
+      <h2>Add a card</h2>
+      <p class="hint">Your own cards and questions live in this browser and merge into the SRS and drills. Export them as JSON so they can ship in a future bank.</p>
+      <form id="add-card-form" class="form">
+        <label>Type
+          <select id="ac-kind"><option value="card">Flashcard</option><option value="question">Practice question</option></select>
+        </label>
+        <label>Topic <select id="ac-topic"></select></label>
+        <label>NEC 2020 reference <input id="ac-article" type="text" placeholder="e.g. 250.66(A)"></label>
+        <label id="ac-front-l">Front <textarea id="ac-front" rows="2" required placeholder="Prompt / question"></textarea></label>
+        <label id="ac-back-l">Back <textarea id="ac-back" rows="2" placeholder="Answer (in your own words — never NEC text verbatim)"></textarea></label>
+        <div id="ac-q-extra" class="hidden">
+          <label>Choice A <input id="ac-c0" type="text"></label>
+          <label>Choice B <input id="ac-c1" type="text"></label>
+          <label>Choice C <input id="ac-c2" type="text"></label>
+          <label>Choice D <input id="ac-c3" type="text"></label>
+          <label>Correct <select id="ac-answer"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></label>
+          <label>Explanation <textarea id="ac-explain" rows="2"></textarea></label>
+        </div>
+        <label>Difficulty <select id="ac-diff"><option value="1">1 · recall</option><option value="2" selected>2 · apply</option><option value="3">3 · calculate / multi-step</option></select></label>
+        <button type="submit" class="primary-btn">Save</button>
+        <p id="ac-status" class="status hidden"></p>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>My content</h2>
+      <div id="my-content" class="list"></div>
+      <div class="btn-row">
+        <button id="export-custom" class="secondary-btn">Export my cards/questions</button>
+        <button id="export-all" class="secondary-btn">Backup everything</button>
+        <label class="secondary-btn file-btn">Import JSON<input id="import-file" type="file" accept=".json,application/json" hidden></label>
+      </div>
+      <p id="io-status" class="status hidden"></p>
+    </div>
+
+    <div class="card">
+      <h2>Content banks</h2>
+      <div id="manifest-view" class="list"></div>
+      <p class="hint small">NEC® is a registered trademark of the NFPA. Content here paraphrases concepts and cites article numbers only; it does not reproduce Code text. Verify every answer against your NEC 2020 book — the book is what you'll have at PSI.</p>
+    </div>
+
+    <div class="card">
+      <h2>Settings</h2>
+      <label>Exam date <input id="set-date" type="date"></label>
+      <label>Daily card goal <input id="set-goal" type="number" min="5" max="200" step="5"></label>
+      <button id="set-save" class="secondary-btn">Save settings</button>
+      <button id="reset-all" class="link-btn danger">Reset all local data</button>
+      <p id="set-status" class="status hidden"></p>
+    </div>
+  </section>
+</main>
+
+<nav class="tabbar" aria-label="Primary">
+  <button class="tab-btn active" data-tab="home">Home</button>
+  <button class="tab-btn" data-tab="cards">Cards</button>
+  <button class="tab-btn" data-tab="exam">Exam</button>
+  <button class="tab-btn" data-tab="plan">Plan</button>
+  <button class="tab-btn" data-tab="more">More</button>
+</nav>
+
+<script src="js/util.js"></script>
+<script src="js/store.js"></script>
+<script src="js/srs.js"></script>
+<script src="js/grader.js"></script>
+<script src="js/data.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/cards.js"></script>
+<script src="js/exam.js"></script>
+<script src="js/plan.js"></script>
+<script src="js/library.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
