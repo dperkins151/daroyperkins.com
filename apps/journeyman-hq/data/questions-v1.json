@@ -1,0 +1,3559 @@
+{
+ "bank": "questions",
+ "version": 1,
+ "code": "NEC 2020",
+ "source": "jhq-v1",
+ "generated": "2026-10-01",
+ "byTopic": {
+  "theory": 44,
+  "wiring": 52,
+  "methods": 34,
+  "equipment": 26,
+  "special": 20,
+  "general": 16
+ },
+ "items": [
+  {
+   "id": "E-001",
+   "topic": "equipment",
+   "article": "404.2(C)",
+   "difficulty": 2,
+   "q": "Where a switch controls a lighting load from a box, the grounded (neutral) conductor generally must be:",
+   "choices": [
+    "Omitted to save copper",
+    "Provided at the switch location (with listed exceptions)",
+    "Spliced to the EGC",
+    "Run only to three-way switches"
+   ],
+   "answer": 1,
+   "explain": "Electronic switches and occupancy sensors need a neutral; 404.2(C) requires one at most switch locations, with exceptions where conductors can be added later (e.g., raceway with enough room).",
+   "tags": [
+    "switches"
+   ]
+  },
+  {
+   "id": "E-002",
+   "topic": "equipment",
+   "article": "404.8(A)",
+   "difficulty": 1,
+   "q": "Switches and circuit breakers used as switches shall be installed so the center of the grip of the operating handle, in its highest position, is not more than how high above the floor or working platform?",
+   "choices": [
+    "5 ft 6 in.",
+    "6 ft",
+    "6 ft 7 in.",
+    "7 ft"
+   ],
+   "answer": 2,
+   "explain": "6 ft 7 in. (2.0 m), same as the OCPD rule in 240.24(A). Exceptions for busways, hookstick-operated switches, and equipment-adjacent switches.",
+   "tags": [
+    "switches"
+   ]
+  },
+  {
+   "id": "E-003",
+   "topic": "equipment",
+   "article": "406.4(D)(2)",
+   "difficulty": 2,
+   "q": "A grounding-type receptacle replaces a non-grounding receptacle where no equipment grounding conductor exists in the box. Which is a permitted option?",
+   "choices": [
+    "Install a grounding-type receptacle and bond its ground screw to the neutral",
+    "Install a GFCI receptacle marked 'No Equipment Ground'",
+    "Install any grounding-type receptacle as-is",
+    "Use a two-prong adapter"
+   ],
+   "answer": 1,
+   "explain": "Options: another non-grounding receptacle; a GFCI-type receptacle marked 'No Equipment Ground'; or a grounding-type receptacle supplied through a GFCI, marked 'GFCI Protected' and 'No Equipment Ground'. Never bond to the neutral.",
+   "tags": [
+    "receptacles",
+    "replacement"
+   ]
+  },
+  {
+   "id": "E-004",
+   "topic": "equipment",
+   "article": "406.9(B)(1)",
+   "difficulty": 1,
+   "q": "A 15 or 20 A, 125 V receptacle installed outdoors in a wet location requires:",
+   "choices": [
+    "A weatherproof cover that is weatherproof only when closed",
+    "An enclosure that is weatherproof whether or not a plug is inserted (in-use cover), with a listed weather-resistant receptacle",
+    "No cover if under a roof overhang",
+    "A metal box only"
+   ],
+   "answer": 1,
+   "explain": "Wet locations: in-use (bubble) cover plus a weather-resistant (WR) receptacle. Damp locations may use a cover weatherproof when closed.",
+   "tags": [
+    "receptacles",
+    "wet-location"
+   ]
+  },
+  {
+   "id": "E-005",
+   "topic": "equipment",
+   "article": "406.12",
+   "difficulty": 1,
+   "q": "In dwelling units, 15 and 20 A, 125 and 250 V receptacles in the areas specified in 210.52 generally must be:",
+   "choices": [
+    "Hospital grade",
+    "Tamper-resistant",
+    "Isolated-ground",
+    "Weather-resistant"
+   ],
+   "answer": 1,
+   "explain": "Tamper-resistant receptacles are required in dwellings (and in guest rooms, child-care facilities, etc.) with exceptions for receptacles above 5½ ft, dedicated appliance receptacles, and a few others.",
+   "tags": [
+    "receptacles"
+   ]
+  },
+  {
+   "id": "E-006",
+   "topic": "equipment",
+   "article": "408.4(A)",
+   "difficulty": 1,
+   "q": "The circuit directory of a panelboard must:",
+   "choices": [
+    "List only the main breaker size",
+    "Legibly identify every circuit and modification for its clear, evident, and specific purpose",
+    "Use only circuit numbers",
+    "Be handwritten in pencil"
+   ],
+   "answer": 1,
+   "explain": "Identification must be specific enough to distinguish circuits — 'lights' isn't enough; location and purpose are. Spare positions get labeled too.",
+   "tags": [
+    "panelboards"
+   ]
+  },
+  {
+   "id": "E-007",
+   "topic": "equipment",
+   "article": "408.36",
+   "difficulty": 2,
+   "q": "A panelboard shall be protected on its supply side by an overcurrent device having a rating:",
+   "choices": [
+    "Not greater than that of the panelboard",
+    "Of at least 125% of the panelboard rating",
+    "Not greater than 42 circuits",
+    "Equal to the feeder conductor ampacity only"
+   ],
+   "answer": 0,
+   "explain": "The panelboard's rating is the ceiling for the supply OCPD, with exceptions for panelboards fed from a protected transformer secondary and for existing 'lighting and appliance' panels.",
+   "tags": [
+    "panelboards"
+   ]
+  },
+  {
+   "id": "E-008",
+   "topic": "equipment",
+   "article": "410.16(C)(1)",
+   "difficulty": 2,
+   "q": "In a clothes closet, a surface-mounted incandescent or LED luminaire with a completely enclosed light source must have at least what clearance from the nearest point of the storage space?",
+   "choices": [
+    "3 in.",
+    "6 in.",
+    "12 in.",
+    "24 in."
+   ],
+   "answer": 2,
+   "explain": "Surface-mounted incandescent/LED enclosed: 12 in. Surface fluorescent and recessed enclosed incandescent/LED/fluorescent: 6 in. Luminaires identified for storage areas may be inside the storage space.",
+   "tags": [
+    "luminaires",
+    "closet"
+   ]
+  },
+  {
+   "id": "E-009",
+   "topic": "equipment",
+   "article": "410.10(D)",
+   "difficulty": 2,
+   "q": "Cord-connected, chain-hung, or pendant luminaires and ceiling-suspended fans shall not be located within what zone around a bathtub rim or shower threshold?",
+   "choices": [
+    "3 ft horizontally and 8 ft vertically",
+    "5 ft horizontally and 6 ft vertically",
+    "6 ft horizontally and 6 ft vertically",
+    "2 ft horizontally and 7 ft vertically"
+   ],
+   "answer": 0,
+   "explain": "The bathtub/shower zone is 3 ft horizontally and 8 ft vertically from the top of the rim or threshold.",
+   "tags": [
+    "luminaires",
+    "bathroom"
+   ]
+  },
+  {
+   "id": "E-010",
+   "topic": "equipment",
+   "article": "422.31(B)",
+   "difficulty": 2,
+   "q": "For a permanently connected appliance rated over 300 VA, the branch-circuit switch or circuit breaker may serve as the disconnect if it is:",
+   "choices": [
+    "Any breaker in the building",
+    "Within sight of the appliance or capable of being locked in the open position",
+    "Rated at least 60 A",
+    "Located in the same panel as the service"
+   ],
+   "answer": 1,
+   "explain": "Within sight, or lockable with the locking provision remaining in place whether or not the lock is installed.",
+   "tags": [
+    "appliances",
+    "disconnect"
+   ]
+  },
+  {
+   "id": "E-011",
+   "topic": "equipment",
+   "article": "422.16(B)(1)",
+   "difficulty": 2,
+   "q": "A cord-and-plug-connected kitchen waste disposer's cord must be between:",
+   "choices": [
+    "12 in. and 24 in.",
+    "18 in. and 36 in.",
+    "3 ft and 6 ft",
+    "3 ft and 6½ ft"
+   ],
+   "answer": 1,
+   "explain": "Disposer: 18–36 in. Built-in dishwasher or trash compactor: 3 ft to 6½ ft measured from the plug face to the plane of the appliance's rear.",
+   "tags": [
+    "appliances",
+    "cords"
+   ]
+  },
+  {
+   "id": "E-012",
+   "topic": "equipment",
+   "article": "430.6(A)(1)",
+   "difficulty": 2,
+   "q": "When sizing branch-circuit conductors and short-circuit/ground-fault protection for a motor, the full-load current is taken from:",
+   "choices": [
+    "The motor nameplate",
+    "Tables 430.247 through 430.250",
+    "The manufacturer's catalog",
+    "The service factor"
+   ],
+   "answer": 1,
+   "explain": "Use the NEC tables for conductors, OCPD and disconnects; use the nameplate current for sizing overload protection (430.6(A)(2)).",
+   "tags": [
+    "motors"
+   ]
+  },
+  {
+   "id": "E-013",
+   "topic": "equipment",
+   "article": "430.22 / Table 430.250",
+   "difficulty": 2,
+   "q": "A 10 hp, 230 V, three-phase motor (table FLC 28 A) requires branch-circuit conductors with an ampacity of at least:",
+   "choices": [
+    "28 A",
+    "32.2 A",
+    "35 A",
+    "70 A"
+   ],
+   "answer": 2,
+   "explain": "Single motor: 125% of table FLC = 28 × 1.25 = 35 A.",
+   "tags": [
+    "motors",
+    "conductors"
+   ]
+  },
+  {
+   "id": "E-014",
+   "topic": "equipment",
+   "article": "Table 430.52",
+   "difficulty": 3,
+   "q": "For the same 10 hp, 230 V, 3-phase motor (FLC 28 A), the maximum rating of an inverse-time circuit breaker for short-circuit and ground-fault protection is:",
+   "choices": [
+    "35 A",
+    "50 A",
+    "70 A",
+    "84 A"
+   ],
+   "answer": 2,
+   "explain": "Inverse-time breaker: 250% × 28 = 70 A (a standard size). Nontime-delay fuse 300%, dual-element time-delay fuse 175%, instantaneous-trip breaker 800%.",
+   "tags": [
+    "motors",
+    "ocpd"
+   ]
+  },
+  {
+   "id": "E-015",
+   "topic": "equipment",
+   "article": "430.32(A)(1)",
+   "difficulty": 2,
+   "q": "A continuous-duty motor with a marked service factor of 1.15 requires a separate overload device set at no more than what percentage of the nameplate full-load current?",
+   "choices": [
+    "100%",
+    "115%",
+    "125%",
+    "140%"
+   ],
+   "answer": 2,
+   "explain": "125% for service factor 1.15 or more, or temperature rise 40°C or less; 115% for all other motors.",
+   "tags": [
+    "motors",
+    "overload"
+   ]
+  },
+  {
+   "id": "E-016",
+   "topic": "equipment",
+   "article": "430.102(B)",
+   "difficulty": 1,
+   "q": "A disconnecting means for a motor must generally be located:",
+   "choices": [
+    "Within sight of the motor location and driven machinery",
+    "Anywhere in the building",
+    "At the service only",
+    "Within 100 ft of the motor"
+   ],
+   "answer": 0,
+   "explain": "Within sight (visible and not more than 50 ft). The controller disconnect can serve if it is in sight of the motor, or with lockable provisions under the exception.",
+   "tags": [
+    "motors",
+    "disconnect"
+   ]
+  },
+  {
+   "id": "E-017",
+   "topic": "equipment",
+   "article": "430.110(A)",
+   "difficulty": 2,
+   "q": "A motor-circuit disconnecting means must have an ampere rating of at least what percentage of the motor's full-load current?",
+   "choices": [
+    "100%",
+    "115%",
+    "125%",
+    "150%"
+   ],
+   "answer": 1,
+   "explain": "115% of the table FLC, or an hp-rated switch of adequate rating.",
+   "tags": [
+    "motors",
+    "disconnect"
+   ]
+  },
+  {
+   "id": "E-018",
+   "topic": "equipment",
+   "article": "Table 430.248",
+   "difficulty": 1,
+   "q": "Per Table 430.248, the full-load current of a 1 hp, 115 V, single-phase motor is:",
+   "choices": [
+    "8 A",
+    "9.8 A",
+    "13.8 A",
+    "16 A"
+   ],
+   "answer": 3,
+   "explain": "115 V single-phase: ½ hp 9.8 A, ¾ hp 13.8 A, 1 hp 16 A, 1½ hp 20 A, 2 hp 24 A. At 230 V the values halve.",
+   "tags": [
+    "motors"
+   ]
+  },
+  {
+   "id": "E-019",
+   "topic": "equipment",
+   "article": "440.32",
+   "difficulty": 2,
+   "q": "Branch-circuit conductors for a single hermetic refrigerant motor-compressor must have an ampacity of at least what percentage of the rated-load current or branch-circuit selection current, whichever is greater?",
+   "choices": [
+    "100%",
+    "115%",
+    "125%",
+    "150%"
+   ],
+   "answer": 2,
+   "explain": "125% — and the disconnect must be within sight and readily accessible (440.14).",
+   "tags": [
+    "hvac"
+   ]
+  },
+  {
+   "id": "E-020",
+   "topic": "equipment",
+   "article": "Table 450.3(B)",
+   "difficulty": 2,
+   "q": "A transformer rated 1000 V or less, protected on the primary side only, with a primary current of 9 A or more, requires a primary OCPD rated not more than:",
+   "choices": [
+    "100%",
+    "125%",
+    "167%",
+    "300%"
+   ],
+   "answer": 1,
+   "explain": "125% of primary current (next standard size up permitted per Note 1). 2–9 A → 167%; less than 2 A → 300%.",
+   "tags": [
+    "transformers",
+    "ocpd"
+   ]
+  },
+  {
+   "id": "E-021",
+   "topic": "equipment",
+   "article": "Table 450.3(B)",
+   "difficulty": 3,
+   "q": "A 1000 V-or-less transformer with primary-only protection has a primary current of 6 A. The maximum primary OCPD is:",
+   "choices": [
+    "125% of 6 A",
+    "167% of 6 A",
+    "300% of 6 A",
+    "Not limited"
+   ],
+   "answer": 1,
+   "explain": "Primary currents from 2 to less than 9 A → 167%. Below 2 A → 300%.",
+   "tags": [
+    "transformers",
+    "ocpd"
+   ]
+  },
+  {
+   "id": "E-022",
+   "topic": "equipment",
+   "article": "450.21(A)",
+   "difficulty": 2,
+   "q": "A dry-type transformer rated 112½ kVA or less and 1000 V or less must generally have a separation of at least how much from combustible material (unless a barrier or complete enclosure is provided)?",
+   "choices": [
+    "6 in.",
+    "12 in.",
+    "18 in.",
+    "24 in."
+   ],
+   "answer": 1,
+   "explain": "12 in. (300 mm). Transformers over 112½ kVA need a transformer room of fire-resistant construction, with exceptions.",
+   "tags": [
+    "transformers"
+   ]
+  },
+  {
+   "id": "E-023",
+   "topic": "equipment",
+   "article": "Table 430.250",
+   "difficulty": 1,
+   "q": "Per Table 430.250, the full-load current of a 5 hp, 208 V, three-phase motor is:",
+   "choices": [
+    "15.2 A",
+    "16.7 A",
+    "24.2 A",
+    "30.8 A"
+   ],
+   "answer": 1,
+   "explain": "208 V 3-phase: 5 hp → 16.7 A; 10 hp → 30.8 A. At 230 V: 5 hp → 15.2 A, 10 hp → 28 A. At 460 V: 5 hp → 7.6 A, 10 hp → 14 A.",
+   "tags": [
+    "motors"
+   ]
+  },
+  {
+   "id": "E-024",
+   "topic": "equipment",
+   "article": "406.5(E)",
+   "difficulty": 1,
+   "q": "Receptacles installed in countertops or work surfaces:",
+   "choices": [
+    "May be installed face-up",
+    "Shall not be installed in a face-up position unless listed for that purpose",
+    "Must be hospital grade",
+    "Must be 20 A"
+   ],
+   "answer": 1,
+   "explain": "Face-up receptacles collect liquids and debris; only listed countertop assemblies are allowed.",
+   "tags": [
+    "receptacles",
+    "kitchen"
+   ]
+  },
+  {
+   "id": "E-025",
+   "topic": "equipment",
+   "article": "404.9(B)",
+   "difficulty": 2,
+   "q": "Snap switches with metal faceplates shall be:",
+   "choices": [
+    "Isolated from ground",
+    "Connected to an equipment grounding conductor (or protected by GFCI where no EGC exists)",
+    "Rated 20 A",
+    "Mounted only in metal boxes"
+   ],
+   "answer": 1,
+   "explain": "Metal yokes and faceplates must be effectively grounded; replacements without an EGC need GFCI protection or a nonmetallic, noncombustible faceplate.",
+   "tags": [
+    "switches"
+   ]
+  },
+  {
+   "id": "E-026",
+   "topic": "equipment",
+   "article": "422.11(E)",
+   "difficulty": 3,
+   "q": "A single non-motor-operated appliance is rated 20 A with no marked OCPD size. The branch-circuit overcurrent device shall not exceed:",
+   "choices": [
+    "20 A",
+    "25 A",
+    "30 A",
+    "40 A"
+   ],
+   "answer": 2,
+   "explain": "For appliances over 13.3 A with no marking, the OCPD can't exceed 150% of rated current: 20 × 1.5 = 30 A. Appliances rated 13.3 A or less: 20 A max.",
+   "tags": [
+    "appliances",
+    "ocpd"
+   ]
+  },
+  {
+   "id": "G-001",
+   "topic": "general",
+   "article": "90.2(B)",
+   "difficulty": 1,
+   "q": "Which installation is NOT covered by the NEC?",
+   "choices": [
+    "A detached garage at a dwelling",
+    "A commercial office building",
+    "Equipment under the exclusive control of an electric utility in its generating plant",
+    "A recreational vehicle park's site supply"
+   ],
+   "answer": 2,
+   "explain": "Art. 90.2(B) lists installations outside the Code's scope, including utility-controlled generation, transmission and distribution installations, ships, railway rolling stock, and mines.",
+   "tags": [
+    "scope"
+   ]
+  },
+  {
+   "id": "G-002",
+   "topic": "general",
+   "article": "90.3",
+   "difficulty": 1,
+   "q": "Which NEC chapter is NOT subject to the requirements of Chapters 1 through 7 except where those chapters specifically reference it?",
+   "choices": [
+    "Chapter 4",
+    "Chapter 6",
+    "Chapter 8",
+    "Chapter 9"
+   ],
+   "answer": 2,
+   "explain": "Chapters 1–4 apply generally; 5, 6 and 7 supplement or modify them; Chapter 8 (communications) stands alone unless referenced; Chapter 9 holds tables.",
+   "tags": [
+    "arrangement"
+   ]
+  },
+  {
+   "id": "G-003",
+   "topic": "general",
+   "article": "90.5(C)",
+   "difficulty": 1,
+   "q": "Informational Notes in the NEC are:",
+   "choices": [
+    "Mandatory requirements",
+    "Permissive rules",
+    "Explanatory material that is not enforceable",
+    "Local amendments"
+   ],
+   "answer": 2,
+   "explain": "'Shall' marks mandatory rules, 'shall be permitted' marks permissive rules, and informational notes only explain.",
+   "tags": [
+    "arrangement"
+   ]
+  },
+  {
+   "id": "G-004",
+   "topic": "general",
+   "article": "Art. 100 — Readily Accessible",
+   "difficulty": 1,
+   "q": "Equipment that can be reached quickly without climbing over obstacles or using portable ladders is described as:",
+   "choices": [
+    "Accessible",
+    "Readily accessible",
+    "Exposed",
+    "Within sight"
+   ],
+   "answer": 1,
+   "explain": "'Readily accessible' adds the 'quickly, no ladders or obstacles' condition to plain 'accessible'. Keys and tools for locks are allowed.",
+   "tags": [
+    "definitions"
+   ]
+  },
+  {
+   "id": "G-005",
+   "topic": "general",
+   "article": "Art. 100 — In Sight From",
+   "difficulty": 1,
+   "q": "For equipment to be 'in sight from' another piece of equipment, it must be visible and not more than how far away?",
+   "choices": [
+    "10 ft",
+    "25 ft",
+    "50 ft",
+    "100 ft"
+   ],
+   "answer": 2,
+   "explain": "Visible and within 50 ft (15 m). This drives motor and HVAC disconnect placement.",
+   "tags": [
+    "definitions"
+   ]
+  },
+  {
+   "id": "G-006",
+   "topic": "general",
+   "article": "Art. 100 — Continuous Load",
+   "difficulty": 1,
+   "q": "A load is 'continuous' when the maximum current is expected to continue for:",
+   "choices": [
+    "1 hour or more",
+    "2 hours or more",
+    "3 hours or more",
+    "8 hours or more"
+   ],
+   "answer": 2,
+   "explain": "Three hours or more. Continuous loads are sized at 125% for conductors and overcurrent devices.",
+   "tags": [
+    "definitions"
+   ]
+  },
+  {
+   "id": "G-007",
+   "topic": "general",
+   "article": "Art. 100 — Ampacity",
+   "difficulty": 1,
+   "q": "The maximum current a conductor can carry continuously under its conditions of use without exceeding its temperature rating is its:",
+   "choices": [
+    "Rated current",
+    "Ampacity",
+    "Demand load",
+    "Overcurrent"
+   ],
+   "answer": 1,
+   "explain": "Ampacity depends on conditions of use — ambient temperature and number of conductors — not just the conductor's size.",
+   "tags": [
+    "definitions"
+   ]
+  },
+  {
+   "id": "G-008",
+   "topic": "general",
+   "article": "110.14(C)(1)(a)",
+   "difficulty": 2,
+   "q": "For a circuit rated 100 A or less, conductor ampacity is generally selected from which temperature column unless the equipment terminations are marked otherwise?",
+   "choices": [
+    "60°C",
+    "75°C",
+    "90°C",
+    "105°C"
+   ],
+   "answer": 0,
+   "explain": "Terminations limit the conductor: 100 A or less (or 14–1 AWG) defaults to the 60°C column; over 100 A defaults to 75°C. Equipment marked 75°C allows the 75°C column.",
+   "tags": [
+    "terminations"
+   ]
+  },
+  {
+   "id": "G-009",
+   "topic": "general",
+   "article": "Table 110.26(A)(1)",
+   "difficulty": 2,
+   "q": "A 480 V panelboard has exposed live parts on both sides of the working space (Condition 3). What minimum working-space depth is required?",
+   "choices": [
+    "3 ft",
+    "3½ ft",
+    "4 ft",
+    "6 ft"
+   ],
+   "answer": 2,
+   "explain": "For 151–600 V to ground: Condition 1 = 3 ft, Condition 2 = 3½ ft, Condition 3 = 4 ft. For 0–150 V every condition is 3 ft.",
+   "tags": [
+    "working-space"
+   ]
+  },
+  {
+   "id": "G-010",
+   "topic": "general",
+   "article": "110.26(A)(2)",
+   "difficulty": 1,
+   "q": "The minimum width of working space in front of electrical equipment is:",
+   "choices": [
+    "24 in. or the width of the equipment, whichever is greater",
+    "30 in. or the width of the equipment, whichever is greater",
+    "36 in. in all cases",
+    "The width of the equipment only"
+   ],
+   "answer": 1,
+   "explain": "30 in. or equipment width, whichever is greater, and doors must open at least 90°. Height is 6½ ft or the equipment height.",
+   "tags": [
+    "working-space"
+   ]
+  },
+  {
+   "id": "G-011",
+   "topic": "general",
+   "article": "110.3(B)",
+   "difficulty": 1,
+   "q": "Listed or labeled equipment shall be installed and used:",
+   "choices": [
+    "However the installer sees fit",
+    "In accordance with any instructions included in the listing or labeling",
+    "Only by the manufacturer",
+    "Only after AHJ field evaluation"
+   ],
+   "answer": 1,
+   "explain": "Manufacturer's listing instructions are enforceable through 110.3(B).",
+   "tags": [
+    "listing"
+   ]
+  },
+  {
+   "id": "G-012",
+   "topic": "general",
+   "article": "110.16(A)",
+   "difficulty": 1,
+   "q": "Arc-flash hazard warning labels are required on switchboards, panelboards, and similar equipment likely to require work while energized in:",
+   "choices": [
+    "Dwelling units only",
+    "Other than dwelling units",
+    "All occupancies without exception",
+    "Hazardous locations only"
+   ],
+   "answer": 1,
+   "explain": "Field or factory marking to warn qualified persons, required in other than dwelling units.",
+   "tags": [
+    "labeling"
+   ]
+  },
+  {
+   "id": "G-013",
+   "topic": "general",
+   "article": "Art. 100 — Branch Circuit",
+   "difficulty": 1,
+   "q": "The circuit conductors between the final overcurrent device protecting the circuit and the outlet(s) are the:",
+   "choices": [
+    "Feeder",
+    "Service conductors",
+    "Branch circuit",
+    "Tap conductors"
+   ],
+   "answer": 2,
+   "explain": "Feeders run between the service equipment (or other supply) and the final branch-circuit overcurrent device.",
+   "tags": [
+    "definitions"
+   ]
+  },
+  {
+   "id": "G-014",
+   "topic": "general",
+   "article": "110.26(E)(1)(a)",
+   "difficulty": 2,
+   "q": "Indoors, the dedicated equipment space above a panelboard extends from the floor to what height?",
+   "choices": [
+    "3 ft above the equipment",
+    "6 ft above the equipment or to the structural ceiling, whichever is lower",
+    "To the structural ceiling in all cases",
+    "8 ft above the floor"
+   ],
+   "answer": 1,
+   "explain": "No piping, ducts or foreign equipment in that zone; sprinkler protection is permitted above it.",
+   "tags": [
+    "working-space"
+   ]
+  },
+  {
+   "id": "G-015",
+   "topic": "general",
+   "article": "110.26(A)(3)",
+   "difficulty": 1,
+   "q": "Minimum headroom (height) of working space for equipment operating at 1000 V or less is generally:",
+   "choices": [
+    "5 ft",
+    "6 ft",
+    "6½ ft or the height of the equipment, whichever is greater",
+    "8 ft"
+   ],
+   "answer": 2,
+   "explain": "6½ ft (2.0 m) or the equipment height. Exceptions exist for existing dwelling-unit service equipment up to 200 A.",
+   "tags": [
+    "working-space"
+   ]
+  },
+  {
+   "id": "G-016",
+   "topic": "general",
+   "article": "Art. 100 — Qualified Person",
+   "difficulty": 1,
+   "q": "A 'qualified person' per Article 100 is one who has:",
+   "choices": [
+    "A journeyman license",
+    "Skills and knowledge of the electrical equipment and installations plus safety training to recognize and avoid the hazards",
+    "Five years of experience",
+    "Completed OSHA 30"
+   ],
+   "answer": 1,
+   "explain": "The definition is about demonstrated skills, knowledge and safety training, not a specific credential.",
+   "tags": [
+    "definitions"
+   ]
+  },
+  {
+   "id": "M-001",
+   "topic": "methods",
+   "article": "Table 300.5",
+   "difficulty": 1,
+   "q": "The minimum cover for direct-buried UF cable (general case, not under a building or slab) is:",
+   "choices": [
+    "6 in.",
+    "12 in.",
+    "18 in.",
+    "24 in."
+   ],
+   "answer": 3,
+   "explain": "Direct-burial cables: 24 in. RMC/IMC: 6 in. Nonmetallic raceways without concrete: 18 in. Residential 120 V, 20 A GFCI-protected branch circuits: 12 in.",
+   "tags": [
+    "burial"
+   ]
+  },
+  {
+   "id": "M-002",
+   "topic": "methods",
+   "article": "Table 300.5",
+   "difficulty": 1,
+   "q": "Minimum cover for rigid metal conduit (RMC) or IMC buried in earth is:",
+   "choices": [
+    "6 in.",
+    "12 in.",
+    "18 in.",
+    "24 in."
+   ],
+   "answer": 0,
+   "explain": "6 in. for RMC and IMC. Under a 4-in. slab with no vehicle traffic, cover can be reduced further per the table.",
+   "tags": [
+    "burial"
+   ]
+  },
+  {
+   "id": "M-003",
+   "topic": "methods",
+   "article": "Table 300.5",
+   "difficulty": 1,
+   "q": "Minimum cover for rigid PVC conduit buried in earth without a concrete envelope is:",
+   "choices": [
+    "6 in.",
+    "12 in.",
+    "18 in.",
+    "24 in."
+   ],
+   "answer": 2,
+   "explain": "18 in. for nonmetallic raceways listed for direct burial without concrete encasement.",
+   "tags": [
+    "burial"
+   ]
+  },
+  {
+   "id": "M-004",
+   "topic": "methods",
+   "article": "300.4(A)(1)",
+   "difficulty": 1,
+   "q": "A cable run through bored holes in wood studs must have the edge of the hole at least how far from the nearest edge of the framing member, or be protected by a steel plate?",
+   "choices": [
+    "½ in.",
+    "1 in.",
+    "1¼ in.",
+    "2 in."
+   ],
+   "answer": 2,
+   "explain": "1¼ in.; otherwise a steel plate or bushing at least 1/16 in. thick is required.",
+   "tags": [
+    "protection"
+   ]
+  },
+  {
+   "id": "M-005",
+   "topic": "methods",
+   "article": "300.14",
+   "difficulty": 1,
+   "q": "At each outlet, junction, or switch point, at least how much free conductor must be left for splices or device connections?",
+   "choices": [
+    "3 in.",
+    "6 in.",
+    "8 in.",
+    "12 in."
+   ],
+   "answer": 1,
+   "explain": "6 in. measured from where the conductor emerges from the raceway or sheath, and extending at least 3 in. outside a box opening smaller than 8 in.",
+   "tags": [
+    "boxes"
+   ]
+  },
+  {
+   "id": "M-006",
+   "topic": "methods",
+   "article": "Table 310.16",
+   "difficulty": 1,
+   "q": "The ampacity of 3/0 AWG copper THWN (75°C column) is:",
+   "choices": [
+    "165 A",
+    "175 A",
+    "200 A",
+    "225 A"
+   ],
+   "answer": 2,
+   "explain": "Copper 75°C: 1/0 → 150, 2/0 → 175, 3/0 → 200, 4/0 → 230, 250 kcmil → 255, 500 kcmil → 380.",
+   "tags": [
+    "ampacity"
+   ]
+  },
+  {
+   "id": "M-007",
+   "topic": "methods",
+   "article": "Table 310.16",
+   "difficulty": 1,
+   "q": "The ampacity of 6 AWG copper at 75°C is:",
+   "choices": [
+    "50 A",
+    "55 A",
+    "65 A",
+    "75 A"
+   ],
+   "answer": 2,
+   "explain": "Copper 75°C: 8 AWG → 50 A, 6 AWG → 65 A, 4 AWG → 85 A, 3 AWG → 100 A, 2 AWG → 115 A, 1 AWG → 130 A.",
+   "tags": [
+    "ampacity"
+   ]
+  },
+  {
+   "id": "M-008",
+   "topic": "methods",
+   "article": "Table 310.15(C)(1)",
+   "difficulty": 2,
+   "q": "Eight current-carrying conductors are installed in one raceway. The ampacity adjustment factor is:",
+   "choices": [
+    "80%",
+    "70%",
+    "50%",
+    "45%"
+   ],
+   "answer": 1,
+   "explain": "4–6 conductors → 80%; 7–9 → 70%; 10–20 → 50%; 21–30 → 45%; 31–40 → 40%; 41+ → 35%.",
+   "tags": [
+    "derating"
+   ]
+  },
+  {
+   "id": "M-009",
+   "topic": "methods",
+   "article": "310.15(C)(1) / 240.4(D)",
+   "difficulty": 3,
+   "q": "Nine 12 AWG THHN copper current-carrying conductors share one conduit at 30°C. What is the adjusted ampacity, and what is the largest OCPD generally permitted?",
+   "choices": [
+    "21 A adjusted; 25 A breaker",
+    "21 A adjusted; 20 A breaker",
+    "17.5 A adjusted; 20 A breaker",
+    "30 A adjusted; 30 A breaker"
+   ],
+   "answer": 1,
+   "explain": "Start at the 90°C column (30 A) × 70% = 21 A. The small-conductor rule still caps 12 AWG copper at a 20 A device.",
+   "tags": [
+    "derating",
+    "ocpd"
+   ]
+  },
+  {
+   "id": "M-010",
+   "topic": "methods",
+   "article": "Table 310.15(B)(1)(1)",
+   "difficulty": 2,
+   "q": "The temperature correction factor for a 90°C-rated conductor in a 45°C ambient is:",
+   "choices": [
+    "0.91",
+    "0.87",
+    "0.82",
+    "0.76"
+   ],
+   "answer": 1,
+   "explain": "90°C column: 36–40°C → 0.91; 41–45°C → 0.87; 46–50°C → 0.82. Always start from the conductor's own temperature column.",
+   "tags": [
+    "derating"
+   ]
+  },
+  {
+   "id": "M-011",
+   "topic": "methods",
+   "article": "310.10(G)",
+   "difficulty": 1,
+   "q": "Conductors may generally be connected in parallel only in sizes:",
+   "choices": [
+    "8 AWG and larger",
+    "4 AWG and larger",
+    "1/0 AWG and larger",
+    "250 kcmil and larger"
+   ],
+   "answer": 2,
+   "explain": "1/0 AWG and larger, with each set matching in length, material, size, insulation and termination method.",
+   "tags": [
+    "parallel-conductors"
+   ]
+  },
+  {
+   "id": "M-012",
+   "topic": "methods",
+   "article": "Table 310.12",
+   "difficulty": 3,
+   "q": "Using the 83% rule for a one-family dwelling, the minimum copper conductor size for a 200 A service is:",
+   "choices": [
+    "1 AWG",
+    "1/0 AWG",
+    "2/0 AWG",
+    "3/0 AWG"
+   ],
+   "answer": 2,
+   "explain": "200 A × 0.83 = 166 A → 2/0 Cu (175 A at 75°C). Table 310.12 lists 2/0 Cu or 4/0 Al for 200 A.",
+   "tags": [
+    "services",
+    "ampacity"
+   ]
+  },
+  {
+   "id": "M-013",
+   "topic": "methods",
+   "article": "Table 314.16(B)",
+   "difficulty": 1,
+   "q": "For box-fill calculations, each 12 AWG conductor is counted at:",
+   "choices": [
+    "2.00 in³",
+    "2.25 in³",
+    "2.50 in³",
+    "3.00 in³"
+   ],
+   "answer": 1,
+   "explain": "14 AWG → 2.00; 12 AWG → 2.25; 10 AWG → 2.50; 8 AWG → 3.00; 6 AWG → 5.00 cubic inches.",
+   "tags": [
+    "box-fill"
+   ]
+  },
+  {
+   "id": "M-014",
+   "topic": "methods",
+   "article": "314.16(B)",
+   "difficulty": 3,
+   "q": "A device box contains four 12 AWG circuit conductors, two 12 AWG equipment grounding conductors, one duplex receptacle, and no internal clamps. Minimum box volume?",
+   "choices": [
+    "11.25 in³",
+    "13.5 in³",
+    "15.75 in³",
+    "18 in³"
+   ],
+   "answer": 2,
+   "explain": "4 conductors + 1 (all EGCs together) + 2 (device yoke) = 7 volumes × 2.25 in³ = 15.75 in³.",
+   "tags": [
+    "box-fill"
+   ]
+  },
+  {
+   "id": "M-015",
+   "topic": "methods",
+   "article": "314.28(A)(1)",
+   "difficulty": 2,
+   "q": "For a straight pull of 4 AWG or larger conductors, the length of the pull box shall be at least how many times the trade size of the largest raceway?",
+   "choices": [
+    "4 times",
+    "6 times",
+    "8 times",
+    "12 times"
+   ],
+   "answer": 2,
+   "explain": "Straight pulls: 8× the largest raceway. Angle/U pulls: 6× the largest plus the sum of other raceways in the same row on that wall.",
+   "tags": [
+    "pull-box"
+   ]
+  },
+  {
+   "id": "M-016",
+   "topic": "methods",
+   "article": "314.28(A)(2)",
+   "difficulty": 3,
+   "q": "A pull box has one 3-in. and two 2-in. conduits entering the same wall for an angle pull. The minimum distance from that wall to the opposite wall is:",
+   "choices": [
+    "18 in.",
+    "22 in.",
+    "24 in.",
+    "42 in."
+   ],
+   "answer": 1,
+   "explain": "6 × 3 in. = 18 in., plus the other raceways on that wall (2 + 2) = 22 in.",
+   "tags": [
+    "pull-box"
+   ]
+  },
+  {
+   "id": "M-017",
+   "topic": "methods",
+   "article": "Ch. 9 Table 1",
+   "difficulty": 1,
+   "q": "The maximum fill for a raceway containing more than two conductors is:",
+   "choices": [
+    "31%",
+    "40%",
+    "53%",
+    "60%"
+   ],
+   "answer": 1,
+   "explain": "One conductor → 53%; two → 31%; more than two → 40%.",
+   "tags": [
+    "raceway-fill"
+   ]
+  },
+  {
+   "id": "M-018",
+   "topic": "methods",
+   "article": "Ch. 9 Note 4 to Table 1",
+   "difficulty": 2,
+   "q": "A conduit nipple not over 24 in. long between boxes may be filled to:",
+   "choices": [
+    "40%",
+    "50%",
+    "60%",
+    "100%"
+   ],
+   "answer": 2,
+   "explain": "60% fill for nipples 24 in. or less, and the ampacity adjustment factors of 310.15(C) do not apply to them.",
+   "tags": [
+    "raceway-fill"
+   ]
+  },
+  {
+   "id": "M-019",
+   "topic": "methods",
+   "article": "358.30(A)",
+   "difficulty": 1,
+   "q": "EMT must be securely fastened within how far of each box or termination, and supported at intervals not exceeding how far?",
+   "choices": [
+    "12 in.; 4½ ft",
+    "3 ft; 10 ft",
+    "5 ft; 10 ft",
+    "3 ft; 20 ft"
+   ],
+   "answer": 1,
+   "explain": "Within 3 ft of each termination and every 10 ft. RMC and IMC share the 3 ft / 10 ft baseline.",
+   "tags": [
+    "raceways",
+    "support"
+   ]
+  },
+  {
+   "id": "M-020",
+   "topic": "methods",
+   "article": "348.30(A)",
+   "difficulty": 1,
+   "q": "Flexible metal conduit must be secured within how far of each box and at intervals not exceeding:",
+   "choices": [
+    "12 in.; 4½ ft",
+    "3 ft; 10 ft",
+    "18 in.; 6 ft",
+    "24 in.; 8 ft"
+   ],
+   "answer": 0,
+   "explain": "Within 12 in. of terminations and every 4½ ft. Unsecured lengths up to 3 ft (6 ft for luminaire whips) are allowed where flexibility is needed.",
+   "tags": [
+    "raceways",
+    "support"
+   ]
+  },
+  {
+   "id": "M-021",
+   "topic": "methods",
+   "article": "334.30",
+   "difficulty": 1,
+   "q": "Type NM cable must be secured within how far of every box and supported at intervals not exceeding:",
+   "choices": [
+    "8 in.; 3 ft",
+    "12 in.; 4½ ft",
+    "18 in.; 6 ft",
+    "24 in.; 10 ft"
+   ],
+   "answer": 1,
+   "explain": "Within 12 in. of boxes and every 4½ ft. Horizontal runs through framing holes count as supported.",
+   "tags": [
+    "cables",
+    "nm"
+   ]
+  },
+  {
+   "id": "M-022",
+   "topic": "methods",
+   "article": "334.80",
+   "difficulty": 2,
+   "q": "Type NM cable with 90°C conductors: what ampacity column may be used for the final ampacity?",
+   "choices": [
+    "90°C",
+    "75°C",
+    "60°C",
+    "Whatever the terminations allow"
+   ],
+   "answer": 2,
+   "explain": "The 90°C rating may be used for adjustment and correction, but the final ampacity cannot exceed the 60°C column (12 AWG NM → 20 A).",
+   "tags": [
+    "cables",
+    "nm",
+    "ampacity"
+   ]
+  },
+  {
+   "id": "M-023",
+   "topic": "methods",
+   "article": "352.44",
+   "difficulty": 2,
+   "q": "Expansion fittings are required for rigid PVC conduit where the expected length change due to temperature is at least:",
+   "choices": [
+    "1/16 in.",
+    "¼ in.",
+    "½ in.",
+    "1 in."
+   ],
+   "answer": 1,
+   "explain": "¼ in. or more in a straight run between securely mounted items. Table 352.44 gives the expansion per 100 ft.",
+   "tags": [
+    "raceways",
+    "pvc"
+   ]
+  },
+  {
+   "id": "M-024",
+   "topic": "methods",
+   "article": "300.11(C)",
+   "difficulty": 1,
+   "q": "Generally, raceways shall NOT be used as a means of support for:",
+   "choices": [
+    "Their own conductors",
+    "Other raceways, cables, or nonelectrical equipment",
+    "Boxes they terminate in",
+    "Pull strings"
+   ],
+   "answer": 1,
+   "explain": "A raceway can't carry other raceways or cables unless identified for the purpose or used to support Class 2 circuit conductors to the equipment the raceway serves.",
+   "tags": [
+    "support"
+   ]
+  },
+  {
+   "id": "M-025",
+   "topic": "methods",
+   "article": "300.3(B)",
+   "difficulty": 1,
+   "q": "All conductors of the same circuit, including the grounded conductor and equipment grounding conductors, shall generally be:",
+   "choices": [
+    "Run in separate raceways to reduce heating",
+    "Contained within the same raceway, cable, or trench",
+    "Color-coded red",
+    "Run with no more than two per raceway"
+   ],
+   "answer": 1,
+   "explain": "Keeping all circuit conductors together prevents inductive heating of metal raceways and keeps the fault-return path low-impedance.",
+   "tags": [
+    "general"
+   ]
+  },
+  {
+   "id": "M-026",
+   "topic": "methods",
+   "article": "Table 300.5",
+   "difficulty": 2,
+   "q": "A residential 120 V, 20 A branch circuit with GFCI protection, in direct-burial UF cable, requires a minimum cover of:",
+   "choices": [
+    "6 in.",
+    "12 in.",
+    "18 in.",
+    "24 in."
+   ],
+   "answer": 1,
+   "explain": "12 in. for residential branch circuits rated 120 V or less, 20 A or less, with GFCI protection.",
+   "tags": [
+    "burial"
+   ]
+  },
+  {
+   "id": "M-027",
+   "topic": "methods",
+   "article": "300.4(D)",
+   "difficulty": 1,
+   "q": "A cable run parallel to a framing member must be kept at least how far from the nearest edge of the member, or be protected?",
+   "choices": [
+    "¾ in.",
+    "1 in.",
+    "1¼ in.",
+    "1½ in."
+   ],
+   "answer": 2,
+   "explain": "Same 1¼-in. setback as bored holes, to keep nails and screws out of the cable.",
+   "tags": [
+    "protection"
+   ]
+  },
+  {
+   "id": "M-028",
+   "topic": "methods",
+   "article": "400.12",
+   "difficulty": 1,
+   "q": "Flexible cords and cables shall NOT be used:",
+   "choices": [
+    "For pendants",
+    "As a substitute for the fixed wiring of a structure or run through walls, ceilings, or floors",
+    "To connect portable lamps",
+    "For elevator cables"
+   ],
+   "answer": 1,
+   "explain": "400.12 lists prohibited uses: substituting for fixed wiring, through holes in walls/ceilings/floors, through doorways or windows, attached to building surfaces, concealed, etc.",
+   "tags": [
+    "cords"
+   ]
+  },
+  {
+   "id": "M-029",
+   "topic": "methods",
+   "article": "Annex C, Table C.1",
+   "difficulty": 2,
+   "q": "How many 12 AWG THHN conductors are permitted in ¾-in. EMT?",
+   "choices": [
+    "9",
+    "13",
+    "16",
+    "22"
+   ],
+   "answer": 2,
+   "explain": "Annex C Table C.1 (EMT): ¾ in. → 22 × 14 AWG, 16 × 12 AWG, 10 × 10 AWG THHN. Use Tables 4 and 5 when conductor sizes are mixed.",
+   "tags": [
+    "raceway-fill"
+   ]
+  },
+  {
+   "id": "M-030",
+   "topic": "methods",
+   "article": "Annex C, Table C.1",
+   "difficulty": 2,
+   "q": "How many 10 AWG THHN conductors are permitted in 1-in. EMT?",
+   "choices": [
+    "10",
+    "13",
+    "16",
+    "26"
+   ],
+   "answer": 2,
+   "explain": "Annex C Table C.1: 1-in. EMT holds 16 × 10 AWG THHN (26 × 12 AWG, 35 × 14 AWG).",
+   "tags": [
+    "raceway-fill"
+   ]
+  },
+  {
+   "id": "M-031",
+   "topic": "methods",
+   "article": "314.29",
+   "difficulty": 1,
+   "q": "Boxes and conduit bodies shall be installed so the wiring inside:",
+   "choices": [
+    "Is sealed permanently",
+    "Can be rendered accessible without removing any part of the building or digging",
+    "Can only be reached by the utility",
+    "Is accessible only from above"
+   ],
+   "answer": 1,
+   "explain": "Accessible without damaging the building finish. Listed boxes in underground installations may be covered by gravel or light aggregate if their location is marked.",
+   "tags": [
+    "boxes"
+   ]
+  },
+  {
+   "id": "M-032",
+   "topic": "methods",
+   "article": "Table 310.16",
+   "difficulty": 2,
+   "q": "What is the 75°C ampacity of 250 kcmil copper?",
+   "choices": [
+    "215 A",
+    "230 A",
+    "255 A",
+    "285 A"
+   ],
+   "answer": 2,
+   "explain": "250 kcmil Cu 75°C → 255 A (4/0 → 230 A; 300 kcmil → 285 A).",
+   "tags": [
+    "ampacity"
+   ]
+  },
+  {
+   "id": "M-033",
+   "topic": "methods",
+   "article": "310.15(C)(1)",
+   "difficulty": 2,
+   "q": "Which conductor is generally NOT counted as a current-carrying conductor for ampacity adjustment?",
+   "choices": [
+    "The neutral of a 2-wire 120 V circuit",
+    "The equipment grounding conductor",
+    "An ungrounded conductor of a 3-phase circuit",
+    "The neutral of a 3-wire circuit supplying nonlinear loads"
+   ],
+   "answer": 1,
+   "explain": "EGCs never count (310.15(E)). A neutral carrying only unbalanced current of a balanced circuit is not counted (310.15(E)(1)), but a 2-wire circuit's neutral and a nonlinear-load neutral do count.",
+   "tags": [
+    "derating"
+   ]
+  },
+  {
+   "id": "M-034",
+   "topic": "methods",
+   "article": "344.30(A)",
+   "difficulty": 1,
+   "q": "Rigid metal conduit must be secured within how far of each box, cabinet, or conduit body?",
+   "choices": [
+    "12 in.",
+    "18 in.",
+    "3 ft",
+    "5 ft"
+   ],
+   "answer": 2,
+   "explain": "Within 3 ft of terminations (5 ft where structural members don't allow 3 ft), and supported every 10 ft; longer spans are allowed for straight runs with threaded couplings per Table 344.30(B)(2).",
+   "tags": [
+    "raceways",
+    "support"
+   ]
+  },
+  {
+   "id": "S-001",
+   "topic": "special",
+   "article": "500.5",
+   "difficulty": 1,
+   "q": "A Class II hazardous (classified) location is one where the hazard is from:",
+   "choices": [
+    "Flammable gases or vapors",
+    "Combustible dust",
+    "Easily ignitable fibers or flyings",
+    "Radiation"
+   ],
+   "answer": 1,
+   "explain": "Class I = flammable gases/vapors/liquids; Class II = combustible dust; Class III = ignitable fibers and flyings.",
+   "tags": [
+    "hazardous"
+   ]
+  },
+  {
+   "id": "S-002",
+   "topic": "special",
+   "article": "500.5(B)",
+   "difficulty": 1,
+   "q": "A location where ignitable concentrations of flammable gases exist under normal operating conditions is:",
+   "choices": [
+    "Class I, Division 1",
+    "Class I, Division 2",
+    "Class II, Division 1",
+    "Zone 2"
+   ],
+   "answer": 0,
+   "explain": "Division 1 = present under normal operation (or frequently due to maintenance/leakage). Division 2 = only under abnormal conditions, normally confined in closed systems.",
+   "tags": [
+    "hazardous"
+   ]
+  },
+  {
+   "id": "S-003",
+   "topic": "special",
+   "article": "501.15(A)(1)",
+   "difficulty": 2,
+   "q": "In a Class I, Division 1 location, a conduit seal entering an enclosure containing arcing devices must be installed within how far of the enclosure?",
+   "choices": [
+    "6 in.",
+    "12 in.",
+    "18 in.",
+    "36 in."
+   ],
+   "answer": 2,
+   "explain": "Within 18 in. (450 mm), with only explosionproof fittings between the seal and the enclosure.",
+   "tags": [
+    "hazardous",
+    "seals"
+   ]
+  },
+  {
+   "id": "S-004",
+   "topic": "special",
+   "article": "511.3(C)",
+   "difficulty": 2,
+   "q": "In a major repair garage with no mechanical ventilation, the space up to what height above the floor is classified as Class I, Division 2?",
+   "choices": [
+    "6 in.",
+    "12 in.",
+    "18 in.",
+    "24 in."
+   ],
+   "answer": 2,
+   "explain": "Up to 18 in. above the floor across the whole floor area. With ventilation providing at least 4 air changes per hour (or the equivalent), the area may be unclassified.",
+   "tags": [
+    "garages",
+    "hazardous"
+   ],
+   "review": true,
+   "note": "Verify against 511.3(C)(1) 2020 text — the 18-in. zone applies where ventilation is not provided; check whether the question should reference the 'pits' provisions instead."
+  },
+  {
+   "id": "S-005",
+   "topic": "special",
+   "article": "517.18(A)",
+   "difficulty": 2,
+   "q": "Each patient bed location in a general care (Category 2) space must be supplied by at least:",
+   "choices": [
+    "One normal-system branch circuit",
+    "Two branch circuits: one from the critical branch and one from the normal system",
+    "Three branch circuits from the life-safety branch",
+    "A single emergency circuit"
+   ],
+   "answer": 1,
+   "explain": "At least two branch circuits, one from the critical branch and one from the normal system (or two critical-branch circuits under conditions).",
+   "tags": [
+    "health-care"
+   ]
+  },
+  {
+   "id": "S-006",
+   "topic": "special",
+   "article": "517.18(B) / 517.19(B)",
+   "difficulty": 2,
+   "q": "Minimum receptacle counts at patient bed locations are:",
+   "choices": [
+    "4 general care; 8 critical care",
+    "6 general care; 12 critical care",
+    "8 general care; 14 critical care",
+    "10 general care; 16 critical care"
+   ],
+   "answer": 2,
+   "explain": "General care (Category 2): at least 8 receptacles. Critical care (Category 1): at least 14. All must be hospital grade and marked.",
+   "tags": [
+    "health-care"
+   ]
+  },
+  {
+   "id": "S-007",
+   "topic": "special",
+   "article": "680.22(A)",
+   "difficulty": 2,
+   "q": "General-purpose receptacles near a permanently installed pool must be located at least how far from the inside walls of the pool?",
+   "choices": [
+    "3 ft",
+    "5 ft",
+    "6 ft",
+    "10 ft"
+   ],
+   "answer": 2,
+   "explain": "Not less than 6 ft. Pump-motor receptacles: 6 to 10 ft, single, locking, grounding, GFCI. All 125 V, 15/20 A receptacles within 20 ft must be GFCI-protected.",
+   "tags": [
+    "pools"
+   ]
+  },
+  {
+   "id": "S-008",
+   "topic": "special",
+   "article": "680.26(B)",
+   "difficulty": 1,
+   "q": "The equipotential bonding grid around a permanently installed pool uses a solid copper conductor not smaller than:",
+   "choices": [
+    "12 AWG",
+    "10 AWG",
+    "8 AWG",
+    "6 AWG"
+   ],
+   "answer": 2,
+   "explain": "8 AWG solid copper (insulated, covered or bare), bonding the perimeter surface, metallic parts, shell steel, and equipment.",
+   "tags": [
+    "pools",
+    "bonding"
+   ]
+  },
+  {
+   "id": "S-009",
+   "topic": "special",
+   "article": "680.23(A)(5)",
+   "difficulty": 2,
+   "q": "A luminaire mounted in a pool wall must have the top of its lens at least how far below the normal water level?",
+   "choices": [
+    "6 in.",
+    "12 in.",
+    "18 in.",
+    "24 in."
+   ],
+   "answer": 2,
+   "explain": "18 in. (450 mm) below normal water level, unless listed and identified for use at lesser depths (never less than 4 in.).",
+   "tags": [
+    "pools",
+    "luminaires"
+   ]
+  },
+  {
+   "id": "S-010",
+   "topic": "special",
+   "article": "690.8(A)(1)",
+   "difficulty": 2,
+   "q": "The maximum current of a PV source circuit is calculated as:",
+   "choices": [
+    "The module's rated operating current",
+    "100% of the sum of parallel-connected module short-circuit currents",
+    "125% of the sum of parallel-connected module short-circuit currents",
+    "The inverter's maximum input current"
+   ],
+   "answer": 2,
+   "explain": "125% of Isc for the source circuit (accounts for irradiance above STC). Conductors are then sized at 125% of that maximum current (690.8(B)) — the familiar 156% net.",
+   "tags": [
+    "pv"
+   ]
+  },
+  {
+   "id": "S-011",
+   "topic": "special",
+   "article": "690.12(B)(2)",
+   "difficulty": 2,
+   "q": "Under the rapid shutdown rules, controlled conductors located outside the array boundary must be reduced to not more than how many volts within 30 seconds of initiation?",
+   "choices": [
+    "30 V",
+    "50 V",
+    "80 V",
+    "120 V"
+   ],
+   "answer": 0,
+   "explain": "Outside the array boundary (and more than 1 ft from it): 30 V within 30 seconds. Inside the boundary: 80 V within 30 seconds, or a listed PV hazard-control system.",
+   "tags": [
+    "pv",
+    "rapid-shutdown"
+   ]
+  },
+  {
+   "id": "S-012",
+   "topic": "special",
+   "article": "690.7(A)",
+   "difficulty": 2,
+   "q": "The maximum PV system DC voltage for a series string is based on the rated open-circuit voltage corrected for:",
+   "choices": [
+    "The highest expected ambient temperature",
+    "The lowest expected ambient temperature",
+    "Standard test conditions only",
+    "The inverter's nominal voltage"
+   ],
+   "answer": 1,
+   "explain": "Voc rises as temperature falls, so the lowest expected ambient temperature (or manufacturer coefficients / Table 690.7(A)) governs maximum voltage.",
+   "tags": [
+    "pv"
+   ]
+  },
+  {
+   "id": "S-013",
+   "topic": "special",
+   "article": "700.12",
+   "difficulty": 1,
+   "q": "An emergency system's power source must be available to the loads within how many seconds of normal supply failure?",
+   "choices": [
+    "10 seconds",
+    "30 seconds",
+    "60 seconds",
+    "120 seconds"
+   ],
+   "answer": 0,
+   "explain": "Emergency (Art. 700): 10 s. Legally required standby (Art. 701): 60 s. Optional standby (Art. 702): no time requirement.",
+   "tags": [
+    "emergency"
+   ]
+  },
+  {
+   "id": "S-014",
+   "topic": "special",
+   "article": "705.12(B)(3)(2)",
+   "difficulty": 3,
+   "q": "A 200 A busbar panel with a 200 A main breaker will have a PV inverter breaker connected at the opposite end of the bus. Using the 120% rule, the largest inverter breaker permitted is:",
+   "choices": [
+    "20 A",
+    "40 A",
+    "60 A",
+    "100 A"
+   ],
+   "answer": 1,
+   "explain": "120% × 200 A = 240 A total; 240 − 200 (main) = 40 A inverter OCPD, with the inverter breaker at the opposite end from the main and a warning label.",
+   "tags": [
+    "pv",
+    "interconnection"
+   ]
+  },
+  {
+   "id": "S-015",
+   "topic": "special",
+   "article": "600.5(A)",
+   "difficulty": 1,
+   "q": "Each commercial building or occupancy accessible to pedestrians must have at least one outlet for a sign or outline lighting at each entrance, supplied by a branch circuit rated at least:",
+   "choices": [
+    "15 A",
+    "20 A",
+    "30 A",
+    "50 A"
+   ],
+   "answer": 1,
+   "explain": "A 20 A branch circuit that supplies no other load, within 50 ft of the entrance (2020 relaxed the exact location).",
+   "tags": [
+    "signs"
+   ]
+  },
+  {
+   "id": "S-016",
+   "topic": "special",
+   "article": "701.12",
+   "difficulty": 1,
+   "q": "A legally required standby system must have its alternate source available within:",
+   "choices": [
+    "10 seconds",
+    "60 seconds",
+    "5 minutes",
+    "Any time set by the AHJ"
+   ],
+   "answer": 1,
+   "explain": "60 seconds for legally required standby; 10 seconds for emergency systems.",
+   "tags": [
+    "standby"
+   ]
+  },
+  {
+   "id": "S-017",
+   "topic": "special",
+   "article": "680.22(A)(1)",
+   "difficulty": 2,
+   "q": "The receptacle for a permanently installed pool's pump motor, where located near the pool, must be:",
+   "choices": [
+    "Within 3 ft of the pool for convenience",
+    "Between 6 ft and 10 ft from the inside walls, single, locking and grounding type, GFCI protected",
+    "At least 20 ft away",
+    "Non-GFCI to avoid nuisance trips"
+   ],
+   "answer": 1,
+   "explain": "6–10 ft, locking/grounding single receptacle, GFCI-protected.",
+   "tags": [
+    "pools"
+   ]
+  },
+  {
+   "id": "S-018",
+   "topic": "special",
+   "article": "690.13(B)",
+   "difficulty": 2,
+   "q": "The PV system disconnecting means must be:",
+   "choices": [
+    "Hidden from unauthorized persons",
+    "Readily accessible and marked 'PV SYSTEM DISCONNECT' (or equivalent)",
+    "Inside the array boundary only",
+    "Rated below the inverter current"
+   ],
+   "answer": 1,
+   "explain": "Readily accessible, permanently marked, and (where the line and load terminals may be energized in the open position) carrying a warning label.",
+   "tags": [
+    "pv",
+    "disconnect"
+   ]
+  },
+  {
+   "id": "S-019",
+   "topic": "special",
+   "article": "547.5(G)",
+   "difficulty": 2,
+   "q": "In agricultural buildings, 15 and 20 A, 125 V receptacles installed in areas with an equipotential plane, outdoors, or in damp/wet locations require:",
+   "choices": [
+    "Isolated ground",
+    "GFCI protection",
+    "Explosionproof enclosures",
+    "No special protection"
+   ],
+   "answer": 1,
+   "explain": "GFCI protection for receptacles in those agricultural-building locations and in dirt-confinement areas for livestock.",
+   "tags": [
+    "agricultural"
+   ],
+   "review": true,
+   "note": "Verify exact 2020 subsection reference (547.5(G)) and the listed locations."
+  },
+  {
+   "id": "S-020",
+   "topic": "special",
+   "article": "620 / 725.2",
+   "difficulty": 1,
+   "q": "A Class 2 circuit is best described as one that:",
+   "choices": [
+    "Supplies motors over 1 hp",
+    "Is power-limited by its listed Class 2 source so it poses an acceptable shock and fire risk",
+    "Must be installed in rigid metal conduit",
+    "Is a 480 V control circuit"
+   ],
+   "answer": 1,
+   "explain": "Class 2 (e.g., thermostat and doorbell circuits) is limited at the source. Class 2 conductors are kept separate from power conductors (725.136).",
+   "tags": [
+    "low-voltage"
+   ]
+  },
+  {
+   "id": "T-001",
+   "topic": "theory",
+   "article": "Ohm's law",
+   "difficulty": 1,
+   "q": "A 120 V circuit supplies a 10 Ω resistive load. What current flows?",
+   "choices": [
+    "1.2 A",
+    "12 A",
+    "120 A",
+    "1200 A"
+   ],
+   "answer": 1,
+   "explain": "I = E / R = 120 / 10 = 12 A.",
+   "tags": [
+    "ohms-law"
+   ]
+  },
+  {
+   "id": "T-002",
+   "topic": "theory",
+   "article": "Power formula",
+   "difficulty": 1,
+   "q": "A 240 V, single-phase resistive heater draws 20 A. What is its power?",
+   "choices": [
+    "1,200 W",
+    "2,400 W",
+    "4,800 W",
+    "9,600 W"
+   ],
+   "answer": 2,
+   "explain": "P = E × I = 240 × 20 = 4,800 W.",
+   "tags": [
+    "power"
+   ]
+  },
+  {
+   "id": "T-003",
+   "topic": "theory",
+   "article": "Power formula",
+   "difficulty": 2,
+   "q": "A 1,200 W heating element is rated for 120 V. What is its resistance?",
+   "choices": [
+    "0.1 Ω",
+    "10 Ω",
+    "12 Ω",
+    "100 Ω"
+   ],
+   "answer": 2,
+   "explain": "R = E² / P = 14,400 / 1,200 = 12 Ω.",
+   "tags": [
+    "power",
+    "ohms-law"
+   ]
+  },
+  {
+   "id": "T-004",
+   "topic": "theory",
+   "article": "Series circuits",
+   "difficulty": 1,
+   "q": "Resistors of 10 Ω, 20 Ω, and 30 Ω are connected in series. What is the total resistance?",
+   "choices": [
+    "5.45 Ω",
+    "20 Ω",
+    "60 Ω",
+    "6,000 Ω"
+   ],
+   "answer": 2,
+   "explain": "Series resistances add: 10 + 20 + 30 = 60 Ω.",
+   "tags": [
+    "series"
+   ]
+  },
+  {
+   "id": "T-005",
+   "topic": "theory",
+   "article": "Parallel circuits",
+   "difficulty": 1,
+   "q": "Two 30 Ω resistors are connected in parallel. What is the total resistance?",
+   "choices": [
+    "15 Ω",
+    "30 Ω",
+    "60 Ω",
+    "900 Ω"
+   ],
+   "answer": 0,
+   "explain": "Equal resistors in parallel: R / n = 30 / 2 = 15 Ω.",
+   "tags": [
+    "parallel"
+   ]
+  },
+  {
+   "id": "T-006",
+   "topic": "theory",
+   "article": "Parallel circuits",
+   "difficulty": 2,
+   "q": "A 10 Ω and a 20 Ω resistor are connected in parallel. What is the total resistance?",
+   "choices": [
+    "3.33 Ω",
+    "6.67 Ω",
+    "15 Ω",
+    "30 Ω"
+   ],
+   "answer": 1,
+   "explain": "Product over sum: (10 × 20) / (10 + 20) = 200 / 30 = 6.67 Ω.",
+   "tags": [
+    "parallel"
+   ]
+  },
+  {
+   "id": "T-007",
+   "topic": "theory",
+   "article": "Series circuits",
+   "difficulty": 2,
+   "q": "Resistors of 10 Ω, 20 Ω, and 30 Ω in series are connected across 120 V. What is the voltage across the 30 Ω resistor?",
+   "choices": [
+    "20 V",
+    "40 V",
+    "60 V",
+    "120 V"
+   ],
+   "answer": 2,
+   "explain": "Total R = 60 Ω, so I = 120 / 60 = 2 A. Voltage across 30 Ω = 2 × 30 = 60 V.",
+   "tags": [
+    "series",
+    "ohms-law"
+   ]
+  },
+  {
+   "id": "T-008",
+   "topic": "theory",
+   "article": "Kirchhoff's current law",
+   "difficulty": 1,
+   "q": "At any junction in a circuit, the sum of currents entering equals the sum of currents leaving. This is:",
+   "choices": [
+    "Ohm's law",
+    "Kirchhoff's current law",
+    "Kirchhoff's voltage law",
+    "Lenz's law"
+   ],
+   "answer": 1,
+   "explain": "Kirchhoff's current law: charge is conserved at a node. The voltage law says voltage drops around a closed loop sum to the source voltage.",
+   "tags": [
+    "kirchhoff"
+   ]
+  },
+  {
+   "id": "T-009",
+   "topic": "theory",
+   "article": "AC values",
+   "difficulty": 2,
+   "q": "A sine-wave voltage reads 120 V RMS on a meter. What is its approximate peak value?",
+   "choices": [
+    "85 V",
+    "120 V",
+    "170 V",
+    "240 V"
+   ],
+   "answer": 2,
+   "explain": "Peak = RMS × 1.414 = 120 × 1.414 ≈ 170 V.",
+   "tags": [
+    "ac"
+   ]
+  },
+  {
+   "id": "T-010",
+   "topic": "theory",
+   "article": "AC fundamentals",
+   "difficulty": 1,
+   "q": "A 60 Hz AC supply completes how many full cycles in one second?",
+   "choices": [
+    "30",
+    "60",
+    "120",
+    "3,600"
+   ],
+   "answer": 1,
+   "explain": "Hertz = cycles per second. 60 Hz = 60 cycles each second (120 alternations).",
+   "tags": [
+    "ac"
+   ]
+  },
+  {
+   "id": "T-011",
+   "topic": "theory",
+   "article": "Impedance",
+   "difficulty": 2,
+   "q": "An AC circuit has 30 Ω of resistance and 40 Ω of inductive reactance in series. What is the impedance?",
+   "choices": [
+    "10 Ω",
+    "35 Ω",
+    "50 Ω",
+    "70 Ω"
+   ],
+   "answer": 2,
+   "explain": "Z = √(R² + X²) = √(900 + 1,600) = √2,500 = 50 Ω. Resistance and reactance add as vectors, not arithmetically.",
+   "tags": [
+    "ac",
+    "impedance"
+   ]
+  },
+  {
+   "id": "T-012",
+   "topic": "theory",
+   "article": "Power factor",
+   "difficulty": 2,
+   "q": "A motor circuit uses 2,400 W of true power while drawing 3,000 VA of apparent power. What is the power factor?",
+   "choices": [
+    "0.6",
+    "0.8",
+    "1.25",
+    "80 VAR"
+   ],
+   "answer": 1,
+   "explain": "PF = W / VA = 2,400 / 3,000 = 0.8 (80%).",
+   "tags": [
+    "ac",
+    "power-factor"
+   ]
+  },
+  {
+   "id": "T-013",
+   "topic": "theory",
+   "article": "Apparent power",
+   "difficulty": 1,
+   "q": "A 240 V single-phase load draws 25 A. What is the apparent power?",
+   "choices": [
+    "0.6 kVA",
+    "6 kVA",
+    "9.6 kVA",
+    "60 kVA"
+   ],
+   "answer": 1,
+   "explain": "VA = E × I = 240 × 25 = 6,000 VA = 6 kVA.",
+   "tags": [
+    "power"
+   ]
+  },
+  {
+   "id": "T-014",
+   "topic": "theory",
+   "article": "Three-phase power",
+   "difficulty": 2,
+   "q": "A balanced three-phase, 208 V load draws 30 A per line at unity power factor. What is the power?",
+   "choices": [
+    "6.24 kW",
+    "10.8 kW",
+    "18.7 kW",
+    "62.4 kW"
+   ],
+   "answer": 1,
+   "explain": "P = 1.732 × E × I × PF = 1.732 × 208 × 30 × 1 ≈ 10,800 W.",
+   "tags": [
+    "three-phase"
+   ]
+  },
+  {
+   "id": "T-015",
+   "topic": "theory",
+   "article": "Wye systems",
+   "difficulty": 2,
+   "q": "On a 480Y/277 V system, what is the relationship between 480 V and 277 V?",
+   "choices": [
+    "277 V is half of 480 V plus a safety margin",
+    "277 V = 480 V ÷ √3 (line-to-neutral of a wye)",
+    "277 V is the delta phase voltage",
+    "They are unrelated nominal values"
+   ],
+   "answer": 1,
+   "explain": "In a wye, line-to-line voltage = line-to-neutral × 1.732. 480 / 1.732 ≈ 277 V.",
+   "tags": [
+    "three-phase",
+    "wye"
+   ]
+  },
+  {
+   "id": "T-016",
+   "topic": "theory",
+   "article": "Delta systems",
+   "difficulty": 2,
+   "q": "In a balanced delta-connected load, line current equals:",
+   "choices": [
+    "Phase current",
+    "Phase current × 1.732",
+    "Phase current ÷ 1.732",
+    "Phase current × 3"
+   ],
+   "answer": 1,
+   "explain": "Delta: line voltage = phase voltage, line current = √3 × phase current. Wye is the reverse.",
+   "tags": [
+    "three-phase",
+    "delta"
+   ]
+  },
+  {
+   "id": "T-017",
+   "topic": "theory",
+   "article": "Transformers",
+   "difficulty": 1,
+   "q": "A transformer steps 480 V down to 120 V. What is its turns ratio (primary:secondary)?",
+   "choices": [
+    "1:4",
+    "2:1",
+    "4:1",
+    "8:1"
+   ],
+   "answer": 2,
+   "explain": "Voltage ratio equals turns ratio: 480 / 120 = 4, so 4:1.",
+   "tags": [
+    "transformers"
+   ]
+  },
+  {
+   "id": "T-018",
+   "topic": "theory",
+   "article": "Transformers",
+   "difficulty": 2,
+   "q": "A 10 kVA single-phase transformer has a 240 V secondary. What is the full-load secondary current?",
+   "choices": [
+    "4.2 A",
+    "24 A",
+    "41.7 A",
+    "83.3 A"
+   ],
+   "answer": 2,
+   "explain": "I = VA / E = 10,000 / 240 ≈ 41.7 A.",
+   "tags": [
+    "transformers"
+   ]
+  },
+  {
+   "id": "T-019",
+   "topic": "theory",
+   "article": "Transformers",
+   "difficulty": 3,
+   "q": "A 25 kVA three-phase transformer has a 208Y/120 V secondary. What is the full-load secondary line current?",
+   "choices": [
+    "40.1 A",
+    "69.4 A",
+    "120 A",
+    "208 A"
+   ],
+   "answer": 1,
+   "explain": "I = VA / (1.732 × E) = 25,000 / (1.732 × 208) ≈ 69.4 A.",
+   "tags": [
+    "transformers",
+    "three-phase"
+   ]
+  },
+  {
+   "id": "T-020",
+   "topic": "theory",
+   "article": "Horsepower",
+   "difficulty": 1,
+   "q": "One horsepower is equal to approximately how many watts?",
+   "choices": [
+    "100 W",
+    "550 W",
+    "746 W",
+    "1,000 W"
+   ],
+   "answer": 2,
+   "explain": "1 hp = 746 W. A 5 hp output is about 3,730 W.",
+   "tags": [
+    "motors"
+   ]
+  },
+  {
+   "id": "T-021",
+   "topic": "theory",
+   "article": "Efficiency",
+   "difficulty": 3,
+   "q": "A 5 hp motor operates at 85% efficiency. What is its approximate input power?",
+   "choices": [
+    "3,170 W",
+    "3,730 W",
+    "4,390 W",
+    "5,000 W"
+   ],
+   "answer": 2,
+   "explain": "Output = 5 × 746 = 3,730 W. Input = output / efficiency = 3,730 / 0.85 ≈ 4,388 W.",
+   "tags": [
+    "motors",
+    "efficiency"
+   ]
+  },
+  {
+   "id": "T-022",
+   "topic": "theory",
+   "article": "Voltage drop",
+   "difficulty": 3,
+   "q": "A 120 V single-phase branch circuit runs 100 ft (one way) on 12 AWG copper (6,530 cmil) and carries 16 A. Using K = 12.9, what is the approximate voltage drop?",
+   "choices": [
+    "3.2 V",
+    "6.3 V",
+    "12.6 V",
+    "25.3 V"
+   ],
+   "answer": 1,
+   "explain": "VD = 2 × K × I × L / CM = 2 × 12.9 × 16 × 100 / 6,530 ≈ 6.3 V (about 5.3% — above the 3% branch-circuit recommendation).",
+   "tags": [
+    "voltage-drop"
+   ]
+  },
+  {
+   "id": "T-023",
+   "topic": "theory",
+   "article": "210.19(A) Informational Note",
+   "difficulty": 1,
+   "q": "The NEC informational note recommends limiting branch-circuit voltage drop to what percentage for reasonable efficiency of operation?",
+   "choices": [
+    "1%",
+    "3%",
+    "5%",
+    "10%"
+   ],
+   "answer": 1,
+   "explain": "Recommendation (not a requirement): 3% on the branch circuit and 5% total for feeder plus branch circuit.",
+   "tags": [
+    "voltage-drop"
+   ]
+  },
+  {
+   "id": "T-024",
+   "topic": "theory",
+   "article": "Conductor resistance",
+   "difficulty": 1,
+   "q": "If the length of a conductor is doubled (same material and size), its resistance:",
+   "choices": [
+    "Stays the same",
+    "Is cut in half",
+    "Doubles",
+    "Quadruples"
+   ],
+   "answer": 2,
+   "explain": "Resistance is directly proportional to length and inversely proportional to cross-sectional area.",
+   "tags": [
+    "resistance"
+   ]
+  },
+  {
+   "id": "T-025",
+   "topic": "theory",
+   "article": "Neutral current",
+   "difficulty": 2,
+   "q": "In a 120/240 V single-phase, 3-wire circuit, line A carries 20 A and line B carries 14 A. What does the neutral carry?",
+   "choices": [
+    "0 A",
+    "6 A",
+    "17 A",
+    "34 A"
+   ],
+   "answer": 1,
+   "explain": "On a single-phase 3-wire system the neutral carries the unbalance: 20 − 14 = 6 A.",
+   "tags": [
+    "neutral"
+   ]
+  },
+  {
+   "id": "T-026",
+   "topic": "theory",
+   "article": "Neutral current",
+   "difficulty": 1,
+   "q": "In a perfectly balanced three-phase, 4-wire wye system supplying linear loads, the neutral current is:",
+   "choices": [
+    "Equal to the line current",
+    "1.732 × line current",
+    "Zero",
+    "Half the line current"
+   ],
+   "answer": 2,
+   "explain": "Balanced three-phase currents are 120° apart and cancel in the neutral. Nonlinear (harmonic) loads can change that.",
+   "tags": [
+    "neutral",
+    "three-phase"
+   ]
+  },
+  {
+   "id": "T-027",
+   "topic": "theory",
+   "article": "Inductive reactance",
+   "difficulty": 2,
+   "q": "If the frequency applied to an inductor increases, its inductive reactance:",
+   "choices": [
+    "Decreases",
+    "Stays the same",
+    "Increases",
+    "Drops to zero"
+   ],
+   "answer": 2,
+   "explain": "XL = 2πfL — reactance rises with frequency. Capacitive reactance does the opposite.",
+   "tags": [
+    "ac",
+    "reactance"
+   ]
+  },
+  {
+   "id": "T-028",
+   "topic": "theory",
+   "article": "Capacitive reactance",
+   "difficulty": 2,
+   "q": "As frequency increases, the capacitive reactance of a capacitor:",
+   "choices": [
+    "Increases",
+    "Decreases",
+    "Stays the same",
+    "Becomes resistive"
+   ],
+   "answer": 1,
+   "explain": "XC = 1 / (2πfC) — higher frequency, lower reactance.",
+   "tags": [
+    "ac",
+    "reactance"
+   ]
+  },
+  {
+   "id": "T-029",
+   "topic": "theory",
+   "article": "Energy",
+   "difficulty": 2,
+   "q": "A 1,500 W heater runs 8 hours a day for 30 days. At $0.15 per kWh, what does it cost?",
+   "choices": [
+    "$5.40",
+    "$36.00",
+    "$54.00",
+    "$540.00"
+   ],
+   "answer": 2,
+   "explain": "1.5 kW × 8 h × 30 d = 360 kWh × $0.15 = $54.",
+   "tags": [
+    "energy"
+   ]
+  },
+  {
+   "id": "T-030",
+   "topic": "theory",
+   "article": "Conductor resistance",
+   "difficulty": 1,
+   "q": "As the temperature of a copper conductor rises, its resistance:",
+   "choices": [
+    "Decreases",
+    "Stays the same",
+    "Increases",
+    "Becomes zero"
+   ],
+   "answer": 2,
+   "explain": "Copper has a positive temperature coefficient. This is why ampacity tables carry temperature correction factors.",
+   "tags": [
+    "resistance"
+   ]
+  },
+  {
+   "id": "T-031",
+   "topic": "theory",
+   "article": "Parallel circuits",
+   "difficulty": 1,
+   "q": "Three 60 Ω resistors are connected in parallel. What is the total resistance?",
+   "choices": [
+    "20 Ω",
+    "60 Ω",
+    "180 Ω",
+    "0.05 Ω"
+   ],
+   "answer": 0,
+   "explain": "Equal resistors in parallel: 60 / 3 = 20 Ω.",
+   "tags": [
+    "parallel"
+   ]
+  },
+  {
+   "id": "T-032",
+   "topic": "theory",
+   "article": "Power formula",
+   "difficulty": 1,
+   "q": "A current of 5 A flows through an 8 Ω resistor. How much power is dissipated?",
+   "choices": [
+    "40 W",
+    "64 W",
+    "200 W",
+    "320 W"
+   ],
+   "answer": 2,
+   "explain": "P = I² × R = 25 × 8 = 200 W.",
+   "tags": [
+    "power"
+   ]
+  },
+  {
+   "id": "T-033",
+   "topic": "theory",
+   "article": "Combination circuits",
+   "difficulty": 2,
+   "q": "Two 20 Ω resistors in parallel are connected in series with a 10 Ω resistor across 120 V. What is the total current?",
+   "choices": [
+    "2.4 A",
+    "4 A",
+    "6 A",
+    "12 A"
+   ],
+   "answer": 2,
+   "explain": "Parallel pair = 10 Ω; total = 10 + 10 = 20 Ω; I = 120 / 20 = 6 A.",
+   "tags": [
+    "series",
+    "parallel"
+   ]
+  },
+  {
+   "id": "T-034",
+   "topic": "theory",
+   "article": "Instruments",
+   "difficulty": 1,
+   "q": "A wattmeter connected to an AC circuit measures:",
+   "choices": [
+    "Apparent power (VA)",
+    "True power (W)",
+    "Reactive power (VAR)",
+    "Power factor"
+   ],
+   "answer": 1,
+   "explain": "A wattmeter responds to voltage × current × power factor — true power. VA requires separate voltage and current readings.",
+   "tags": [
+    "instruments"
+   ]
+  },
+  {
+   "id": "T-035",
+   "topic": "theory",
+   "article": "Electromagnetic induction",
+   "difficulty": 1,
+   "q": "A voltage is induced in a conductor when it:",
+   "choices": [
+    "Carries DC current",
+    "Is heated",
+    "Cuts through magnetic lines of force",
+    "Is connected to ground"
+   ],
+   "answer": 2,
+   "explain": "Faraday's law of induction — the basis of generators and transformers. Relative motion (or changing flux) between conductor and field induces voltage.",
+   "tags": [
+    "magnetism"
+   ]
+  },
+  {
+   "id": "T-036",
+   "topic": "theory",
+   "article": "Three-phase power",
+   "difficulty": 2,
+   "q": "A three-phase, 208 V load draws 50 A per line. What transformer kVA is needed (minimum, at full load)?",
+   "choices": [
+    "10.4 kVA",
+    "18 kVA",
+    "31.2 kVA",
+    "54 kVA"
+   ],
+   "answer": 1,
+   "explain": "kVA = 1.732 × 208 × 50 / 1,000 ≈ 18 kVA.",
+   "tags": [
+    "three-phase",
+    "transformers"
+   ]
+  },
+  {
+   "id": "T-037",
+   "topic": "theory",
+   "article": "Phase relationships",
+   "difficulty": 2,
+   "q": "In a purely inductive AC circuit, the current:",
+   "choices": [
+    "Leads the voltage by 90°",
+    "Lags the voltage by 90°",
+    "Is in phase with the voltage",
+    "Leads the voltage by 45°"
+   ],
+   "answer": 1,
+   "explain": "ELI the ICE man: in an inductor (L), voltage (E) leads current (I); in a capacitor (C), current leads voltage.",
+   "tags": [
+    "ac"
+   ]
+  },
+  {
+   "id": "T-038",
+   "topic": "theory",
+   "article": "Ohm's law",
+   "difficulty": 1,
+   "q": "A 7.2 kW resistive heater operates at 240 V single-phase. What current does it draw?",
+   "choices": [
+    "3 A",
+    "30 A",
+    "60 A",
+    "300 A"
+   ],
+   "answer": 1,
+   "explain": "I = P / E = 7,200 / 240 = 30 A.",
+   "tags": [
+    "power"
+   ]
+  },
+  {
+   "id": "T-039",
+   "topic": "theory",
+   "article": "Ch. 9 Table 8",
+   "difficulty": 2,
+   "q": "The DC resistance of 1,000 ft of 12 AWG uncoated copper at 75°C is approximately:",
+   "choices": [
+    "0.2 Ω",
+    "2 Ω",
+    "20 Ω",
+    "200 Ω"
+   ],
+   "answer": 1,
+   "explain": "Chapter 9, Table 8 lists roughly 1.9–2.0 Ω per 1,000 ft for 12 AWG copper. Each three sizes smaller roughly doubles the resistance.",
+   "tags": [
+    "resistance"
+   ]
+  },
+  {
+   "id": "T-040",
+   "topic": "theory",
+   "article": "Efficiency",
+   "difficulty": 3,
+   "q": "A motor delivers 10 hp while drawing 9 kW from the line. What is its efficiency?",
+   "choices": [
+    "74%",
+    "83%",
+    "90%",
+    "111%"
+   ],
+   "answer": 1,
+   "explain": "Output = 10 × 746 = 7,460 W. Efficiency = 7,460 / 9,000 ≈ 0.83 = 83%.",
+   "tags": [
+    "motors",
+    "efficiency"
+   ]
+  },
+  {
+   "id": "T-041",
+   "topic": "theory",
+   "article": "Wye systems",
+   "difficulty": 1,
+   "q": "In a wye-connected load, the line current is:",
+   "choices": [
+    "Equal to the phase current",
+    "1.732 × phase current",
+    "Phase current ÷ 1.732",
+    "Zero in the neutral only"
+   ],
+   "answer": 0,
+   "explain": "Wye: line current = phase current; line voltage = √3 × phase voltage.",
+   "tags": [
+    "three-phase",
+    "wye"
+   ]
+  },
+  {
+   "id": "T-042",
+   "topic": "theory",
+   "article": "Apparent power",
+   "difficulty": 2,
+   "q": "A 15 kVA single-phase load at 240 V draws what current?",
+   "choices": [
+    "36 A",
+    "62.5 A",
+    "72 A",
+    "125 A"
+   ],
+   "answer": 1,
+   "explain": "I = VA / E = 15,000 / 240 = 62.5 A.",
+   "tags": [
+    "power"
+   ]
+  },
+  {
+   "id": "T-043",
+   "topic": "theory",
+   "article": "Voltage drop",
+   "difficulty": 3,
+   "q": "A three-phase, 480 V feeder runs 250 ft on 1/0 AWG copper (105,600 cmil) at 100 A. Using K = 12.9, the approximate voltage drop is:",
+   "choices": [
+    "3.1 V",
+    "5.3 V",
+    "6.1 V",
+    "10.6 V"
+   ],
+   "answer": 1,
+   "explain": "Three-phase: VD = 1.732 × K × I × L / CM = 1.732 × 12.9 × 100 × 250 / 105,600 ≈ 5.3 V (about 1.1%).",
+   "tags": [
+    "voltage-drop",
+    "three-phase"
+   ]
+  },
+  {
+   "id": "T-044",
+   "topic": "theory",
+   "article": "Series circuits",
+   "difficulty": 1,
+   "q": "In a series circuit, which quantity is the same through every component?",
+   "choices": [
+    "Voltage",
+    "Current",
+    "Power",
+    "Resistance"
+   ],
+   "answer": 1,
+   "explain": "Only one path exists, so current is identical everywhere. Voltage divides across the components.",
+   "tags": [
+    "series"
+   ]
+  },
+  {
+   "id": "W-001",
+   "topic": "wiring",
+   "article": "210.52(A)(1)",
+   "difficulty": 1,
+   "q": "In a dwelling-unit living room, wall receptacles must be placed so that no point measured horizontally along the floor line of any wall space is more than how far from a receptacle?",
+   "choices": [
+    "4 ft",
+    "6 ft",
+    "10 ft",
+    "12 ft"
+   ],
+   "answer": 1,
+   "explain": "The 6-ft rule — which produces the familiar 12-ft maximum spacing between receptacles. Wall spaces 2 ft or wider count.",
+   "tags": [
+    "receptacles",
+    "dwelling"
+   ]
+  },
+  {
+   "id": "W-002",
+   "topic": "wiring",
+   "article": "210.52(C)(1)",
+   "difficulty": 1,
+   "q": "For kitchen wall countertop spaces, receptacles must be installed so no point along the wall line is more than how far from a receptacle?",
+   "choices": [
+    "12 in.",
+    "18 in.",
+    "24 in.",
+    "36 in."
+   ],
+   "answer": 2,
+   "explain": "24 in. — so countertop receptacles are at most 4 ft apart. Any wall counter space 12 in. or wider needs one.",
+   "tags": [
+    "receptacles",
+    "kitchen"
+   ]
+  },
+  {
+   "id": "W-003",
+   "topic": "wiring",
+   "article": "210.8(A)",
+   "difficulty": 1,
+   "q": "Which dwelling-unit receptacle location does NOT require GFCI protection under 210.8(A)?",
+   "choices": [
+    "Bathroom",
+    "Garage",
+    "Living room",
+    "Outdoors"
+   ],
+   "answer": 2,
+   "explain": "210.8(A) lists bathrooms, garages, outdoors, crawl spaces, basements, kitchens (countertop-serving), within 6 ft of sinks, boathouses, near bathtubs/showers, and laundry areas. Ordinary living areas are not on the list.",
+   "tags": [
+    "gfci"
+   ]
+  },
+  {
+   "id": "W-004",
+   "topic": "wiring",
+   "article": "210.8(A)(7)",
+   "difficulty": 1,
+   "q": "In a dwelling, 125 V receptacles installed within what distance of the top inside edge of a sink bowl require GFCI protection?",
+   "choices": [
+    "3 ft",
+    "6 ft",
+    "8 ft",
+    "10 ft"
+   ],
+   "answer": 1,
+   "explain": "Within 6 ft of the sink, measured from the top inside edge of the bowl.",
+   "tags": [
+    "gfci",
+    "sink"
+   ]
+  },
+  {
+   "id": "W-005",
+   "topic": "wiring",
+   "article": "210.11(C)(1)",
+   "difficulty": 1,
+   "q": "A dwelling unit kitchen requires a minimum of how many 20-ampere small-appliance branch circuits?",
+   "choices": [
+    "One",
+    "Two",
+    "Three",
+    "Four"
+   ],
+   "answer": 1,
+   "explain": "At least two 20 A small-appliance circuits serving the kitchen, pantry, dining and similar areas' receptacles.",
+   "tags": [
+    "branch-circuits",
+    "kitchen"
+   ]
+  },
+  {
+   "id": "W-006",
+   "topic": "wiring",
+   "article": "210.11(C)(3)",
+   "difficulty": 1,
+   "q": "The dwelling-unit bathroom receptacle branch circuit must be rated at least:",
+   "choices": [
+    "15 A",
+    "20 A",
+    "25 A",
+    "30 A"
+   ],
+   "answer": 1,
+   "explain": "At least one 20 A circuit for bathroom receptacles, with no other outlets unless it serves a single bathroom.",
+   "tags": [
+    "branch-circuits",
+    "bathroom"
+   ]
+  },
+  {
+   "id": "W-007",
+   "topic": "wiring",
+   "article": "210.12(A)",
+   "difficulty": 2,
+   "q": "Which dwelling-unit area is NOT listed as requiring AFCI protection for its 120 V, 15 and 20 A branch circuits?",
+   "choices": [
+    "Bedroom",
+    "Hallway",
+    "Kitchen",
+    "Bathroom"
+   ],
+   "answer": 3,
+   "explain": "210.12(A) covers kitchens, family/dining/living rooms, bedrooms, closets, hallways, laundry areas and similar. Bathrooms, garages and outdoors are not listed.",
+   "tags": [
+    "afci"
+   ]
+  },
+  {
+   "id": "W-008",
+   "topic": "wiring",
+   "article": "210.20(A)",
+   "difficulty": 2,
+   "q": "A branch circuit supplies 40 A of continuous load and no noncontinuous load. The overcurrent device must be rated at least:",
+   "choices": [
+    "40 A",
+    "45 A",
+    "50 A",
+    "60 A"
+   ],
+   "answer": 2,
+   "explain": "Continuous load × 125% = 50 A. Conductors (210.19(A)) follow the same 125% rule before adjustment.",
+   "tags": [
+    "continuous-load"
+   ]
+  },
+  {
+   "id": "W-009",
+   "topic": "wiring",
+   "article": "Table 210.21(B)(3)",
+   "difficulty": 1,
+   "q": "A 20 A branch circuit supplies two or more receptacles. What receptacle ratings are permitted?",
+   "choices": [
+    "15 A only",
+    "20 A only",
+    "15 A or 20 A",
+    "15, 20, or 30 A"
+   ],
+   "answer": 2,
+   "explain": "15 A circuit → 15 A receptacles only (not more than 15); 20 A circuit → 15 or 20 A; 30 A → 30 A; 40 A → 40 or 50 A; 50 A → 50 A.",
+   "tags": [
+    "receptacles"
+   ]
+  },
+  {
+   "id": "W-010",
+   "topic": "wiring",
+   "article": "210.23(A)(1)",
+   "difficulty": 2,
+   "q": "On a branch circuit supplying two or more outlets, cord-and-plug-connected utilization equipment not fastened in place shall not exceed what percentage of the circuit rating?",
+   "choices": [
+    "50%",
+    "80%",
+    "100%",
+    "125%"
+   ],
+   "answer": 1,
+   "explain": "80% of the branch-circuit ampere rating for portable cord-and-plug equipment.",
+   "tags": [
+    "branch-circuits"
+   ]
+  },
+  {
+   "id": "W-011",
+   "topic": "wiring",
+   "article": "210.52(H)",
+   "difficulty": 1,
+   "q": "A dwelling-unit hallway requires at least one receptacle outlet when it is at least how long?",
+   "choices": [
+    "6 ft",
+    "10 ft",
+    "12 ft",
+    "15 ft"
+   ],
+   "answer": 1,
+   "explain": "Hallways 10 ft or more in length, measured along the centerline without passing through a doorway.",
+   "tags": [
+    "receptacles",
+    "dwelling"
+   ]
+  },
+  {
+   "id": "W-012",
+   "topic": "wiring",
+   "article": "210.52(E)(1)",
+   "difficulty": 2,
+   "q": "One- and two-family dwellings need outdoor receptacles accessible at grade level at the front and back, installed not more than how high above grade?",
+   "choices": [
+    "4 ft",
+    "5½ ft",
+    "6½ ft",
+    "8 ft"
+   ],
+   "answer": 2,
+   "explain": "Not more than 6½ ft (2.0 m) above grade. Garage receptacles use 5½ ft.",
+   "tags": [
+    "receptacles",
+    "outdoor"
+   ]
+  },
+  {
+   "id": "W-013",
+   "topic": "wiring",
+   "article": "210.52(G)(1)",
+   "difficulty": 2,
+   "q": "In an attached dwelling garage, at least one receptacle is required in each vehicle bay, installed not more than how high above the floor?",
+   "choices": [
+    "4 ft",
+    "5½ ft",
+    "6½ ft",
+    "No height limit"
+   ],
+   "answer": 1,
+   "explain": "Not more than 5½ ft (1.7 m) above the floor, one per vehicle bay.",
+   "tags": [
+    "receptacles",
+    "garage"
+   ]
+  },
+  {
+   "id": "W-014",
+   "topic": "wiring",
+   "article": "210.70(A)(1)",
+   "difficulty": 1,
+   "q": "In a dwelling, at least one wall-switch-controlled lighting outlet is required in:",
+   "choices": [
+    "Bedrooms only",
+    "Every habitable room, kitchen, and bathroom",
+    "Kitchens and bathrooms only",
+    "Only rooms over 120 sq ft"
+   ],
+   "answer": 1,
+   "explain": "Every habitable room, kitchen and bathroom. In rooms other than kitchens and bathrooms, a switched receptacle can substitute.",
+   "tags": [
+    "lighting",
+    "dwelling"
+   ]
+  },
+  {
+   "id": "W-015",
+   "topic": "wiring",
+   "article": "Table 220.12",
+   "difficulty": 1,
+   "q": "The general lighting load for a dwelling unit is calculated at how many volt-amperes per square foot?",
+   "choices": [
+    "1 VA",
+    "2 VA",
+    "3 VA",
+    "3.5 VA"
+   ],
+   "answer": 2,
+   "explain": "3 VA/ft² of floor area (not counting open porches, garages, or unused/unfinished spaces not adaptable for future use).",
+   "tags": [
+    "load-calc"
+   ]
+  },
+  {
+   "id": "W-016",
+   "topic": "wiring",
+   "article": "220.52",
+   "difficulty": 1,
+   "q": "In a standard dwelling load calculation, each small-appliance circuit and the laundry circuit are each counted at:",
+   "choices": [
+    "1,000 VA",
+    "1,200 VA",
+    "1,500 VA",
+    "2,000 VA"
+   ],
+   "answer": 2,
+   "explain": "1,500 VA each — so two small-appliance circuits plus laundry add 4,500 VA before demand factors.",
+   "tags": [
+    "load-calc"
+   ]
+  },
+  {
+   "id": "W-017",
+   "topic": "wiring",
+   "article": "Table 220.42",
+   "difficulty": 3,
+   "q": "A 2,000 sq ft dwelling has two small-appliance circuits and one laundry circuit. Using the standard method, what is the general lighting and receptacle demand load?",
+   "choices": [
+    "3,675 VA",
+    "5,625 VA",
+    "6,000 VA",
+    "10,500 VA"
+   ],
+   "answer": 1,
+   "explain": "6,000 VA (3 VA × 2,000) + 4,500 VA = 10,500 VA. First 3,000 VA at 100% = 3,000; remaining 7,500 at 35% = 2,625. Total 5,625 VA.",
+   "tags": [
+    "load-calc"
+   ]
+  },
+  {
+   "id": "W-018",
+   "topic": "wiring",
+   "article": "220.54",
+   "difficulty": 1,
+   "q": "For a household electric clothes dryer, the load used in the calculation is:",
+   "choices": [
+    "4,000 W",
+    "5,000 W or the nameplate rating, whichever is larger",
+    "The nameplate rating × 125%",
+    "1,500 VA"
+   ],
+   "answer": 1,
+   "explain": "5,000 W or nameplate, whichever is larger. Demand factors in Table 220.54 apply for 5 or more dryers.",
+   "tags": [
+    "load-calc",
+    "dryer"
+   ]
+  },
+  {
+   "id": "W-019",
+   "topic": "wiring",
+   "article": "Table 220.55",
+   "difficulty": 2,
+   "q": "Using Table 220.55 Column C, the demand load for one household range rated 12 kW is:",
+   "choices": [
+    "6 kW",
+    "8 kW",
+    "9.6 kW",
+    "12 kW"
+   ],
+   "answer": 1,
+   "explain": "Column C allows 8 kW for one range rated not over 12 kW. Over 12 kW, add 5% per kW above 12.",
+   "tags": [
+    "load-calc",
+    "range"
+   ]
+  },
+  {
+   "id": "W-020",
+   "topic": "wiring",
+   "article": "220.14(I)",
+   "difficulty": 1,
+   "q": "In other than dwelling units, each general-use receptacle outlet is calculated at:",
+   "choices": [
+    "90 VA",
+    "120 VA",
+    "180 VA",
+    "360 VA"
+   ],
+   "answer": 2,
+   "explain": "180 VA per yoke/strap (a 4-plex counts at 360 VA).",
+   "tags": [
+    "load-calc",
+    "commercial"
+   ]
+  },
+  {
+   "id": "W-021",
+   "topic": "wiring",
+   "article": "230.70(A)(1)",
+   "difficulty": 1,
+   "q": "The service disconnecting means shall be installed at a readily accessible location:",
+   "choices": [
+    "Anywhere in the building",
+    "Either outside the building or inside nearest the point of entrance of the service conductors",
+    "Only outdoors",
+    "In the same room as the meter"
+   ],
+   "answer": 1,
+   "explain": "Outside, or inside nearest the point of entrance of the service conductors — not in a bathroom (230.70(A)(2)).",
+   "tags": [
+    "services"
+   ]
+  },
+  {
+   "id": "W-022",
+   "topic": "wiring",
+   "article": "230.71(A)",
+   "difficulty": 1,
+   "q": "The maximum number of service disconnecting means permitted for each service is:",
+   "choices": [
+    "One",
+    "Two",
+    "Six",
+    "Eight"
+   ],
+   "answer": 2,
+   "explain": "Up to six, and in the 2020 edition each must be in a separate enclosure or compartment (230.71(B)).",
+   "tags": [
+    "services"
+   ]
+  },
+  {
+   "id": "W-023",
+   "topic": "wiring",
+   "article": "230.79(C)",
+   "difficulty": 1,
+   "q": "The service disconnecting means for a one-family dwelling must have a rating of not less than:",
+   "choices": [
+    "60 A",
+    "100 A, 3-wire",
+    "150 A",
+    "200 A"
+   ],
+   "answer": 1,
+   "explain": "100 A, 3-wire minimum for a one-family dwelling. Other installations: 60 A general; 30 A for limited loads of a single branch circuit; 15 A for one 2-wire circuit.",
+   "tags": [
+    "services"
+   ]
+  },
+  {
+   "id": "W-024",
+   "topic": "wiring",
+   "article": "230.24(B)(2)",
+   "difficulty": 2,
+   "q": "Overhead service conductors (not over 300 V to ground) passing over a residential driveway must have a minimum vertical clearance of:",
+   "choices": [
+    "10 ft",
+    "12 ft",
+    "15 ft",
+    "18 ft"
+   ],
+   "answer": 1,
+   "explain": "12 ft over residential property and driveways; 10 ft above finished grade at the service entrance (≤150 V to ground); 18 ft over public streets and parking areas subject to truck traffic.",
+   "tags": [
+    "services",
+    "clearance"
+   ]
+  },
+  {
+   "id": "W-025",
+   "topic": "wiring",
+   "article": "230.9(A)",
+   "difficulty": 2,
+   "q": "Service conductors installed as open conductors or multiconductor cable without an overall jacket must have a clearance of at least how much from windows designed to be opened?",
+   "choices": [
+    "1 ft",
+    "3 ft",
+    "6 ft",
+    "10 ft"
+   ],
+   "answer": 1,
+   "explain": "3 ft from windows, doors, porches, balconies, fire escapes. Conductors run above the top level of a window are exempt.",
+   "tags": [
+    "services",
+    "clearance"
+   ]
+  },
+  {
+   "id": "W-026",
+   "topic": "wiring",
+   "article": "240.4(D)",
+   "difficulty": 1,
+   "q": "The maximum standard overcurrent device rating for 12 AWG copper conductors (absent a specific exception) is:",
+   "choices": [
+    "15 A",
+    "20 A",
+    "25 A",
+    "30 A"
+   ],
+   "answer": 1,
+   "explain": "Small-conductor rule: 14 AWG Cu → 15 A, 12 AWG Cu → 20 A, 10 AWG Cu → 30 A (12 AWG Al → 15 A, 10 AWG Al → 25 A).",
+   "tags": [
+    "ocpd"
+   ]
+  },
+  {
+   "id": "W-027",
+   "topic": "wiring",
+   "article": "240.6(A)",
+   "difficulty": 1,
+   "q": "Which of the following is NOT a standard ampere rating for fuses and inverse-time circuit breakers?",
+   "choices": [
+    "45 A",
+    "70 A",
+    "75 A",
+    "110 A"
+   ],
+   "answer": 2,
+   "explain": "Standard ratings run 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 110, 125, 150, 175, 200... 75 A is not on the list.",
+   "tags": [
+    "ocpd"
+   ]
+  },
+  {
+   "id": "W-028",
+   "topic": "wiring",
+   "article": "240.4(B)",
+   "difficulty": 2,
+   "q": "A feeder conductor has an adjusted ampacity of 65 A and does not supply a multioutlet receptacle circuit. The largest standard overcurrent device permitted is:",
+   "choices": [
+    "60 A",
+    "65 A",
+    "70 A",
+    "80 A"
+   ],
+   "answer": 2,
+   "explain": "Next-size-up rule: when ampacity doesn't match a standard rating and the device is 800 A or less, the next higher standard rating (70 A) is permitted.",
+   "tags": [
+    "ocpd"
+   ]
+  },
+  {
+   "id": "W-029",
+   "topic": "wiring",
+   "article": "240.21(B)(2)",
+   "difficulty": 2,
+   "q": "Under the 25-ft feeder tap rule, the tap conductors must have an ampacity of at least:",
+   "choices": [
+    "One-tenth of the feeder OCPD rating",
+    "One-third of the feeder OCPD rating",
+    "One-half of the feeder OCPD rating",
+    "The full feeder OCPD rating"
+   ],
+   "answer": 1,
+   "explain": "25-ft tap: at least 1/3 of the feeder overcurrent device rating, terminating in a single OCPD, protected from damage. 10-ft tap has its own conditions.",
+   "tags": [
+    "taps"
+   ]
+  },
+  {
+   "id": "W-030",
+   "topic": "wiring",
+   "article": "240.24(A)",
+   "difficulty": 1,
+   "q": "Overcurrent devices shall be readily accessible and installed so the center of the operating handle, in its highest position, is not more than how far above the floor?",
+   "choices": [
+    "5 ft 6 in.",
+    "6 ft",
+    "6 ft 7 in.",
+    "7 ft"
+   ],
+   "answer": 2,
+   "explain": "6 ft 7 in. (2.0 m), with exceptions such as busways and devices adjacent to the equipment they supply.",
+   "tags": [
+    "ocpd",
+    "location"
+   ]
+  },
+  {
+   "id": "W-031",
+   "topic": "wiring",
+   "article": "240.24(E)",
+   "difficulty": 1,
+   "q": "In dwelling units, overcurrent devices (other than supplementary protection) shall NOT be located in:",
+   "choices": [
+    "Garages",
+    "Bathrooms",
+    "Kitchens",
+    "Basements"
+   ],
+   "answer": 1,
+   "explain": "Not in bathrooms of dwellings or guest rooms, and not in the vicinity of easily ignitable material such as clothes closets (240.24(D)).",
+   "tags": [
+    "ocpd",
+    "location"
+   ]
+  },
+  {
+   "id": "W-032",
+   "topic": "wiring",
+   "article": "250.66(A)",
+   "difficulty": 2,
+   "q": "The portion of a grounding electrode conductor that is the sole connection to a ground rod is not required to be larger than:",
+   "choices": [
+    "8 AWG copper",
+    "6 AWG copper",
+    "4 AWG copper",
+    "2 AWG copper"
+   ],
+   "answer": 1,
+   "explain": "Rod, pipe or plate electrodes: 6 AWG Cu max. Concrete-encased electrode: 4 AWG Cu max (250.66(B)). Ground ring: no larger than the ring conductor.",
+   "tags": [
+    "grounding",
+    "gec"
+   ]
+  },
+  {
+   "id": "W-033",
+   "topic": "wiring",
+   "article": "250.53(A)(2)",
+   "difficulty": 1,
+   "q": "A single ground rod electrode must be supplemented by an additional electrode unless it has a resistance to earth of:",
+   "choices": [
+    "5 ohms or less",
+    "10 ohms or less",
+    "25 ohms or less",
+    "50 ohms or less"
+   ],
+   "answer": 2,
+   "explain": "25 ohms or less, otherwise add a second electrode spaced at least 6 ft away (250.53(A)(3)).",
+   "tags": [
+    "grounding",
+    "electrodes"
+   ]
+  },
+  {
+   "id": "W-034",
+   "topic": "wiring",
+   "article": "250.53(A)(3)",
+   "difficulty": 1,
+   "q": "When two ground rods are installed, they must be spaced at least how far apart?",
+   "choices": [
+    "3 ft",
+    "6 ft",
+    "8 ft",
+    "10 ft"
+   ],
+   "answer": 1,
+   "explain": "Not less than 6 ft (1.8 m) apart. Rods must be at least 8 ft long and driven their full length (250.52(A)(5), 250.53(G)).",
+   "tags": [
+    "grounding",
+    "electrodes"
+   ]
+  },
+  {
+   "id": "W-035",
+   "topic": "wiring",
+   "article": "250.52(A)(3)",
+   "difficulty": 2,
+   "q": "A concrete-encased electrode (Ufer) requires at least how much electrically conductive steel reinforcing bar of ½-in. minimum diameter?",
+   "choices": [
+    "10 ft",
+    "20 ft",
+    "25 ft",
+    "50 ft"
+   ],
+   "answer": 1,
+   "explain": "At least 20 ft of ½-in. rebar, or 20 ft of bare 4 AWG copper, encased in at least 2 in. of concrete in direct contact with earth.",
+   "tags": [
+    "grounding",
+    "electrodes"
+   ]
+  },
+  {
+   "id": "W-036",
+   "topic": "wiring",
+   "article": "Table 250.122",
+   "difficulty": 2,
+   "q": "A 100 A circuit requires a copper equipment grounding conductor of at least what size?",
+   "choices": [
+    "12 AWG",
+    "10 AWG",
+    "8 AWG",
+    "6 AWG"
+   ],
+   "answer": 2,
+   "explain": "Table 250.122: 15 A → 14; 20 A → 12; 30–60 A → 10; 100 A → 8; 200 A → 6; 300 A → 4; 400 A → 3 (copper).",
+   "tags": [
+    "grounding",
+    "egc"
+   ]
+  },
+  {
+   "id": "W-037",
+   "topic": "wiring",
+   "article": "250.24(A)(5)",
+   "difficulty": 2,
+   "q": "On the load side of the service disconnecting means, the grounded (neutral) conductor:",
+   "choices": [
+    "Must be bonded to every panel enclosure",
+    "Shall not be connected to equipment grounding conductors or enclosures",
+    "May be used as the equipment ground for ranges",
+    "Must be re-grounded at each subpanel"
+   ],
+   "answer": 1,
+   "explain": "The neutral-to-ground bond happens once, at the service. Downstream, neutrals and EGCs stay separate so no neutral current flows on metal parts.",
+   "tags": [
+    "grounding",
+    "bonding"
+   ]
+  },
+  {
+   "id": "W-038",
+   "topic": "wiring",
+   "article": "250.32(B)(1)",
+   "difficulty": 2,
+   "q": "A feeder supplies a detached garage from a dwelling. At the garage panel, the grounded conductor:",
+   "choices": [
+    "Is bonded to the enclosure and grounding electrode",
+    "Is kept isolated from the EGC and enclosure; an EGC is run with the feeder",
+    "Replaces the EGC",
+    "Is not required"
+   ],
+   "answer": 1,
+   "explain": "Run an equipment grounding conductor with the feeder and keep the neutral isolated at the second building. A grounding electrode is still required there (250.32(A)).",
+   "tags": [
+    "grounding",
+    "separate-building"
+   ]
+  },
+  {
+   "id": "W-039",
+   "topic": "wiring",
+   "article": "250.104(A)(1)",
+   "difficulty": 2,
+   "q": "The bonding jumper for a building's metal water piping system supplied by a service is sized according to:",
+   "choices": [
+    "Table 250.122 based on the largest OCPD",
+    "Table 250.102(C)(1) based on the service conductors",
+    "Always 6 AWG copper",
+    "The water pipe diameter"
+   ],
+   "answer": 1,
+   "explain": "Sized from the service-entrance conductors using Table 250.102(C)(1) (the 2020 edition points here rather than to Table 250.66).",
+   "tags": [
+    "bonding",
+    "water-pipe"
+   ],
+   "review": true,
+   "note": "Verify 2020 reference: 250.104(A)(1) → Table 250.102(C)(1) (2017 referenced Table 250.66)."
+  },
+  {
+   "id": "W-040",
+   "topic": "wiring",
+   "article": "250.118",
+   "difficulty": 1,
+   "q": "Which raceway is recognized as an equipment grounding conductor without added conditions on length or fitting type?",
+   "choices": [
+    "Electrical metallic tubing (EMT)",
+    "Rigid PVC conduit",
+    "Electrical nonmetallic tubing (ENT)",
+    "Liquidtight flexible nonmetallic conduit"
+   ],
+   "answer": 0,
+   "explain": "RMC, IMC and EMT are EGCs by themselves. FMC and LFMC qualify only with listed fittings, limited OCPD size and a 6-ft total length limit. Nonmetallic raceways never qualify.",
+   "tags": [
+    "grounding",
+    "egc"
+   ]
+  },
+  {
+   "id": "W-041",
+   "topic": "wiring",
+   "article": "250.119",
+   "difficulty": 1,
+   "q": "An insulated equipment grounding conductor shall be identified by:",
+   "choices": [
+    "White or gray",
+    "Green, or green with one or more yellow stripes",
+    "Black",
+    "Red"
+   ],
+   "answer": 1,
+   "explain": "Green or green with yellow stripes, or bare. White/gray is reserved for the grounded conductor (200.6).",
+   "tags": [
+    "identification"
+   ]
+  },
+  {
+   "id": "W-042",
+   "topic": "wiring",
+   "article": "200.6(A)",
+   "difficulty": 1,
+   "q": "An insulated grounded (neutral) conductor 6 AWG or smaller shall be identified by:",
+   "choices": [
+    "Green insulation",
+    "A continuous white or gray outer finish, or three continuous white or gray stripes",
+    "Black tape at terminations only",
+    "Any color other than green"
+   ],
+   "answer": 1,
+   "explain": "White, gray, or three continuous white/gray stripes on other than green insulation.",
+   "tags": [
+    "identification"
+   ]
+  },
+  {
+   "id": "W-043",
+   "topic": "wiring",
+   "article": "250.64(B)",
+   "difficulty": 2,
+   "q": "An 8 AWG copper grounding electrode conductor run along a surface must be:",
+   "choices": [
+    "Left bare and exposed",
+    "Protected in rigid metal conduit, IMC, PVC, RTRC, EMT, or cable armor",
+    "Spliced every 10 ft",
+    "Painted green"
+   ],
+   "answer": 1,
+   "explain": "GECs smaller than 6 AWG need raceway or armor protection. 6 AWG may be exposed along the structure if not subject to physical damage; 4 AWG and larger may be exposed.",
+   "tags": [
+    "grounding",
+    "gec"
+   ]
+  },
+  {
+   "id": "W-044",
+   "topic": "wiring",
+   "article": "Table 250.102(C)(1)",
+   "difficulty": 3,
+   "q": "A service has 500 kcmil copper service-entrance conductors. The minimum copper main bonding jumper is:",
+   "choices": [
+    "4 AWG",
+    "2 AWG",
+    "1/0 AWG",
+    "2/0 AWG"
+   ],
+   "answer": 2,
+   "explain": "Table 250.102(C)(1): over 350 through 600 kcmil copper → 1/0 AWG copper. Above 1,100 kcmil, use 12½% of the largest phase conductor area.",
+   "tags": [
+    "bonding"
+   ]
+  },
+  {
+   "id": "W-045",
+   "topic": "wiring",
+   "article": "210.4(B)",
+   "difficulty": 2,
+   "q": "Each multiwire branch circuit must be provided with a means to:",
+   "choices": [
+    "Disconnect only the neutral",
+    "Simultaneously disconnect all ungrounded conductors at the point where the circuit originates",
+    "Trip on ground fault",
+    "Be identified with purple tape"
+   ],
+   "answer": 1,
+   "explain": "A multipole breaker or handle-tied single poles at the panel. Conductors of a multiwire circuit must also be grouped (210.4(D)).",
+   "tags": [
+    "multiwire"
+   ]
+  },
+  {
+   "id": "W-046",
+   "topic": "wiring",
+   "article": "215.2(A)(1)",
+   "difficulty": 3,
+   "q": "A feeder supplies 60 A of continuous load and 40 A of noncontinuous load. Before any adjustment or correction, the minimum feeder conductor ampacity is:",
+   "choices": [
+    "100 A",
+    "110 A",
+    "115 A",
+    "125 A"
+   ],
+   "answer": 2,
+   "explain": "(60 × 1.25) + 40 = 75 + 40 = 115 A. The OCPD follows the same math (215.3).",
+   "tags": [
+    "feeders",
+    "continuous-load"
+   ]
+  },
+  {
+   "id": "W-047",
+   "topic": "wiring",
+   "article": "220.82(B)",
+   "difficulty": 2,
+   "q": "Using the optional method for a dwelling unit, the general loads are taken at 100% for the first 10 kVA and at what percentage for the remainder?",
+   "choices": [
+    "25%",
+    "35%",
+    "40%",
+    "50%"
+   ],
+   "answer": 2,
+   "explain": "100% of the first 10 kVA, 40% of the rest; then add the larger of the heating or cooling loads per 220.82(C).",
+   "tags": [
+    "load-calc",
+    "optional"
+   ]
+  },
+  {
+   "id": "W-048",
+   "topic": "wiring",
+   "article": "230.6",
+   "difficulty": 2,
+   "q": "Service conductors are considered 'outside' a building when installed:",
+   "choices": [
+    "Inside a metal raceway anywhere in the building",
+    "Beneath at least 2 in. of concrete under the building",
+    "In any attic space",
+    "Within 10 ft of the exterior wall"
+   ],
+   "answer": 1,
+   "explain": "230.6 lists: under 2 in. of concrete beneath the building, within the building in 2 in. of concrete/brick, in a vault, in conduit under 18 in. of earth under the building, etc.",
+   "tags": [
+    "services"
+   ]
+  },
+  {
+   "id": "W-049",
+   "topic": "wiring",
+   "article": "250.50",
+   "difficulty": 2,
+   "q": "If a metal underground water pipe, a concrete-encased electrode, and a ground rod are all present at a building, which must be bonded together to form the grounding electrode system?",
+   "choices": [
+    "Only the water pipe",
+    "Only the concrete-encased electrode",
+    "All electrodes present must be bonded together",
+    "Whichever one the installer selects"
+   ],
+   "answer": 2,
+   "explain": "All grounding electrodes described in 250.52(A)(1) through (A)(7) that are present must be bonded together. Metal water pipe must also be supplemented (250.53(D)(2)).",
+   "tags": [
+    "grounding",
+    "electrodes"
+   ]
+  },
+  {
+   "id": "W-050",
+   "topic": "wiring",
+   "article": "210.52(B)(1)",
+   "difficulty": 2,
+   "q": "The two small-appliance branch circuits in a dwelling kitchen may supply:",
+   "choices": [
+    "Kitchen lighting",
+    "Receptacles in the kitchen, pantry, breakfast room and dining room, plus refrigeration equipment",
+    "Bathroom receptacles",
+    "The range hood and dishwasher"
+   ],
+   "answer": 1,
+   "explain": "Receptacle outlets in the kitchen and dining-type areas (including the refrigerator, which may also have its own 15 A+ circuit). No lighting or other outlets.",
+   "tags": [
+    "branch-circuits",
+    "kitchen"
+   ]
+  },
+  {
+   "id": "W-051",
+   "topic": "wiring",
+   "article": "250.122(B)",
+   "difficulty": 2,
+   "q": "When ungrounded conductors are increased in size to compensate for voltage drop, the equipment grounding conductor:",
+   "choices": [
+    "Stays at the Table 250.122 size",
+    "Must be increased proportionately by circular-mil area",
+    "Can be omitted if the raceway is metal",
+    "Is sized from the service"
+   ],
+   "answer": 1,
+   "explain": "Wire-type EGCs are upsized in proportion to the increase in the ungrounded conductors' circular-mil area.",
+   "tags": [
+    "grounding",
+    "egc",
+    "voltage-drop"
+   ]
+  },
+  {
+   "id": "W-052",
+   "topic": "wiring",
+   "article": "225.30",
+   "difficulty": 2,
+   "q": "Generally, a building or structure served by a feeder from another building shall be supplied by:",
+   "choices": [
+    "Only one feeder or branch circuit",
+    "Up to six feeders",
+    "Two feeders minimum",
+    "Any number of feeders"
+   ],
+   "answer": 0,
+   "explain": "One supply per building unless a 225.30 exception applies (special conditions, different voltages, capacity, etc.) — parallel to the one-service rule in 230.2.",
+   "tags": [
+    "feeders",
+    "outside"
+   ]
+  }
+ ]
+}

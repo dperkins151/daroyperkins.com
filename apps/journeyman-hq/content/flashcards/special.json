@@ -1,0 +1,100 @@
+[
+ {
+  "id": "F-S01",
+  "topic": "special",
+  "article": "500.5",
+  "difficulty": 1,
+  "front": "Hazardous location classes and divisions",
+  "back": "Class I: gases/vapors · Class II: dust · Class III: fibers/flyings\nDivision 1: normally present · Division 2: abnormal conditions only\nZones 0/1/2 (gases) and 20/21/22 (dust) are the alternative system"
+ },
+ {
+  "id": "F-S02",
+  "topic": "special",
+  "article": "501.15",
+  "difficulty": 2,
+  "front": "Conduit seals — Class I",
+  "back": "Within 18 in. of enclosures with arcing/sparking devices (Div 1)\nWhere conduit leaves a Div 1 area (boundary seal)\nDiv 2: at boundary and at enclosures required to be explosionproof\nOnly explosionproof fittings between seal and enclosure"
+ },
+ {
+  "id": "F-S03",
+  "topic": "special",
+  "article": "511.3",
+  "difficulty": 2,
+  "front": "Commercial garages",
+  "back": "Major repair, no ventilation: Class I Div 2 up to 18 in. above the floor\nPits without ventilation: Div 1\nWith 4 air changes/hr (or ventilation per 511.3): may be unclassified\nMinor repair garages: generally unclassified"
+ },
+ {
+  "id": "F-S04",
+  "topic": "special",
+  "article": "517.18 / 517.19",
+  "difficulty": 2,
+  "front": "Patient bed locations",
+  "back": "General care (Cat. 2): 2 branch circuits (1 critical, 1 normal), ≥ 8 receptacles\nCritical care (Cat. 1): ≥ 14 receptacles, at least 1 critical-branch circuit\nAll hospital grade"
+ },
+ {
+  "id": "F-S05",
+  "topic": "special",
+  "article": "680.22 / 680.23 / 680.26",
+  "difficulty": 2,
+  "front": "Pool numbers",
+  "back": "General receptacles ≥ 6 ft from inside walls; GFCI within 20 ft\nPump receptacle 6–10 ft, locking, GFCI\nLuminaires: lens top ≥ 18 in. below water\nEquipotential bond: 8 AWG solid Cu\nSwitches ≥ 5 ft from the water (680.22(C))"
+ },
+ {
+  "id": "F-S06",
+  "topic": "special",
+  "article": "690.7 / 690.8",
+  "difficulty": 2,
+  "front": "PV voltage and current rules",
+  "back": "Max voltage: Voc × low-temp correction (Table 690.7(A) or coefficients)\nSource circuit max current: 125% × Isc\nConductor sizing: 125% of that (690.8(B)) → 156% of Isc overall\nResidential DC max 600 V (1000 V other)"
+ },
+ {
+  "id": "F-S07",
+  "topic": "special",
+  "article": "690.12",
+  "difficulty": 2,
+  "front": "Rapid shutdown limits",
+  "back": "Outside array boundary (> 1 ft): ≤ 30 V within 30 s\nInside array boundary: ≤ 80 V within 30 s, or listed PV hazard control system\nInitiation device at the service or readily accessible location"
+ },
+ {
+  "id": "F-S08",
+  "topic": "special",
+  "article": "705.12(B)",
+  "difficulty": 3,
+  "front": "Load-side interconnection — 120% rule",
+  "back": "Sum of main + inverter OCPD ≤ 120% × busbar rating\nInverter breaker at the opposite end of the bus; label required\n200 A bus / 200 A main → 40 A inverter max\nAlternative: 100% rule (sum of all breakers except main ≤ bus rating)"
+ },
+ {
+  "id": "F-S09",
+  "topic": "special",
+  "article": "700 / 701 / 702",
+  "difficulty": 1,
+  "front": "Emergency vs standby systems",
+  "back": "Emergency (700): 10 s, life safety, separate wiring\nLegally required standby (701): 60 s\nOptional standby (702): no time limit; transfer equipment still required\nFire-pump: Art. 695"
+ },
+ {
+  "id": "F-S10",
+  "topic": "special",
+  "article": "600.5",
+  "difficulty": 1,
+  "front": "Sign circuits",
+  "back": "One 20 A sign outlet at each entrance of a commercial occupancy, no other load\nSigns need a disconnect within sight or lockable\nNeon transformers/power supplies: 600.23/600.24"
+ },
+ {
+  "id": "F-S11",
+  "topic": "special",
+  "article": "725",
+  "difficulty": 1,
+  "front": "Class 1, 2, 3 circuits",
+  "back": "Class 1: up to 600 V, installed like power wiring\nClass 2: power-limited at source, low shock & fire risk (thermostats, doorbells)\nClass 3: power-limited, higher voltage than Class 2, shock risk\nKeep Class 2/3 separate from power conductors"
+ },
+ {
+  "id": "F-S12",
+  "topic": "special",
+  "article": "547 / 550 / 551",
+  "difficulty": 2,
+  "front": "Ag buildings, mobile homes, RV parks — one-liners",
+  "back": "Ag (547): equipotential planes in livestock areas, GFCI receptacles, corrosion-resistant methods\nMobile home (550): feeder 4-wire, min 100 A service equipment\nRV sites (551): 20% min of sites with 50 A 125/250 V receptacles (check current table)",
+  "review": true,
+  "note": "Verify 551.71 RV-site percentage table for 2020."
+ }
+]

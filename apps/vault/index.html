@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b0b0d">
+<title>Roy's private apps</title>
+<style>
+  :root { --bg:#0b0b0d; --surface:#141417; --surface-2:#1a1a1e; --border:#26262b; --text:#f4f4f5; --muted:#a3a3ad; --amber:#f5a623; --amber-light:#fbbf24; --red:#f2555a; --green:#35c26e; --radius:14px; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; font-size:16px; line-height:1.45; -webkit-font-smoothing:antialiased; padding-bottom:env(safe-area-inset-bottom); }
+  .top { position:sticky; top:0; background:rgba(11,11,13,.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); z-index:5; }
+  .top-in { max-width:720px; margin:0 auto; padding:0 16px; height:56px; display:flex; align-items:center; justify-content:space-between; }
+  .brand { font-weight:800; letter-spacing:-.01em; font-size:17px; }
+  .brand .bolt { color:var(--amber); }
+  .btn { display:inline-flex; align-items:center; gap:6px; background:var(--amber); color:#111; border:0; border-radius:10px; padding:9px 14px; font-weight:800; font-size:14px; text-decoration:none; cursor:pointer; }
+  .btn:active { opacity:.85; }
+  main { max-width:720px; margin:0 auto; padding:18px 16px 40px; }
+  h1 { font-size:26px; letter-spacing:-.02em; margin:6px 0 2px; }
+  .sub { color:var(--muted); margin:0 0 18px; font-size:.92rem; }
+  .grid { display:grid; grid-template-columns:1fr; gap:10px; }
+  @media (min-width:560px){ .grid { grid-template-columns:1fr 1fr; } }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:14px; display:flex; gap:12px; align-items:center; position:relative; }
+  .card:active { border-color:var(--amber); }
+  .tile { width:48px; height:48px; border-radius:12px; background:linear-gradient(160deg,#2a2210,#1a1a1e); border:1px solid #3a2e14; display:grid; place-items:center; font-weight:800; font-size:20px; color:var(--amber); flex-shrink:0; }
+  .meta { flex:1; min-width:0; }
+  .name { font-weight:700; font-size:1.02rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .name a { color:var(--text); text-decoration:none; }
+  .name a::after { content:""; position:absolute; inset:0; }  /* whole card is the tap target */
+  .small { color:var(--muted); font-size:.8rem; margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .badge { display:inline-block; background:var(--surface-2); border:1px solid var(--border); border-radius:999px; padding:1px 8px; font-size:.72rem; color:var(--amber-light); margin-right:4px; }
+  .del { position:relative; z-index:1; background:none; border:1px solid var(--border); color:var(--muted); border-radius:8px; padding:7px 10px; cursor:pointer; font-size:.8rem; }
+  .del:hover, .del:focus { color:var(--red); border-color:#5a2226; }
+  .empty { text-align:center; color:var(--muted); padding:36px 16px; background:var(--surface); border:1px dashed var(--border); border-radius:var(--radius); }
+  .empty a { color:var(--amber-light); }
+  .status { margin:10px 0 0; font-size:.85rem; min-height:1.3em; }
+  .status.err { color:var(--red); } .status.ok { color:var(--green); }
+  footer { max-width:720px; margin:0 auto; padding:0 16px 28px; color:var(--muted); font-size:.78rem; display:flex; justify-content:space-between; }
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in"><span class="brand"><span class="bolt">⚡</span> Roy's private apps</span><a class="btn" href="/upload/">+ Upload</a></div></header>
+<main>
+  <h1>Apps</h1>
+  <p class="sub" id="sub">Behind the vault. Tap to open; delete asks first.</p>
+  <div id="grid" class="grid"></div>
+  <p id="empty" class="empty" hidden>No apps yet. <a href="/upload/">Upload your first one</a>.</p>
+  <p id="status" class="status"></p>
+</main>
+<footer><span>apps.daroyperkins.com</span><span>Built for the field. ⚡</span></footer>
+<script>
+(function () {
+  "use strict";
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const grid = document.getElementById("grid"), empty = document.getElementById("empty"), status = document.getElementById("status"), sub = document.getElementById("sub");
+  const when = (iso) => { try { const d = new Date(iso), diff = (Date.now() - d) / 864e5; if (diff < 1) return "updated today"; if (diff < 2) return "updated yesterday"; if (diff < 30) return "updated " + Math.floor(diff) + " days ago"; return "updated " + d.toLocaleDateString(); } catch (e) { return ""; } };
+
+  async function manifest(name) {
+    // Optional: apps that ship data/manifest.json (e.g. journeyman-hq) get a name/version badge. Silent on 404.
+    try {
+      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 2500);
+      const r = await fetch("/" + encodeURIComponent(name) + "/data/manifest.json", { credentials: "same-origin", signal: ctl.signal, cache: "no-cache" });
+      clearTimeout(t); if (!r.ok) return null; const m = await r.json();
+      return { app: m.app, version: m.appVersion, banks: m.banks ? Object.entries(m.banks).map(([k, b]) => k + " v" + b.version) : [] };
+    } catch (e) { return null; }
+  }
+
+  async function load(keepStatus) {
+    if (!keepStatus) { status.className = "status"; status.textContent = ""; }
+    let apps;
+    try {
+      const r = await fetch("/api/apps", { credentials: "same-origin", cache: "no-cache" });
+      if (r.status === 401) { status.className = "status err"; status.textContent = "Sign in again."; return; }
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      apps = (await r.json()).apps || [];
+    } catch (e) { status.className = "status err"; status.textContent = "Couldn't load the app list (" + e.message + ")."; return; }
+    apps.sort((a, b) => String(b.updated).localeCompare(String(a.updated)));
+    empty.hidden = apps.length > 0;
+    sub.textContent = apps.length ? apps.length + (apps.length === 1 ? " app" : " apps") + " behind the vault. Tap to open; delete asks first." : "Behind the vault.";
+    grid.innerHTML = apps.map((a) => `
+      <div class="card" data-name="${esc(a.name)}">
+        <div class="tile">${esc(String(a.name).charAt(0).toUpperCase())}</div>
+        <div class="meta">
+          <div class="name"><a href="/${esc(a.name)}/">${esc(a.name)}</a></div>
+          <div class="small" data-sub>${esc(when(a.updated))}</div>
+        </div>
+        <button class="del" data-del="${esc(a.name)}" aria-label="Delete ${esc(a.name)}">delete</button>
+      </div>`).join("");
+    grid.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", async (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      const name = b.dataset.del;
+      if (!confirm("Delete " + name + "? This removes it from the server.")) return;
+      b.disabled = true;
+      try {
+        const r = await fetch("/api/apps/" + encodeURIComponent(name), { method: "DELETE", credentials: "same-origin" });
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        status.className = "status ok"; status.textContent = "Deleted " + name + ".";
+      } catch (e) { status.className = "status err"; status.textContent = "Delete failed (" + e.message + ")."; b.disabled = false; }
+      load(true);
+    }));
+    // enrich with manifests, in parallel, non-blocking
+    apps.forEach(async (a) => {
+      const m = await manifest(a.name); if (!m) return;
+      const card = grid.querySelector(`.card[data-name="${CSS.escape(a.name)}"]`); if (!card) return;
+      if (m.app) card.querySelector(".name a").textContent = m.app;
+      const s = card.querySelector("[data-sub]");
+      s.innerHTML = (m.version ? `<span class="badge">v${esc(m.version)}</span>` : "") + m.banks.map((b) => `<span class="badge">${esc(b)}</span>`).join("") + esc(when(a.updated));
+    });
+  }
+  load();
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) load(); });
+})();
+</script>
+</body>
+</html>

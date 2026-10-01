@@ -1,0 +1,6 @@
+# GitHub Pages (Jekyll) config for daroyperkins.com.
+# `apps/` holds private-vault app sources (deployed to apps.daroyperkins.com behind
+# Basic Auth via zip upload). Keep them OUT of the public site build.
+exclude:
+  - apps/
+  - README.md

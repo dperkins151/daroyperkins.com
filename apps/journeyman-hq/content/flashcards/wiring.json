@@ -1,0 +1,228 @@
+[
+ {
+  "id": "F-W01",
+  "topic": "wiring",
+  "article": "210.52(A)",
+  "difficulty": 1,
+  "front": "Dwelling wall receptacle spacing",
+  "back": "No point along the floor line more than 6 ft from a receptacle → max 12 ft apart.\nWall spaces 2 ft or wider count. Floor receptacles within 18 in. of the wall count."
+ },
+ {
+  "id": "F-W02",
+  "topic": "wiring",
+  "article": "210.52(C)",
+  "difficulty": 1,
+  "front": "Kitchen countertop receptacles",
+  "back": "Any wall counter space 12 in. or wider gets one.\nNo point along the wall line more than 24 in. from a receptacle (4 ft apart max).\nIslands/peninsulas: 2020 — at least one per island/peninsula (per 9 sq ft rule)."
+ },
+ {
+  "id": "F-W03",
+  "topic": "wiring",
+  "article": "210.8(A)",
+  "difficulty": 1,
+  "front": "Dwelling GFCI locations (210.8(A))",
+  "back": "Bathrooms · garages & accessory buildings · outdoors · crawl spaces · basements · kitchens (countertop) · within 6 ft of any sink · boathouses · within 6 ft of bathtub/shower · laundry areas · indoor damp/wet locations"
+ },
+ {
+  "id": "F-W04",
+  "topic": "wiring",
+  "article": "210.12(A)",
+  "difficulty": 1,
+  "front": "Dwelling AFCI areas (210.12(A))",
+  "back": "Kitchens, family rooms, dining, living, parlors, libraries, dens, bedrooms, sunrooms, rec rooms, closets, hallways, laundry areas, similar.\nNOT: bathrooms, garages, outdoors, unfinished basements."
+ },
+ {
+  "id": "F-W05",
+  "topic": "wiring",
+  "article": "210.11(C)",
+  "difficulty": 1,
+  "front": "Required dwelling 20 A circuits",
+  "back": "2 small-appliance (kitchen/dining)\n1 laundry\n1 bathroom\n1 garage (attached garages, 2017+)"
+ },
+ {
+  "id": "F-W06",
+  "topic": "wiring",
+  "article": "210.19 / 210.20",
+  "difficulty": 1,
+  "front": "Continuous load rule",
+  "back": "Conductors and OCPD ≥ 125% of continuous + 100% of noncontinuous.\nContinuous = 3 hours or more."
+ },
+ {
+  "id": "F-W07",
+  "topic": "wiring",
+  "article": "Table 210.21(B)(3)",
+  "difficulty": 1,
+  "front": "Receptacle ratings permitted per circuit (2+ receptacles)",
+  "back": "15 A circuit → 15 A\n20 A → 15 or 20 A\n30 A → 30 A\n40 A → 40 or 50 A\n50 A → 50 A"
+ },
+ {
+  "id": "F-W08",
+  "topic": "wiring",
+  "article": "210.52(E)/(G)/(H)",
+  "difficulty": 1,
+  "front": "Dwelling receptacle heights and hallways",
+  "back": "Outdoor: front & back, ≤ 6½ ft above grade\nGarage: one per vehicle bay, ≤ 5½ ft above floor\nHallway: 10 ft or longer → at least one\nBathroom: within 3 ft of basin edge"
+ },
+ {
+  "id": "F-W09",
+  "topic": "wiring",
+  "article": "Table 220.12 / 220.52",
+  "difficulty": 1,
+  "front": "Dwelling standard-method base loads",
+  "back": "General lighting: 3 VA per sq ft\nSmall appliance: 1,500 VA each (×2)\nLaundry: 1,500 VA"
+ },
+ {
+  "id": "F-W10",
+  "topic": "wiring",
+  "article": "Table 220.42",
+  "difficulty": 2,
+  "front": "Dwelling general lighting demand factors",
+  "back": "First 3,000 VA → 100%\n3,001–120,000 VA → 35%\nOver 120,000 VA → 25%"
+ },
+ {
+  "id": "F-W11",
+  "topic": "wiring",
+  "article": "220.54 / 220.55",
+  "difficulty": 2,
+  "front": "Dryer and range demand",
+  "back": "Dryer: 5,000 W or nameplate, whichever larger\nRange ≤ 12 kW (one): 8 kW (Table 220.55 Col. C)\nOver 12 kW: add 5% per kW above 12"
+ },
+ {
+  "id": "F-W12",
+  "topic": "wiring",
+  "article": "220.82",
+  "difficulty": 2,
+  "front": "Optional method — dwelling (220.82)",
+  "back": "General loads: first 10 kVA at 100%, remainder at 40%\nThen add largest of heating/cooling per 220.82(C)\nService must be ≥ 100 A"
+ },
+ {
+  "id": "F-W13",
+  "topic": "wiring",
+  "article": "230.24",
+  "difficulty": 2,
+  "front": "Overhead service conductor clearances",
+  "back": "10 ft above grade at the service entrance (≤150 V to ground)\n12 ft over residential property/driveways (≤300 V)\n15 ft over commercial areas with truck traffic (>300 V)\n18 ft over public streets, alleys, parking lots\n8 ft above roofs (with exceptions)"
+ },
+ {
+  "id": "F-W14",
+  "topic": "wiring",
+  "article": "230.70 / 230.71 / 230.79",
+  "difficulty": 1,
+  "front": "Service disconnect basics",
+  "back": "Location: outside, or inside nearest point of entrance; never in a bathroom\nMax six disconnects, each in its own enclosure (2020)\nMin rating: one-family dwelling 100 A 3-wire; other 60 A"
+ },
+ {
+  "id": "F-W15",
+  "topic": "wiring",
+  "article": "240.4(D)",
+  "difficulty": 1,
+  "front": "Small-conductor OCPD limits",
+  "back": "14 AWG Cu → 15 A\n12 AWG Cu → 20 A\n10 AWG Cu → 30 A\n12 AWG Al → 15 A\n10 AWG Al → 25 A"
+ },
+ {
+  "id": "F-W16",
+  "topic": "wiring",
+  "article": "240.6(A)",
+  "difficulty": 1,
+  "front": "Standard OCPD ratings",
+  "back": "15 20 25 30 35 40 45 50 60 70 80 90 100 110 125 150 175 200 225 250 300 350 400 450 500 600 700 800 1000 1200 1600 2000 2500 3000 4000 5000 6000"
+ },
+ {
+  "id": "F-W17",
+  "topic": "wiring",
+  "article": "240.4(B)",
+  "difficulty": 2,
+  "front": "Next-size-up rule",
+  "back": "Allowed when: conductor ampacity isn't a standard rating, the OCPD is 800 A or less, and it's not a multioutlet receptacle circuit.\n65 A ampacity → 70 A breaker OK."
+ },
+ {
+  "id": "F-W18",
+  "topic": "wiring",
+  "article": "240.21(B)",
+  "difficulty": 2,
+  "front": "Feeder tap rules",
+  "back": "10 ft: tap ampacity ≥ load AND ≥ OCPD rating at termination; ≥ 1/10 of feeder OCPD\n25 ft: tap ampacity ≥ 1/3 feeder OCPD, ends in a single OCPD\nAll: protected from damage, in raceway"
+ },
+ {
+  "id": "F-W19",
+  "topic": "wiring",
+  "article": "240.24",
+  "difficulty": 1,
+  "front": "OCPD location rules",
+  "back": "Readily accessible; handle ≤ 6 ft 7 in. above floor\nNot near easily ignitable material (clothes closets)\nNot in dwelling bathrooms\nNot over steps of a stairway"
+ },
+ {
+  "id": "F-W20",
+  "topic": "wiring",
+  "article": "Table 250.66",
+  "difficulty": 2,
+  "front": "GEC sizing (copper) — Table 250.66",
+  "back": "Service conductor 2 AWG or smaller → 8 AWG\n1 or 1/0 → 6\n2/0 or 3/0 → 4\nOver 3/0 to 350 kcmil → 2\nOver 350 to 600 → 1/0\nOver 600 to 1100 → 2/0\nOver 1100 → 3/0\nRod/pipe/plate max 6 AWG; Ufer max 4 AWG"
+ },
+ {
+  "id": "F-W21",
+  "topic": "wiring",
+  "article": "Table 250.122",
+  "difficulty": 2,
+  "front": "EGC sizing (copper) — Table 250.122",
+  "back": "15 A → 14\n20 A → 12\n30, 40, 60 A → 10\n100 A → 8\n200 A → 6\n300 A → 4\n400 A → 3\n500 A → 2\n600 A → 1\nUpsize proportionally when conductors are upsized for VD."
+ },
+ {
+  "id": "F-W22",
+  "topic": "wiring",
+  "article": "250.52 / 250.53",
+  "difficulty": 1,
+  "front": "Ground rod rules",
+  "back": "≥ 8 ft long, driven full length\nSingle rod OK only if ≤ 25 Ω; otherwise add a second\nRods ≥ 6 ft apart\nUfer: 20 ft of ½-in. rebar or 20 ft of 4 AWG bare Cu, 2 in. of concrete"
+ },
+ {
+  "id": "F-W23",
+  "topic": "wiring",
+  "article": "250.24 / 250.32",
+  "difficulty": 2,
+  "front": "Where is the neutral bonded to ground?",
+  "back": "Once — at the service disconnect (main bonding jumper).\nNever on the load side (subpanels, separate buildings).\nSeparate building: run an EGC with the feeder; isolate the neutral; still install a grounding electrode."
+ },
+ {
+  "id": "F-W24",
+  "topic": "wiring",
+  "article": "250.118",
+  "difficulty": 1,
+  "front": "Raceways that count as an EGC",
+  "back": "RMC, IMC, EMT: yes, as-is\nFMC/LFMC: only with listed fittings, OCPD ≤ 20 A (FMC) / 60 A (LFMC ¾ in. and smaller), ≤ 6 ft total\nPVC, ENT, LFNC: never",
+  "review": true,
+  "note": "Verify 250.118(5)/(6) OCPD limits per trade size for FMC/LFMC."
+ },
+ {
+  "id": "F-W25",
+  "topic": "wiring",
+  "article": "200.6 / 250.119",
+  "difficulty": 1,
+  "front": "Conductor color identification",
+  "back": "Grounded (neutral): white, gray, or 3 white stripes\nEGC: green, green/yellow stripes, or bare\nUngrounded: any other color (orange = high leg, 110.15)"
+ },
+ {
+  "id": "F-W26",
+  "topic": "wiring",
+  "article": "Table 250.102(C)(1)",
+  "difficulty": 3,
+  "front": "Main / supply-side bonding jumper sizing (copper)",
+  "back": "Same breakpoints as Table 250.66 for ≤ 1100 kcmil.\nOver 1100 kcmil Cu: 12½% of the largest ungrounded conductor area.\n500 kcmil service → 1/0 Cu jumper."
+ },
+ {
+  "id": "F-W27",
+  "topic": "wiring",
+  "article": "210.4",
+  "difficulty": 1,
+  "front": "Multiwire branch circuits",
+  "back": "Shared neutral, ungrounded conductors on different phases/legs.\nMust have a simultaneous disconnect (handle tie or multipole breaker) at the origin.\nConductors grouped in the panel."
+ },
+ {
+  "id": "F-W28",
+  "topic": "wiring",
+  "article": "230.6",
+  "difficulty": 2,
+  "front": "When are service conductors 'outside' a building?",
+  "back": "Under ≥ 2 in. of concrete beneath the building\nIn ≥ 2 in. of concrete or brick within the building\nIn a vault\nIn conduit under ≥ 18 in. of earth beneath the building\nIn an overhead service mast"
+ }
+]
