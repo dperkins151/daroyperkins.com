@@ -39,8 +39,8 @@
   {
    "id": "F-S12",
    "date": "2026-10-01",
-   "outcome": "fixed",
-   "detail": "551.71 in 2020 requires ≥ 40% of sites with 50 A (2017 was 20%); 70% with 30 A; every site 20 A; every 50 A site also 30 A. Card corrected.",
+   "outcome": "disputed — re-flagged",
+   "detail": "551.71 in 2020 requires ≥ 40% of sites with 50 A (2017 was 20%); 70% with 30 A; every site 20 A; every 50 A site also 30 A. Card corrected. Main (PR #1, Luigi) independently kept 20%. Re-flagged review:true until checked in the book.",
    "sources": [
     "https://www.ecmweb.com/national-electrical-code/article/20898442/recreational-vehicles-and-rv-parks"
    ]
