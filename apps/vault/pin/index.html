@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0b0b0d">
+<title>Vault</title>
+<style>
+  :root { --bg:#0b0b0d; --surface:#141417; --surface-2:#1a1a1e; --border:#26262b; --text:#f4f4f5; --muted:#a3a3ad; --amber:#f5a623; --amber-light:#fbbf24; --red:#f2555a; --green:#35c26e; }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html, body { height:100%; margin:0; }
+  body { background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px 16px calc(24px + env(safe-area-inset-bottom)); user-select:none; -webkit-user-select:none; }
+  .brand { font-weight:800; font-size:17px; margin-bottom:6px; }
+  .brand .bolt { color:var(--amber); }
+  .sub { color:var(--muted); font-size:.85rem; margin:0 0 22px; text-align:center; }
+  .dots { display:flex; gap:12px; height:28px; align-items:center; justify-content:center; margin-bottom:10px; min-width:200px; }
+  .dot { width:14px; height:14px; border-radius:50%; border:2px solid var(--border); transition:background .1s, border-color .1s, transform .1s; }
+  .dot.on { background:var(--amber); border-color:var(--amber); transform:scale(1.1); }
+  .dots.shake { animation:shake .4s; }
+  @keyframes shake { 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+  .status { min-height:1.4em; font-size:.9rem; font-weight:600; text-align:center; margin-bottom:18px; color:var(--muted); }
+  .status.err { color:var(--red); } .status.ok { color:var(--green); } .status.lock { color:var(--amber-light); font-variant-numeric:tabular-nums; }
+  .pad { display:grid; grid-template-columns:repeat(3, 76px); gap:12px; }
+  @media (min-width: 420px) { .pad { grid-template-columns:repeat(3, 84px); } }
+  .key { height:68px; border-radius:16px; border:1px solid var(--border); background:var(--surface); color:var(--text); font-size:26px; font-weight:600; cursor:pointer; display:grid; place-items:center; transition:background .08s, transform .08s; font-family:inherit; }
+  .key:active { background:var(--surface-2); transform:scale(.96); }
+  .key.fn { font-size:15px; color:var(--muted); background:transparent; }
+  .key.go { background:var(--amber); color:#111; border-color:var(--amber); font-size:16px; font-weight:800; }
+  .pad[aria-disabled="true"] .key { opacity:.4; pointer-events:none; }
+  .foot { margin-top:26px; color:var(--muted); font-size:.75rem; text-align:center; max-width:300px; line-height:1.5; }
+  .foot b { color:var(--text); font-weight:600; }
+</style>
+</head>
+<body>
+  <div class="brand"><span class="bolt">⚡</span> Roy's private apps</div>
+  <p class="sub">Enter your PIN</p>
+  <div id="dots" class="dots" aria-hidden="true"></div>
+  <div id="status" class="status" role="status" aria-live="polite"></div>
+  <div id="pad" class="pad" role="group" aria-label="PIN keypad">
+    <button class="key" data-k="1">1</button><button class="key" data-k="2">2</button><button class="key" data-k="3">3</button>
+    <button class="key" data-k="4">4</button><button class="key" data-k="5">5</button><button class="key" data-k="6">6</button>
+    <button class="key" data-k="7">7</button><button class="key" data-k="8">8</button><button class="key" data-k="9">9</button>
+    <button class="key fn" data-k="clear" aria-label="Clear">Clear</button><button class="key" data-k="0">0</button><button class="key fn" data-k="back" aria-label="Delete last digit">⌫</button>
+    <button class="key go" id="go" data-k="go" style="grid-column:1 / -1; height:56px;">Unlock</button>
+  </div>
+  <p class="foot">6–12 digits · 5 tries, then a timed lock. <b>Upload and delete still use the vault password.</b></p>
+
+<script>
+(function () {
+  "use strict";
+  const MIN = 6, MAX = 12;
+  const dots = document.getElementById("dots"), status = document.getElementById("status"), pad = document.getElementById("pad");
+  let pin = "";            // lives only in this closure; wiped after each submit
+  let busy = false, lockTimer = null;
+
+  /** Where to go after unlock. Same-origin paths only — blocks //evil.com, javascript:, and absolute URLs. */
+  function safeNext() {
+    const n = new URLSearchParams(location.search).get("next") || "/";
+    return (/^\/(?!\/)/.test(n) && !/[\u0000-\u001f\\]/.test(n)) ? n : "/";
+  }
+  function renderDots() {
+    const n = Math.max(MIN, pin.length);
+    dots.innerHTML = Array.from({ length: n }, (_, i) => `<span class="dot ${i < pin.length ? "on" : ""}"></span>`).join("");
+  }
+  function say(msg, cls) { status.textContent = msg; status.className = "status " + (cls || ""); }
+  function fmt(sec) { const m = Math.floor(sec / 60), s = sec % 60; return (m ? m + ":" : "") + String(s).padStart(m ? 2 : 1, "0") + (m ? "" : "s"); }
+  function lock(sec) {
+    pad.setAttribute("aria-disabled", "true"); pin = ""; renderDots();
+    let left = Math.max(1, Math.ceil(sec));
+    clearInterval(lockTimer);
+    const tick = () => { if (left <= 0) { clearInterval(lockTimer); pad.removeAttribute("aria-disabled"); say("Try again.", ""); return; } say("Locked · try again in " + fmt(left), "lock"); left--; };
+    tick(); lockTimer = setInterval(tick, 1000);
+  }
+  function press(k) {
+    if (busy || pad.getAttribute("aria-disabled") === "true") return;
+    if (k === "back") pin = pin.slice(0, -1);
+    else if (k === "clear") pin = "";
+    else if (k === "go") return submit();
+    else if (/^[0-9]$/.test(k) && pin.length < MAX) pin += k;
+    if (navigator.vibrate) navigator.vibrate(8);
+    renderDots();
+    if (status.classList.contains("err")) say("", "");
+  }
+  async function submit() {
+    if (pin.length < MIN) { say("At least " + MIN + " digits.", "err"); dots.classList.add("shake"); setTimeout(() => dots.classList.remove("shake"), 400); return; }
+    busy = true; say("Checking…", "");
+    const body = JSON.stringify({ pin }); pin = ""; renderDots();   // PIN leaves memory as soon as it is serialized
+    let r, data = {};
+    try {
+      r = await fetch("/auth/pin", { method: "POST", credentials: "same-origin", cache: "no-store", headers: { "Content-Type": "application/json" }, body });
+      try { data = await r.json(); } catch (e) {}
+    } catch (e) { busy = false; say("Network error — try again.", "err"); return; }
+    busy = false;
+    if (r.status === 200 && data.ok) { say("Unlocked", "ok"); location.replace(safeNext()); return; }
+    if (r.status === 429) { lock(Number(data.retryAfterSec) || 30); return; }
+    if (r.status === 401) {
+      const left = Number(data.attemptsLeft);
+      say(!Number.isFinite(left) ? "Wrong PIN" : left > 0 ? "Wrong PIN · " + left + (left === 1 ? " try" : " tries") + " left" : "Wrong PIN · next miss locks the pad", "err");
+      dots.classList.add("shake"); setTimeout(() => dots.classList.remove("shake"), 400); return;
+    }
+    say("Something went wrong (" + r.status + ").", "err");
+  }
+  pad.addEventListener("click", (e) => { const b = e.target.closest("[data-k]"); if (b) press(b.dataset.k); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key >= "0" && e.key <= "9") press(e.key);
+    else if (e.key === "Backspace") press("back");
+    else if (e.key === "Enter") press("go");
+    else if (e.key === "Escape") press("clear");
+    else return;
+    e.preventDefault();
+  });
+  renderDots();
+  // Already unlocked? Skip the pad. (auth_request target is the same one nginx uses.)
+  fetch("/auth/check", { credentials: "same-origin", cache: "no-store" }).then((r) => { if (r.status === 204) location.replace(safeNext()); }).catch(() => {});
+})();
+</script>
+</body>
+</html>
