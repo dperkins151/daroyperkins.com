@@ -52,7 +52,9 @@ test("cookie: HttpOnly + Secure + SameSite=Strict + Path=/ + Max-Age; dev flag o
 });
 
 test("pin-set: validation rails and bcrypt cost 12", () => {
-  assert.equal(validate("12345"), "PIN must be 6 to 12 digits."); assert.equal(validate("1234567890123"), "PIN must be 6 to 12 digits.");
-  assert.equal(validate("12a456"), "PIN must be 6 to 12 digits."); assert.ok(validate("111111")); assert.ok(validate("123456")); assert.equal(validate("482913"), null);
-  const h = hashPin("482913"); assert.ok(h.startsWith("$2b$12$")); assert.equal(bcrypt.compareSync("482913", h), true); assert.equal(bcrypt.compareSync("482914", h), false);
+  assert.equal(validate("4829135"), "PIN must be 8 to 12 digits.");             // 7 digits: under the 8 floor
+  assert.equal(validate("1234567890123"), "PIN must be 8 to 12 digits.");
+  assert.equal(validate("12a45678"), "PIN must be 8 to 12 digits."); assert.ok(validate("11111111")); assert.ok(validate("12345678")); assert.equal(validate("48291357"), null);
+  assert.equal(validate("482913", 6), null); assert.ok(validate("48291", 6)); assert.ok(validate("48291", 3), "--min can never go below 6");
+  const h = hashPin("48291357"); assert.ok(h.startsWith("$2b$12$")); assert.equal(bcrypt.compareSync("48291357", h), true); assert.equal(bcrypt.compareSync("48291358", h), false);
 });
