@@ -1,0 +1,15 @@
+{
+  "name": "apps-vault-pin-auth",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PIN verifier + session cookie for apps.daroyperkins.com (nginx auth_request backend)",
+  "main": "pin-auth.js",
+  "scripts": {
+    "start": "node pin-auth.js",
+    "test": "node --test ../test/unit.test.js && node ../test/smoke.mjs"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2"
+  },
+  "engines": { "node": ">=18" }
+}
