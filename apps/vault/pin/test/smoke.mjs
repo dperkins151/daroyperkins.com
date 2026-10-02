@@ -7,7 +7,7 @@ const require = createRequire("/opt/node22/lib/node_modules/");
 const { chromium } = require("playwright");
 const here = path.resolve(new URL(".", import.meta.url).pathname);
 const bcrypt = require(path.join(here, "..", "server", "node_modules", "bcryptjs"));
-const PIN = "482913", PORT = 8092 + Math.floor(Math.random() * 500);
+const PIN = "48291357", PORT = 8092 + Math.floor(Math.random() * 500);
 const srv = spawn(process.execPath, [path.join(here, "..", "server", "pin-auth.js")], { env: { ...process.env, PIN_AUTH_DEV: "1", PIN_AUTH_PORT: String(PORT), VAULT_PIN_HASH: bcrypt.hashSync(PIN, 12), PIN_AUTH_LOCK_SCHEDULE: "2,3,4", SESSION_TTL_HOURS: "1" }, stdio: ["ignore", "ignore", "pipe"] });
 const logs = []; srv.stderr.on("data", (d) => logs.push(String(d)));
 await new Promise((r) => { const i = setInterval(async () => { try { const x = await fetch(`http://127.0.0.1:${PORT}/auth/health`); if (x.ok) { clearInterval(i); r(); } } catch {} }, 100); });
@@ -21,23 +21,23 @@ try {
   // protected page redirects to the pad with next=
   await page.goto(base + "/journeyman-hq/"); await page.waitForSelector("#pad");
   ok(page.url().includes("/pin/?next=%2Fjourneyman-hq%2F"), "unauthenticated → redirected to /pin/ with next");
-  ok((await page.$$eval(".dot", (d) => d.length)) === 6, "6 dots shown by default");
-  await type("12345"); await page.click("#go");
+  ok((await page.$$eval(".dot", (d) => d.length)) === 8, "8 dots shown by default");
+  await type("4829135"); await page.click("#go");
   await page.waitForFunction(() => document.getElementById("status").textContent.includes("At least"));
-  ok(true, "fewer than 6 digits rejected client-side (no request)");
+  ok(true, "fewer than 8 digits rejected client-side (no request)");
   ok(!urls.some((u) => u.includes("/auth/pin")), "no /auth/pin call for short PIN");
   await page.click('.key[data-k="clear"]');
   for (let i = 1; i <= 5; i++) {
-    await type("000000"); await page.click("#go");
+    await type("00000000"); await page.click("#go");
     await page.waitForFunction((n) => { const t = document.getElementById("status").textContent; return t.includes("Wrong PIN") && (n < 5 ? t.includes(String(5 - n) + " tr") : t.includes("next miss")); }, i);
   }
   ok(true, "5 wrong PINs → 'Wrong PIN · N tries left' counts 4,3,2,1 then 'next miss locks the pad'");
-  await type("000000"); await page.click("#go");
+  await type("00000000"); await page.click("#go");
   await page.waitForFunction(() => document.getElementById("status").textContent.startsWith("Locked"));
   ok((await page.getAttribute("#pad", "aria-disabled")) === "true", "6th wrong → locked, pad disabled, countdown shown");
   await page.waitForFunction(() => document.getElementById("pad").getAttribute("aria-disabled") !== "true", null, { timeout: 6000 });
   ok(true, "lock expires and pad re-enables");
-  await type("000000"); await page.click("#go"); await page.waitForFunction(() => document.getElementById("status").textContent.startsWith("Locked"));
+  await type("00000000"); await page.click("#go"); await page.waitForFunction(() => document.getElementById("status").textContent.startsWith("Locked"));
   const t2 = await page.textContent("#status"); ok(/3s|2s/.test(t2), "escalation: second lock is longer (" + t2.trim() + ")");
   await page.waitForFunction(() => document.getElementById("pad").getAttribute("aria-disabled") !== "true", null, { timeout: 6000 });
   await type(PIN); await page.keyboard.press("Enter");
