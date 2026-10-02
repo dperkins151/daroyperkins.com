@@ -98,7 +98,12 @@ curl -s http://127.0.0.1:8092/auth/health          # expect {"ok":true,"hashConf
 # 4. nginx — stage, test, then swap (file names are the vault vhost's; adjust to the real one)
 cp /etc/nginx/sites-available/apps-vault /root/apps-vault.nginx.bak
 ```
-nginx fragment for the `apps.daroyperkins.com` 443 server block. **PIN everywhere:** every `auth_basic` / `auth_basic_user_file` line in this vhost is removed and replaced by `auth_request` (`/upload/` and `/api/` included). `proxy_pass` uses `127.0.0.1`, never `localhost`, per the droplet gotcha:
+**Machine endpoints stay out of the PIN gate.** The vault vhost also serves `/mem0/mcp` — Mari0's brain backend (mari0 PR #23 / M12, merged 2026-10-02), authenticated by a bearer token in the `Authorization` header, called by a server, not a browser. It cannot carry a cookie and must never redirect to the pad. Rules:
+- `auth_request` goes **only** inside the browser-facing `location` blocks listed below — never at `server { }` level, where it would apply to every location including `/mem0/`.
+- Before editing, list every `location` in the vhost (`grep -n "location" <vhost>`) and sort them: browser paths (`/`, `/upload/`, `/api/`, app subpaths) get `auth_request`; machine paths (`/mem0/`, any webhook or MCP endpoint) keep their own token auth and get nothing added. Any Basic-Auth line found on a machine path today is a pre-existing bug to raise, not to convert.
+- nginx picks the longest matching prefix, so `location /mem0/ { … }` keeps winning over `location / { auth_request … }` as long as the `/mem0/` block exists in the same server.
+
+nginx fragment for the `apps.daroyperkins.com` 443 server block. **PIN everywhere:** every `auth_basic` / `auth_basic_user_file` line on the browser-facing locations is removed and replaced by `auth_request` (`/upload/` and `/api/` included). `proxy_pass` uses `127.0.0.1`, never `localhost`, per the droplet gotcha:
 ```nginx
 # http { } block:  limit_req_zone $binary_remote_addr zone=pin:1m rate=10r/m;   # belt-and-braces under the app limiter
 
@@ -126,6 +131,7 @@ location / {                           # was: auth_basic ...; now:
     try_files $uri $uri/ =404;
 }
 location @pin { return 302 /pin/?next=$request_uri; }
+# location /mem0/ { proxy_pass http://127.0.0.1:<mem0 port>; ... }   UNCHANGED — bearer-token machine endpoint; NO auth_request here
 location /upload/ {                    # was auth_basic; now the same cookie
     auth_request            /auth/check;
     error_page 401 = @pin;
@@ -147,6 +153,8 @@ nginx -t && systemctl reload nginx
 #    correct PIN                               → lands on /, apps open, /journeyman-hq/ works, /budget/ API calls work
 #    https://apps.daroyperkins.com/upload/     → 302 to /pin/ without a cookie; with the cookie, the uploader loads and a test zip uploads
 #    curl -I https://apps.daroyperkins.com/api/apps → 302 (no cookie) ; HTTP → 301 to HTTPS
+#    Mari0 brain still reachable: from the Mari0 droplet, `npm run brain:smoke` (mari0 repo) passes against https://apps.daroyperkins.com/mem0/mcp
+#      — a 302 or an HTML body there means auth_request leaked onto /mem0/; roll back (step 8) and fix the location scoping
 # 7. Basic Auth is retired for this vhost. Keep /etc/nginx/.htpasswd on disk (unreferenced) — it is the rollback credential.
 # 8. rollback (one command): cp /root/apps-vault.nginx.bak /etc/nginx/sites-available/apps-vault && nginx -t && systemctl reload nginx ; pm2 delete pin-auth
 ```
@@ -156,4 +164,5 @@ Rotation: `node pin-set.js --out /etc/apps-vault/pin.hash && pm2 restart pin-aut
 
 - Not done: nginx, htpasswd, PM2 on the droplet (rails). The budget app's own backend auth assumptions were not audited beyond "cookie rides same-origin fetches"; verify `/budget/api/*` and a real zip upload after cutover (step 6).
 - Any script or cron that hits `/api/*` with the Basic-Auth password (none known; check Luigi's upload tooling) must switch to the cookie flow or be given a separate token before cutover.
+- Known machine consumer on this vhost: Mari0 → `/mem0/mcp` (bearer token). Must be verified unaffected after cutover (step 6). Any future MCP/webhook endpoint added under apps.daroyperkins.com needs the same carve-out.
 - Optional later: WebAuthn/passkey instead of a PIN (iPhone Face ID) — same `auth_request` shape, different verifier; the cookie/session half of this PR carries over.
