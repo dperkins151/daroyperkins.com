@@ -39,7 +39,7 @@ python3 -m http.server 8080      # preview at http://localhost:8080/ (file:// bl
 ```
 Deploy = Roy uploads the zip at `https://apps.daroyperkins.com/upload/` with the name `journeyman-hq` (re-upload replaces the app; local progress is in the browser, not the bundle, so it survives). No deploy is done from this repo.
 
-## Adding content (v2 pack)
-1. Add items to `content/questions/<topic>.json` or `content/flashcards/<topic>.json` (or paste Roy's exported custom items in, giving them bank IDs).
+## Adding content (packs)
+1. Add items to a new per-topic file such as `content/questions/<topic>-v3.json` with `"pack": 3` on each item (IDs stay unique across all files; the builder stamps `source: jhq-v<pack>`). Or paste Roy's exported custom items in, giving them bank IDs. v2 (2026-10-06) added 68 calculation-heavy items as `*-v2.json`.
 2. Bump `banks.*.version` and `file` names in `content/manifest.src.json`, then `./build.sh`. The validator rejects bad topics, missing articles, wrong choice counts, duplicate IDs, and "all of the above" choices.
 3. Luigi samples flagged + new items against the book; clear `review` flags once verified and set `reviewed` dates in the manifest.

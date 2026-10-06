@@ -100,8 +100,10 @@ const custom = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.cu
 ok(custom.length === 1 && custom[0].source === "custom", "custom card saved");
 const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#export-custom")]);
 ok(/journeyman-hq-my-content/.test(dl.suggestedFilename()), "export downloads JSON: " + dl.suggestedFilename());
-ok(/journeyman-hq 1\.0\.0/.test(await page.textContent("#manifest-view")) || /Journeyman HQ 1\.0\.0/.test(await page.textContent("#manifest-view")), "manifest view shows app + bank versions");
-ok(/questions · v1/.test(await page.textContent("#manifest-view")), "manifest lists questions bank v1");
+const manifest = JSON.parse(await readFile(path.join(root, "data", "manifest.json"), "utf8"));
+const mv = await page.textContent("#manifest-view");
+ok(mv.includes(manifest.app + " " + manifest.appVersion), "manifest view shows app + version " + manifest.appVersion);
+ok(mv.includes("questions · v" + manifest.banks.questions.version) && mv.includes(String(manifest.banks.questions.count) + " items"), "manifest lists questions bank v" + manifest.banks.questions.version + " with " + manifest.banks.questions.count + " items");
 
 // network rail: only same-origin static files
 const foreign = requests.filter((u) => !u.startsWith(base));

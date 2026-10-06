@@ -1,19 +1,282 @@
 {
  "bank": "questions",
- "version": 1,
+ "version": 2,
  "code": "NEC 2020",
- "source": "jhq-v1",
- "generated": "2026-10-01",
+ "source": "jhq-v2",
+ "generated": "2026-10-06",
  "byTopic": {
-  "theory": 44,
-  "wiring": 52,
-  "methods": 34,
-  "equipment": 26,
+  "theory": 65,
+  "wiring": 74,
+  "methods": 47,
+  "equipment": 38,
   "special": 20,
   "general": 16
  },
+ "byPack": {
+  "v2": 68,
+  "v1": 192
+ },
  "items": [
   {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-101",
+   "topic": "equipment",
+   "article": "430.24",
+   "difficulty": 2,
+   "q": "A feeder supplies three motors with full-load currents of 20 A, 15 A and 10 A. The minimum feeder conductor ampacity is:",
+   "choices": [
+    "45 A",
+    "50 A",
+    "56 A",
+    "62.5 A"
+   ],
+   "answer": 1,
+   "explain": "125% of the largest motor plus 100% of the others: 20 × 1.25 + 15 + 10 = 50 A.",
+   "tags": [
+    "motors",
+    "feeders",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-102",
+   "topic": "equipment",
+   "article": "430.22 / Table 430.250",
+   "difficulty": 3,
+   "q": "A 25 hp, 460 V three-phase motor (Table FLC 34 A) requires branch-circuit copper conductors (75°C) of at least:",
+   "choices": [
+    "10 AWG",
+    "8 AWG",
+    "6 AWG",
+    "4 AWG"
+   ],
+   "answer": 1,
+   "explain": "34 × 1.25 = 42.5 A → 8 AWG Cu (50 A at 75°C).",
+   "tags": [
+    "motors",
+    "conductors",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-103",
+   "topic": "equipment",
+   "article": "Table 430.52",
+   "difficulty": 3,
+   "q": "For the same 25 hp, 460 V motor (FLC 34 A), the maximum dual-element time-delay fuse for short-circuit and ground-fault protection is:",
+   "choices": [
+    "45 A",
+    "60 A",
+    "70 A",
+    "110 A"
+   ],
+   "answer": 1,
+   "explain": "Dual-element time-delay fuse: 175% × 34 = 59.5 A → 60 A standard size (next size up permitted by 430.52(C)(1) Exception 1).",
+   "tags": [
+    "motors",
+    "ocpd",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-104",
+   "topic": "equipment",
+   "article": "430.32(A)(1)",
+   "difficulty": 2,
+   "q": "A continuous-duty motor has a nameplate FLA of 32 A and a service factor of 1.15. The maximum overload relay setting is:",
+   "choices": [
+    "32 A",
+    "36.8 A",
+    "40 A",
+    "48 A"
+   ],
+   "answer": 2,
+   "explain": "125% of nameplate for SF 1.15 or greater: 32 × 1.25 = 40 A. Use nameplate current, not the table value, for overloads.",
+   "tags": [
+    "motors",
+    "overload",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-105",
+   "topic": "equipment",
+   "article": "Table 450.3(B)",
+   "difficulty": 3,
+   "q": "A 45 kVA transformer (secondary 208Y/120 V, 125 A full load) is protected on both primary and secondary. The maximum secondary OCPD is:",
+   "choices": [
+    "125 A",
+    "150 A",
+    "175 A",
+    "250 A"
+   ],
+   "answer": 2,
+   "explain": "Secondary (9 A or more): 125% → 156 A; Note 1 permits the next higher standard rating, 175 A. With secondary protection in place the primary may be up to 250%.",
+   "tags": [
+    "transformers",
+    "ocpd",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-106",
+   "topic": "equipment",
+   "article": "Table 450.3(B)",
+   "difficulty": 3,
+   "q": "A 75 kVA, 480 V three-phase transformer (primary current ≈ 90 A) is protected on the primary only. The maximum primary OCPD is:",
+   "choices": [
+    "90 A",
+    "110 A",
+    "125 A",
+    "225 A"
+   ],
+   "answer": 2,
+   "explain": "125% × 90.2 = 112.8 A → next standard size 125 A (Note 1).",
+   "tags": [
+    "transformers",
+    "ocpd",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-107",
+   "topic": "equipment",
+   "article": "430.110(A)",
+   "difficulty": 2,
+   "q": "A motor has a table full-load current of 28 A. A non-horsepower-rated disconnect switch for it must have an ampere rating of at least:",
+   "choices": [
+    "28 A",
+    "30 A",
+    "32.2 A",
+    "35 A"
+   ],
+   "answer": 2,
+   "explain": "115% × 28 = 32.2 A — so in practice a 35 A (or larger) switch, or a horsepower-rated switch of adequate rating.",
+   "tags": [
+    "motors",
+    "disconnect",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-108",
+   "topic": "equipment",
+   "article": "460.8(A)",
+   "difficulty": 2,
+   "q": "Conductors supplying a capacitor bank must have an ampacity of at least what percentage of the capacitor's rated current?",
+   "choices": [
+    "100%",
+    "115%",
+    "125%",
+    "135%"
+   ],
+   "answer": 3,
+   "explain": "135% of rated current, to allow for harmonic currents and capacitance tolerance.",
+   "tags": [
+    "capacitors"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-109",
+   "topic": "equipment",
+   "article": "430.109(C)",
+   "difficulty": 2,
+   "q": "An AC general-use snap switch may serve as the disconnecting means for a motor rated 2 hp or less and 300 V or less, provided the motor's full-load current does not exceed what percentage of the switch rating?",
+   "choices": [
+    "50%",
+    "80%",
+    "100%",
+    "125%"
+   ],
+   "answer": 1,
+   "explain": "80% of the switch's ampere rating. (A general-use switch rated at least twice the motor FLC is the other common permission for stationary motors ≤ 2 hp.)",
+   "tags": [
+    "motors",
+    "disconnect"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-110",
+   "topic": "equipment",
+   "article": "440.22(A)",
+   "difficulty": 2,
+   "q": "The branch-circuit short-circuit and ground-fault protective device for a hermetic refrigerant motor-compressor shall not exceed what percentage of the rated-load current (unless needed for starting)?",
+   "choices": [
+    "125%",
+    "150%",
+    "175%",
+    "250%"
+   ],
+   "answer": 2,
+   "explain": "175% of RLA or branch-circuit selection current; may go to 225% where the compressor won't start otherwise. The nameplate 'maximum fuse/breaker' marking governs when present.",
+   "tags": [
+    "hvac",
+    "ocpd"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-111",
+   "topic": "equipment",
+   "article": "Table 430.248",
+   "difficulty": 1,
+   "q": "Per Table 430.248, the full-load current of a 2 hp, 230 V single-phase motor is:",
+   "choices": [
+    "8 A",
+    "12 A",
+    "16 A",
+    "24 A"
+   ],
+   "answer": 1,
+   "explain": "230 V single-phase: 1 hp → 8 A, 1½ hp → 10 A, 2 hp → 12 A, 3 hp → 17 A, 5 hp → 28 A. Halve the 115 V values.",
+   "tags": [
+    "motors"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "E-112",
+   "topic": "equipment",
+   "article": "430.52(C)(1) Exception 1",
+   "difficulty": 2,
+   "q": "Table 430.52 gives a maximum of 250% for an inverse-time breaker. For a motor with 14 A FLC, 250% = 35 A, which is a standard size. If the calculation had produced a non-standard value, the Code permits:",
+   "choices": [
+    "Rounding down to the next standard size only",
+    "Using the next higher standard size",
+    "Any size up to 400%",
+    "Omitting the device"
+   ],
+   "answer": 1,
+   "explain": "Exception 1 allows the next higher standard rating when the computed value doesn't correspond to a standard size. Exception 2 allows further increases (up to 400% for breakers ≤ 100 A) only when needed to start the motor.",
+   "tags": [
+    "motors",
+    "ocpd"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-001",
    "topic": "equipment",
    "article": "404.2(C)",
@@ -32,6 +295,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-002",
    "topic": "equipment",
    "article": "404.8(A)",
@@ -50,6 +315,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-003",
    "topic": "equipment",
    "article": "406.4(D)(2)",
@@ -69,6 +336,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-004",
    "topic": "equipment",
    "article": "406.9(B)(1)",
@@ -88,6 +357,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-005",
    "topic": "equipment",
    "article": "406.12",
@@ -106,6 +377,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-006",
    "topic": "equipment",
    "article": "408.4(A)",
@@ -124,6 +397,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-007",
    "topic": "equipment",
    "article": "408.36",
@@ -142,6 +417,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-008",
    "topic": "equipment",
    "article": "410.16(C)(1)",
@@ -161,6 +438,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-009",
    "topic": "equipment",
    "article": "410.10(D)",
@@ -180,6 +459,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-010",
    "topic": "equipment",
    "article": "422.31(B)",
@@ -199,6 +480,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-011",
    "topic": "equipment",
    "article": "422.16(B)(1)",
@@ -218,6 +501,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-012",
    "topic": "equipment",
    "article": "430.6(A)(1)",
@@ -236,6 +521,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-013",
    "topic": "equipment",
    "article": "430.22 / Table 430.250",
@@ -255,6 +542,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-014",
    "topic": "equipment",
    "article": "Table 430.52",
@@ -274,6 +563,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-015",
    "topic": "equipment",
    "article": "430.32(A)(1)",
@@ -293,6 +584,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-016",
    "topic": "equipment",
    "article": "430.102(B)",
@@ -312,6 +605,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-017",
    "topic": "equipment",
    "article": "430.110(A)",
@@ -331,6 +626,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-018",
    "topic": "equipment",
    "article": "Table 430.248",
@@ -349,6 +646,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-019",
    "topic": "equipment",
    "article": "440.32",
@@ -367,6 +666,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-020",
    "topic": "equipment",
    "article": "Table 450.3(B)",
@@ -386,6 +687,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-021",
    "topic": "equipment",
    "article": "Table 450.3(B)",
@@ -405,6 +708,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-022",
    "topic": "equipment",
    "article": "450.21(A)",
@@ -423,6 +728,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-023",
    "topic": "equipment",
    "article": "Table 430.250",
@@ -441,6 +748,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-024",
    "topic": "equipment",
    "article": "406.5(E)",
@@ -460,6 +769,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-025",
    "topic": "equipment",
    "article": "404.9(B)",
@@ -478,6 +789,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "E-026",
    "topic": "equipment",
    "article": "422.11(E)",
@@ -497,6 +810,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-001",
    "topic": "general",
    "article": "90.2(B)",
@@ -515,6 +830,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-002",
    "topic": "general",
    "article": "90.3",
@@ -533,6 +850,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-003",
    "topic": "general",
    "article": "90.5(C)",
@@ -551,6 +870,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-004",
    "topic": "general",
    "article": "Art. 100 — Readily Accessible",
@@ -569,6 +890,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-005",
    "topic": "general",
    "article": "Art. 100 — In Sight From",
@@ -587,6 +910,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-006",
    "topic": "general",
    "article": "Art. 100 — Continuous Load",
@@ -605,6 +930,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-007",
    "topic": "general",
    "article": "Art. 100 — Ampacity",
@@ -623,6 +950,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-008",
    "topic": "general",
    "article": "110.14(C)(1)(a)",
@@ -641,6 +970,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-009",
    "topic": "general",
    "article": "Table 110.26(A)(1)",
@@ -659,6 +990,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-010",
    "topic": "general",
    "article": "110.26(A)(2)",
@@ -677,6 +1010,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-011",
    "topic": "general",
    "article": "110.3(B)",
@@ -695,6 +1030,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-012",
    "topic": "general",
    "article": "110.16(A)",
@@ -713,6 +1050,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-013",
    "topic": "general",
    "article": "Art. 100 — Branch Circuit",
@@ -731,6 +1070,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-014",
    "topic": "general",
    "article": "110.26(E)(1)(a)",
@@ -749,6 +1090,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-015",
    "topic": "general",
    "article": "110.26(A)(3)",
@@ -767,6 +1110,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "G-016",
    "topic": "general",
    "article": "Art. 100 — Qualified Person",
@@ -785,6 +1130,280 @@
    ]
   },
   {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-101",
+   "topic": "methods",
+   "article": "Ch. 9 Tables 4 and 5",
+   "difficulty": 3,
+   "q": "Three 1/0 AWG THHN (0.1855 in² each) and one 2 AWG THHN (0.1158 in²) are installed in EMT. The minimum trade size is:",
+   "choices": [
+    "1 in.",
+    "1¼ in.",
+    "1½ in.",
+    "2 in."
+   ],
+   "answer": 2,
+   "explain": "Total area = 3 × 0.1855 + 0.1158 = 0.6723 in². Table 4 EMT at 40%: 1¼ in. = 0.598 in² (too small), 1½ in. = 0.814 in². Use 1½ in.",
+   "tags": [
+    "raceway-fill",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-102",
+   "topic": "methods",
+   "article": "Annex C, Table C.1",
+   "difficulty": 2,
+   "q": "How many 8 AWG THHN conductors are permitted in ¾-in. EMT?",
+   "choices": [
+    "3",
+    "6",
+    "9",
+    "10"
+   ],
+   "answer": 1,
+   "explain": "Table C.1: 8 AWG THHN — ½ in. → 3, ¾ in. → 6, 1 in. → 9.",
+   "tags": [
+    "raceway-fill"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-103",
+   "topic": "methods",
+   "article": "310.15(B)(1) and (C)(1)",
+   "difficulty": 3,
+   "q": "Twelve 10 AWG THHN current-carrying conductors share a raceway in a 40°C ambient. The adjusted and corrected ampacity of each is approximately:",
+   "choices": [
+    "14 A",
+    "18 A",
+    "26 A",
+    "35 A"
+   ],
+   "answer": 1,
+   "explain": "Start at the 90°C column: 40 A. 10–20 conductors → 50%; 36–40°C → 0.91. 40 × 0.50 × 0.91 ≈ 18.2 A — so a 20 A device is the practical maximum, below the 30 A small-conductor cap.",
+   "tags": [
+    "derating",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-104",
+   "topic": "methods",
+   "article": "314.16(B)",
+   "difficulty": 3,
+   "q": "A box contains six 14 AWG circuit conductors, two internal cable clamps, one single-pole switch, and three 14 AWG equipment grounding conductors. Minimum box volume?",
+   "choices": [
+    "14 in³",
+    "18 in³",
+    "20 in³",
+    "24 in³"
+   ],
+   "answer": 2,
+   "explain": "6 conductors + 1 (all clamps together) + 2 (device yoke) + 1 (all EGCs together) = 10 volumes × 2.00 in³ = 20 in³.",
+   "tags": [
+    "box-fill",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-105",
+   "topic": "methods",
+   "article": "314.16(B)",
+   "difficulty": 3,
+   "q": "Three 12-2 NM cables (each with a ground) enter a box that holds a switch and a duplex receptacle, with no internal clamps. Minimum box volume?",
+   "choices": [
+    "18 in³",
+    "20.25 in³",
+    "24.75 in³",
+    "27 in³"
+   ],
+   "answer": 2,
+   "explain": "6 circuit conductors + 1 (EGCs) + 2 (switch) + 2 (receptacle) = 11 volumes × 2.25 in³ = 24.75 in³.",
+   "tags": [
+    "box-fill",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-106",
+   "topic": "methods",
+   "article": "314.28(A)(2)",
+   "difficulty": 3,
+   "q": "Two 2-in. conduits enter a pull box on the same wall and the conductors leave through two 2-in. conduits on the same wall (a U-pull). The minimum distance to the opposite wall is:",
+   "choices": [
+    "12 in.",
+    "14 in.",
+    "16 in.",
+    "24 in."
+   ],
+   "answer": 1,
+   "explain": "6 × 2 in. (largest raceway) + 2 in. (the other raceway in the same row on that wall) = 14 in. The 6× rule also applies between each entry and exit of the same conductor group.",
+   "tags": [
+    "pull-box",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-107",
+   "topic": "methods",
+   "article": "300.5(D)(1)",
+   "difficulty": 2,
+   "q": "Direct-buried conductors emerging from grade must be protected by an enclosure or raceway extending from the minimum cover depth up to at least how far above finished grade?",
+   "choices": [
+    "18 in.",
+    "3 ft",
+    "6 ft 7 in.",
+    "8 ft"
+   ],
+   "answer": 3,
+   "explain": "Protection runs from the required burial depth (or 18 in. below grade) to a point at least 8 ft above finished grade.",
+   "tags": [
+    "burial",
+    "protection"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-108",
+   "topic": "methods",
+   "article": "Table 310.16",
+   "difficulty": 2,
+   "q": "The 75°C ampacity of 4/0 AWG aluminum is:",
+   "choices": [
+    "150 A",
+    "180 A",
+    "205 A",
+    "230 A"
+   ],
+   "answer": 1,
+   "explain": "Aluminum 75°C: 1/0 → 120, 2/0 → 135, 3/0 → 155, 4/0 → 180, 250 kcmil → 205. Copper 4/0 is 230 A.",
+   "tags": [
+    "ampacity"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-109",
+   "topic": "methods",
+   "article": "358.12",
+   "difficulty": 1,
+   "q": "Electrical metallic tubing shall NOT be used:",
+   "choices": [
+    "In concealed dry locations",
+    "Where subject to severe physical damage",
+    "In wet locations with listed fittings",
+    "Above suspended ceilings"
+   ],
+   "answer": 1,
+   "explain": "EMT is thin-wall. It is also not permitted for direct earth burial where subject to corrosion unless protected, or to support luminaires except as permitted.",
+   "tags": [
+    "raceways",
+    "emt"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-110",
+   "topic": "methods",
+   "article": "344.26 / 358.26",
+   "difficulty": 1,
+   "q": "Between pull points (boxes, conduit bodies), a run of rigid metal conduit or EMT shall contain not more than the equivalent of how many degrees of bends?",
+   "choices": [
+    "180°",
+    "270°",
+    "360°",
+    "450°"
+   ],
+   "answer": 2,
+   "explain": "Four quarter bends (360°) total, including offsets, between pull points.",
+   "tags": [
+    "raceways",
+    "bends"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-111",
+   "topic": "methods",
+   "article": "376.22(A)",
+   "difficulty": 2,
+   "q": "The sum of the cross-sectional areas of all conductors in a metal wireway shall not exceed what percentage of its interior area?",
+   "choices": [
+    "20%",
+    "31%",
+    "40%",
+    "53%"
+   ],
+   "answer": 0,
+   "explain": "Wireways: 20% fill (and adjustment factors apply only above 30 current-carrying conductors, 376.22(B)).",
+   "tags": [
+    "wireway",
+    "fill"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-112",
+   "topic": "methods",
+   "article": "300.4(G)",
+   "difficulty": 2,
+   "q": "Where raceways contain insulated conductors of what minimum size must a fitting or bushing with a smooth insulating surface protect the conductors where they enter an enclosure?",
+   "choices": [
+    "8 AWG and larger",
+    "6 AWG and larger",
+    "4 AWG and larger",
+    "1/0 AWG and larger"
+   ],
+   "answer": 2,
+   "explain": "4 AWG and larger conductors need an insulating bushing or an identified fitting at raceway terminations, unless separated by substantial insulating material.",
+   "tags": [
+    "protection",
+    "bushings"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "M-113",
+   "topic": "methods",
+   "article": "Table 352.30",
+   "difficulty": 2,
+   "q": "Rigid PVC conduit in trade sizes ½ in. through 1 in. must be supported at intervals not exceeding:",
+   "choices": [
+    "3 ft",
+    "4½ ft",
+    "5 ft",
+    "10 ft"
+   ],
+   "answer": 0,
+   "explain": "Table 352.30: ½–1 in. → 3 ft; 1¼–2 in. → 5 ft; 2½–3 in. → 6 ft; 3½–5 in. → 7 ft; 6 in. → 8 ft. Also within 3 ft of each termination.",
+   "tags": [
+    "raceways",
+    "pvc",
+    "support"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-001",
    "topic": "methods",
    "article": "Table 300.5",
@@ -803,6 +1422,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-002",
    "topic": "methods",
    "article": "Table 300.5",
@@ -821,6 +1442,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-003",
    "topic": "methods",
    "article": "Table 300.5",
@@ -839,6 +1462,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-004",
    "topic": "methods",
    "article": "300.4(A)(1)",
@@ -857,6 +1482,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-005",
    "topic": "methods",
    "article": "300.14",
@@ -875,6 +1502,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-006",
    "topic": "methods",
    "article": "Table 310.16",
@@ -893,6 +1522,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-007",
    "topic": "methods",
    "article": "Table 310.16",
@@ -911,6 +1542,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-008",
    "topic": "methods",
    "article": "Table 310.15(C)(1)",
@@ -929,6 +1562,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-009",
    "topic": "methods",
    "article": "310.15(C)(1) / 240.4(D)",
@@ -948,6 +1583,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-010",
    "topic": "methods",
    "article": "Table 310.15(B)(1)(1)",
@@ -966,6 +1603,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-011",
    "topic": "methods",
    "article": "310.10(G)",
@@ -984,6 +1623,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-012",
    "topic": "methods",
    "article": "Table 310.12",
@@ -1003,6 +1644,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-013",
    "topic": "methods",
    "article": "Table 314.16(B)",
@@ -1021,6 +1664,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-014",
    "topic": "methods",
    "article": "314.16(B)",
@@ -1039,6 +1684,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-015",
    "topic": "methods",
    "article": "314.28(A)(1)",
@@ -1057,6 +1704,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-016",
    "topic": "methods",
    "article": "314.28(A)(2)",
@@ -1075,6 +1724,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-017",
    "topic": "methods",
    "article": "Ch. 9 Table 1",
@@ -1093,6 +1744,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-018",
    "topic": "methods",
    "article": "Ch. 9 Note 4 to Table 1",
@@ -1111,6 +1764,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-019",
    "topic": "methods",
    "article": "358.30(A)",
@@ -1130,6 +1785,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-020",
    "topic": "methods",
    "article": "348.30(A)",
@@ -1149,6 +1806,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-021",
    "topic": "methods",
    "article": "334.30",
@@ -1168,6 +1827,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-022",
    "topic": "methods",
    "article": "334.80",
@@ -1188,6 +1849,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-023",
    "topic": "methods",
    "article": "352.44",
@@ -1207,6 +1870,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-024",
    "topic": "methods",
    "article": "300.11(C)",
@@ -1225,6 +1890,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-025",
    "topic": "methods",
    "article": "300.3(B)",
@@ -1243,6 +1910,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-026",
    "topic": "methods",
    "article": "Table 300.5",
@@ -1261,6 +1930,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-027",
    "topic": "methods",
    "article": "300.4(D)",
@@ -1279,6 +1950,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-028",
    "topic": "methods",
    "article": "400.12",
@@ -1297,6 +1970,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-029",
    "topic": "methods",
    "article": "Annex C, Table C.1",
@@ -1315,6 +1990,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-030",
    "topic": "methods",
    "article": "Annex C, Table C.1",
@@ -1333,6 +2010,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-031",
    "topic": "methods",
    "article": "314.29",
@@ -1351,6 +2030,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-032",
    "topic": "methods",
    "article": "Table 310.16",
@@ -1369,6 +2050,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-033",
    "topic": "methods",
    "article": "310.15(C)(1)",
@@ -1387,6 +2070,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "M-034",
    "topic": "methods",
    "article": "344.30(A)",
@@ -1406,6 +2091,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-001",
    "topic": "special",
    "article": "500.5",
@@ -1424,6 +2111,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-002",
    "topic": "special",
    "article": "500.5(B)",
@@ -1442,6 +2131,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-003",
    "topic": "special",
    "article": "501.15(A)(1)",
@@ -1461,6 +2152,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-004",
    "topic": "special",
    "article": "511.3(C)(1)(b)",
@@ -1480,6 +2173,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-005",
    "topic": "special",
    "article": "517.18(A)",
@@ -1498,6 +2193,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-006",
    "topic": "special",
    "article": "517.18(B) / 517.19(B)",
@@ -1516,6 +2213,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-007",
    "topic": "special",
    "article": "680.22(A)",
@@ -1534,6 +2233,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-008",
    "topic": "special",
    "article": "680.26(B)",
@@ -1553,6 +2254,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-009",
    "topic": "special",
    "article": "680.23(A)(5)",
@@ -1572,6 +2275,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-010",
    "topic": "special",
    "article": "690.8(A)(1)",
@@ -1590,6 +2295,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-011",
    "topic": "special",
    "article": "690.12(B)(2)",
@@ -1609,6 +2316,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-012",
    "topic": "special",
    "article": "690.7(A)",
@@ -1627,6 +2336,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-013",
    "topic": "special",
    "article": "700.12",
@@ -1645,6 +2356,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-014",
    "topic": "special",
    "article": "705.12(B)(3)(2)",
@@ -1664,6 +2377,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-015",
    "topic": "special",
    "article": "600.5(A)",
@@ -1682,6 +2397,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-016",
    "topic": "special",
    "article": "701.12",
@@ -1700,6 +2417,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-017",
    "topic": "special",
    "article": "680.22(A)(1)",
@@ -1718,6 +2437,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-018",
    "topic": "special",
    "article": "690.13(B)",
@@ -1737,6 +2458,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-019",
    "topic": "special",
    "article": "547.5(G)",
@@ -1755,6 +2478,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "S-020",
    "topic": "special",
    "article": "620 / 725.2",
@@ -1773,6 +2498,452 @@
    ]
   },
   {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-101",
+   "topic": "theory",
+   "article": "Combination circuits",
+   "difficulty": 2,
+   "q": "A 12 Ω resistor is in series with a parallel pair of 6 Ω and 12 Ω. The circuit is connected to 48 V. What is the total current?",
+   "choices": [
+    "1.6 A",
+    "3 A",
+    "4 A",
+    "12 A"
+   ],
+   "answer": 1,
+   "explain": "Parallel pair: (6 × 12) / 18 = 4 Ω. Total = 12 + 4 = 16 Ω. I = 48 / 16 = 3 A.",
+   "tags": [
+    "series",
+    "parallel",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-102",
+   "topic": "theory",
+   "article": "Power formula",
+   "difficulty": 1,
+   "q": "A 40 Ω heating element is connected across 120 V. How much power does it dissipate?",
+   "choices": [
+    "3 W",
+    "48 W",
+    "360 W",
+    "4,800 W"
+   ],
+   "answer": 2,
+   "explain": "P = E² / R = 14,400 / 40 = 360 W.",
+   "tags": [
+    "power",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-103",
+   "topic": "theory",
+   "article": "Voltage drop (3-phase)",
+   "difficulty": 3,
+   "q": "A 208 V three-phase feeder carries 50 A over 150 ft (one way) on 6 AWG copper (26,240 cmil). Using K = 12.9, the approximate voltage drop is:",
+   "choices": [
+    "3.7 V",
+    "6.4 V",
+    "7.4 V",
+    "12.8 V"
+   ],
+   "answer": 1,
+   "explain": "VD = 1.732 × K × I × L / CM = 1.732 × 12.9 × 50 × 150 / 26,240 ≈ 6.4 V, about 3.1% of 208 V.",
+   "tags": [
+    "voltage-drop",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-104",
+   "topic": "theory",
+   "article": "Voltage drop (sizing)",
+   "difficulty": 3,
+   "q": "A 240 V single-phase circuit carries 30 A for 200 ft (one way). To hold voltage drop to 3% (7.2 V) with K = 12.9, the minimum copper conductor is:",
+   "choices": [
+    "10 AWG",
+    "8 AWG",
+    "6 AWG",
+    "4 AWG"
+   ],
+   "answer": 2,
+   "explain": "Required CM = 2 × K × I × L / VD = 2 × 12.9 × 30 × 200 / 7.2 ≈ 21,500 cmil. 8 AWG (16,510) is too small; 6 AWG (26,240) is the first size that qualifies.",
+   "tags": [
+    "voltage-drop",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-105",
+   "topic": "theory",
+   "article": "Voltage drop (aluminum)",
+   "difficulty": 3,
+   "q": "A 120 V single-phase circuit carries 20 A for 100 ft (one way) on 10 AWG aluminum (10,380 cmil). Using K = 21.2 for aluminum, the voltage drop is approximately:",
+   "choices": [
+    "4.1 V",
+    "8.2 V",
+    "12.3 V",
+    "16.3 V"
+   ],
+   "answer": 1,
+   "explain": "VD = 2 × 21.2 × 20 × 100 / 10,380 ≈ 8.2 V (about 6.8%). Aluminum's K is roughly 1.6 × copper's, which is why aluminum runs need larger sizes for the same drop.",
+   "tags": [
+    "voltage-drop",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-106",
+   "topic": "theory",
+   "article": "Three-phase power",
+   "difficulty": 2,
+   "q": "A balanced 480 V three-phase load draws 40 A per line. What is its apparent power?",
+   "choices": [
+    "19.2 kVA",
+    "33.3 kVA",
+    "57.6 kVA",
+    "96 kVA"
+   ],
+   "answer": 1,
+   "explain": "kVA = 1.732 × 480 × 40 / 1,000 ≈ 33.3 kVA.",
+   "tags": [
+    "three-phase",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-107",
+   "topic": "theory",
+   "article": "Transformers",
+   "difficulty": 3,
+   "q": "A 75 kVA three-phase transformer is fed at 480 V. What is its full-load primary line current?",
+   "choices": [
+    "52 A",
+    "90 A",
+    "156 A",
+    "270 A"
+   ],
+   "answer": 1,
+   "explain": "I = VA / (1.732 × E) = 75,000 / (1.732 × 480) ≈ 90.2 A.",
+   "tags": [
+    "transformers",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-108",
+   "topic": "theory",
+   "article": "Transformers",
+   "difficulty": 3,
+   "q": "A 45 kVA three-phase transformer has a 208Y/120 V secondary. Its full-load secondary line current is approximately:",
+   "choices": [
+    "72 A",
+    "125 A",
+    "216 A",
+    "375 A"
+   ],
+   "answer": 1,
+   "explain": "I = 45,000 / (1.732 × 208) ≈ 125 A.",
+   "tags": [
+    "transformers",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-109",
+   "topic": "theory",
+   "article": "Transformers",
+   "difficulty": 2,
+   "q": "A single-phase transformer steps 7,200 V down to 240 V. When the secondary delivers 100 A, the primary current is approximately:",
+   "choices": [
+    "3.3 A",
+    "30 A",
+    "100 A",
+    "3,000 A"
+   ],
+   "answer": 0,
+   "explain": "Turns ratio = 7,200 / 240 = 30:1. Current is inversely proportional: 100 / 30 ≈ 3.3 A. Check: 7,200 × 3.33 ≈ 240 × 100 = 24 kVA.",
+   "tags": [
+    "transformers",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-110",
+   "topic": "theory",
+   "article": "Power factor correction",
+   "difficulty": 1,
+   "q": "Adding capacitors in parallel with an inductive motor load will:",
+   "choices": [
+    "Increase the line current",
+    "Raise the power factor and reduce line current",
+    "Lower the power factor",
+    "Change the true power consumed"
+   ],
+   "answer": 1,
+   "explain": "Capacitive VAR cancels inductive VAR, so apparent power (and line current) drops while true power stays the same.",
+   "tags": [
+    "power-factor"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-111",
+   "topic": "theory",
+   "article": "Power triangle",
+   "difficulty": 2,
+   "q": "A load draws 10 kVA and consumes 8 kW. What is its reactive power?",
+   "choices": [
+    "2 kVAR",
+    "6 kVAR",
+    "8 kVAR",
+    "18 kVAR"
+   ],
+   "answer": 1,
+   "explain": "VAR = √(kVA² − kW²) = √(100 − 64) = 6 kVAR. Power factor here is 0.8.",
+   "tags": [
+    "power-factor",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-112",
+   "topic": "theory",
+   "article": "AC values",
+   "difficulty": 2,
+   "q": "A 240 V RMS sine wave has an approximate peak-to-peak value of:",
+   "choices": [
+    "170 V",
+    "339 V",
+    "480 V",
+    "679 V"
+   ],
+   "answer": 3,
+   "explain": "Peak = 240 × 1.414 ≈ 339 V; peak-to-peak = 2 × 339 ≈ 679 V.",
+   "tags": [
+    "ac",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-113",
+   "topic": "theory",
+   "article": "Ch. 9 Table 8",
+   "difficulty": 2,
+   "q": "Chapter 9 Table 8 lists 10 AWG uncoated copper at about 1.2 Ω per 1,000 ft. The resistance of a 500 ft length is approximately:",
+   "choices": [
+    "0.06 Ω",
+    "0.6 Ω",
+    "2.4 Ω",
+    "6 Ω"
+   ],
+   "answer": 1,
+   "explain": "Resistance is proportional to length: 1.2 Ω × (500 / 1,000) = 0.6 Ω.",
+   "tags": [
+    "resistance",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-114",
+   "topic": "theory",
+   "article": "Three-phase power",
+   "difficulty": 2,
+   "q": "A 15 kW, 480 V three-phase resistive heater draws what line current?",
+   "choices": [
+    "10.4 A",
+    "18 A",
+    "31.3 A",
+    "54 A"
+   ],
+   "answer": 1,
+   "explain": "I = P / (1.732 × E × PF) = 15,000 / (1.732 × 480 × 1) ≈ 18 A.",
+   "tags": [
+    "three-phase",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-115",
+   "topic": "theory",
+   "article": "Efficiency / energy",
+   "difficulty": 3,
+   "q": "A 5 hp motor operating at 83% efficiency runs fully loaded for 10 hours. Approximately how much energy does it consume?",
+   "choices": [
+    "31 kWh",
+    "37 kWh",
+    "45 kWh",
+    "60 kWh"
+   ],
+   "answer": 2,
+   "explain": "Output 5 × 746 = 3,730 W; input = 3,730 / 0.83 ≈ 4,494 W = 4.49 kW; × 10 h ≈ 45 kWh.",
+   "tags": [
+    "motors",
+    "energy",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-116",
+   "topic": "theory",
+   "article": "Series circuits",
+   "difficulty": 2,
+   "q": "Two resistors in series across 120 V draw 2 A. One resistor is 20 Ω. The other is:",
+   "choices": [
+    "20 Ω",
+    "40 Ω",
+    "60 Ω",
+    "100 Ω"
+   ],
+   "answer": 1,
+   "explain": "Total R = 120 / 2 = 60 Ω; 60 − 20 = 40 Ω.",
+   "tags": [
+    "series",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-117",
+   "topic": "theory",
+   "article": "Current division",
+   "difficulty": 3,
+   "q": "A 10 Ω and a 30 Ω resistor are in parallel and the total current is 12 A. How much current flows through the 10 Ω resistor?",
+   "choices": [
+    "3 A",
+    "4 A",
+    "8 A",
+    "9 A"
+   ],
+   "answer": 3,
+   "explain": "Current divides inversely with resistance: I(10 Ω) = 12 × 30 / (10 + 30) = 9 A; the 30 Ω branch carries 3 A. Check: 9 × 10 = 3 × 30 = 90 V across both.",
+   "tags": [
+    "parallel",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-118",
+   "topic": "theory",
+   "article": "Capacitors",
+   "difficulty": 1,
+   "q": "After a capacitor in a DC circuit is fully charged, it behaves like:",
+   "choices": [
+    "A short circuit",
+    "An open circuit",
+    "A resistor equal to its reactance",
+    "An inductor"
+   ],
+   "answer": 1,
+   "explain": "Once charged to the source voltage, no further current flows — an open circuit to DC. Capacitors pass changing (AC) current, block steady DC.",
+   "tags": [
+    "capacitors"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-119",
+   "topic": "theory",
+   "article": "Delta systems",
+   "difficulty": 2,
+   "q": "A balanced delta-connected load draws 52 A of line current. The current in each phase winding is approximately:",
+   "choices": [
+    "17 A",
+    "30 A",
+    "52 A",
+    "90 A"
+   ],
+   "answer": 1,
+   "explain": "Delta: I(phase) = I(line) / 1.732 = 52 / 1.732 ≈ 30 A.",
+   "tags": [
+    "three-phase",
+    "delta",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-120",
+   "topic": "theory",
+   "article": "Neutral current (3-phase)",
+   "difficulty": 3,
+   "q": "On a 208Y/120 V 4-wire system with linear loads, phase A carries 30 A, phase B carries 30 A, and phase C carries 0 A. The neutral current is:",
+   "choices": [
+    "0 A",
+    "30 A",
+    "42 A",
+    "60 A"
+   ],
+   "answer": 1,
+   "explain": "In = √(A² + B² + C² − AB − BC − CA) = √(900 + 900 + 0 − 900 − 0 − 0) = √900 = 30 A. With two phases equally loaded, the neutral carries the same as one phase.",
+   "tags": [
+    "neutral",
+    "three-phase",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "T-121",
+   "topic": "theory",
+   "article": "Ohm's law",
+   "difficulty": 2,
+   "q": "A 240 V circuit supplies a 4,800 W resistive load through conductors with a total round-trip resistance of 0.2 Ω. The voltage drop in the conductors is approximately:",
+   "choices": [
+    "2 V",
+    "4 V",
+    "8 V",
+    "20 V"
+   ],
+   "answer": 1,
+   "explain": "Load current ≈ 4,800 / 240 = 20 A. VD = I × R = 20 × 0.2 = 4 V. (Strictly the current is slightly higher after the drop, but 4 V is the exam answer.)",
+   "tags": [
+    "voltage-drop",
+    "ohms-law",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-001",
    "topic": "theory",
    "article": "Ohm's law",
@@ -1791,6 +2962,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-002",
    "topic": "theory",
    "article": "Power formula",
@@ -1809,6 +2982,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-003",
    "topic": "theory",
    "article": "Power formula",
@@ -1828,6 +3003,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-004",
    "topic": "theory",
    "article": "Series circuits",
@@ -1846,6 +3023,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-005",
    "topic": "theory",
    "article": "Parallel circuits",
@@ -1864,6 +3043,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-006",
    "topic": "theory",
    "article": "Parallel circuits",
@@ -1882,6 +3063,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-007",
    "topic": "theory",
    "article": "Series circuits",
@@ -1901,6 +3084,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-008",
    "topic": "theory",
    "article": "Kirchhoff's current law",
@@ -1919,6 +3104,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-009",
    "topic": "theory",
    "article": "AC values",
@@ -1937,6 +3124,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-010",
    "topic": "theory",
    "article": "AC fundamentals",
@@ -1955,6 +3144,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-011",
    "topic": "theory",
    "article": "Impedance",
@@ -1974,6 +3165,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-012",
    "topic": "theory",
    "article": "Power factor",
@@ -1993,6 +3186,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-013",
    "topic": "theory",
    "article": "Apparent power",
@@ -2011,6 +3206,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-014",
    "topic": "theory",
    "article": "Three-phase power",
@@ -2029,6 +3226,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-015",
    "topic": "theory",
    "article": "Wye systems",
@@ -2048,6 +3247,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-016",
    "topic": "theory",
    "article": "Delta systems",
@@ -2067,6 +3268,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-017",
    "topic": "theory",
    "article": "Transformers",
@@ -2085,6 +3288,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-018",
    "topic": "theory",
    "article": "Transformers",
@@ -2103,6 +3308,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-019",
    "topic": "theory",
    "article": "Transformers",
@@ -2122,6 +3329,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-020",
    "topic": "theory",
    "article": "Horsepower",
@@ -2140,6 +3349,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-021",
    "topic": "theory",
    "article": "Efficiency",
@@ -2159,6 +3370,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-022",
    "topic": "theory",
    "article": "Voltage drop",
@@ -2177,6 +3390,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-023",
    "topic": "theory",
    "article": "210.19(A) Informational Note",
@@ -2195,6 +3410,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-024",
    "topic": "theory",
    "article": "Conductor resistance",
@@ -2213,6 +3430,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-025",
    "topic": "theory",
    "article": "Neutral current",
@@ -2231,6 +3450,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-026",
    "topic": "theory",
    "article": "Neutral current",
@@ -2250,6 +3471,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-027",
    "topic": "theory",
    "article": "Inductive reactance",
@@ -2269,6 +3492,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-028",
    "topic": "theory",
    "article": "Capacitive reactance",
@@ -2288,6 +3513,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-029",
    "topic": "theory",
    "article": "Energy",
@@ -2306,6 +3533,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-030",
    "topic": "theory",
    "article": "Conductor resistance",
@@ -2324,6 +3553,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-031",
    "topic": "theory",
    "article": "Parallel circuits",
@@ -2342,6 +3573,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-032",
    "topic": "theory",
    "article": "Power formula",
@@ -2360,6 +3593,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-033",
    "topic": "theory",
    "article": "Combination circuits",
@@ -2379,6 +3614,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-034",
    "topic": "theory",
    "article": "Instruments",
@@ -2397,6 +3634,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-035",
    "topic": "theory",
    "article": "Electromagnetic induction",
@@ -2415,6 +3654,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-036",
    "topic": "theory",
    "article": "Three-phase power",
@@ -2434,6 +3675,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-037",
    "topic": "theory",
    "article": "Phase relationships",
@@ -2452,6 +3695,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-038",
    "topic": "theory",
    "article": "Ohm's law",
@@ -2470,6 +3715,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-039",
    "topic": "theory",
    "article": "Ch. 9 Table 8",
@@ -2488,6 +3735,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-040",
    "topic": "theory",
    "article": "Efficiency",
@@ -2507,6 +3756,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-041",
    "topic": "theory",
    "article": "Wye systems",
@@ -2526,6 +3777,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-042",
    "topic": "theory",
    "article": "Apparent power",
@@ -2544,6 +3797,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-043",
    "topic": "theory",
    "article": "Voltage drop",
@@ -2563,6 +3818,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "T-044",
    "topic": "theory",
    "article": "Series circuits",
@@ -2581,6 +3838,477 @@
    ]
   },
   {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-101",
+   "topic": "wiring",
+   "article": "220.40–220.55 (standard method)",
+   "difficulty": 3,
+   "q": "A 1,800 sq ft dwelling has two small-appliance circuits, one laundry circuit, a 12 kW range and a 5 kW dryer. Using the standard method, the total calculated load is approximately:",
+   "choices": [
+    "14,900 VA",
+    "18,415 VA",
+    "23,400 VA",
+    "27,900 VA"
+   ],
+   "answer": 1,
+   "explain": "Lighting 1,800 × 3 = 5,400 + 4,500 (SA + laundry) = 9,900 VA → 3,000 + 0.35 × 6,900 = 5,415 VA. Range 8,000 VA (Table 220.55 Col. C). Dryer 5,000 VA. Total 18,415 VA ÷ 240 V ≈ 77 A — so the 100 A minimum of 230.79(C) governs.",
+   "tags": [
+    "load-calc",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-102",
+   "topic": "wiring",
+   "article": "Table 220.55 Note 1",
+   "difficulty": 2,
+   "q": "The demand load for one 15 kW household range is:",
+   "choices": [
+    "8 kW",
+    "9.2 kW",
+    "12 kW",
+    "15 kW"
+   ],
+   "answer": 1,
+   "explain": "Column C gives 8 kW for up to 12 kW. For each kW over 12, add 5%: 3 kW over → 15% → 8 × 1.15 = 9.2 kW.",
+   "tags": [
+    "load-calc",
+    "range",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-103",
+   "topic": "wiring",
+   "article": "Table 220.54",
+   "difficulty": 2,
+   "q": "A four-unit building has one 5 kW electric dryer per unit. The dryer demand load for the service is:",
+   "choices": [
+    "10 kW",
+    "15 kW",
+    "20 kW",
+    "25 kW"
+   ],
+   "answer": 2,
+   "explain": "Table 220.54 applies 100% for 1–4 dryers: 4 × 5 kW = 20 kW. Demand factors begin at 5 dryers (85%).",
+   "tags": [
+    "load-calc",
+    "dryer"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-104",
+   "topic": "wiring",
+   "article": "220.82(C)",
+   "difficulty": 2,
+   "q": "Under the dwelling optional method, central electric space heating (including a heat pump's supplemental heat) is included at what percentage of nameplate?",
+   "choices": [
+    "40%",
+    "65%",
+    "100%",
+    "125%"
+   ],
+   "answer": 1,
+   "explain": "220.82(C): air conditioning 100%; central electric space heating 65%; fewer than four separately controlled heating units 65%; four or more separately controlled units 40%. Use only the largest of the heating/cooling options.",
+   "tags": [
+    "load-calc",
+    "optional"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-105",
+   "topic": "wiring",
+   "article": "220.44 / 220.14(I)",
+   "difficulty": 3,
+   "q": "An office has 100 general-use receptacle outlets (180 VA each). Applying Table 220.44, the receptacle demand load is:",
+   "choices": [
+    "9,000 VA",
+    "14,000 VA",
+    "18,000 VA",
+    "27,000 VA"
+   ],
+   "answer": 1,
+   "explain": "100 × 180 = 18,000 VA. First 10 kVA at 100% = 10,000; remaining 8,000 at 50% = 4,000. Total 14,000 VA.",
+   "tags": [
+    "load-calc",
+    "commercial",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-106",
+   "topic": "wiring",
+   "article": "Table 310.12",
+   "difficulty": 2,
+   "q": "Using the 83% rule, the minimum copper conductor for a 150 A one-family dwelling service is:",
+   "choices": [
+    "3 AWG",
+    "2 AWG",
+    "1 AWG",
+    "1/0 AWG"
+   ],
+   "answer": 2,
+   "explain": "150 × 0.83 = 124.5 A → 1 AWG Cu (130 A at 75°C). Table 310.12 lists 1 AWG Cu / 2/0 Al for 150 A.",
+   "tags": [
+    "services",
+    "ampacity"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-107",
+   "topic": "wiring",
+   "article": "Table 250.66",
+   "difficulty": 2,
+   "q": "A service has 3/0 AWG copper service-entrance conductors. The minimum copper grounding electrode conductor to a metal water pipe electrode is:",
+   "choices": [
+    "8 AWG",
+    "6 AWG",
+    "4 AWG",
+    "2 AWG"
+   ],
+   "answer": 2,
+   "explain": "Table 250.66: 2/0 or 3/0 copper → 4 AWG copper GEC. (The 6 AWG cap applies only to the portion that is the sole connection to a rod, pipe or plate.)",
+   "tags": [
+    "grounding",
+    "gec"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-108",
+   "topic": "wiring",
+   "article": "Table 250.122",
+   "difficulty": 1,
+   "q": "A 60 A branch circuit requires a copper equipment grounding conductor of at least:",
+   "choices": [
+    "12 AWG",
+    "10 AWG",
+    "8 AWG",
+    "6 AWG"
+   ],
+   "answer": 1,
+   "explain": "Table 250.122: 30, 40 and 60 A → 10 AWG copper. 100 A → 8 AWG.",
+   "tags": [
+    "grounding",
+    "egc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-109",
+   "topic": "wiring",
+   "article": "250.122(B)",
+   "difficulty": 3,
+   "q": "A 20 A circuit's 12 AWG ungrounded conductors (6,530 cmil) are upsized to 8 AWG (16,510 cmil) for voltage drop. The equipment grounding conductor must be increased to at least:",
+   "choices": [
+    "12 AWG",
+    "10 AWG",
+    "8 AWG",
+    "6 AWG"
+   ],
+   "answer": 2,
+   "explain": "Ratio = 16,510 / 6,530 ≈ 2.53. Required EGC = 6,530 × 2.53 ≈ 16,500 cmil → 8 AWG. Wire-type EGCs are upsized in proportion to the circular-mil increase.",
+   "tags": [
+    "grounding",
+    "egc",
+    "voltage-drop",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-110",
+   "topic": "wiring",
+   "article": "240.21(B)(2)",
+   "difficulty": 3,
+   "q": "A 25-ft tap is made from a feeder protected at 400 A. The minimum copper tap conductor (75°C) is:",
+   "choices": [
+    "3 AWG",
+    "1 AWG",
+    "1/0 AWG",
+    "3/0 AWG"
+   ],
+   "answer": 2,
+   "explain": "Tap ampacity ≥ 1/3 × 400 = 133.3 A. 1 AWG (130 A) falls short; 1/0 AWG (150 A) is the first size that qualifies.",
+   "tags": [
+    "taps",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-111",
+   "topic": "wiring",
+   "article": "210.19(A) / 110.14(C)",
+   "difficulty": 3,
+   "q": "A branch circuit supplies 80 A of continuous lighting load. The equipment is rated for 75°C terminations. Minimum copper conductor size?",
+   "choices": [
+    "4 AWG",
+    "3 AWG",
+    "2 AWG",
+    "1 AWG"
+   ],
+   "answer": 1,
+   "explain": "80 × 1.25 = 100 A minimum ampacity before adjustment → 3 AWG Cu at 75°C (100 A). OCPD likewise 100 A (210.20(A)).",
+   "tags": [
+    "continuous-load",
+    "ampacity",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-112",
+   "topic": "wiring",
+   "article": "220.61(B)",
+   "difficulty": 3,
+   "q": "A service's calculated neutral load is 300 A. Applying the neutral demand factor, the required neutral ampacity is:",
+   "choices": [
+    "210 A",
+    "240 A",
+    "270 A",
+    "300 A"
+   ],
+   "answer": 2,
+   "explain": "The portion of the unbalanced load over 200 A may be reduced 30%: 200 + 0.7 × 100 = 270 A. Not permitted for the nonlinear-load portion.",
+   "tags": [
+    "load-calc",
+    "neutral",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-113",
+   "topic": "wiring",
+   "article": "210.52(C)(2)",
+   "difficulty": 2,
+   "q": "Under the 2020 Code, a kitchen island with 36 sq ft of countertop requires at least how many receptacle outlets?",
+   "choices": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "answer": 2,
+   "explain": "One receptacle for the first 9 sq ft, plus one for each additional 18 sq ft or fraction: 36 − 9 = 27 → 27 / 18 = 1.5 → 2 more. Total 3.",
+   "tags": [
+    "receptacles",
+    "kitchen",
+    "calc"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-114",
+   "topic": "wiring",
+   "article": "210.52(D)",
+   "difficulty": 1,
+   "q": "A dwelling bathroom receptacle must be located within how far of the outside edge of each basin?",
+   "choices": [
+    "18 in.",
+    "24 in.",
+    "3 ft",
+    "6 ft"
+   ],
+   "answer": 2,
+   "explain": "Within 3 ft of the outside edge of the basin, on a wall or partition adjacent to it, or on the side/face of the cabinet (not more than 12 in. below the countertop).",
+   "tags": [
+    "receptacles",
+    "bathroom"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-115",
+   "topic": "wiring",
+   "article": "210.11(C)(4)",
+   "difficulty": 1,
+   "q": "An attached garage with electric power requires at least one branch circuit that is:",
+   "choices": [
+    "15 A, shared with outdoor lighting",
+    "20 A, 120 V, serving garage receptacles with no other outlets (readily accessible outdoor receptacles excepted)",
+    "30 A for an EV charger",
+    "Any rating, shared with the laundry"
+   ],
+   "answer": 1,
+   "explain": "A dedicated 120 V, 20 A circuit for garage receptacle outlets; it may also supply readily accessible outdoor receptacles.",
+   "tags": [
+    "branch-circuits",
+    "garage"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-116",
+   "topic": "wiring",
+   "article": "230.24(A) Exception 2",
+   "difficulty": 2,
+   "q": "Overhead service conductors (300 V or less) pass over a roof with a slope of at least 4 in 12. The minimum clearance above the roof may be reduced to:",
+   "choices": [
+    "18 in.",
+    "3 ft",
+    "8 ft",
+    "10 ft"
+   ],
+   "answer": 1,
+   "explain": "General rule is 8 ft above the roof; 3 ft is permitted for roofs sloped 4 in 12 or steeper when voltage does not exceed 300 V between conductors.",
+   "tags": [
+    "services",
+    "clearance"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-117",
+   "topic": "wiring",
+   "article": "250.30(A)(1) / 250.102(C)",
+   "difficulty": 2,
+   "q": "The system bonding jumper for a separately derived system (such as a transformer secondary) is sized according to:",
+   "choices": [
+    "Table 250.122 using the secondary OCPD",
+    "Table 250.102(C)(1) using the derived phase conductors",
+    "Always 6 AWG copper",
+    "The primary conductor size"
+   ],
+   "answer": 1,
+   "explain": "Same table as the service main bonding jumper, based on the derived (secondary) ungrounded conductors. The SDS grounding electrode conductor is sized from Table 250.66.",
+   "tags": [
+    "grounding",
+    "sds"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-118",
+   "topic": "wiring",
+   "article": "250.52(A)(2)",
+   "difficulty": 2,
+   "q": "A metal in-ground support structure (building steel) qualifies as a grounding electrode when it is in direct contact with the earth vertically for at least:",
+   "choices": [
+    "5 ft",
+    "8 ft",
+    "10 ft",
+    "20 ft"
+   ],
+   "answer": 2,
+   "explain": "10 ft or more, with or without concrete encasement. Multiple structures bonded together count as one electrode.",
+   "tags": [
+    "grounding",
+    "electrodes"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-119",
+   "topic": "wiring",
+   "article": "250.50 Exception",
+   "difficulty": 2,
+   "q": "At an existing building, a concrete-encased electrode is NOT required to be part of the grounding electrode system when:",
+   "choices": [
+    "The building has a metal water pipe",
+    "Using it would require disturbing the concrete",
+    "The service is under 200 A",
+    "A ground rod is driven instead"
+   ],
+   "answer": 1,
+   "explain": "The exception covers existing buildings where the rebar is not accessible without disturbing the concrete. New construction must use the Ufer when present.",
+   "tags": [
+    "grounding",
+    "electrodes"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-120",
+   "topic": "wiring",
+   "article": "Table 310.12 / 215.2(A)(1)",
+   "difficulty": 2,
+   "q": "A 100 A feeder carries the entire load of a one-family dwelling to its main panel. Using Table 310.12, the minimum copper feeder conductor is:",
+   "choices": [
+    "6 AWG",
+    "4 AWG",
+    "3 AWG",
+    "2 AWG"
+   ],
+   "answer": 1,
+   "explain": "The 83% table applies to the main power feeder as well as the service: 100 A → 4 AWG Cu (2 AWG Al).",
+   "tags": [
+    "feeders",
+    "ampacity"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-121",
+   "topic": "wiring",
+   "article": "Table 220.55",
+   "difficulty": 3,
+   "q": "A multifamily service supplies 12 ranges, each rated 12 kW. Using Column C, the range demand load is:",
+   "choices": [
+    "27 kW",
+    "36 kW",
+    "48 kW",
+    "96 kW"
+   ],
+   "answer": 0,
+   "explain": "Column C, 12 appliances → 27 kW. (Column C runs 8 kW for one range up to 15 kW + 1 kW per range above 30.)",
+   "tags": [
+    "load-calc",
+    "range"
+   ]
+  },
+  {
+   "source": "jhq-v2",
+   "pack": 2,
+   "id": "W-122",
+   "topic": "wiring",
+   "article": "230.42(A) / 230.79",
+   "difficulty": 3,
+   "q": "A dwelling's standard-method calculated load is 18,415 VA at 240 V (≈ 77 A). The minimum service disconnect rating and the minimum copper service conductor (Table 310.12) are:",
+   "choices": [
+    "80 A; 4 AWG",
+    "100 A; 4 AWG",
+    "100 A; 3 AWG",
+    "125 A; 2 AWG"
+   ],
+   "answer": 1,
+   "explain": "230.79(C) sets 100 A as the floor for a one-family dwelling regardless of the 77 A calculation; Table 310.12 gives 4 AWG Cu for 100 A.",
+   "tags": [
+    "services",
+    "load-calc"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-001",
    "topic": "wiring",
    "article": "210.52(A)(1)",
@@ -2600,6 +4328,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-002",
    "topic": "wiring",
    "article": "210.52(C)(1)",
@@ -2619,6 +4349,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-003",
    "topic": "wiring",
    "article": "210.8(A)",
@@ -2637,6 +4369,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-004",
    "topic": "wiring",
    "article": "210.8(A)(7)",
@@ -2656,6 +4390,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-005",
    "topic": "wiring",
    "article": "210.11(C)(1)",
@@ -2675,6 +4411,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-006",
    "topic": "wiring",
    "article": "210.11(C)(3)",
@@ -2694,6 +4432,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-007",
    "topic": "wiring",
    "article": "210.12(A)",
@@ -2712,6 +4452,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-008",
    "topic": "wiring",
    "article": "210.20(A)",
@@ -2730,6 +4472,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-009",
    "topic": "wiring",
    "article": "Table 210.21(B)(3)",
@@ -2748,6 +4492,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-010",
    "topic": "wiring",
    "article": "210.23(A)(1)",
@@ -2766,6 +4512,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-011",
    "topic": "wiring",
    "article": "210.52(H)",
@@ -2785,6 +4533,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-012",
    "topic": "wiring",
    "article": "210.52(E)(1)",
@@ -2804,6 +4554,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-013",
    "topic": "wiring",
    "article": "210.52(G)(1)",
@@ -2823,6 +4575,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-014",
    "topic": "wiring",
    "article": "210.70(A)(1)",
@@ -2842,6 +4596,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-015",
    "topic": "wiring",
    "article": "Table 220.12",
@@ -2860,6 +4616,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-016",
    "topic": "wiring",
    "article": "220.52",
@@ -2878,6 +4636,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-017",
    "topic": "wiring",
    "article": "Table 220.42",
@@ -2896,6 +4656,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-018",
    "topic": "wiring",
    "article": "220.54",
@@ -2915,6 +4677,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-019",
    "topic": "wiring",
    "article": "Table 220.55",
@@ -2934,6 +4698,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-020",
    "topic": "wiring",
    "article": "220.14(I)",
@@ -2953,6 +4719,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-021",
    "topic": "wiring",
    "article": "230.70(A)(1)",
@@ -2971,6 +4739,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-022",
    "topic": "wiring",
    "article": "230.71(A)",
@@ -2989,6 +4759,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-023",
    "topic": "wiring",
    "article": "230.79(C)",
@@ -3007,6 +4779,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-024",
    "topic": "wiring",
    "article": "230.24(B)(2)",
@@ -3026,6 +4800,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-025",
    "topic": "wiring",
    "article": "230.9(A)",
@@ -3045,6 +4821,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-026",
    "topic": "wiring",
    "article": "240.4(D)",
@@ -3063,6 +4841,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-027",
    "topic": "wiring",
    "article": "240.6(A)",
@@ -3081,6 +4861,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-028",
    "topic": "wiring",
    "article": "240.4(B)",
@@ -3099,6 +4881,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-029",
    "topic": "wiring",
    "article": "240.21(B)(2)",
@@ -3117,6 +4901,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-030",
    "topic": "wiring",
    "article": "240.24(A)",
@@ -3136,6 +4922,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-031",
    "topic": "wiring",
    "article": "240.24(E)",
@@ -3155,6 +4943,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-032",
    "topic": "wiring",
    "article": "250.66(A)",
@@ -3174,6 +4964,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-033",
    "topic": "wiring",
    "article": "250.53(A)(2)",
@@ -3193,6 +4985,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-034",
    "topic": "wiring",
    "article": "250.53(A)(3)",
@@ -3212,6 +5006,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-035",
    "topic": "wiring",
    "article": "250.52(A)(3)",
@@ -3231,6 +5027,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-036",
    "topic": "wiring",
    "article": "Table 250.122",
@@ -3250,6 +5048,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-037",
    "topic": "wiring",
    "article": "250.24(A)(5)",
@@ -3269,6 +5069,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-038",
    "topic": "wiring",
    "article": "250.32(B)(1)",
@@ -3288,6 +5090,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-039",
    "topic": "wiring",
    "article": "250.104(A)(1)",
@@ -3307,6 +5111,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-040",
    "topic": "wiring",
    "article": "250.118",
@@ -3326,6 +5132,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-041",
    "topic": "wiring",
    "article": "250.119",
@@ -3344,6 +5152,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-042",
    "topic": "wiring",
    "article": "200.6(A)",
@@ -3362,6 +5172,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-043",
    "topic": "wiring",
    "article": "250.64(B)",
@@ -3381,6 +5193,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-044",
    "topic": "wiring",
    "article": "Table 250.102(C)(1)",
@@ -3399,6 +5213,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-045",
    "topic": "wiring",
    "article": "210.4(B)",
@@ -3417,6 +5233,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-046",
    "topic": "wiring",
    "article": "215.2(A)(1)",
@@ -3436,6 +5254,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-047",
    "topic": "wiring",
    "article": "220.82(B)",
@@ -3455,6 +5275,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-048",
    "topic": "wiring",
    "article": "230.6",
@@ -3473,6 +5295,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-049",
    "topic": "wiring",
    "article": "250.50",
@@ -3492,6 +5316,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-050",
    "topic": "wiring",
    "article": "210.52(B)(1)",
@@ -3511,6 +5337,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-051",
    "topic": "wiring",
    "article": "250.122(B)",
@@ -3531,6 +5359,8 @@
    ]
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "W-052",
    "topic": "wiring",
    "article": "225.30",
