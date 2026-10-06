@@ -3,7 +3,7 @@
  "version": 1,
  "code": "NEC 2020",
  "source": "jhq-v1",
- "generated": "2026-10-01",
+ "generated": "2026-10-06",
  "byTopic": {
   "theory": 20,
   "wiring": 28,
@@ -14,6 +14,8 @@
  },
  "items": [
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E01",
    "topic": "equipment",
    "article": "404.2(C) / 404.8",
@@ -22,6 +24,8 @@
    "back": "Neutral at switch locations (with exceptions)\nGrip center ≤ 6 ft 7 in. above floor\nMetal faceplates/yokes grounded\nSwitches not in wet locations unless in weatherproof enclosures"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E02",
    "topic": "equipment",
    "article": "406.4(D)",
@@ -30,6 +34,8 @@
    "back": "Where GFCI/AFCI/TR/WR would be required today → install that type\nNo EGC in box: non-grounding, or GFCI marked 'No Equipment Ground', or grounding-type on a GFCI with both markings"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E03",
    "topic": "equipment",
    "article": "406.9",
@@ -38,6 +44,8 @@
    "back": "Damp: cover weatherproof when closed (no plug inserted)\nWet: in-use cover (weatherproof with plug inserted) + WR-listed receptacle"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E04",
    "topic": "equipment",
    "article": "406.12",
@@ -46,6 +54,8 @@
    "back": "More than 5½ ft above the floor\nPart of a luminaire or appliance\nDedicated appliance receptacle (not easily moved)\nNon-grounding replacements (406.4(D)(2)(a))"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E05",
    "topic": "equipment",
    "article": "410.10(D) / 410.16",
@@ -54,6 +64,8 @@
    "back": "Bathtub/shower zone: 3 ft horizontal, 8 ft vertical — no cord/chain/pendant luminaires or fans\nCloset: surface incandescent/LED enclosed 12 in.; surface fluorescent 6 in.; recessed enclosed 6 in."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E06",
    "topic": "equipment",
    "article": "422.16(B)",
@@ -62,6 +74,8 @@
    "back": "Waste disposer: 18–36 in.\nDishwasher / trash compactor: 3 ft to 6½ ft\nRange hood / microwave-hood: 18 in. to 4 ft (422.16(B)(4))"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E07",
    "topic": "equipment",
    "article": "430.6 / 430.22 / 430.32",
@@ -70,6 +84,8 @@
    "back": "Table FLC (430.247–250): conductors (125%), OCPD, disconnect (115%)\nNameplate FLA: overloads (125% if SF ≥ 1.15 or rise ≤ 40°C, else 115%)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E08",
    "topic": "equipment",
    "article": "Table 430.52",
@@ -78,6 +94,8 @@
    "back": "Nontime-delay fuse: 300%\nDual-element time-delay fuse: 175%\nInstantaneous-trip breaker: 800%\nInverse-time breaker: 250%\n(Next standard size up permitted per 430.52(C)(1) Ex. 1)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E09",
    "topic": "equipment",
    "article": "Table 430.248 / 430.250",
@@ -86,6 +104,8 @@
    "back": "1-ph 115 V: ½ hp 9.8 · ¾ hp 13.8 · 1 hp 16 · 2 hp 24 · 5 hp 56\n3-ph 230 V: 5 hp 15.2 · 10 hp 28 · 25 hp 68\n3-ph 460 V: 5 hp 7.6 · 10 hp 14 · 25 hp 34 · 50 hp 65\n3-ph 208 V: 5 hp 16.7 · 10 hp 30.8"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E10",
    "topic": "equipment",
    "article": "430.102 / 430.110",
@@ -94,6 +114,8 @@
    "back": "In sight of the controller AND in sight of the motor (or lockable per exception)\nRated ≥ 115% of FLC, or hp-rated\n'In sight' = visible and ≤ 50 ft"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E11",
    "topic": "equipment",
    "article": "Table 450.3(B)",
@@ -102,6 +124,8 @@
    "back": "Primary ≥ 9 A → 125% (next size up OK)\n2 to < 9 A → 167%\n< 2 A → 300%\nWith secondary protection: primary 250%, secondary 125% (≥ 9 A)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E12",
    "topic": "equipment",
    "article": "450.21 / 450.9",
@@ -110,6 +134,8 @@
    "back": "≤ 112½ kVA: 12 in. from combustibles (or barrier / fully enclosed)\n> 112½ kVA: transformer room of fire-resistant construction (exceptions for Class 155+ insulation)\nVentilation openings unobstructed"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E13",
    "topic": "equipment",
    "article": "440.14 / 440.32",
@@ -118,6 +144,8 @@
    "back": "Disconnect within sight AND readily accessible from the unit\nConductors ≥ 125% of RLA or branch-circuit selection current\nOCPD per nameplate 'maximum fuse/breaker' marking"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-E14",
    "topic": "equipment",
    "article": "408.4 / 408.36",
@@ -126,6 +154,8 @@
    "back": "Directory: specific purpose, not 'lights'\nSupply OCPD ≤ panelboard rating\nFeed-through / subfeed lugs allowed; back-fed breakers must be secured (408.36(D))"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G01",
    "topic": "general",
    "article": "90.3",
@@ -134,6 +164,8 @@
    "back": "Ch. 1–4: apply generally\nCh. 5–7: special — supplement or modify 1–4\nCh. 8: communications — independent unless referenced\nCh. 9: tables (mandatory where referenced)\nAnnexes: informational only"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G02",
    "topic": "general",
    "article": "90.5",
@@ -142,6 +174,8 @@
    "back": "'Shall' / 'shall not' → mandatory\n'Shall be permitted' / 'shall not be required' → permissive\nInformational notes and annexes → explanatory, not enforceable"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G03",
    "topic": "general",
    "article": "Art. 100",
@@ -150,6 +184,8 @@
    "back": "Accessible (equipment): reachable, not guarded by locked doors/height\nAccessible (wiring): can be removed/exposed without damaging the building\nReadily accessible: reach quickly — no climbing, obstacles, or ladders"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G04",
    "topic": "general",
    "article": "Art. 100",
@@ -158,6 +194,8 @@
    "back": "Visible AND not more than 50 ft (15 m) away"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G05",
    "topic": "general",
    "article": "Art. 100",
@@ -166,6 +204,8 @@
    "back": "Continuous load: max current expected for 3 hours or more\nAmpacity: max current carried continuously without exceeding the temperature rating, under conditions of use\nOvercurrent: any current above rated — overload, short circuit, ground fault"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G06",
    "topic": "general",
    "article": "110.14(C)",
@@ -174,6 +214,8 @@
    "back": "Circuits ≤ 100 A or 14–1 AWG: 60°C column (unless equipment marked 75°C)\nCircuits > 100 A or larger than 1 AWG: 75°C column\n90°C conductors: use the 90°C column only for derating math"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G07",
    "topic": "general",
    "article": "Table 110.26(A)(1)",
@@ -182,6 +224,8 @@
    "back": "0–150 V: 3 ft (all conditions)\n151–600 V: Cond. 1 → 3 ft · Cond. 2 → 3½ ft · Cond. 3 → 4 ft\n601–1000 V: 3 ft / 4 ft / 5 ft\nCond. 1: insulated/no live parts opposite · Cond. 2: grounded parts opposite · Cond. 3: live parts both sides"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G08",
    "topic": "general",
    "article": "110.26(A)(2)/(3)/(E)",
@@ -190,6 +234,8 @@
    "back": "Width: 30 in. or equipment width, whichever greater; doors open 90°\nHeight: 6½ ft or equipment height\nDedicated space: floor to 6 ft above equipment or structural ceiling — no foreign systems"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G09",
    "topic": "general",
    "article": "110.3(B) / 110.12",
@@ -198,6 +244,8 @@
    "back": "Install listed equipment per its listing/labeling instructions (110.3(B))\nNeat and workmanlike manner (110.12); unused openings closed; no damaged equipment"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G10",
    "topic": "general",
    "article": "110.16 / 110.21 / 110.22",
@@ -206,6 +254,8 @@
    "back": "Arc-flash warning on switchboards/panels/MCCs in other than dwellings (110.16)\nField-applied hazard markings durable (110.21(B))\nDisconnects marked for purpose unless obvious (110.22)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G11",
    "topic": "general",
    "article": "110.26(C)",
@@ -214,6 +264,8 @@
    "back": "Equipment ≥ 1200 A and over 6 ft wide: an entrance ≥ 24 in. wide × 6½ ft high at EACH end (or an unobstructed exit / double working space)\nPersonnel doors within 25 ft: open outward with panic hardware (800 A+)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-G12",
    "topic": "general",
    "article": "Art. 100",
@@ -222,6 +274,8 @@
    "back": "Service conductors: utility point to service disconnect\nFeeder: service equipment (or source) to the final branch-circuit OCPD\nBranch circuit: final OCPD to the outlets"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M01",
    "topic": "methods",
    "article": "Table 300.5",
@@ -230,6 +284,8 @@
    "back": "Direct-burial cable/UF: 24 in.\nRMC/IMC: 6 in.\nPVC (no concrete): 18 in.\nResidential 120 V ≤20 A GFCI branch: 12 in.\nUnder 4-in. slab, no vehicles: cable 18 / raceway 4 in."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M02",
    "topic": "methods",
    "article": "300.4",
@@ -238,6 +294,8 @@
    "back": "Bored holes and parallel runs: ≥ 1¼ in. from the edge, or a 1/16-in. steel plate.\nNotches: steel plate.\nUnder metal-corrugated roof decking: ≥ 1½ in. below."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M03",
    "topic": "methods",
    "article": "300.14",
@@ -246,6 +304,8 @@
    "back": "≥ 6 in. from where the conductor emerges\n≥ 3 in. outside the box opening (openings < 8 in.)\nNot required for conductors passing straight through."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M04",
    "topic": "methods",
    "article": "Table 310.16",
@@ -254,6 +314,8 @@
    "back": "14 → 20 A*  12 → 25 A*  10 → 35 A*\n8 → 50 A\n6 → 65 A\n4 → 85 A\n3 → 100 A\n2 → 115 A\n1 → 130 A\n(*OCPD still capped by 240.4(D))"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M05",
    "topic": "methods",
    "article": "Table 310.16",
@@ -262,6 +324,8 @@
    "back": "1/0 → 150\n2/0 → 175\n3/0 → 200\n4/0 → 230\n250 kcmil → 255\n300 → 285\n350 → 310\n400 → 335\n500 → 380"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M06",
    "topic": "methods",
    "article": "Table 310.15(C)(1)",
@@ -270,6 +334,8 @@
    "back": "4–6 → 80%\n7–9 → 70%\n10–20 → 50%\n21–30 → 45%\n31–40 → 40%\n41+ → 35%\nEGCs never count; balanced neutrals don't count."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M07",
    "topic": "methods",
    "article": "Table 310.15(B)(1)(1)",
@@ -278,6 +344,8 @@
    "back": "26–30°C → 1.00\n31–35 → 0.96\n36–40 → 0.91\n41–45 → 0.87\n46–50 → 0.82\n51–55 → 0.76\nStart from the conductor's own column; then check the termination limit (110.14(C))."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M08",
    "topic": "methods",
    "article": "Table 310.12",
@@ -286,6 +354,8 @@
    "back": "100 A → 4 Cu / 2 Al\n125 A → 2 Cu / 1/0 Al\n150 A → 1 Cu / 2/0 Al\n200 A → 2/0 Cu / 4/0 Al\n(one-family dwellings and individual units; main power feeder too)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M09",
    "topic": "methods",
    "article": "Table 314.16(B)",
@@ -294,6 +364,8 @@
    "back": "14 AWG → 2.00 in³\n12 AWG → 2.25\n10 AWG → 2.50\n8 AWG → 3.00\n6 AWG → 5.00\nCount: each conductor 1; all EGCs together 1 (2 if more than 4); internal clamps 1; each device yoke 2; fixture studs/hickeys 1 each."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M10",
    "topic": "methods",
    "article": "314.28(A)",
@@ -302,6 +374,8 @@
    "back": "Straight pull: length ≥ 8 × largest raceway\nAngle/U pull: ≥ 6 × largest + sum of other raceways on the same wall\nBetween raceway entries of the same conductor: ≥ 6 × largest raceway"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M11",
    "topic": "methods",
    "article": "Ch. 9 Table 1",
@@ -310,6 +384,8 @@
    "back": "1 conductor → 53%\n2 conductors → 31%\n3 or more → 40%\nNipple ≤ 24 in. → 60% (no derating)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M12",
    "topic": "methods",
    "article": "Annex C Table C.1",
@@ -318,6 +394,8 @@
    "back": "½ in.: 14→12, 12→9, 10→5\n¾ in.: 14→22, 12→16, 10→10\n1 in.: 14→35, 12→26, 10→16"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M13",
    "topic": "methods",
    "article": "342–358",
@@ -326,6 +404,8 @@
    "back": "RMC / IMC / EMT: within 3 ft of boxes, every 10 ft\nFMC / LFMC: within 12 in., every 4½ ft\nPVC: within 3 ft; spacing by size (Table 352.30) — ½–1 in. every 3 ft\nENT: within 3 ft, every 3 ft"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M14",
    "topic": "methods",
    "article": "334.30 / 334.80",
@@ -334,6 +414,8 @@
    "back": "Secure within 12 in. of boxes, every 4½ ft\nAmpacity: 60°C column (12 AWG → 20 A, 10 AWG → 30 A)\nNot in commercial garages, theaters, hazardous locations, or exposed in dropped ceilings of other than dwellings\nBundled through the same hole > 24 in. → derate"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M15",
    "topic": "methods",
    "article": "320 / 330 / 338 / 340",
@@ -342,6 +424,8 @@
    "back": "AC: armored, bonding strip, anti-short bushings; secure 12 in. / 4½ ft\nMC: metal clad, needs listed fittings; EGC inside; secure 12 in. / 6 ft\nSE: service-entrance; SER has a separate EGC; interior use per 338.10\nUF: direct burial; 60°C ampacity like NM"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M16",
    "topic": "methods",
    "article": "352.44",
@@ -350,6 +434,8 @@
    "back": "Required where expected length change ≥ ¼ in. in a straight run.\nTable 352.44: roughly 4 in. per 100 ft for a 100°F swing."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M17",
    "topic": "methods",
    "article": "400.12",
@@ -358,6 +444,8 @@
    "back": "No substitute for fixed wiring\nNot through walls, ceilings, floors, doorways, windows\nNot attached to building surfaces (except 400.10(A)(1) exceptions)\nNot concealed behind walls/ceilings\nNot in raceways (except as permitted)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-M18",
    "topic": "methods",
    "article": "300.3(B)",
@@ -366,6 +454,8 @@
    "back": "All conductors of a circuit — ungrounded, grounded, EGC — in the same raceway, cable, trench, or cord.\nPrevents induction heating and keeps the fault path intact."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S01",
    "topic": "special",
    "article": "500.5",
@@ -374,6 +464,8 @@
    "back": "Class I: gases/vapors · Class II: dust · Class III: fibers/flyings\nDivision 1: normally present · Division 2: abnormal conditions only\nZones 0/1/2 (gases) and 20/21/22 (dust) are the alternative system"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S02",
    "topic": "special",
    "article": "501.15",
@@ -382,6 +474,8 @@
    "back": "Within 18 in. of enclosures with arcing/sparking devices (Div 1)\nWhere conduit leaves a Div 1 area (boundary seal)\nDiv 2: at boundary and at enclosures required to be explosionproof\nOnly explosionproof fittings between seal and enclosure"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S03",
    "topic": "special",
    "article": "511.3",
@@ -390,6 +484,8 @@
    "back": "Major repair, no ventilation: Class I Div 2 up to 18 in. above the floor\nPits without ventilation: Div 1\nWith 4 air changes/hr (or ventilation per 511.3): may be unclassified\nMinor repair garages: generally unclassified"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S04",
    "topic": "special",
    "article": "517.18 / 517.19",
@@ -398,6 +494,8 @@
    "back": "General care (Cat. 2): 2 branch circuits (1 critical, 1 normal), ≥ 8 receptacles\nCritical care (Cat. 1): ≥ 14 receptacles, at least 1 critical-branch circuit\nAll hospital grade"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S05",
    "topic": "special",
    "article": "680.22 / 680.23 / 680.26",
@@ -406,6 +504,8 @@
    "back": "General receptacles ≥ 6 ft from inside walls; GFCI within 20 ft\nPump receptacle 6–10 ft, locking, GFCI\nLuminaires: lens top ≥ 18 in. below water\nEquipotential bond: 8 AWG solid Cu\nSwitches ≥ 5 ft from the water (680.22(C))"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S06",
    "topic": "special",
    "article": "690.7 / 690.8",
@@ -414,6 +514,8 @@
    "back": "Max voltage: Voc × low-temp correction (Table 690.7(A) or coefficients)\nSource circuit max current: 125% × Isc\nConductor sizing: 125% of that (690.8(B)) → 156% of Isc overall\nResidential DC max 600 V (1000 V other)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S07",
    "topic": "special",
    "article": "690.12",
@@ -422,6 +524,8 @@
    "back": "Outside array boundary (> 1 ft): ≤ 30 V within 30 s\nInside array boundary: ≤ 80 V within 30 s, or listed PV hazard control system\nInitiation device at the service or readily accessible location"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S08",
    "topic": "special",
    "article": "705.12(B)",
@@ -430,6 +534,8 @@
    "back": "Sum of main + inverter OCPD ≤ 120% × busbar rating\nInverter breaker at the opposite end of the bus; label required\n200 A bus / 200 A main → 40 A inverter max\nAlternative: 100% rule (sum of all breakers except main ≤ bus rating)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S09",
    "topic": "special",
    "article": "700 / 701 / 702",
@@ -438,6 +544,8 @@
    "back": "Emergency (700): 10 s, life safety, separate wiring\nLegally required standby (701): 60 s\nOptional standby (702): no time limit; transfer equipment still required\nFire-pump: Art. 695"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S10",
    "topic": "special",
    "article": "600.5",
@@ -446,6 +554,8 @@
    "back": "One 20 A sign outlet at each entrance of a commercial occupancy, no other load\nSigns need a disconnect within sight or lockable\nNeon transformers/power supplies: 600.23/600.24"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S11",
    "topic": "special",
    "article": "725",
@@ -454,6 +564,8 @@
    "back": "Class 1: up to 600 V, installed like power wiring\nClass 2: power-limited at source, low shock & fire risk (thermostats, doorbells)\nClass 3: power-limited, higher voltage than Class 2, shock risk\nKeep Class 2/3 separate from power conductors"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-S12",
    "topic": "special",
    "article": "547 / 550 / 551.71",
@@ -464,6 +576,8 @@
    "note": "DISPUTED 2026-10-01: this lane's sources (ECM 'Recreational Vehicles and RV Parks', NEC 2020) read 551.71(C) as 40% of sites with 50 A; Luigi's pass on main (PR #1) kept 20%. Card shows 40%. Confirm against the 2020 book: 551.71(C)."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T01",
    "topic": "theory",
    "article": "Ohm's law",
@@ -472,6 +586,8 @@
    "back": "E = I × R\nI = E ÷ R\nR = E ÷ I"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T02",
    "topic": "theory",
    "article": "Power formulas",
@@ -480,6 +596,8 @@
    "back": "P = E × I\nP = I² × R\nP = E² ÷ R\nI = P ÷ E"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T03",
    "topic": "theory",
    "article": "Series circuits",
@@ -488,6 +606,8 @@
    "back": "Current is the same everywhere.\nResistances add.\nVoltage drops add up to the source voltage."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T04",
    "topic": "theory",
    "article": "Parallel circuits",
@@ -496,6 +616,8 @@
    "back": "Voltage is the same across each branch.\nBranch currents add.\nTotal R is less than the smallest branch: 1/Rt = 1/R1 + 1/R2 ...\nTwo resistors: product ÷ sum. Equal resistors: R ÷ n."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T05",
    "topic": "theory",
    "article": "AC values",
@@ -504,6 +626,8 @@
    "back": "Peak = RMS × 1.414\nRMS = Peak × 0.707\n120 V RMS ≈ 170 V peak"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T06",
    "topic": "theory",
    "article": "Impedance",
@@ -512,6 +636,8 @@
    "back": "Z = √(R² + X²)\nNet reactance X = XL − XC\n30 Ω R + 40 Ω XL → 50 Ω"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T07",
    "topic": "theory",
    "article": "Reactance",
@@ -520,6 +646,8 @@
    "back": "XL = 2πfL → rises with frequency\nXC = 1 ÷ (2πfC) → falls with frequency"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T08",
    "topic": "theory",
    "article": "Power factor",
@@ -528,6 +656,8 @@
    "back": "True power W = VA × PF\nApparent power VA = E × I\nReactive VAR = √(VA² − W²)\nPF = W ÷ VA = cos θ"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T09",
    "topic": "theory",
    "article": "Three-phase power",
@@ -536,6 +666,8 @@
    "back": "P = 1.732 × E(line) × I(line) × PF\nI = VA ÷ (1.732 × E)\nkVA = 1.732 × E × I ÷ 1000"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T10",
    "topic": "theory",
    "article": "Wye vs delta",
@@ -544,6 +676,8 @@
    "back": "WYE: E(line) = 1.732 × E(phase); I(line) = I(phase)\nDELTA: E(line) = E(phase); I(line) = 1.732 × I(phase)\n480Y/277: 480 ÷ 1.732 = 277"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T11",
    "topic": "theory",
    "article": "Transformers",
@@ -552,6 +686,8 @@
    "back": "Ep ÷ Es = Np ÷ Ns = Is ÷ Ip\nkVA in = kVA out (ignoring losses)\nSecondary current = VA ÷ Es (1-ph) or VA ÷ (1.732 × Es) (3-ph)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T12",
    "topic": "theory",
    "article": "Horsepower",
@@ -560,6 +696,8 @@
    "back": "1 hp = 746 W\nInput W = output W ÷ efficiency\nEfficiency = output ÷ input"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T13",
    "topic": "theory",
    "article": "Voltage drop",
@@ -568,6 +706,8 @@
    "back": "Single-phase: VD = 2 × K × I × L ÷ CM\nThree-phase: VD = 1.732 × K × I × L ÷ CM\nK ≈ 12.9 copper, 21.2 aluminum (75°C)\nL = one-way length in ft; CM from Ch. 9 Table 8"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T14",
    "topic": "theory",
    "article": "210.19(A) Info. Note",
@@ -576,6 +716,8 @@
    "back": "3% for a branch circuit\n5% total for feeder + branch circuit\n(Informational — recommended, not mandatory)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T15",
    "topic": "theory",
    "article": "Neutral current",
@@ -584,6 +726,8 @@
    "back": "Neutral carries the difference between the two line currents.\n20 A and 14 A → 6 A on the neutral.\nBalanced 3-phase wye linear loads → 0 A."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T16",
    "topic": "theory",
    "article": "Conductor resistance",
@@ -592,6 +736,8 @@
    "back": "Longer → more R (proportional)\nLarger area (CM) → less R (inverse)\nHotter copper → more R\nMaterial: copper lower than aluminum"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T17",
    "topic": "theory",
    "article": "Phase angle",
@@ -600,6 +746,8 @@
    "back": "Inductor (L): voltage E leads current I\nCapacitor (C): current I leads voltage E\nPure inductive/capacitive → 90° shift"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T18",
    "topic": "theory",
    "article": "Energy",
@@ -608,6 +756,8 @@
    "back": "kWh = kW × hours\nCost = kWh × rate\n1.5 kW × 8 h × 30 d = 360 kWh"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T19",
    "topic": "theory",
    "article": "Ch. 9 Table 8",
@@ -616,6 +766,8 @@
    "back": "14 AWG: 4,110\n12 AWG: 6,530\n10 AWG: 10,380\n8 AWG: 16,510\n6 AWG: 26,240\n4 AWG: 41,740\n1/0: 105,600"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-T20",
    "topic": "theory",
    "article": "Kirchhoff",
@@ -624,6 +776,8 @@
    "back": "Current law: currents into a node = currents out.\nVoltage law: sum of voltage drops around any closed loop = source voltage."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W01",
    "topic": "wiring",
    "article": "210.52(A)",
@@ -632,6 +786,8 @@
    "back": "No point along the floor line more than 6 ft from a receptacle → max 12 ft apart.\nWall spaces 2 ft or wider count. Floor receptacles within 18 in. of the wall count."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W02",
    "topic": "wiring",
    "article": "210.52(C)",
@@ -640,6 +796,8 @@
    "back": "Any wall counter space 12 in. or wider gets one.\nNo point along the wall line more than 24 in. from a receptacle (4 ft apart max).\nIslands/peninsulas: 2020 — at least one per island/peninsula (per 9 sq ft rule)."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W03",
    "topic": "wiring",
    "article": "210.8(A)",
@@ -648,6 +806,8 @@
    "back": "Bathrooms · garages & accessory buildings · outdoors · crawl spaces · basements · kitchens (countertop) · within 6 ft of any sink · boathouses · within 6 ft of bathtub/shower · laundry areas · indoor damp/wet locations"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W04",
    "topic": "wiring",
    "article": "210.12(A)",
@@ -656,6 +816,8 @@
    "back": "Kitchens, family rooms, dining, living, parlors, libraries, dens, bedrooms, sunrooms, rec rooms, closets, hallways, laundry areas, similar.\nNOT: bathrooms, garages, outdoors, unfinished basements."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W05",
    "topic": "wiring",
    "article": "210.11(C)",
@@ -664,6 +826,8 @@
    "back": "2 small-appliance (kitchen/dining)\n1 laundry\n1 bathroom\n1 garage (attached garages, 2017+)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W06",
    "topic": "wiring",
    "article": "210.19 / 210.20",
@@ -672,6 +836,8 @@
    "back": "Conductors and OCPD ≥ 125% of continuous + 100% of noncontinuous.\nContinuous = 3 hours or more."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W07",
    "topic": "wiring",
    "article": "Table 210.21(B)(3)",
@@ -680,6 +846,8 @@
    "back": "15 A circuit → 15 A\n20 A → 15 or 20 A\n30 A → 30 A\n40 A → 40 or 50 A\n50 A → 50 A"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W08",
    "topic": "wiring",
    "article": "210.52(E)/(G)/(H)",
@@ -688,6 +856,8 @@
    "back": "Outdoor: front & back, ≤ 6½ ft above grade\nGarage: one per vehicle bay, ≤ 5½ ft above floor\nHallway: 10 ft or longer → at least one\nBathroom: within 3 ft of basin edge"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W09",
    "topic": "wiring",
    "article": "Table 220.12 / 220.52",
@@ -696,6 +866,8 @@
    "back": "General lighting: 3 VA per sq ft\nSmall appliance: 1,500 VA each (×2)\nLaundry: 1,500 VA"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W10",
    "topic": "wiring",
    "article": "Table 220.42",
@@ -704,6 +876,8 @@
    "back": "First 3,000 VA → 100%\n3,001–120,000 VA → 35%\nOver 120,000 VA → 25%"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W11",
    "topic": "wiring",
    "article": "220.54 / 220.55",
@@ -712,6 +886,8 @@
    "back": "Dryer: 5,000 W or nameplate, whichever larger\nRange ≤ 12 kW (one): 8 kW (Table 220.55 Col. C)\nOver 12 kW: add 5% per kW above 12"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W12",
    "topic": "wiring",
    "article": "220.82",
@@ -720,6 +896,8 @@
    "back": "General loads: first 10 kVA at 100%, remainder at 40%\nThen add largest of heating/cooling per 220.82(C)\nService must be ≥ 100 A"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W13",
    "topic": "wiring",
    "article": "230.24",
@@ -728,6 +906,8 @@
    "back": "10 ft above grade at the service entrance (≤150 V to ground)\n12 ft over residential property/driveways (≤300 V)\n15 ft over commercial areas with truck traffic (>300 V)\n18 ft over public streets, alleys, parking lots\n8 ft above roofs (with exceptions)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W14",
    "topic": "wiring",
    "article": "230.70 / 230.71 / 230.79",
@@ -736,6 +916,8 @@
    "back": "Location: outside, or inside nearest point of entrance; never in a bathroom\nMax six disconnects, each in its own enclosure (2020)\nMin rating: one-family dwelling 100 A 3-wire; other 60 A"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W15",
    "topic": "wiring",
    "article": "240.4(D)",
@@ -744,6 +926,8 @@
    "back": "14 AWG Cu → 15 A\n12 AWG Cu → 20 A\n10 AWG Cu → 30 A\n12 AWG Al → 15 A\n10 AWG Al → 25 A"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W16",
    "topic": "wiring",
    "article": "240.6(A)",
@@ -752,6 +936,8 @@
    "back": "15 20 25 30 35 40 45 50 60 70 80 90 100 110 125 150 175 200 225 250 300 350 400 450 500 600 700 800 1000 1200 1600 2000 2500 3000 4000 5000 6000"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W17",
    "topic": "wiring",
    "article": "240.4(B)",
@@ -760,6 +946,8 @@
    "back": "Allowed when: conductor ampacity isn't a standard rating, the OCPD is 800 A or less, and it's not a multioutlet receptacle circuit.\n65 A ampacity → 70 A breaker OK."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W18",
    "topic": "wiring",
    "article": "240.21(B)",
@@ -768,6 +956,8 @@
    "back": "10 ft: tap ampacity ≥ load AND ≥ OCPD rating at termination; ≥ 1/10 of feeder OCPD\n25 ft: tap ampacity ≥ 1/3 feeder OCPD, ends in a single OCPD\nAll: protected from damage, in raceway"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W19",
    "topic": "wiring",
    "article": "240.24",
@@ -776,6 +966,8 @@
    "back": "Readily accessible; handle ≤ 6 ft 7 in. above floor\nNot near easily ignitable material (clothes closets)\nNot in dwelling bathrooms\nNot over steps of a stairway"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W20",
    "topic": "wiring",
    "article": "Table 250.66",
@@ -784,6 +976,8 @@
    "back": "Service conductor 2 AWG or smaller → 8 AWG\n1 or 1/0 → 6\n2/0 or 3/0 → 4\nOver 3/0 to 350 kcmil → 2\nOver 350 to 600 → 1/0\nOver 600 to 1100 → 2/0\nOver 1100 → 3/0\nRod/pipe/plate max 6 AWG; Ufer max 4 AWG"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W21",
    "topic": "wiring",
    "article": "Table 250.122",
@@ -792,6 +986,8 @@
    "back": "15 A → 14\n20 A → 12\n30, 40, 60 A → 10\n100 A → 8\n200 A → 6\n300 A → 4\n400 A → 3\n500 A → 2\n600 A → 1\nUpsize proportionally when conductors are upsized for VD."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W22",
    "topic": "wiring",
    "article": "250.52 / 250.53",
@@ -800,6 +996,8 @@
    "back": "≥ 8 ft long, driven full length\nSingle rod OK only if ≤ 25 Ω; otherwise add a second\nRods ≥ 6 ft apart\nUfer: 20 ft of ½-in. rebar or 20 ft of 4 AWG bare Cu, 2 in. of concrete"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W23",
    "topic": "wiring",
    "article": "250.24 / 250.32",
@@ -808,6 +1006,8 @@
    "back": "Once — at the service disconnect (main bonding jumper).\nNever on the load side (subpanels, separate buildings).\nSeparate building: run an EGC with the feeder; isolate the neutral; still install a grounding electrode."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W24",
    "topic": "wiring",
    "article": "250.118",
@@ -816,6 +1016,8 @@
    "back": "RMC, IMC, EMT: yes, as-is\nFMC (250.118(5)): listed fittings, OCPD ≤ 20 A, ≤ 6 ft of flex in the fault path; add an EGC where used for flexibility\nLFMC (250.118(6)): ⅜ and ½ in. → OCPD ≤ 20 A; ¾ through 1¼ in. → OCPD ≤ 60 A (no smaller LFMC in the path); ≤ 6 ft total\nPVC, ENT, LFNC: never"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W25",
    "topic": "wiring",
    "article": "200.6 / 250.119",
@@ -824,6 +1026,8 @@
    "back": "Grounded (neutral): white, gray, or 3 white stripes\nEGC: green, green/yellow stripes, or bare\nUngrounded: any other color (orange = high leg, 110.15)"
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W26",
    "topic": "wiring",
    "article": "Table 250.102(C)(1)",
@@ -832,6 +1036,8 @@
    "back": "Same breakpoints as Table 250.66 for ≤ 1100 kcmil.\nOver 1100 kcmil Cu: 12½% of the largest ungrounded conductor area.\n500 kcmil service → 1/0 Cu jumper."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W27",
    "topic": "wiring",
    "article": "210.4",
@@ -840,6 +1046,8 @@
    "back": "Shared neutral, ungrounded conductors on different phases/legs.\nMust have a simultaneous disconnect (handle tie or multipole breaker) at the origin.\nConductors grouped in the panel."
   },
   {
+   "source": "jhq-v1",
+   "pack": 1,
    "id": "F-W28",
    "topic": "wiring",
    "article": "230.6",

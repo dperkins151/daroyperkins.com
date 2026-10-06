@@ -18,6 +18,7 @@ function checkCommon(x, kind) {
   if (!x.article) errors.push(`${x.id}: missing NEC article reference`);
   if (![1, 2, 3].includes(x.difficulty)) errors.push(`${x.id}: difficulty must be 1–3`);
   if (x.review && !x.note) errors.push(`${x.id}: review:true needs a note saying what to verify`);
+  if (x.pack !== undefined && !(Number.isInteger(x.pack) && x.pack >= 1)) errors.push(`${x.id}: pack must be a positive integer`);
 }
 const questions = loadDir("content/questions");
 const seen = new Set();
@@ -41,10 +42,11 @@ const plan = read("content/plan.src.json");
 plan.days.forEach((d, i) => { if (d.day !== i + 1) errors.push(`plan day ${d.day} out of order`); if (!topicIds.has(d.topic)) errors.push(`plan day ${d.day}: bad topic`); if (!d.tasks?.length) errors.push(`plan day ${d.day}: no tasks`); });
 if (errors.length) { console.error("BANK VALIDATION FAILED\n" + errors.map((e) => " - " + e).join("\n")); process.exit(1); }
 
-const strip = (x) => { const { _file, ...rest } = x; return rest; };
+const strip = (x) => { const { _file, ...rest } = x; return Object.assign({ source: "jhq-v" + (x.pack || 1), pack: x.pack || 1 }, rest); };
 const today = new Date().toISOString().slice(0, 10);
 const byTopic = (items) => Object.fromEntries(manifest.topics.map((t) => [t.id, items.filter((x) => x.topic === t.id).length]));
-const qOut = { bank: "questions", version: manifest.banks.questions.version, code: manifest.code, source: "jhq-v" + manifest.banks.questions.version, generated: today, byTopic: byTopic(questions), items: questions.map(strip) };
+const byPack = (items) => items.reduce((o, x) => { const k = "v" + (x.pack || 1); o[k] = (o[k] || 0) + 1; return o; }, {});
+const qOut = { bank: "questions", version: manifest.banks.questions.version, code: manifest.code, source: "jhq-v" + manifest.banks.questions.version, generated: today, byTopic: byTopic(questions), byPack: byPack(questions), items: questions.map(strip) };
 const cOut = { bank: "flashcards", version: manifest.banks.flashcards.version, code: manifest.code, source: "jhq-v" + manifest.banks.flashcards.version, generated: today, byTopic: byTopic(cards), items: cards.map(strip) };
 manifest.banks.questions.count = questions.length;
 manifest.banks.flashcards.count = cards.length;
@@ -53,6 +55,8 @@ manifest.banks.questions.reviewFlagged = questions.filter((q) => q.review).lengt
 manifest.banks.flashcards.reviewFlagged = cards.filter((c) => c.review).length;
 manifest.generated = today;
 fs.mkdirSync(path.join(root, "data"), { recursive: true });
+const live = new Set([manifest.banks.questions.file, manifest.banks.flashcards.file, manifest.banks.plan.file, "manifest.json"]);
+for (const f of fs.readdirSync(path.join(root, "data"))) if (!live.has(f)) { fs.unlinkSync(path.join(root, "data", f)); console.log("removed stale bank file data/" + f); }
 fs.writeFileSync(path.join(root, "data", manifest.banks.questions.file), JSON.stringify(qOut, null, 1));
 fs.writeFileSync(path.join(root, "data", manifest.banks.flashcards.file), JSON.stringify(cOut, null, 1));
 fs.writeFileSync(path.join(root, "data", manifest.banks.plan.file), JSON.stringify(plan, null, 1));
@@ -72,4 +76,4 @@ if (fs.existsSync(logPath)) {
 }
 fs.writeFileSync(path.join(root, "CONTENT-REVIEW.md"), md);
 console.log(`OK: ${questions.length} questions, ${cards.length} cards, ${plan.days.length} plan days → data/. Flagged for review: ${review.length}.`);
-console.log("by topic:", qOut.byTopic);
+console.log("by topic:", qOut.byTopic, "by pack:", qOut.byPack);
