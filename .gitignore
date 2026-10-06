@@ -1,0 +1,4 @@
+# local test output
+apps/journeyman-hq/dist/*.png
+apps/vault/test/*.png
+.DS_Store

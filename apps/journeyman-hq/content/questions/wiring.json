@@ -1,0 +1,971 @@
+[
+ {
+  "id": "W-001",
+  "topic": "wiring",
+  "article": "210.52(A)(1)",
+  "difficulty": 1,
+  "q": "In a dwelling-unit living room, wall receptacles must be placed so that no point measured horizontally along the floor line of any wall space is more than how far from a receptacle?",
+  "choices": [
+   "4 ft",
+   "6 ft",
+   "10 ft",
+   "12 ft"
+  ],
+  "answer": 1,
+  "explain": "The 6-ft rule — which produces the familiar 12-ft maximum spacing between receptacles. Wall spaces 2 ft or wider count.",
+  "tags": [
+   "receptacles",
+   "dwelling"
+  ]
+ },
+ {
+  "id": "W-002",
+  "topic": "wiring",
+  "article": "210.52(C)(1)",
+  "difficulty": 1,
+  "q": "For kitchen wall countertop spaces, receptacles must be installed so no point along the wall line is more than how far from a receptacle?",
+  "choices": [
+   "12 in.",
+   "18 in.",
+   "24 in.",
+   "36 in."
+  ],
+  "answer": 2,
+  "explain": "24 in. — so countertop receptacles are at most 4 ft apart. Any wall counter space 12 in. or wider needs one.",
+  "tags": [
+   "receptacles",
+   "kitchen"
+  ]
+ },
+ {
+  "id": "W-003",
+  "topic": "wiring",
+  "article": "210.8(A)",
+  "difficulty": 1,
+  "q": "Which dwelling-unit receptacle location does NOT require GFCI protection under 210.8(A)?",
+  "choices": [
+   "Bathroom",
+   "Garage",
+   "Living room",
+   "Outdoors"
+  ],
+  "answer": 2,
+  "explain": "210.8(A) lists bathrooms, garages, outdoors, crawl spaces, basements, kitchens (countertop-serving), within 6 ft of sinks, boathouses, near bathtubs/showers, and laundry areas. Ordinary living areas are not on the list.",
+  "tags": [
+   "gfci"
+  ]
+ },
+ {
+  "id": "W-004",
+  "topic": "wiring",
+  "article": "210.8(A)(7)",
+  "difficulty": 1,
+  "q": "In a dwelling, 125 V receptacles installed within what distance of the top inside edge of a sink bowl require GFCI protection?",
+  "choices": [
+   "3 ft",
+   "6 ft",
+   "8 ft",
+   "10 ft"
+  ],
+  "answer": 1,
+  "explain": "Within 6 ft of the sink, measured from the top inside edge of the bowl.",
+  "tags": [
+   "gfci",
+   "sink"
+  ]
+ },
+ {
+  "id": "W-005",
+  "topic": "wiring",
+  "article": "210.11(C)(1)",
+  "difficulty": 1,
+  "q": "A dwelling unit kitchen requires a minimum of how many 20-ampere small-appliance branch circuits?",
+  "choices": [
+   "One",
+   "Two",
+   "Three",
+   "Four"
+  ],
+  "answer": 1,
+  "explain": "At least two 20 A small-appliance circuits serving the kitchen, pantry, dining and similar areas' receptacles.",
+  "tags": [
+   "branch-circuits",
+   "kitchen"
+  ]
+ },
+ {
+  "id": "W-006",
+  "topic": "wiring",
+  "article": "210.11(C)(3)",
+  "difficulty": 1,
+  "q": "The dwelling-unit bathroom receptacle branch circuit must be rated at least:",
+  "choices": [
+   "15 A",
+   "20 A",
+   "25 A",
+   "30 A"
+  ],
+  "answer": 1,
+  "explain": "At least one 20 A circuit for bathroom receptacles, with no other outlets unless it serves a single bathroom.",
+  "tags": [
+   "branch-circuits",
+   "bathroom"
+  ]
+ },
+ {
+  "id": "W-007",
+  "topic": "wiring",
+  "article": "210.12(A)",
+  "difficulty": 2,
+  "q": "Which dwelling-unit area is NOT listed as requiring AFCI protection for its 120 V, 15 and 20 A branch circuits?",
+  "choices": [
+   "Bedroom",
+   "Hallway",
+   "Kitchen",
+   "Bathroom"
+  ],
+  "answer": 3,
+  "explain": "210.12(A) covers kitchens, family/dining/living rooms, bedrooms, closets, hallways, laundry areas and similar. Bathrooms, garages and outdoors are not listed.",
+  "tags": [
+   "afci"
+  ]
+ },
+ {
+  "id": "W-008",
+  "topic": "wiring",
+  "article": "210.20(A)",
+  "difficulty": 2,
+  "q": "A branch circuit supplies 40 A of continuous load and no noncontinuous load. The overcurrent device must be rated at least:",
+  "choices": [
+   "40 A",
+   "45 A",
+   "50 A",
+   "60 A"
+  ],
+  "answer": 2,
+  "explain": "Continuous load × 125% = 50 A. Conductors (210.19(A)) follow the same 125% rule before adjustment.",
+  "tags": [
+   "continuous-load"
+  ]
+ },
+ {
+  "id": "W-009",
+  "topic": "wiring",
+  "article": "Table 210.21(B)(3)",
+  "difficulty": 1,
+  "q": "A 20 A branch circuit supplies two or more receptacles. What receptacle ratings are permitted?",
+  "choices": [
+   "15 A only",
+   "20 A only",
+   "15 A or 20 A",
+   "15, 20, or 30 A"
+  ],
+  "answer": 2,
+  "explain": "15 A circuit → 15 A receptacles only (not more than 15); 20 A circuit → 15 or 20 A; 30 A → 30 A; 40 A → 40 or 50 A; 50 A → 50 A.",
+  "tags": [
+   "receptacles"
+  ]
+ },
+ {
+  "id": "W-010",
+  "topic": "wiring",
+  "article": "210.23(A)(1)",
+  "difficulty": 2,
+  "q": "On a branch circuit supplying two or more outlets, cord-and-plug-connected utilization equipment not fastened in place shall not exceed what percentage of the circuit rating?",
+  "choices": [
+   "50%",
+   "80%",
+   "100%",
+   "125%"
+  ],
+  "answer": 1,
+  "explain": "80% of the branch-circuit ampere rating for portable cord-and-plug equipment.",
+  "tags": [
+   "branch-circuits"
+  ]
+ },
+ {
+  "id": "W-011",
+  "topic": "wiring",
+  "article": "210.52(H)",
+  "difficulty": 1,
+  "q": "A dwelling-unit hallway requires at least one receptacle outlet when it is at least how long?",
+  "choices": [
+   "6 ft",
+   "10 ft",
+   "12 ft",
+   "15 ft"
+  ],
+  "answer": 1,
+  "explain": "Hallways 10 ft or more in length, measured along the centerline without passing through a doorway.",
+  "tags": [
+   "receptacles",
+   "dwelling"
+  ]
+ },
+ {
+  "id": "W-012",
+  "topic": "wiring",
+  "article": "210.52(E)(1)",
+  "difficulty": 2,
+  "q": "One- and two-family dwellings need outdoor receptacles accessible at grade level at the front and back, installed not more than how high above grade?",
+  "choices": [
+   "4 ft",
+   "5½ ft",
+   "6½ ft",
+   "8 ft"
+  ],
+  "answer": 2,
+  "explain": "Not more than 6½ ft (2.0 m) above grade. Garage receptacles use 5½ ft.",
+  "tags": [
+   "receptacles",
+   "outdoor"
+  ]
+ },
+ {
+  "id": "W-013",
+  "topic": "wiring",
+  "article": "210.52(G)(1)",
+  "difficulty": 2,
+  "q": "In an attached dwelling garage, at least one receptacle is required in each vehicle bay, installed not more than how high above the floor?",
+  "choices": [
+   "4 ft",
+   "5½ ft",
+   "6½ ft",
+   "No height limit"
+  ],
+  "answer": 1,
+  "explain": "Not more than 5½ ft (1.7 m) above the floor, one per vehicle bay.",
+  "tags": [
+   "receptacles",
+   "garage"
+  ]
+ },
+ {
+  "id": "W-014",
+  "topic": "wiring",
+  "article": "210.70(A)(1)",
+  "difficulty": 1,
+  "q": "In a dwelling, at least one wall-switch-controlled lighting outlet is required in:",
+  "choices": [
+   "Bedrooms only",
+   "Every habitable room, kitchen, and bathroom",
+   "Kitchens and bathrooms only",
+   "Only rooms over 120 sq ft"
+  ],
+  "answer": 1,
+  "explain": "Every habitable room, kitchen and bathroom. In rooms other than kitchens and bathrooms, a switched receptacle can substitute.",
+  "tags": [
+   "lighting",
+   "dwelling"
+  ]
+ },
+ {
+  "id": "W-015",
+  "topic": "wiring",
+  "article": "Table 220.12",
+  "difficulty": 1,
+  "q": "The general lighting load for a dwelling unit is calculated at how many volt-amperes per square foot?",
+  "choices": [
+   "1 VA",
+   "2 VA",
+   "3 VA",
+   "3.5 VA"
+  ],
+  "answer": 2,
+  "explain": "3 VA/ft² of floor area (not counting open porches, garages, or unused/unfinished spaces not adaptable for future use).",
+  "tags": [
+   "load-calc"
+  ]
+ },
+ {
+  "id": "W-016",
+  "topic": "wiring",
+  "article": "220.52",
+  "difficulty": 1,
+  "q": "In a standard dwelling load calculation, each small-appliance circuit and the laundry circuit are each counted at:",
+  "choices": [
+   "1,000 VA",
+   "1,200 VA",
+   "1,500 VA",
+   "2,000 VA"
+  ],
+  "answer": 2,
+  "explain": "1,500 VA each — so two small-appliance circuits plus laundry add 4,500 VA before demand factors.",
+  "tags": [
+   "load-calc"
+  ]
+ },
+ {
+  "id": "W-017",
+  "topic": "wiring",
+  "article": "Table 220.42",
+  "difficulty": 3,
+  "q": "A 2,000 sq ft dwelling has two small-appliance circuits and one laundry circuit. Using the standard method, what is the general lighting and receptacle demand load?",
+  "choices": [
+   "3,675 VA",
+   "5,625 VA",
+   "6,000 VA",
+   "10,500 VA"
+  ],
+  "answer": 1,
+  "explain": "6,000 VA (3 VA × 2,000) + 4,500 VA = 10,500 VA. First 3,000 VA at 100% = 3,000; remaining 7,500 at 35% = 2,625. Total 5,625 VA.",
+  "tags": [
+   "load-calc"
+  ]
+ },
+ {
+  "id": "W-018",
+  "topic": "wiring",
+  "article": "220.54",
+  "difficulty": 1,
+  "q": "For a household electric clothes dryer, the load used in the calculation is:",
+  "choices": [
+   "4,000 W",
+   "5,000 W or the nameplate rating, whichever is larger",
+   "The nameplate rating × 125%",
+   "1,500 VA"
+  ],
+  "answer": 1,
+  "explain": "5,000 W or nameplate, whichever is larger. Demand factors in Table 220.54 apply for 5 or more dryers.",
+  "tags": [
+   "load-calc",
+   "dryer"
+  ]
+ },
+ {
+  "id": "W-019",
+  "topic": "wiring",
+  "article": "Table 220.55",
+  "difficulty": 2,
+  "q": "Using Table 220.55 Column C, the demand load for one household range rated 12 kW is:",
+  "choices": [
+   "6 kW",
+   "8 kW",
+   "9.6 kW",
+   "12 kW"
+  ],
+  "answer": 1,
+  "explain": "Column C allows 8 kW for one range rated not over 12 kW. Over 12 kW, add 5% per kW above 12.",
+  "tags": [
+   "load-calc",
+   "range"
+  ]
+ },
+ {
+  "id": "W-020",
+  "topic": "wiring",
+  "article": "220.14(I)",
+  "difficulty": 1,
+  "q": "In other than dwelling units, each general-use receptacle outlet is calculated at:",
+  "choices": [
+   "90 VA",
+   "120 VA",
+   "180 VA",
+   "360 VA"
+  ],
+  "answer": 2,
+  "explain": "180 VA per yoke/strap (a 4-plex counts at 360 VA).",
+  "tags": [
+   "load-calc",
+   "commercial"
+  ]
+ },
+ {
+  "id": "W-021",
+  "topic": "wiring",
+  "article": "230.70(A)(1)",
+  "difficulty": 1,
+  "q": "The service disconnecting means shall be installed at a readily accessible location:",
+  "choices": [
+   "Anywhere in the building",
+   "Either outside the building or inside nearest the point of entrance of the service conductors",
+   "Only outdoors",
+   "In the same room as the meter"
+  ],
+  "answer": 1,
+  "explain": "Outside, or inside nearest the point of entrance of the service conductors — not in a bathroom (230.70(A)(2)).",
+  "tags": [
+   "services"
+  ]
+ },
+ {
+  "id": "W-022",
+  "topic": "wiring",
+  "article": "230.71(A)",
+  "difficulty": 1,
+  "q": "The maximum number of service disconnecting means permitted for each service is:",
+  "choices": [
+   "One",
+   "Two",
+   "Six",
+   "Eight"
+  ],
+  "answer": 2,
+  "explain": "Up to six, and in the 2020 edition each must be in a separate enclosure or compartment (230.71(B)).",
+  "tags": [
+   "services"
+  ]
+ },
+ {
+  "id": "W-023",
+  "topic": "wiring",
+  "article": "230.79(C)",
+  "difficulty": 1,
+  "q": "The service disconnecting means for a one-family dwelling must have a rating of not less than:",
+  "choices": [
+   "60 A",
+   "100 A, 3-wire",
+   "150 A",
+   "200 A"
+  ],
+  "answer": 1,
+  "explain": "100 A, 3-wire minimum for a one-family dwelling. Other installations: 60 A general; 30 A for limited loads of a single branch circuit; 15 A for one 2-wire circuit.",
+  "tags": [
+   "services"
+  ]
+ },
+ {
+  "id": "W-024",
+  "topic": "wiring",
+  "article": "230.24(B)(2)",
+  "difficulty": 2,
+  "q": "Overhead service conductors (not over 300 V to ground) passing over a residential driveway must have a minimum vertical clearance of:",
+  "choices": [
+   "10 ft",
+   "12 ft",
+   "15 ft",
+   "18 ft"
+  ],
+  "answer": 1,
+  "explain": "12 ft over residential property and driveways; 10 ft above finished grade at the service entrance (≤150 V to ground); 18 ft over public streets and parking areas subject to truck traffic.",
+  "tags": [
+   "services",
+   "clearance"
+  ]
+ },
+ {
+  "id": "W-025",
+  "topic": "wiring",
+  "article": "230.9(A)",
+  "difficulty": 2,
+  "q": "Service conductors installed as open conductors or multiconductor cable without an overall jacket must have a clearance of at least how much from windows designed to be opened?",
+  "choices": [
+   "1 ft",
+   "3 ft",
+   "6 ft",
+   "10 ft"
+  ],
+  "answer": 1,
+  "explain": "3 ft from windows, doors, porches, balconies, fire escapes. Conductors run above the top level of a window are exempt.",
+  "tags": [
+   "services",
+   "clearance"
+  ]
+ },
+ {
+  "id": "W-026",
+  "topic": "wiring",
+  "article": "240.4(D)",
+  "difficulty": 1,
+  "q": "The maximum standard overcurrent device rating for 12 AWG copper conductors (absent a specific exception) is:",
+  "choices": [
+   "15 A",
+   "20 A",
+   "25 A",
+   "30 A"
+  ],
+  "answer": 1,
+  "explain": "Small-conductor rule: 14 AWG Cu → 15 A, 12 AWG Cu → 20 A, 10 AWG Cu → 30 A (12 AWG Al → 15 A, 10 AWG Al → 25 A).",
+  "tags": [
+   "ocpd"
+  ]
+ },
+ {
+  "id": "W-027",
+  "topic": "wiring",
+  "article": "240.6(A)",
+  "difficulty": 1,
+  "q": "Which of the following is NOT a standard ampere rating for fuses and inverse-time circuit breakers?",
+  "choices": [
+   "45 A",
+   "70 A",
+   "75 A",
+   "110 A"
+  ],
+  "answer": 2,
+  "explain": "Standard ratings run 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 110, 125, 150, 175, 200... 75 A is not on the list.",
+  "tags": [
+   "ocpd"
+  ]
+ },
+ {
+  "id": "W-028",
+  "topic": "wiring",
+  "article": "240.4(B)",
+  "difficulty": 2,
+  "q": "A feeder conductor has an adjusted ampacity of 65 A and does not supply a multioutlet receptacle circuit. The largest standard overcurrent device permitted is:",
+  "choices": [
+   "60 A",
+   "65 A",
+   "70 A",
+   "80 A"
+  ],
+  "answer": 2,
+  "explain": "Next-size-up rule: when ampacity doesn't match a standard rating and the device is 800 A or less, the next higher standard rating (70 A) is permitted.",
+  "tags": [
+   "ocpd"
+  ]
+ },
+ {
+  "id": "W-029",
+  "topic": "wiring",
+  "article": "240.21(B)(2)",
+  "difficulty": 2,
+  "q": "Under the 25-ft feeder tap rule, the tap conductors must have an ampacity of at least:",
+  "choices": [
+   "One-tenth of the feeder OCPD rating",
+   "One-third of the feeder OCPD rating",
+   "One-half of the feeder OCPD rating",
+   "The full feeder OCPD rating"
+  ],
+  "answer": 1,
+  "explain": "25-ft tap: at least 1/3 of the feeder overcurrent device rating, terminating in a single OCPD, protected from damage. 10-ft tap has its own conditions.",
+  "tags": [
+   "taps"
+  ]
+ },
+ {
+  "id": "W-030",
+  "topic": "wiring",
+  "article": "240.24(A)",
+  "difficulty": 1,
+  "q": "Overcurrent devices shall be readily accessible and installed so the center of the operating handle, in its highest position, is not more than how far above the floor?",
+  "choices": [
+   "5 ft 6 in.",
+   "6 ft",
+   "6 ft 7 in.",
+   "7 ft"
+  ],
+  "answer": 2,
+  "explain": "6 ft 7 in. (2.0 m), with exceptions such as busways and devices adjacent to the equipment they supply.",
+  "tags": [
+   "ocpd",
+   "location"
+  ]
+ },
+ {
+  "id": "W-031",
+  "topic": "wiring",
+  "article": "240.24(E)",
+  "difficulty": 1,
+  "q": "In dwelling units, overcurrent devices (other than supplementary protection) shall NOT be located in:",
+  "choices": [
+   "Garages",
+   "Bathrooms",
+   "Kitchens",
+   "Basements"
+  ],
+  "answer": 1,
+  "explain": "Not in bathrooms of dwellings or guest rooms, and not in the vicinity of easily ignitable material such as clothes closets (240.24(D)).",
+  "tags": [
+   "ocpd",
+   "location"
+  ]
+ },
+ {
+  "id": "W-032",
+  "topic": "wiring",
+  "article": "250.66(A)",
+  "difficulty": 2,
+  "q": "The portion of a grounding electrode conductor that is the sole connection to a ground rod is not required to be larger than:",
+  "choices": [
+   "8 AWG copper",
+   "6 AWG copper",
+   "4 AWG copper",
+   "2 AWG copper"
+  ],
+  "answer": 1,
+  "explain": "Rod, pipe or plate electrodes: 6 AWG Cu max. Concrete-encased electrode: 4 AWG Cu max (250.66(B)). Ground ring: no larger than the ring conductor.",
+  "tags": [
+   "grounding",
+   "gec"
+  ]
+ },
+ {
+  "id": "W-033",
+  "topic": "wiring",
+  "article": "250.53(A)(2)",
+  "difficulty": 1,
+  "q": "A single ground rod electrode must be supplemented by an additional electrode unless it has a resistance to earth of:",
+  "choices": [
+   "5 ohms or less",
+   "10 ohms or less",
+   "25 ohms or less",
+   "50 ohms or less"
+  ],
+  "answer": 2,
+  "explain": "25 ohms or less, otherwise add a second electrode spaced at least 6 ft away (250.53(A)(3)).",
+  "tags": [
+   "grounding",
+   "electrodes"
+  ]
+ },
+ {
+  "id": "W-034",
+  "topic": "wiring",
+  "article": "250.53(A)(3)",
+  "difficulty": 1,
+  "q": "When two ground rods are installed, they must be spaced at least how far apart?",
+  "choices": [
+   "3 ft",
+   "6 ft",
+   "8 ft",
+   "10 ft"
+  ],
+  "answer": 1,
+  "explain": "Not less than 6 ft (1.8 m) apart. Rods must be at least 8 ft long and driven their full length (250.52(A)(5), 250.53(G)).",
+  "tags": [
+   "grounding",
+   "electrodes"
+  ]
+ },
+ {
+  "id": "W-035",
+  "topic": "wiring",
+  "article": "250.52(A)(3)",
+  "difficulty": 2,
+  "q": "A concrete-encased electrode (Ufer) requires at least how much electrically conductive steel reinforcing bar of ½-in. minimum diameter?",
+  "choices": [
+   "10 ft",
+   "20 ft",
+   "25 ft",
+   "50 ft"
+  ],
+  "answer": 1,
+  "explain": "At least 20 ft of ½-in. rebar, or 20 ft of bare 4 AWG copper, encased in at least 2 in. of concrete in direct contact with earth.",
+  "tags": [
+   "grounding",
+   "electrodes"
+  ]
+ },
+ {
+  "id": "W-036",
+  "topic": "wiring",
+  "article": "Table 250.122",
+  "difficulty": 2,
+  "q": "A 100 A circuit requires a copper equipment grounding conductor of at least what size?",
+  "choices": [
+   "12 AWG",
+   "10 AWG",
+   "8 AWG",
+   "6 AWG"
+  ],
+  "answer": 2,
+  "explain": "Table 250.122: 15 A → 14; 20 A → 12; 30–60 A → 10; 100 A → 8; 200 A → 6; 300 A → 4; 400 A → 3 (copper).",
+  "tags": [
+   "grounding",
+   "egc"
+  ]
+ },
+ {
+  "id": "W-037",
+  "topic": "wiring",
+  "article": "250.24(A)(5)",
+  "difficulty": 2,
+  "q": "On the load side of the service disconnecting means, the grounded (neutral) conductor:",
+  "choices": [
+   "Must be bonded to every panel enclosure",
+   "Shall not be connected to equipment grounding conductors or enclosures",
+   "May be used as the equipment ground for ranges",
+   "Must be re-grounded at each subpanel"
+  ],
+  "answer": 1,
+  "explain": "The neutral-to-ground bond happens once, at the service. Downstream, neutrals and EGCs stay separate so no neutral current flows on metal parts.",
+  "tags": [
+   "grounding",
+   "bonding"
+  ]
+ },
+ {
+  "id": "W-038",
+  "topic": "wiring",
+  "article": "250.32(B)(1)",
+  "difficulty": 2,
+  "q": "A feeder supplies a detached garage from a dwelling. At the garage panel, the grounded conductor:",
+  "choices": [
+   "Is bonded to the enclosure and grounding electrode",
+   "Is kept isolated from the EGC and enclosure; an EGC is run with the feeder",
+   "Replaces the EGC",
+   "Is not required"
+  ],
+  "answer": 1,
+  "explain": "Run an equipment grounding conductor with the feeder and keep the neutral isolated at the second building. A grounding electrode is still required there (250.32(A)).",
+  "tags": [
+   "grounding",
+   "separate-building"
+  ]
+ },
+ {
+  "id": "W-039",
+  "topic": "wiring",
+  "article": "250.104(A)(1)",
+  "difficulty": 2,
+  "q": "The bonding jumper for a building's metal water piping system supplied by a service is sized according to:",
+  "choices": [
+   "Table 250.122 based on the largest OCPD",
+   "Table 250.102(C)(1) based on the service conductors",
+   "Always 6 AWG copper",
+   "The water pipe diameter"
+  ],
+  "answer": 1,
+  "explain": "Sized from the service-entrance conductors using Table 250.102(C)(1), and in the 2020 edition it need not be larger than 3/0 copper or 250 kcmil aluminum. (The 2017 edition pointed to this table too; earlier editions used Table 250.66.)",
+  "tags": [
+   "bonding",
+   "water-pipe"
+  ]
+ },
+ {
+  "id": "W-040",
+  "topic": "wiring",
+  "article": "250.118",
+  "difficulty": 1,
+  "q": "Which raceway is recognized as an equipment grounding conductor without added conditions on length or fitting type?",
+  "choices": [
+   "Electrical metallic tubing (EMT)",
+   "Rigid PVC conduit",
+   "Electrical nonmetallic tubing (ENT)",
+   "Liquidtight flexible nonmetallic conduit"
+  ],
+  "answer": 0,
+  "explain": "RMC, IMC and EMT are EGCs by themselves. FMC and LFMC qualify only with listed fittings, limited OCPD size and a 6-ft total length limit. Nonmetallic raceways never qualify.",
+  "tags": [
+   "grounding",
+   "egc"
+  ]
+ },
+ {
+  "id": "W-041",
+  "topic": "wiring",
+  "article": "250.119",
+  "difficulty": 1,
+  "q": "An insulated equipment grounding conductor shall be identified by:",
+  "choices": [
+   "White or gray",
+   "Green, or green with one or more yellow stripes",
+   "Black",
+   "Red"
+  ],
+  "answer": 1,
+  "explain": "Green or green with yellow stripes, or bare. White/gray is reserved for the grounded conductor (200.6).",
+  "tags": [
+   "identification"
+  ]
+ },
+ {
+  "id": "W-042",
+  "topic": "wiring",
+  "article": "200.6(A)",
+  "difficulty": 1,
+  "q": "An insulated grounded (neutral) conductor 6 AWG or smaller shall be identified by:",
+  "choices": [
+   "Green insulation",
+   "A continuous white or gray outer finish, or three continuous white or gray stripes",
+   "Black tape at terminations only",
+   "Any color other than green"
+  ],
+  "answer": 1,
+  "explain": "White, gray, or three continuous white/gray stripes on other than green insulation.",
+  "tags": [
+   "identification"
+  ]
+ },
+ {
+  "id": "W-043",
+  "topic": "wiring",
+  "article": "250.64(B)",
+  "difficulty": 2,
+  "q": "An 8 AWG copper grounding electrode conductor run along a surface must be:",
+  "choices": [
+   "Left bare and exposed",
+   "Protected in rigid metal conduit, IMC, PVC, RTRC, EMT, or cable armor",
+   "Spliced every 10 ft",
+   "Painted green"
+  ],
+  "answer": 1,
+  "explain": "GECs smaller than 6 AWG need raceway or armor protection. 6 AWG may be exposed along the structure if not subject to physical damage; 4 AWG and larger may be exposed.",
+  "tags": [
+   "grounding",
+   "gec"
+  ]
+ },
+ {
+  "id": "W-044",
+  "topic": "wiring",
+  "article": "Table 250.102(C)(1)",
+  "difficulty": 3,
+  "q": "A service has 500 kcmil copper service-entrance conductors. The minimum copper main bonding jumper is:",
+  "choices": [
+   "4 AWG",
+   "2 AWG",
+   "1/0 AWG",
+   "2/0 AWG"
+  ],
+  "answer": 2,
+  "explain": "Table 250.102(C)(1): over 350 through 600 kcmil copper → 1/0 AWG copper. Above 1,100 kcmil, use 12½% of the largest phase conductor area.",
+  "tags": [
+   "bonding"
+  ]
+ },
+ {
+  "id": "W-045",
+  "topic": "wiring",
+  "article": "210.4(B)",
+  "difficulty": 2,
+  "q": "Each multiwire branch circuit must be provided with a means to:",
+  "choices": [
+   "Disconnect only the neutral",
+   "Simultaneously disconnect all ungrounded conductors at the point where the circuit originates",
+   "Trip on ground fault",
+   "Be identified with purple tape"
+  ],
+  "answer": 1,
+  "explain": "A multipole breaker or handle-tied single poles at the panel. Conductors of a multiwire circuit must also be grouped (210.4(D)).",
+  "tags": [
+   "multiwire"
+  ]
+ },
+ {
+  "id": "W-046",
+  "topic": "wiring",
+  "article": "215.2(A)(1)",
+  "difficulty": 3,
+  "q": "A feeder supplies 60 A of continuous load and 40 A of noncontinuous load. Before any adjustment or correction, the minimum feeder conductor ampacity is:",
+  "choices": [
+   "100 A",
+   "110 A",
+   "115 A",
+   "125 A"
+  ],
+  "answer": 2,
+  "explain": "(60 × 1.25) + 40 = 75 + 40 = 115 A. The OCPD follows the same math (215.3).",
+  "tags": [
+   "feeders",
+   "continuous-load"
+  ]
+ },
+ {
+  "id": "W-047",
+  "topic": "wiring",
+  "article": "220.82(B)",
+  "difficulty": 2,
+  "q": "Using the optional method for a dwelling unit, the general loads are taken at 100% for the first 10 kVA and at what percentage for the remainder?",
+  "choices": [
+   "25%",
+   "35%",
+   "40%",
+   "50%"
+  ],
+  "answer": 2,
+  "explain": "100% of the first 10 kVA, 40% of the rest; then add the larger of the heating or cooling loads per 220.82(C).",
+  "tags": [
+   "load-calc",
+   "optional"
+  ]
+ },
+ {
+  "id": "W-048",
+  "topic": "wiring",
+  "article": "230.6",
+  "difficulty": 2,
+  "q": "Service conductors are considered 'outside' a building when installed:",
+  "choices": [
+   "Inside a metal raceway anywhere in the building",
+   "Beneath at least 2 in. of concrete under the building",
+   "In any attic space",
+   "Within 10 ft of the exterior wall"
+  ],
+  "answer": 1,
+  "explain": "230.6 lists: under 2 in. of concrete beneath the building, within the building in 2 in. of concrete/brick, in a vault, in conduit under 18 in. of earth under the building, etc.",
+  "tags": [
+   "services"
+  ]
+ },
+ {
+  "id": "W-049",
+  "topic": "wiring",
+  "article": "250.50",
+  "difficulty": 2,
+  "q": "If a metal underground water pipe, a concrete-encased electrode, and a ground rod are all present at a building, which must be bonded together to form the grounding electrode system?",
+  "choices": [
+   "Only the water pipe",
+   "Only the concrete-encased electrode",
+   "All electrodes present must be bonded together",
+   "Whichever one the installer selects"
+  ],
+  "answer": 2,
+  "explain": "All grounding electrodes described in 250.52(A)(1) through (A)(7) that are present must be bonded together. Metal water pipe must also be supplemented (250.53(D)(2)).",
+  "tags": [
+   "grounding",
+   "electrodes"
+  ]
+ },
+ {
+  "id": "W-050",
+  "topic": "wiring",
+  "article": "210.52(B)(1)",
+  "difficulty": 2,
+  "q": "The two small-appliance branch circuits in a dwelling kitchen may supply:",
+  "choices": [
+   "Kitchen lighting",
+   "Receptacles in the kitchen, pantry, breakfast room and dining room, plus refrigeration equipment",
+   "Bathroom receptacles",
+   "The range hood and dishwasher"
+  ],
+  "answer": 1,
+  "explain": "Receptacle outlets in the kitchen and dining-type areas (including the refrigerator, which may also have its own 15 A+ circuit). No lighting or other outlets.",
+  "tags": [
+   "branch-circuits",
+   "kitchen"
+  ]
+ },
+ {
+  "id": "W-051",
+  "topic": "wiring",
+  "article": "250.122(B)",
+  "difficulty": 2,
+  "q": "When ungrounded conductors are increased in size to compensate for voltage drop, the equipment grounding conductor:",
+  "choices": [
+   "Stays at the Table 250.122 size",
+   "Must be increased proportionately by circular-mil area",
+   "Can be omitted if the raceway is metal",
+   "Is sized from the service"
+  ],
+  "answer": 1,
+  "explain": "Wire-type EGCs are upsized in proportion to the increase in the ungrounded conductors' circular-mil area.",
+  "tags": [
+   "grounding",
+   "egc",
+   "voltage-drop"
+  ]
+ },
+ {
+  "id": "W-052",
+  "topic": "wiring",
+  "article": "225.30",
+  "difficulty": 2,
+  "q": "Generally, a building or structure served by a feeder from another building shall be supplied by:",
+  "choices": [
+   "Only one feeder or branch circuit",
+   "Up to six feeders",
+   "Two feeders minimum",
+   "Any number of feeders"
+  ],
+  "answer": 0,
+  "explain": "One supply per building unless a 225.30 exception applies (special conditions, different voltages, capacity, etc.) — parallel to the one-service rule in 230.2.",
+  "tags": [
+   "feeders",
+   "outside"
+  ]
+ }
+]

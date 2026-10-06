@@ -1,0 +1,114 @@
+[
+ {
+  "id": "F-E01",
+  "topic": "equipment",
+  "article": "404.2(C) / 404.8",
+  "difficulty": 1,
+  "front": "Switch essentials",
+  "back": "Neutral at switch locations (with exceptions)\nGrip center ≤ 6 ft 7 in. above floor\nMetal faceplates/yokes grounded\nSwitches not in wet locations unless in weatherproof enclosures"
+ },
+ {
+  "id": "F-E02",
+  "topic": "equipment",
+  "article": "406.4(D)",
+  "difficulty": 2,
+  "front": "Receptacle replacement rules",
+  "back": "Where GFCI/AFCI/TR/WR would be required today → install that type\nNo EGC in box: non-grounding, or GFCI marked 'No Equipment Ground', or grounding-type on a GFCI with both markings"
+ },
+ {
+  "id": "F-E03",
+  "topic": "equipment",
+  "article": "406.9",
+  "difficulty": 1,
+  "front": "Receptacles in damp vs wet locations",
+  "back": "Damp: cover weatherproof when closed (no plug inserted)\nWet: in-use cover (weatherproof with plug inserted) + WR-listed receptacle"
+ },
+ {
+  "id": "F-E04",
+  "topic": "equipment",
+  "article": "406.12",
+  "difficulty": 1,
+  "front": "Tamper-resistant receptacle exemptions",
+  "back": "More than 5½ ft above the floor\nPart of a luminaire or appliance\nDedicated appliance receptacle (not easily moved)\nNon-grounding replacements (406.4(D)(2)(a))"
+ },
+ {
+  "id": "F-E05",
+  "topic": "equipment",
+  "article": "410.10(D) / 410.16",
+  "difficulty": 2,
+  "front": "Luminaire clearances — bathtubs and closets",
+  "back": "Bathtub/shower zone: 3 ft horizontal, 8 ft vertical — no cord/chain/pendant luminaires or fans\nCloset: surface incandescent/LED enclosed 12 in.; surface fluorescent 6 in.; recessed enclosed 6 in."
+ },
+ {
+  "id": "F-E06",
+  "topic": "equipment",
+  "article": "422.16(B)",
+  "difficulty": 1,
+  "front": "Appliance cord lengths",
+  "back": "Waste disposer: 18–36 in.\nDishwasher / trash compactor: 3 ft to 6½ ft\nRange hood / microwave-hood: 18 in. to 4 ft (422.16(B)(4))"
+ },
+ {
+  "id": "F-E07",
+  "topic": "equipment",
+  "article": "430.6 / 430.22 / 430.32",
+  "difficulty": 2,
+  "front": "Motor sizing — which current for what?",
+  "back": "Table FLC (430.247–250): conductors (125%), OCPD, disconnect (115%)\nNameplate FLA: overloads (125% if SF ≥ 1.15 or rise ≤ 40°C, else 115%)"
+ },
+ {
+  "id": "F-E08",
+  "topic": "equipment",
+  "article": "Table 430.52",
+  "difficulty": 2,
+  "front": "Motor branch-circuit SC/GF protection maximums",
+  "back": "Nontime-delay fuse: 300%\nDual-element time-delay fuse: 175%\nInstantaneous-trip breaker: 800%\nInverse-time breaker: 250%\n(Next standard size up permitted per 430.52(C)(1) Ex. 1)"
+ },
+ {
+  "id": "F-E09",
+  "topic": "equipment",
+  "article": "Table 430.248 / 430.250",
+  "difficulty": 2,
+  "front": "FLC values worth memorizing",
+  "back": "1-ph 115 V: ½ hp 9.8 · ¾ hp 13.8 · 1 hp 16 · 2 hp 24 · 5 hp 56\n3-ph 230 V: 5 hp 15.2 · 10 hp 28 · 25 hp 68\n3-ph 460 V: 5 hp 7.6 · 10 hp 14 · 25 hp 34 · 50 hp 65\n3-ph 208 V: 5 hp 16.7 · 10 hp 30.8"
+ },
+ {
+  "id": "F-E10",
+  "topic": "equipment",
+  "article": "430.102 / 430.110",
+  "difficulty": 1,
+  "front": "Motor disconnects",
+  "back": "In sight of the controller AND in sight of the motor (or lockable per exception)\nRated ≥ 115% of FLC, or hp-rated\n'In sight' = visible and ≤ 50 ft"
+ },
+ {
+  "id": "F-E11",
+  "topic": "equipment",
+  "article": "Table 450.3(B)",
+  "difficulty": 2,
+  "front": "Transformer primary OCPD (≤1000 V, primary only)",
+  "back": "Primary ≥ 9 A → 125% (next size up OK)\n2 to < 9 A → 167%\n< 2 A → 300%\nWith secondary protection: primary 250%, secondary 125% (≥ 9 A)"
+ },
+ {
+  "id": "F-E12",
+  "topic": "equipment",
+  "article": "450.21 / 450.9",
+  "difficulty": 1,
+  "front": "Dry-type transformer placement",
+  "back": "≤ 112½ kVA: 12 in. from combustibles (or barrier / fully enclosed)\n> 112½ kVA: transformer room of fire-resistant construction (exceptions for Class 155+ insulation)\nVentilation openings unobstructed"
+ },
+ {
+  "id": "F-E13",
+  "topic": "equipment",
+  "article": "440.14 / 440.32",
+  "difficulty": 2,
+  "front": "HVAC (Art. 440) essentials",
+  "back": "Disconnect within sight AND readily accessible from the unit\nConductors ≥ 125% of RLA or branch-circuit selection current\nOCPD per nameplate 'maximum fuse/breaker' marking"
+ },
+ {
+  "id": "F-E14",
+  "topic": "equipment",
+  "article": "408.4 / 408.36",
+  "difficulty": 1,
+  "front": "Panelboard rules",
+  "back": "Directory: specific purpose, not 'lights'\nSupply OCPD ≤ panelboard rating\nFeed-through / subfeed lugs allowed; back-fed breakers must be secured (408.36(D))"
+ }
+]

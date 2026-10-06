@@ -1,0 +1,369 @@
+[
+ {
+  "id": "S-001",
+  "topic": "special",
+  "article": "500.5",
+  "difficulty": 1,
+  "q": "A Class II hazardous (classified) location is one where the hazard is from:",
+  "choices": [
+   "Flammable gases or vapors",
+   "Combustible dust",
+   "Easily ignitable fibers or flyings",
+   "Radiation"
+  ],
+  "answer": 1,
+  "explain": "Class I = flammable gases/vapors/liquids; Class II = combustible dust; Class III = ignitable fibers and flyings.",
+  "tags": [
+   "hazardous"
+  ]
+ },
+ {
+  "id": "S-002",
+  "topic": "special",
+  "article": "500.5(B)",
+  "difficulty": 1,
+  "q": "A location where ignitable concentrations of flammable gases exist under normal operating conditions is:",
+  "choices": [
+   "Class I, Division 1",
+   "Class I, Division 2",
+   "Class II, Division 1",
+   "Zone 2"
+  ],
+  "answer": 0,
+  "explain": "Division 1 = present under normal operation (or frequently due to maintenance/leakage). Division 2 = only under abnormal conditions, normally confined in closed systems.",
+  "tags": [
+   "hazardous"
+  ]
+ },
+ {
+  "id": "S-003",
+  "topic": "special",
+  "article": "501.15(A)(1)",
+  "difficulty": 2,
+  "q": "In a Class I, Division 1 location, a conduit seal entering an enclosure containing arcing devices must be installed within how far of the enclosure?",
+  "choices": [
+   "6 in.",
+   "12 in.",
+   "18 in.",
+   "36 in."
+  ],
+  "answer": 2,
+  "explain": "Within 18 in. (450 mm), with only explosionproof fittings between the seal and the enclosure.",
+  "tags": [
+   "hazardous",
+   "seals"
+  ]
+ },
+ {
+  "id": "S-004",
+  "topic": "special",
+  "article": "511.3(C)(1)(b)",
+  "difficulty": 2,
+  "q": "In a major repair garage with no mechanical ventilation, the space up to what height above the floor is classified as Class I, Division 2?",
+  "choices": [
+   "6 in.",
+   "12 in.",
+   "18 in.",
+   "24 in."
+  ],
+  "answer": 2,
+  "explain": "Where ventilation is not provided, the entire floor area up to 18 in. above the floor is Class I, Division 2. With mechanical ventilation of at least 4 air changes per hour (or 1 cfm/ft²), exhausted within 12 in. of the floor, the floor area may be unclassified. Pits without ventilation are Division 1.",
+  "tags": [
+   "garages",
+   "hazardous"
+  ]
+ },
+ {
+  "id": "S-005",
+  "topic": "special",
+  "article": "517.18(A)",
+  "difficulty": 2,
+  "q": "Each patient bed location in a general care (Category 2) space must be supplied by at least:",
+  "choices": [
+   "One normal-system branch circuit",
+   "Two branch circuits: one from the critical branch and one from the normal system",
+   "Three branch circuits from the life-safety branch",
+   "A single emergency circuit"
+  ],
+  "answer": 1,
+  "explain": "At least two branch circuits, one from the critical branch and one from the normal system (or two critical-branch circuits under conditions).",
+  "tags": [
+   "health-care"
+  ]
+ },
+ {
+  "id": "S-006",
+  "topic": "special",
+  "article": "517.18(B) / 517.19(B)",
+  "difficulty": 2,
+  "q": "Minimum receptacle counts at patient bed locations are:",
+  "choices": [
+   "4 general care; 8 critical care",
+   "6 general care; 12 critical care",
+   "8 general care; 14 critical care",
+   "10 general care; 16 critical care"
+  ],
+  "answer": 2,
+  "explain": "General care (Category 2): at least 8 receptacles. Critical care (Category 1): at least 14. All must be hospital grade and marked.",
+  "tags": [
+   "health-care"
+  ]
+ },
+ {
+  "id": "S-007",
+  "topic": "special",
+  "article": "680.22(A)",
+  "difficulty": 2,
+  "q": "General-purpose receptacles near a permanently installed pool must be located at least how far from the inside walls of the pool?",
+  "choices": [
+   "3 ft",
+   "5 ft",
+   "6 ft",
+   "10 ft"
+  ],
+  "answer": 2,
+  "explain": "Not less than 6 ft. Pump-motor receptacles: 6 to 10 ft, single, locking, grounding, GFCI. All 125 V, 15/20 A receptacles within 20 ft must be GFCI-protected.",
+  "tags": [
+   "pools"
+  ]
+ },
+ {
+  "id": "S-008",
+  "topic": "special",
+  "article": "680.26(B)",
+  "difficulty": 1,
+  "q": "The equipotential bonding grid around a permanently installed pool uses a solid copper conductor not smaller than:",
+  "choices": [
+   "12 AWG",
+   "10 AWG",
+   "8 AWG",
+   "6 AWG"
+  ],
+  "answer": 2,
+  "explain": "8 AWG solid copper (insulated, covered or bare), bonding the perimeter surface, metallic parts, shell steel, and equipment.",
+  "tags": [
+   "pools",
+   "bonding"
+  ]
+ },
+ {
+  "id": "S-009",
+  "topic": "special",
+  "article": "680.23(A)(5)",
+  "difficulty": 2,
+  "q": "A luminaire mounted in a pool wall must have the top of its lens at least how far below the normal water level?",
+  "choices": [
+   "6 in.",
+   "12 in.",
+   "18 in.",
+   "24 in."
+  ],
+  "answer": 2,
+  "explain": "18 in. (450 mm) below normal water level, unless listed and identified for use at lesser depths (never less than 4 in.).",
+  "tags": [
+   "pools",
+   "luminaires"
+  ]
+ },
+ {
+  "id": "S-010",
+  "topic": "special",
+  "article": "690.8(A)(1)",
+  "difficulty": 2,
+  "q": "The maximum current of a PV source circuit is calculated as:",
+  "choices": [
+   "The module's rated operating current",
+   "100% of the sum of parallel-connected module short-circuit currents",
+   "125% of the sum of parallel-connected module short-circuit currents",
+   "The inverter's maximum input current"
+  ],
+  "answer": 2,
+  "explain": "125% of Isc for the source circuit (accounts for irradiance above STC). Conductors are then sized at 125% of that maximum current (690.8(B)) — the familiar 156% net.",
+  "tags": [
+   "pv"
+  ]
+ },
+ {
+  "id": "S-011",
+  "topic": "special",
+  "article": "690.12(B)(2)",
+  "difficulty": 2,
+  "q": "Under the rapid shutdown rules, controlled conductors located outside the array boundary must be reduced to not more than how many volts within 30 seconds of initiation?",
+  "choices": [
+   "30 V",
+   "50 V",
+   "80 V",
+   "120 V"
+  ],
+  "answer": 0,
+  "explain": "Outside the array boundary (and more than 1 ft from it): 30 V within 30 seconds. Inside the boundary: 80 V within 30 seconds, or a listed PV hazard-control system.",
+  "tags": [
+   "pv",
+   "rapid-shutdown"
+  ]
+ },
+ {
+  "id": "S-012",
+  "topic": "special",
+  "article": "690.7(A)",
+  "difficulty": 2,
+  "q": "The maximum PV system DC voltage for a series string is based on the rated open-circuit voltage corrected for:",
+  "choices": [
+   "The highest expected ambient temperature",
+   "The lowest expected ambient temperature",
+   "Standard test conditions only",
+   "The inverter's nominal voltage"
+  ],
+  "answer": 1,
+  "explain": "Voc rises as temperature falls, so the lowest expected ambient temperature (or manufacturer coefficients / Table 690.7(A)) governs maximum voltage.",
+  "tags": [
+   "pv"
+  ]
+ },
+ {
+  "id": "S-013",
+  "topic": "special",
+  "article": "700.12",
+  "difficulty": 1,
+  "q": "An emergency system's power source must be available to the loads within how many seconds of normal supply failure?",
+  "choices": [
+   "10 seconds",
+   "30 seconds",
+   "60 seconds",
+   "120 seconds"
+  ],
+  "answer": 0,
+  "explain": "Emergency (Art. 700): 10 s. Legally required standby (Art. 701): 60 s. Optional standby (Art. 702): no time requirement.",
+  "tags": [
+   "emergency"
+  ]
+ },
+ {
+  "id": "S-014",
+  "topic": "special",
+  "article": "705.12(B)(3)(2)",
+  "difficulty": 3,
+  "q": "A 200 A busbar panel with a 200 A main breaker will have a PV inverter breaker connected at the opposite end of the bus. Using the 120% rule, the largest inverter breaker permitted is:",
+  "choices": [
+   "20 A",
+   "40 A",
+   "60 A",
+   "100 A"
+  ],
+  "answer": 1,
+  "explain": "120% × 200 A = 240 A total; 240 − 200 (main) = 40 A inverter OCPD, with the inverter breaker at the opposite end from the main and a warning label.",
+  "tags": [
+   "pv",
+   "interconnection"
+  ]
+ },
+ {
+  "id": "S-015",
+  "topic": "special",
+  "article": "600.5(A)",
+  "difficulty": 1,
+  "q": "Each commercial building or occupancy accessible to pedestrians must have at least one outlet for a sign or outline lighting at each entrance, supplied by a branch circuit rated at least:",
+  "choices": [
+   "15 A",
+   "20 A",
+   "30 A",
+   "50 A"
+  ],
+  "answer": 1,
+  "explain": "A 20 A branch circuit that supplies no other load, within 50 ft of the entrance (2020 relaxed the exact location).",
+  "tags": [
+   "signs"
+  ]
+ },
+ {
+  "id": "S-016",
+  "topic": "special",
+  "article": "701.12",
+  "difficulty": 1,
+  "q": "A legally required standby system must have its alternate source available within:",
+  "choices": [
+   "10 seconds",
+   "60 seconds",
+   "5 minutes",
+   "Any time set by the AHJ"
+  ],
+  "answer": 1,
+  "explain": "60 seconds for legally required standby; 10 seconds for emergency systems.",
+  "tags": [
+   "standby"
+  ]
+ },
+ {
+  "id": "S-017",
+  "topic": "special",
+  "article": "680.22(A)(1)",
+  "difficulty": 2,
+  "q": "The receptacle for a permanently installed pool's pump motor, where located near the pool, must be:",
+  "choices": [
+   "Within 3 ft of the pool for convenience",
+   "Between 6 ft and 10 ft from the inside walls, single, locking and grounding type, GFCI protected",
+   "At least 20 ft away",
+   "Non-GFCI to avoid nuisance trips"
+  ],
+  "answer": 1,
+  "explain": "6–10 ft, locking/grounding single receptacle, GFCI-protected.",
+  "tags": [
+   "pools"
+  ]
+ },
+ {
+  "id": "S-018",
+  "topic": "special",
+  "article": "690.13(B)",
+  "difficulty": 2,
+  "q": "The PV system disconnecting means must be:",
+  "choices": [
+   "Hidden from unauthorized persons",
+   "Readily accessible and marked 'PV SYSTEM DISCONNECT' (or equivalent)",
+   "Inside the array boundary only",
+   "Rated below the inverter current"
+  ],
+  "answer": 1,
+  "explain": "Readily accessible, permanently marked, and (where the line and load terminals may be energized in the open position) carrying a warning label.",
+  "tags": [
+   "pv",
+   "disconnect"
+  ]
+ },
+ {
+  "id": "S-019",
+  "topic": "special",
+  "article": "547.5(G)",
+  "difficulty": 2,
+  "q": "In agricultural buildings, 15 and 20 A, 125 V receptacles installed in areas with an equipotential plane, outdoors, or in damp/wet locations require:",
+  "choices": [
+   "Isolated ground",
+   "GFCI protection",
+   "Explosionproof enclosures",
+   "No special protection"
+  ],
+  "answer": 1,
+  "explain": "547.5(G): GFCI for 125 V, 15 and 20 A general-purpose receptacles in areas with an equipotential plane, outdoors, in damp or wet locations, and in dirt confinement areas for livestock. 2020 clarified it applies only to those 125 V 15/20 A receptacles; a dedicated-load receptacle is exempt when a GFCI-protected receptacle is within 3 ft.",
+  "tags": [
+   "agricultural"
+  ]
+ },
+ {
+  "id": "S-020",
+  "topic": "special",
+  "article": "620 / 725.2",
+  "difficulty": 1,
+  "q": "A Class 2 circuit is best described as one that:",
+  "choices": [
+   "Supplies motors over 1 hp",
+   "Is power-limited by its listed Class 2 source so it poses an acceptable shock and fire risk",
+   "Must be installed in rigid metal conduit",
+   "Is a 480 V control circuit"
+  ],
+  "answer": 1,
+  "explain": "Class 2 (e.g., thermostat and doorbell circuits) is limited at the source. Class 2 conductors are kept separate from power conductors (725.136).",
+  "tags": [
+   "low-voltage"
+  ]
+ }
+]
