@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Firehose and the Cup — DaRoy Perkins</title>
+  <meta name="description" content="Humanity harnesses roughly 0.0001% of the solar energy that reaches Earth. The headroom isn't a physics problem — it's a deployment problem.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"><span class="bolt">⚡</span> DaRoy Perkins</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="index.html">Writing</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="article">
+    <div class="wrap">
+      <p><a href="index.html">← All writing</a></p>
+      <h1>The Firehose and the Cup</h1>
+      <p class="meta">Oct 2026</p>
+
+      <p><strong>Humanity harnesses roughly 0.0001% of the solar energy that reaches Earth.</strong></p>
+
+      <p>Read that again. Of the entire river of sunlight pouring onto this planet, we capture about one part in a million. Not because the panels don't work — they do. Because almost none of that light ever meets a panel.</p>
+
+      <h2>The math</h2>
+      <p>The sun delivers about 173,000 terawatt-hours of energy to Earth every hour — roughly 1.5 billion TWh over the course of a year. The old line checks out: an hour of sunlight carries roughly what the whole world uses in a year.</p>
+      <p>In 2024, all of the world's solar panels together generated 2,131 TWh of electricity — 6.9% of global electricity, and the fastest-growing power source for the twentieth year in a row. <em>(Ember, Global Electricity Review 2025)</em></p>
+      <p>2,131 divided by 1.5 billion: about 0.00014%. Call it 0.0001%.</p>
+      <p>Two more ways to hold the number:</p>
+      <ul>
+        <li>Against everything humanity uses — electricity plus heating, transport, and industry, roughly 180,000 TWh a year — solar electricity is only about 1%.</li>
+        <li>The panels themselves aren't the bottleneck. A commercial panel converts about 20% of the light that lands on it. The gap is placement: almost none of Earth's incoming sunlight lands on a panel at all.</li>
+      </ul>
+
+      <h2>Why this is good news</h2>
+      <p>The firehose isn't the constraint. It never was. The constraint is the cup — and cups are getting bigger, cheaper, and more numerous, fast.</p>
+      <p>Solar went from 1% of global electricity in 2015 to 6.9% in 2024, doubling roughly every three years. In the first half of 2025 it hit 8.8%. Most of the new capacity is now going up in emerging economies, not the rich world. The technology that was a subsidy case a decade ago is, in many markets, now simply the cheapest way to make an electron.</p>
+      <p>So the headroom isn't a physics problem. It's a deployment problem. And deployment is where the interesting innovation is happening right now.</p>
+
+      <h2>Where the room actually is</h2>
+
+      <h3>Storage</h3>
+      <p>Sunshine doesn't keep office hours. Batteries are the partner technology that turns daytime surplus into evening power, and their cost curves are bending the same way solar's did.</p>
+
+      <h3>Better cells</h3>
+      <p>Perovskites and tandem cells are pushing past the practical limits of conventional silicon — more watts per square meter, which matters most where space is the constraint, like rooftops.</p>
+
+      <h3>Smarter land use</h3>
+      <p>Agrivoltaics — raising panels over crops so the same acre grows food and electricity — is moving from pilot projects to real deployments.</p>
+
+      <h3>The unsexy layer</h3>
+      <p>This one gets the least press and may matter the most: execution. Getting systems installed faster, cheaper, cleaner, and documented well enough to survive decades of inspections, warranty claims, and ownership changes. Software that takes friction out of the field. Checklists that catch the mistake before the truck rolls. As-builts that match reality.</p>
+      <p>The technology keeps getting cheaper. The differentiator is who can ship it well.</p>
+
+      <blockquote class="pullquote">"The sun hands us 1.5 billion terawatt-hours a year and asks nothing in return. We're catching a ten-thousandth of a percent of it — and even that is already transforming the grid."</blockquote>
+
+      <h2>Sources</h2>
+      <ul>
+        <li>Ember, <em>Global Electricity Review 2025</em> — 2,131 TWh of solar generation in 2024, 6.9% of global electricity, the fastest-growing power source for the 20th consecutive year. (<a href="https://www.energyglobal.com/special-reports/09042025/ember-world-surpasses-40-clean-power-as-renewables-see-record-rise/">Energy Global</a>, <a href="https://newatlas.com/energy/renewables-40-percent-global-electricity-ember/">New Atlas</a>)</li>
+        <li>Ember, <em>The year sunlight went global</em> — solar's share of electricity doubling roughly every three years since 2015, from 1% to 6.9%, with 8.8% in the first half of 2025. (<a href="http://now.solar/2025/12/16/the-year-sunlight-went-global-how-the-paris-agreement-brought-solar-power-to-the-world-ember-energy-org/">now.solar</a>)</li>
+        <li>BioNumbers (Harvard) — ~175 petawatts of solar power arriving at the top of Earth's atmosphere, ~174 PW cited across sources. (<a href="https://bionumbers.hms.harvard.edu/bionumber.aspx?id=100943&ver=3">bionumbers.hms.harvard.edu</a>)</li>
+      </ul>
+
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 DaRoy Perkins</span>
+    <span>Built for the field. ⚡</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
