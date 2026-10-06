@@ -2,24 +2,26 @@
 
 Sites lane, 2026-10-02. Design + build only. **Nothing here is deployed; no credential changed.** Roy owns the cutover; Luigi gates it.
 
+> **Decisions (Roy, 2026-10-02):** (1) session-cookie architecture (§4 option b); (2) **PIN for everything** — apps, upload, delete; Basic Auth retired at cutover (§5, §6 updated accordingly); (3) **8-digit PIN** — the pad, verifier and setup CLI now enforce an 8-digit floor (`PIN_MIN_LEN`, never below the spec's 6).
+
 ## 1. What this is
 
 A phone-friendly numeric PIN pad at `https://apps.daroyperkins.com/pin/` that replaces the browser's Basic-Auth popup for *entering* the vault. After a correct PIN the browser holds a session cookie and every vault app loads as today. Upload and delete keep the existing vault password (see §5).
 
 | Piece | Path | Role |
 |---|---|---|
-| PIN pad | `apps/vault/pin/index.html` | Static page. Numeric keypad, masked dots, lockout countdown, physical-keyboard support, safe `?next=` redirect. Zero external requests. |
+| PIN pad | `apps/vault/pin/index.html` | Static page. Numeric keypad, masked dots (8 shown), lockout countdown, physical-keyboard support, safe `?next=` redirect. Zero external requests. |
 | Verifier | `apps/vault/pin/server/pin-auth.js` | Node service on `127.0.0.1:8092`. `POST /auth/pin`, `GET /auth/check` (nginx `auth_request` target), `POST /auth/logout`, `GET /auth/health`. |
 | Rate limiter | `server/lib/ratelimit.js` | Pure module: 5 free tries, escalating lock 30 s → 60 s → 5 m → 15 m → 60 m, plus a global lock (20 failures/hour from any source → 1 h for everyone). |
 | Sessions | `server/lib/session.js` | 256-bit random tokens; only SHA-256 of the token is stored; 12 h TTL; optional file persistence across PM2 restarts. |
-| PIN setup | `server/pin-set.js` | Prompts with echo off, validates (6–12 digits, rejects repeats and common PINs), writes a bcrypt cost-12 hash to a 0600 file. |
+| PIN setup | `server/pin-set.js` | Prompts with echo off, validates (8–12 digits by default, `--min 6` floor, rejects repeats and common PINs), writes a bcrypt cost-12 hash to a 0600 file. |
 | Tests | `test/unit.test.js`, `test/smoke.mjs` | 6 unit cases on the rails; a headless-Chromium run of the real pad against the real verifier (lockout, escalation, cookie flags, open-redirect guard, PIN never in a URL or a log line). |
 
 ## 2. Security rails (as specified, and where each is enforced)
 
 | Rail | Enforced by |
 |---|---|
-| Min 6 digits (max 12) | Pad refuses to submit under 6; verifier regex `^[0-9]{6,12}$`; `pin-set.js` refuses weak/short PINs. |
+| Min 6 digits (spec) — **8 by decision** | Pad refuses to submit under 8; verifier regex `^[0-9]{8,12}$` (`PIN_MIN_LEN`, clamped ≥ 6); `pin-set.js` refuses weak/short PINs. |
 | 5 tries, then escalating lockout | `ratelimit.js` per client IP (nginx passes `X-Real-IP`) **and** a global cap so a botnet gets no more guesses than one attacker. Pad shows the countdown and disables itself; the server is the authority. |
 | bcrypt/argon2 hash, never plaintext | `bcryptjs` cost 12 (~330 ms per verify on the droplet's 1 vCPU). Hash lives in `/etc/apps-vault/pin.hash`, mode 0600, root. Pure-JS bcrypt chosen over argon2 to avoid a native build on a 1.9 GB box where `tsc` already OOMs; swapping to argon2id is one function if desired. |
 | Never in URLs or logs | PIN travels once, in a JSON POST body over TLS. `GET /auth/pin` is a 404. Logs carry a salted hash of the IP, outcome and counters only; smoke test asserts the PIN and cookie value never appear in logs or request URLs. `<meta name="referrer" content="no-referrer">` on the pad. |
@@ -30,17 +32,17 @@ A phone-friendly numeric PIN pad at `https://apps.daroyperkins.com/pin/` that re
 
 ## 3. Brute-force math
 
-Keyspace: 6 digits = 10⁶; 8 digits = 10⁸. Expected guesses to hit = half the keyspace.
+Keyspace: 8 digits (chosen) = 10⁸; 6 digits (spec floor) = 10⁶. Expected guesses to hit = half the keyspace.
 
-| Scenario | Guess rate | Time to exhaust 10⁶ | Expected |
+| Scenario | Guess rate | Exhaust 10⁸ (8 digits) | Exhaust 10⁶ (6 digits) |
 |---|---|---|---|
-| **No limiter** (only bcrypt cost 12, 1 vCPU) | ~3 /s | ~3.9 days | ~2 days |
-| nginx `limit_req` only, 10 r/min | 10 /min | 69 days | 35 days |
-| **This design, one IP** — 5 free then 30 s, 60 s, 5 m, 15 m, then 60 m per guess | ≈1 /h after the 10th guess | ≈114 years | ≈57 years |
-| **This design, distributed** — global cap 20 failures/h | 20 /h | ≈5.7 years | ≈2.9 years |
-| Attacker's chance per hour under the global cap | 20 / 10⁶ | | 0.002 % |
+| **No limiter** (only bcrypt cost 12, 1 vCPU) | ~3 /s | ≈1.06 years | ≈3.9 days |
+| nginx `limit_req` only, 10 r/min | 10 /min | ≈19 years | 69 days |
+| **This design, one IP** — 5 free then 30 s, 60 s, 5 m, 15 m, then 60 m per guess | ≈1 /h after the 10th guess | ≈11,400 years | ≈114 years |
+| **This design, distributed** — global cap 20 failures/h | 20 /h | ≈570 years | ≈5.7 years |
+| Attacker's chance per hour under the global cap | 20 / keyspace | 0.00002 % | 0.002 % |
 
-Offline attack (attacker already has `pin.hash`): bcrypt-12 on a consumer GPU runs on the order of 10⁴ H/s → a 6-digit space falls in ~2 minutes, an 8-digit space in ~3 hours. **The hash protects against casual exposure (a stray `cat`, a backup), not against offline cracking of a 6-digit space.** The real controls are the online limiter, root-only 0600 on the hash, and the hash never leaving the box. Recommendation: Roy picks **8 digits**; the floor stays 6 per the spec.
+Offline attack (attacker already has `pin.hash`): bcrypt-12 on a consumer GPU runs on the order of 10⁴ H/s → an 8-digit space falls in ~3 hours, a 6-digit space in ~2 minutes. **The hash protects against casual exposure (a stray `cat`, a backup), not against offline cracking of a numeric space.** The real controls are the online limiter, root-only 0600 on the hash, and the hash never leaving the box. With the PIN now also guarding upload/delete (§5), rotate it if the box is ever suspected compromised: `pin-set.js --out … && pm2 restart pin-auth`.
 
 Session token: 256 bits random; guessing is not a factor. TTL 12 h; logout endpoint provided; the store holds SHA-256 of tokens so a copied store file is useless.
 
@@ -55,19 +57,19 @@ Session token: 256 bits random; guessing is not a factor. TTL 12 h; logout endpo
 ### (b) Session-cookie login behind nginx `auth_request` — **recommended**
 - Pad POSTs the PIN once to a 150-line Node service; service sets an `HttpOnly; Secure; SameSite=Strict` cookie; nginx asks the service `GET /auth/check` on every vault request (`ngx_http_auth_request_module`, compiled into Ubuntu's nginx by default). 401 → `302 /pin/?next=…`.
 - Full control of the rails in code (escalating + global lockout, uniform timing, expiry, logout). Testable offline — the smoke test drives the exact flow.
-- Coexists with Basic Auth: `/upload/` and `/api/` keep `auth_basic` untouched (§5). The budget app's `/budget/api/*` sits under the vault path and works unchanged because the cookie rides on same-origin fetches; `SameSite=Strict` also gives CSRF protection those endpoints did not have before.
+- Can coexist with Basic Auth on admin paths, or replace it entirely (Roy chose the latter, §5). The budget app's `/budget/api/*` and the uploader's `/api/*` work unchanged because the cookie rides on same-origin fetches; `SameSite=Strict` also gives CSRF protection those endpoints did not have before.
 - Cost: one more PM2 process (≈30 MB RSS) and a 20-line nginx change, both staged in §6 and reversible with one `cp` + reload.
 
 **Decision: (b).** (a) fails the phone use case and cannot meet the lockout rail without bolting fail2ban onto nginx logs.
 
-## 5. PIN for vault entry only, or PIN everywhere?
+## 5. PIN for vault entry only, or PIN everywhere? — **Roy chose PIN everywhere**
 
-**Recommendation: PIN for vault entry (viewing/using apps) only; keep the vault password for `/upload/` and `/api/*` (upload, replace, delete).**
+My recommendation was vault-entry-only (keep the vault password as a step-up for upload/delete: smaller blast radius for a shoulder-surfed PIN, uploader path untouched). Roy decided **one PIN for everything** on 2026-10-02 — one thing to remember on the phone, no second credential to manage. Consequences, built in:
 
-- A 6–8 digit PIN is a convenience factor sized for a phone. Upload and delete are destructive, rare, laptop-side actions — exactly where a long password is cheap and a shoulder-surfed PIN is expensive. Step-up for destructive ops is the standard pattern.
-- Blast radius of a leaked PIN = read access to the apps until Roy rotates it. Blast radius of a leaked vault password today = read + replace any app with arbitrary HTML. Keeping them separate halves what a PIN leak can do.
-- Cutover risk: the uploader path does not change at all, so nothing about Luigi's zip-deploy flow moves.
-- "PIN everywhere" would be the right call only if Roy stops using the laptop for uploads; revisit then.
+- `/upload/` and `/api/*` go behind the same `auth_request` cookie at cutover; `auth_basic` is removed from the vault vhost. The `.htpasswd` file stays on disk, unreferenced, as the rollback credential.
+- The uploader and launcher already call `/api/*` with `credentials: "same-origin"`, so the cookie rides along with no page changes. `SameSite=Strict` means a cross-site page cannot trigger an upload or delete even with the cookie present.
+- The 8-digit floor (decision 3) is what makes this acceptable: 10⁸ keyspace + the limiter puts an online guess of the admin credential in the hundreds-of-years range (§3).
+- Session TTL stays 12 h. If Roy wants uploads to require a fresh PIN, a 1-hour `SESSION_TTL_HOURS` is the one knob — not built as a separate tier, to keep one credential and one flow.
 
 ## 6. Cutover — **waits for Roy's go-ahead; not part of this PR's effect**
 
@@ -96,7 +98,12 @@ curl -s http://127.0.0.1:8092/auth/health          # expect {"ok":true,"hashConf
 # 4. nginx — stage, test, then swap (file names are the vault vhost's; adjust to the real one)
 cp /etc/nginx/sites-available/apps-vault /root/apps-vault.nginx.bak
 ```
-nginx fragment to add inside the `apps.daroyperkins.com` 443 server block (the `/upload/` and `/api/` locations keep their existing `auth_basic` lines; `proxy_pass` uses `127.0.0.1`, never `localhost`, per the droplet gotcha):
+**Machine endpoints stay out of the PIN gate.** The vault vhost also serves `/mem0/mcp` — Mari0's brain backend (mari0 PR #23 / M12, merged 2026-10-02), authenticated by a bearer token in the `Authorization` header, called by a server, not a browser. It cannot carry a cookie and must never redirect to the pad. Rules:
+- `auth_request` goes **only** inside the browser-facing `location` blocks listed below — never at `server { }` level, where it would apply to every location including `/mem0/`.
+- Before editing, list every `location` in the vhost (`grep -n "location" <vhost>`) and sort them: browser paths (`/`, `/upload/`, `/api/`, app subpaths) get `auth_request`; machine paths (`/mem0/`, any webhook or MCP endpoint) keep their own token auth and get nothing added. Any Basic-Auth line found on a machine path today is a pre-existing bug to raise, not to convert.
+- nginx picks the longest matching prefix, so `location /mem0/ { … }` keeps winning over `location / { auth_request … }` as long as the `/mem0/` block exists in the same server.
+
+nginx fragment for the `apps.daroyperkins.com` 443 server block. **PIN everywhere:** every `auth_basic` / `auth_basic_user_file` line on the browser-facing locations is removed and replaced by `auth_request` (`/upload/` and `/api/` included). `proxy_pass` uses `127.0.0.1`, never `localhost`, per the droplet gotcha:
 ```nginx
 # http { } block:  limit_req_zone $binary_remote_addr zone=pin:1m rate=10r/m;   # belt-and-braces under the app limiter
 
@@ -124,8 +131,18 @@ location / {                           # was: auth_basic ...; now:
     try_files $uri $uri/ =404;
 }
 location @pin { return 302 /pin/?next=$request_uri; }
-# location /upload/ { auth_basic "vault"; auth_basic_user_file /etc/nginx/.htpasswd; ... }   UNCHANGED
-# location /api/    { auth_basic "vault"; auth_basic_user_file /etc/nginx/.htpasswd; ... }   UNCHANGED
+# location /mem0/ { proxy_pass http://127.0.0.1:<mem0 port>; ... }   UNCHANGED — bearer-token machine endpoint; NO auth_request here
+location /upload/ {                    # was auth_basic; now the same cookie
+    auth_request            /auth/check;
+    error_page 401 = @pin;
+    alias /srv/apps-vault/public/;     # keep the existing alias/root line as-is
+}
+location /api/ {                       # uploader backend (127.0.0.1:8091); was auth_basic; now the same cookie
+    auth_request            /auth/check;
+    error_page 401 = @pin;             # fetch() callers see a 302 → JSON parse fails → landing page shows "sign in"; acceptable
+    proxy_pass              http://127.0.0.1:8091;
+    client_max_body_size    250m;      # keep the existing upload limits
+}
 ```
 ```bash
 # 5. test + reload
@@ -134,14 +151,18 @@ nginx -t && systemctl reload nginx
 #    https://apps.daroyperkins.com/           → 302 to /pin/?next=/ ; pad renders
 #    6 wrong PINs                              → 5× "Wrong PIN", then "Locked · 30s"; pm2 logs pin-auth shows ev:"fail"/"locked", no PIN text
 #    correct PIN                               → lands on /, apps open, /journeyman-hq/ works, /budget/ API calls work
-#    https://apps.daroyperkins.com/upload/     → still the Basic-Auth prompt (password, not PIN)
-#    curl -I https://apps.daroyperkins.com/    → 302 (no cookie) ; HTTP → 301 to HTTPS
-# 7. the old Basic-Auth password stays valid for /upload/ and /api/. No htpasswd change.
+#    https://apps.daroyperkins.com/upload/     → 302 to /pin/ without a cookie; with the cookie, the uploader loads and a test zip uploads
+#    curl -I https://apps.daroyperkins.com/api/apps → 302 (no cookie) ; HTTP → 301 to HTTPS
+#    Mari0 brain still reachable: from the Mari0 droplet, `npm run brain:smoke` (mari0 repo) passes against https://apps.daroyperkins.com/mem0/mcp
+#      — a 302 or an HTML body there means auth_request leaked onto /mem0/; roll back (step 8) and fix the location scoping
+# 7. Basic Auth is retired for this vhost. Keep /etc/nginx/.htpasswd on disk (unreferenced) — it is the rollback credential.
 # 8. rollback (one command): cp /root/apps-vault.nginx.bak /etc/nginx/sites-available/apps-vault && nginx -t && systemctl reload nginx ; pm2 delete pin-auth
 ```
 Rotation: `node pin-set.js --out /etc/apps-vault/pin.hash && pm2 restart pin-auth` (sessions survive if `SESSION_STORE_FILE` is set; delete that file to force everyone to re-enter).
 
 ## 7. Out of scope / open
 
-- Not done: nginx, htpasswd, PM2 on the droplet (rails). The budget app's own backend auth assumptions were not audited beyond "cookie rides same-origin fetches"; verify `/budget/api/*` after cutover (step 6).
+- Not done: nginx, htpasswd, PM2 on the droplet (rails). The budget app's own backend auth assumptions were not audited beyond "cookie rides same-origin fetches"; verify `/budget/api/*` and a real zip upload after cutover (step 6).
+- Any script or cron that hits `/api/*` with the Basic-Auth password (none known; check Luigi's upload tooling) must switch to the cookie flow or be given a separate token before cutover.
+- Known machine consumer on this vhost: Mari0 → `/mem0/mcp` (bearer token). Must be verified unaffected after cutover (step 6). Any future MCP/webhook endpoint added under apps.daroyperkins.com needs the same carve-out.
 - Optional later: WebAuthn/passkey instead of a PIN (iPhone Face ID) — same `auth_request` shape, different verifier; the cookie/session half of this PR carries over.

@@ -13,6 +13,7 @@
  *   PIN_AUTH_PORT            default 8092 (bind 127.0.0.1 only)
  *   VAULT_PIN_HASH_FILE      bcrypt hash of the PIN, one line, mode 0600 (default /etc/apps-vault/pin.hash)
  *   VAULT_PIN_HASH           alternative: the hash itself
+ *   PIN_MIN_LEN              default 8 (never below 6)
  *   SESSION_TTL_HOURS        default 12
  *   SESSION_STORE_FILE       optional persistence (default none)
  *   PIN_AUTH_LOCK_SCHEDULE   optional "30,60,300,900,3600" seconds (tests shorten it)
@@ -33,7 +34,8 @@ const { createSessions, cookieHeader, clearCookieHeader, parseCookie } = require
 const PORT = Number(process.env.PIN_AUTH_PORT) || 8092;
 const DEV = process.env.PIN_AUTH_DEV === "1";
 const TTL_HOURS = Number(process.env.SESSION_TTL_HOURS) || 12;
-const PIN_RE = /^[0-9]{6,12}$/;
+const PIN_MIN = Math.max(6, Number(process.env.PIN_MIN_LEN) || 8);   // floor 8 per Roy (2026-10-02); 6 is the spec minimum
+const PIN_RE = new RegExp("^[0-9]{" + PIN_MIN + ",12}$");
 // A real bcrypt hash of a random value: used so malformed input still costs one bcrypt compare (uniform timing).
 const DUMMY_HASH = bcrypt.hashSync(crypto.randomBytes(16).toString("hex"), 12);
 const IP_SALT = crypto.randomBytes(16);
@@ -104,7 +106,7 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "POST" && url.pathname === "/auth/pin") return await handlePin(req, res);
     if (req.method === "GET" && url.pathname === "/auth/check") return handleCheck(req, res);
     if (req.method === "POST" && url.pathname === "/auth/logout") return handleLogout(req, res);
-    if (req.method === "GET" && url.pathname === "/auth/health") return send(res, 200, { ok: true, hashConfigured: !!PIN_HASH, sessions: sessions.count(), limiter: limiter.stats() });
+    if (req.method === "GET" && url.pathname === "/auth/health") return send(res, 200, { ok: true, hashConfigured: !!PIN_HASH, pinMinLen: PIN_MIN, sessions: sessions.count(), limiter: limiter.stats() });
     if (url.pathname.startsWith("/auth/")) return send(res, 404, { error: "not found" });   // e.g. GET /auth/pin?pin=… is never a route
     if (DEV) {
       // Local emulation of the nginx flow for the smoke test only.

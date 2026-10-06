@@ -45,12 +45,12 @@
     <button class="key fn" data-k="clear" aria-label="Clear">Clear</button><button class="key" data-k="0">0</button><button class="key fn" data-k="back" aria-label="Delete last digit">⌫</button>
     <button class="key go" id="go" data-k="go" style="grid-column:1 / -1; height:56px;">Unlock</button>
   </div>
-  <p class="foot">6–12 digits · 5 tries, then a timed lock. <b>Upload and delete still use the vault password.</b></p>
+  <p class="foot">8–12 digits · 5 tries, then a timed lock. <b>One PIN for everything — apps, upload, delete.</b></p>
 
 <script>
 (function () {
   "use strict";
-  const MIN = 6, MAX = 12;
+  const MIN = 8, MAX = 12;   // floor raised 6 → 8 by Roy's decision, 2026-10-02
   const dots = document.getElementById("dots"), status = document.getElementById("status"), pad = document.getElementById("pad");
   let pin = "";            // lives only in this closure; wiped after each submit
   let busy = false, lockTimer = null;
