@@ -130,6 +130,7 @@
     });
     $("cd-edit").addEventListener("click", () => JHQ.app.go("more"));
     $("report-open").addEventListener("click", () => openSheet("Weekly report", buildReport()));
+    JHQ.print.bind();
     $("report-close").addEventListener("click", () => $("report").classList.add("hidden"));
     $("report").addEventListener("click", (e) => { if (e.target === $("report")) $("report").classList.add("hidden"); });
     $("report-copy").addEventListener("click", async () => { const ok = await copyText($("report-text").value); JHQ.util.flash($("report-status"), ok ? "Copied." : "Couldn't copy — select the text and copy it by hand.", ok); });

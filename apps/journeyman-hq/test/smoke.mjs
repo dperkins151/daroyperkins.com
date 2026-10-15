@@ -219,6 +219,14 @@ ok(/^Journeyman HQ — week of /.test(reportTxt) && /Sims: 1 \(best \d+%, last \
 await page.click("#report-copy"); await page.waitForSelector("#report-status:not(.hidden)");
 ok(/Copied|copy it by hand/.test(await page.textContent("#report-status")), "copy reports its outcome: " + (await page.textContent("#report-status")).trim());
 await page.click("#report-close"); ok(await page.$eval("#report", (e) => e.classList.contains("hidden")), "report sheet closes");
+// print study sheet: built on demand, print media shows only the sheet
+await page.evaluate(() => { window.print = () => {}; });   // headless: just make sure nothing throws
+await page.click("#print-open");
+ok((await page.$$eval("#print-sheet .p-tabs li", (l) => l.length)) === 30 && (await page.$$eval("#print-sheet h3", (h) => h.length)) === 6 && /Journeyman HQ — week of/.test(await page.textContent("#print-sheet .p-report")), "study sheet built: 30 tabs, 6 formula groups, this week's report");
+await page.emulateMedia({ media: "print" });
+ok((await page.$eval("#print-sheet", (e) => getComputedStyle(e).display)) === "block" && (await page.$eval(".tabbar", (e) => getComputedStyle(e).display)) === "none", "print media shows the sheet and hides the app chrome");
+await page.emulateMedia({ media: "screen" });
+ok((await page.$eval("#print-sheet", (e) => getComputedStyle(e).display)) === "none", "screen media hides the sheet again");
 // Progress card
 ok(!(await page.$eval("#progress", (e) => e.classList.contains("hidden"))), "progress card shows once attempts exist");
 ok((await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts")).find((a) => a.mode === "sim").elapsedSec)) > 0, "sim elapsed time is recorded (timer no longer loses time on each answer)");

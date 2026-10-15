@@ -279,3 +279,19 @@ button:focus-visible, [tabindex]:focus-visible, a:focus-visible { outline: 2px s
 /* knowledge-vs-raw marker on sim bars */
 .spark-bar .know { position: absolute; left: -3px; right: -3px; height: 0; border-top: 2px solid var(--red); }
 .spark-bar .know-n { display: block; color: var(--red); font-size: 0.62rem; font-weight: 700; }
+/* print study sheet */
+.print-sheet { display: none; }
+@media print {
+  body { background: #fff; color: #000; font-size: 11pt; }
+  body > :not(.print-sheet) { display: none !important; }
+  .print-sheet { display: block !important; padding: 0; color: #000; }
+  .print-sheet h1 { font-size: 18pt; margin: 0 0 4pt; }
+  .print-sheet h2 { font-size: 13pt; margin: 10pt 0 4pt; border-bottom: 1px solid #000; }
+  .print-sheet h3 { font-size: 11pt; margin: 6pt 0 2pt; }
+  .print-sheet ul { margin: 0 0 0 14pt; padding: 0; }
+  .print-sheet li { margin: 1pt 0; }
+  .p-tabs { columns: 2; column-gap: 18pt; list-style: none; margin-left: 0 !important; }
+  .p-box { font-family: monospace; }
+  .p-muted, .p-sub { color: #444; font-size: 9pt; }
+  .p-report { font-family: monospace; font-size: 9pt; white-space: pre-wrap; border: 1px solid #000; padding: 6pt; }
+}
