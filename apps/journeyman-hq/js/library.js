@@ -35,6 +35,7 @@
     }
     const s = JHQ.store.settings();
     $("set-date").value = s.examDate || ""; $("set-goal").value = s.dailyGoal || 30;
+    $("backup-line").textContent = backupText(s) + " · everything lives in this browser until you back it up.";
   }
 
   function onKind() {
@@ -70,19 +71,26 @@
     download("journeyman-hq-my-content-" + new Date().toISOString().slice(0, 10) + ".json", JSON.stringify(pack, null, 2));
     flash($("io-status"), "Exported " + pack.cards.length + " cards, " + pack.questions.length + " questions.", true);
   }
-  function exportAll() {
-    const pack = { app: "journeyman-hq", type: "backup", exportedAt: new Date().toISOString(), data: JHQ.store.all() };
-    download("journeyman-hq-backup-" + new Date().toISOString().slice(0, 10) + ".json", JSON.stringify(pack));
-    flash($("io-status"), "Backup downloaded.", true);
+  /** "Last backup today / 3 days ago / never" for the More tab and the Home nudge. */
+  function backupText(s) {
+    if (!s.lastBackup) return "No backup yet";
+    const days = JHQ.util.daysBetween(s.lastBackup.slice(0, 10), JHQ.util.todayKey());
+    return "Last backup " + (days <= 0 ? "today" : days === 1 ? "yesterday" : days + " days ago");
   }
-  function importFile(file) {
+  function exportAll() {
+    const s = JHQ.store.settings(); s.lastBackup = new Date().toISOString(); JHQ.store.saveSettings(s);   // stamp first so the backup itself carries it
+    const pack = { app: "journeyman-hq", type: "backup", exportedAt: s.lastBackup, data: JHQ.store.all() };
+    download("journeyman-hq-backup-" + s.lastBackup.slice(0, 10) + ".json", JSON.stringify(pack));
+    flash($("io-status"), "Backup downloaded.", true); render(); JHQ.dashboard.render();
+  }
+  function importFile(file, statusEl = $("io-status")) {
     const r = new FileReader();
     r.onload = () => {
       try {
         const pack = JSON.parse(r.result);
         if (pack.type === "backup" && pack.data) {
           if (!confirm("Restore this backup? It replaces all local progress.")) return;
-          JHQ.store.replaceAll(pack.data); flash($("io-status"), "Backup restored.", true); JHQ.app.refresh(); return;
+          JHQ.store.replaceAll(pack.data); flash(statusEl, "Backup restored.", true); JHQ.app.refresh(); return;
         }
         const cards = Array.isArray(pack.cards) ? pack.cards : [], qs = Array.isArray(pack.questions) ? pack.questions : [];
         const cc = JHQ.store.customCards(), cq = JHQ.store.customQuestions();
@@ -92,7 +100,7 @@
         qs.forEach((q) => { if (q && q.q && Array.isArray(q.choices) && q.choices.length >= 2 && !haveQ.has(q.id)) { cq.push(Object.assign({ source: "custom" }, q, { id: q.id || uid("MQ") })); n++; } });
         JHQ.store.saveCustomCards(cc); JHQ.store.saveCustomQuestions(cq);
         flash($("io-status"), "Imported " + n + " new item" + (n === 1 ? "" : "s") + ".", true); render();
-      } catch (e) { flash($("io-status"), "Not a valid Journeyman HQ JSON file.", false); }
+      } catch (e) { flash(statusEl, "Not a valid Journeyman HQ JSON file.", false); }
     };
     r.readAsText(file);
   }
@@ -103,6 +111,7 @@
     $("export-custom").addEventListener("click", exportCustom);
     $("export-all").addEventListener("click", exportAll);
     $("import-file").addEventListener("change", () => { if ($("import-file").files[0]) importFile($("import-file").files[0]); $("import-file").value = ""; });
+    $("setup-import").addEventListener("change", () => { if ($("setup-import").files[0]) importFile($("setup-import").files[0], $("setup-import-status")); $("setup-import").value = ""; });
     $("set-save").addEventListener("click", () => {
       const s = JHQ.store.settings();
       const d = $("set-date").value; if (d) s.examDate = d;
@@ -126,5 +135,5 @@
     onKind();
   }
 
-  JHQ.library = { render, bind };
+  JHQ.library = { render, bind, backupText };
 })(typeof window !== "undefined" ? window : globalThis);

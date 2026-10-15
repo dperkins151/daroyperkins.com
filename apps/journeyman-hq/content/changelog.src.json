@@ -1,19 +1,114 @@
 {
   "note": "One entry per app version, newest first. Plain lines Roy will read on the phone after an update; no PR numbers or internals. Validated by tools/build-banks.mjs and shipped as data/changelog.json.",
   "versions": [
-    { "version": "1.11.0", "date": "2026-10-15", "lines": ["This \"What's new\" sheet: shows once after each update, and lives under More"] },
-    { "version": "1.10.0", "date": "2026-10-15", "lines": ["Keyboard shortcuts: 1–4 answer, arrows move, F flag, R review; Space flips cards, 1/2/3 grades", "Screen-reader labels, visible focus, reduced-motion support"] },
-    { "version": "1.9.0", "date": "2026-10-15", "lines": ["Results: switch between Misses only and All questions to walk the whole sim"] },
-    { "version": "1.8.0", "date": "2026-10-15", "lines": ["Cram: every card shuffled, Shaky/Solid, nothing gets scheduled — moves to the top in the last 3 days"] },
-    { "version": "1.7.0", "date": "2026-10-15", "lines": ["Review days in the plan now target your weakest topics, with that deck and a topic drill one tap away"] },
-    { "version": "1.6.0", "date": "2026-10-15", "lines": ["Article lookup drill: find the NEC reference, timed per question — the open-book skill"] },
-    { "version": "1.5.1", "date": "2026-10-15", "lines": ["48 new questions on Special Occupancies and General Requirements (bank now 308)"] },
-    { "version": "1.5.0", "date": "2026-10-15", "lines": ["The study plan stretches or packs itself to the days left before your exam; checked tasks survive date changes"] },
-    { "version": "1.4.0", "date": "2026-10-15", "lines": ["Progress card on Home: sim scores, pace vs the 180 s budget, topic trends, 14-day activity", "Fixed the exam timer under-counting time on each answer tap"] },
-    { "version": "1.3.0", "date": "2026-10-15", "lines": ["Drill my misses: 10 questions from what you missed in the last 7 days"] },
-    { "version": "1.2.1", "date": "2026-10-15", "lines": ["78 new worked-calculation flashcards (deck now 182); RV park 50 A rule corrected"] },
-    { "version": "1.2.0", "date": "2026-10-15", "lines": ["Every missed question becomes a flashcard in the Missed questions deck", "Installs to the home screen and works offline"] },
-    { "version": "1.1.0", "date": "2026-10-06", "lines": ["68 calculation-heavy questions added (bank 260)"] },
-    { "version": "1.0.0", "date": "2026-10-01", "lines": ["First release: countdown, flashcards with spaced repetition, 70-question timed sims, 30-day plan"] }
+    {
+      "version": "1.12.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Backup reminder on Home when progress is older than your last backup; More shows the backup age",
+        "Restore a backup straight from the setup screen on a new phone"
+      ]
+    },
+    {
+      "version": "1.11.0",
+      "date": "2026-10-15",
+      "lines": [
+        "This \"What's new\" sheet: shows once after each update, and lives under More"
+      ]
+    },
+    {
+      "version": "1.10.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Keyboard shortcuts: 1–4 answer, arrows move, F flag, R review; Space flips cards, 1/2/3 grades",
+        "Screen-reader labels, visible focus, reduced-motion support"
+      ]
+    },
+    {
+      "version": "1.9.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Results: switch between Misses only and All questions to walk the whole sim"
+      ]
+    },
+    {
+      "version": "1.8.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Cram: every card shuffled, Shaky/Solid, nothing gets scheduled — moves to the top in the last 3 days"
+      ]
+    },
+    {
+      "version": "1.7.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Review days in the plan now target your weakest topics, with that deck and a topic drill one tap away"
+      ]
+    },
+    {
+      "version": "1.6.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Article lookup drill: find the NEC reference, timed per question — the open-book skill"
+      ]
+    },
+    {
+      "version": "1.5.1",
+      "date": "2026-10-15",
+      "lines": [
+        "48 new questions on Special Occupancies and General Requirements (bank now 308)"
+      ]
+    },
+    {
+      "version": "1.5.0",
+      "date": "2026-10-15",
+      "lines": [
+        "The study plan stretches or packs itself to the days left before your exam; checked tasks survive date changes"
+      ]
+    },
+    {
+      "version": "1.4.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Progress card on Home: sim scores, pace vs the 180 s budget, topic trends, 14-day activity",
+        "Fixed the exam timer under-counting time on each answer tap"
+      ]
+    },
+    {
+      "version": "1.3.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Drill my misses: 10 questions from what you missed in the last 7 days"
+      ]
+    },
+    {
+      "version": "1.2.1",
+      "date": "2026-10-15",
+      "lines": [
+        "78 new worked-calculation flashcards (deck now 182); RV park 50 A rule corrected"
+      ]
+    },
+    {
+      "version": "1.2.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Every missed question becomes a flashcard in the Missed questions deck",
+        "Installs to the home screen and works offline"
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-10-06",
+      "lines": [
+        "68 calculation-heavy questions added (bank 260)"
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-10-01",
+      "lines": [
+        "First release: countdown, flashcards with spaced repetition, 70-question timed sims, 30-day plan"
+      ]
+    }
   ]
 }

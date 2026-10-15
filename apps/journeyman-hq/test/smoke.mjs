@@ -217,6 +217,16 @@ const custom = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.cu
 ok(custom.length === 1 && custom[0].source === "custom", "custom card saved");
 const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#export-custom")]);
 ok(/journeyman-hq-my-content/.test(dl.suggestedFilename()), "export downloads JSON: " + dl.suggestedFilename());
+// backup nudge + full backup
+await page.click('.tab-btn[data-tab="home"]');
+ok(!(await page.$eval("#backup-nudge", (e) => e.classList.contains("hidden"))) && /No backup yet/.test(await page.textContent("#backup-nudge")), "Home nudges when progress exists and no backup was made");
+await page.click('.tab-btn[data-tab="more"]');
+const [dlAll] = await Promise.all([page.waitForEvent("download"), page.click("#export-all")]);
+const backupPath = path.join(root, "dist", "smoke-backup.json"); await dlAll.saveAs(backupPath);
+ok(/Last backup today/.test(await page.textContent("#backup-line")), "More shows the backup age: " + (await page.textContent("#backup-line")).trim());
+await page.click('.tab-btn[data-tab="home"]');
+ok(await page.$eval("#backup-nudge", (e) => e.classList.contains("hidden")), "nudge clears after a backup");
+await page.click('.tab-btn[data-tab="more"]');
 const manifest = JSON.parse(await readFile(path.join(root, "data", "manifest.json"), "utf8"));
 const mv = await page.textContent("#manifest-view");
 ok(mv.includes(manifest.app + " " + manifest.appVersion), "manifest view shows app + version " + manifest.appVersion);
@@ -252,5 +262,11 @@ ok(requests.every((u) => /\.(html|css|js|json|webmanifest|png|svg)$|\/$/.test(u.
 ok(errors.length === 0, "no page errors" + (errors.length ? ": " + errors.join(" | ") : ""));
 await page.click('.tab-btn[data-tab="home"]'); await page.waitForTimeout(100);
 await page.screenshot({ path: path.join(root, "dist", "smoke-home.png"), fullPage: true }).catch(() => {});
+// restore on first run: wipe local data, land on setup, restore the backup taken above
+await page.evaluate(() => localStorage.clear()); await page.reload(); await page.waitForSelector("#home-setup:not(.hidden)");
+await page.setInputFiles("#setup-import", backupPath);
+await page.waitForSelector("#home-main:not(.hidden)", { timeout: 10000 });
+ok((await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts")).length)) >= 4 && (await page.textContent("#cd-days")).trim() === "11", "restore from the setup screen brings attempts and the exam date back");
+ok(errors.length === 0, "no page errors after restore" + (errors.length ? ": " + errors.join(" | ") : ""));
 await browser.close(); srv.close();
 console.log("SMOKE OK");

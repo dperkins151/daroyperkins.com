@@ -41,6 +41,7 @@
         <input id="setup-date" type="date">
       </label>
       <button id="setup-save" class="primary-btn">Start the countdown</button>
+      <p class="hint small">New phone? <label class="link-btn file-btn">Restore a backup<input id="setup-import" type="file" accept=".json,application/json" hidden></label><span id="setup-import-status" class="status hidden"></span></p>
     </div>
 
     <div id="home-main" class="hidden">
@@ -83,6 +84,7 @@
 
       <h2 class="section-h">Recent attempts</h2>
       <div id="home-attempts" class="list"></div>
+      <p id="backup-nudge" class="hint small hidden"></p>
     </div>
   </section>
 
@@ -227,6 +229,7 @@
     <div class="card">
       <h2>My content</h2>
       <div id="my-content" class="list"></div>
+      <p id="backup-line" class="hint small"></p>
       <div class="btn-row">
         <button id="export-custom" class="secondary-btn">Export my cards/questions</button>
         <button id="export-all" class="secondary-btn">Backup everything</button>

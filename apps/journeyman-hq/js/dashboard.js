@@ -45,6 +45,12 @@
     $("act-plan").textContent = "day " + planDay + " of " + (plan ? JHQ.plan.length() : 30);
 
     renderProgress(attempts, act);
+    // quiet backup nudge: only when there is progress worth keeping and the last backup is > 7 days old (or none)
+    const hasProgress = attempts.length > 0 || Object.keys(st.srs()).length > 0 || Object.keys(st.plan()).length > 0;
+    const stale = !s.lastBackup || daysBetween(s.lastBackup.slice(0, 10), todayKey()) > 7;
+    const nudge = $("backup-nudge"); nudge.classList.toggle("hidden", !(hasProgress && stale));
+    if (hasProgress && stale) nudge.innerHTML = JHQ.util.esc(JHQ.library.backupText(s)) + ' — progress lives in this browser only. <button class="link-btn" id="nudge-backup">Back up now</button>';
+    const nb = $("nudge-backup"); if (nb) nb.addEventListener("click", () => { JHQ.app.go("more"); $("export-all").click(); });
 
     // weak topics
     const weak = JHQ.grader.weakTopics(attempts, JHQ.data.state.topics);
