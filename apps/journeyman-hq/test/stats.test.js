@@ -11,6 +11,9 @@ test("simTrend: sims only, in order, capped", () => {
   const attempts = [att("sim", 60, bt(5, 7)), att("drill", 80, bt(8, 8)), att("sim", 75, bt(7, 8)), { mode: "sim", submittedAt: null, result: { score: { pct: 100 } } }];
   const t = stats.simTrend(attempts);
   assert.deepEqual(t.map((x) => x.pct), [60, 75]); assert.equal(t[1].verdict, "pass");
+  assert.deepEqual(t.map((x) => x.knowledgePct), [60, 75], "no guess data → knowledge equals raw");
+  const g = stats.simTrend([att("sim", 80, bt(8, 8), { result: { score: { pct: 80, knowledgePct: 71.4, lucky: 6 }, verdict: "pass", byTopic: bt(8, 8) } })]);
+  assert.equal(g[0].knowledgePct, 71); assert.equal(g[0].lucky, 6);
   assert.equal(stats.simTrend(attempts, 1).length, 1);
 });
 

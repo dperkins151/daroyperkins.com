@@ -10,7 +10,7 @@
 
   /** Full and half sim scores in order, last `limit`: [{ at, pct, verdict, half }]. */
   function simTrend(attempts, limit = 10) {
-    return graded(attempts).filter((a) => a.mode === "sim" || a.mode === "half").slice(-limit).map((a) => ({ at: a.submittedAt, pct: Math.round(a.result.score.pct), verdict: a.result.verdict, half: a.mode === "half" }));
+    return graded(attempts).filter((a) => a.mode === "sim" || a.mode === "half").slice(-limit).map((a) => ({ at: a.submittedAt, pct: Math.round(a.result.score.pct), knowledgePct: Math.round(a.result.score.knowledgePct != null ? a.result.score.knowledgePct : a.result.score.pct), lucky: a.result.score.lucky || 0, verdict: a.result.verdict, half: a.mode === "half" }));
   }
 
   /** Per-topic accuracy per attempt (any mode) where the topic had ≥1 question, last `window` attempts.

@@ -103,8 +103,9 @@
     if (!graded.length) return;
     // full-sim scores: one bar per sim, 70% line
     const sims = S.simTrend(attempts, 10);
-    $("prog-sim").innerHTML = sims.length ? '<div class="spark-line" style="bottom:70%"></div>' + sims.map((s) => `<div class="spark-bar ${s.verdict} ${s.half ? "half" : ""}" style="height:${Math.max(4, s.pct)}%" title="${esc(fmtDate(s.at))} · ${s.pct}%${s.half ? " · half sim" : ""}"><span>${s.pct}</span></div>`).join("") : '<div class="empty small">No full sims yet — scores land here.</div>';
-    $("prog-sim-sub").textContent = sims.length ? (sims.length === 1 ? "1 sim" : sims.length + " sims") + " · best " + Math.max(...sims.map((s) => s.pct)) + "% · need 70%" : "";
+    const anyLucky = sims.some((s) => s.lucky > 0);
+    $("prog-sim").innerHTML = sims.length ? '<div class="spark-line" style="bottom:70%"></div>' + sims.map((s) => `<div class="spark-bar ${s.verdict} ${s.half ? "half" : ""}" style="height:${Math.max(4, s.pct)}%" title="${esc(fmtDate(s.at))} · ${s.pct}%${s.lucky ? " · " + s.knowledgePct + "% without " + s.lucky + " lucky guess" + (s.lucky === 1 ? "" : "es") : ""}${s.half ? " · half sim" : ""}">${s.lucky ? `<i class="know" style="bottom:${Math.round((s.knowledgePct / Math.max(4, s.pct)) * 100)}%" title="${s.knowledgePct}% by knowledge"></i>` : ""}<span>${s.pct}${s.lucky ? `<b class="know-n">${s.knowledgePct}</b>` : ""}</span></div>`).join("") : '<div class="empty small">No full sims yet — scores land here.</div>';
+    $("prog-sim-sub").textContent = sims.length ? (sims.length === 1 ? "1 sim" : sims.length + " sims") + " · best " + Math.max(...sims.map((s) => s.pct)) + "% · need 70%" + (anyLucky ? " · red tick = without guesses" : "") : "";
     // pace
     const p = S.pace(attempts);
     if (p.secPerQ == null) { $("prog-pace").textContent = "—"; $("prog-pace-sub").textContent = "runs a full sim to measure"; $("prog-pace-fill").style.width = "0%"; $("prog-pace-fill").className = "bar-fill"; }

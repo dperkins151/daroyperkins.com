@@ -276,3 +276,6 @@ button:focus-visible, [tabindex]:focus-visible, a:focus-visible { outline: 2px s
 .calc-steps { margin: 8px 0 0 18px; font-size: 0.88rem; color: var(--muted); }
 .calc-steps li { margin: 3px 0; }
 .seg { flex-wrap: wrap; }
+/* knowledge-vs-raw marker on sim bars */
+.spark-bar .know { position: absolute; left: -3px; right: -3px; height: 0; border-top: 2px solid var(--red); }
+.spark-bar .know-n { display: block; color: var(--red); font-size: 0.62rem; font-weight: 700; }

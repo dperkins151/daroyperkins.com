@@ -216,6 +216,8 @@ await page.click("#report-close"); ok(await page.$eval("#report", (e) => e.class
 ok(!(await page.$eval("#progress", (e) => e.classList.contains("hidden"))), "progress card shows once attempts exist");
 ok((await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts")).find((a) => a.mode === "sim").elapsedSec)) > 0, "sim elapsed time is recorded (timer no longer loses time on each answer)");
 ok((await page.$$eval("#prog-sim .spark-bar", (b) => b.length)) === 2 && (await page.$$eval("#prog-sim .spark-bar.half", (b) => b.length)) === 1, "full + half sim bars in the score chart (half dashed)");
+const simLucky = simRec.result.score.lucky || 0;
+ok((await page.$$eval("#prog-sim .spark-bar .know", (k) => k.length)) === (simLucky ? 1 : 0) && (simLucky ? /red tick = without guesses/.test(await page.textContent("#prog-sim-sub")) : true), "knowledge marker drawn only when a sim had lucky guesses (" + simLucky + ")");
 ok(/^\d+ s \/ question$/.test((await page.textContent("#prog-pace")).trim()) && /PSI budget 180 s/.test(await page.textContent("#prog-pace-sub")), "pace vs PSI budget: " + (await page.textContent("#prog-pace")).trim());
 ok((await page.$$eval("#prog-topics .prog-topic", (r) => r.length)) === 6, "six topic trend rows");
 ok((await page.$$eval("#prog-days .day-col", (c) => c.length)) === 14 && /1 active day · \d+ cards · \d+ questions/.test(await page.textContent("#prog-days-sub")), "14-day activity strip: " + (await page.textContent("#prog-days-sub")).trim());
