@@ -80,7 +80,19 @@
     return lines.join("\n");
   }
 
-  const api = { simTrend, topicTrend, pace, daily, weeklyReport, PSI_SEC_PER_Q };
+  /** Questions missed most often across attempts (qstats = { id: {seen, missed} }). Only items seen at least `minSeen` times. */
+  function mostMissed(qstats, qmap, { minSeen = 2, limit = 15 } = {}) {
+    return Object.entries(qstats || {}).filter(([id, s]) => qmap[id] && s && s.seen >= minSeen && s.missed > 0)
+      .map(([id, s]) => { const q = qmap[id]; return { id, seen: s.seen, missed: s.missed, rate: Math.round((s.missed / s.seen) * 100), q: q.q, article: q.article, topic: q.topic, explain: q.explain || "" }; })
+      .sort((a, b) => b.rate - a.rate || b.missed - a.missed || b.seen - a.seen).slice(0, limit);
+  }
+  /** Plain-text version for a content reviewer: id · article · miss x/y (rate) · stem. */
+  function mostMissedText(list, appVersion) {
+    const head = "Journeyman HQ most-missed questions" + (appVersion ? " · " + appVersion : "") + " · " + list.length + " item" + (list.length === 1 ? "" : "s") + " (seen ≥ 2)";
+    return [head].concat(list.map((m, i) => (i + 1) + ". " + m.id + " · NEC " + (m.article || "—") + " · missed " + m.missed + "/" + m.seen + " (" + m.rate + "%) · " + m.q)).join("\n");
+  }
+
+  const api = { simTrend, topicTrend, pace, daily, weeklyReport, mostMissed, mostMissedText, PSI_SEC_PER_Q };
   JHQ.stats = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

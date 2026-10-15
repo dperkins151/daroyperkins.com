@@ -263,6 +263,13 @@ const custom = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.cu
 ok(custom.length === 1 && custom[0].source === "custom", "custom card saved");
 const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#export-custom")]);
 ok(/journeyman-hq-my-content/.test(dl.suggestedFilename()), "export downloads JSON: " + dl.suggestedFilename());
+// most-missed questions (seen ≥ 2: the missed drill re-asked sim misses)
+await page.click('.tab-btn[data-tab="more"]');
+const mmRows = await page.$$eval("#mostmissed-list .missed-row", (r) => r.length);
+ok(!(await page.$eval("#mostmissed-card", (e) => e.classList.contains("hidden"))) && mmRows >= 1 && mmRows <= 15 && /missed \d+\/\d+ · \d+%/.test(await page.textContent("#mostmissed-list")), "most-missed list shows re-missed questions (" + mmRows + ")");
+await page.click("#mostmissed-copy"); await page.waitForSelector("#report:not(.hidden)");
+ok(/^Journeyman HQ most-missed questions/.test(await page.$eval("#report-text", (t) => t.value)) && (await page.textContent("#report-title")).trim() === "Most-missed questions", "copy-for-review sheet carries the list");
+await page.click("#report-close");
 // tab-your-book checklist
 await page.click('.tab-btn[data-tab="more"]');
 ok((await page.$$eval("#tabs-list input[data-tab]", (c) => c.length)) === 30 && /0 of 30 tabbed/.test(await page.textContent("#tabs-progress")), "Tab your book lists the 30 most-cited references");

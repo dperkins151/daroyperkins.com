@@ -1,8 +1,15 @@
 {
  "app": "Journeyman HQ",
- "current": "1.17.0",
+ "current": "1.18.0",
  "generated": "2026-10-15",
  "versions": [
+  {
+   "version": "1.18.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Most-missed questions (More): what you keep getting wrong across sims and drills, with a copy-for-review list"
+   ]
+  },
   {
    "version": "1.17.0",
    "date": "2026-10-15",

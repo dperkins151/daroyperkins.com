@@ -34,6 +34,7 @@
       $("manifest-view").innerHTML = `<div class="row"><div><div class="title">${esc(m.app)} ${esc(m.appVersion)}</div><div class="sub">${esc(m.exam.name || "")} · ${esc(m.code || "")}</div></div></div>` + rows.join("");
     }
     renderTabs();
+    renderMostMissed();
     const s = JHQ.store.settings();
     $("set-date").value = s.examDate || ""; $("set-goal").value = s.dailyGoal || 30;
     $("backup-line").textContent = backupText(s) + " · everything lives in this browser until you back it up.";
@@ -49,6 +50,12 @@
     $("tabs-bar").style.width = Math.round((n / t.items.length) * 100) + "%";
     $("tabs-list").innerHTML = t.items.map((i) => `<label class="task ${done[i.ref] ? "done" : ""}"><input type="checkbox" data-tab="${esc(i.ref)}" ${done[i.ref] ? "checked" : ""}><span><b>${esc(i.ref)}</b> <span class="muted small">· ${esc(JHQ.data.topicName(i.topic))} · cited ${i.count}×</span></span></label>`).join("");
     $("tabs-list").querySelectorAll("input[data-tab]").forEach((c) => c.addEventListener("change", () => { const d = JHQ.store.tabs(); if (c.checked) d[c.dataset.tab] = true; else delete d[c.dataset.tab]; JHQ.store.saveTabs(d); renderTabs(); }));
+  }
+
+  function renderMostMissed() {
+    const list = JHQ.stats.mostMissed(JHQ.store.qstats(), JHQ.data.questionMap());
+    const card = $("mostmissed-card"); card.classList.toggle("hidden", !list.length); if (!list.length) return;
+    $("mostmissed-list").innerHTML = list.map((m, i) => `<div class="missed-row"><div class="fc-meta"><span class="idx">#${i + 1}</span><span class="chip">${esc(JHQ.data.topicName(m.topic))}</span>${m.article ? `<span class="chip chip-amber">NEC ${esc(m.article)}</span>` : ""}<span class="chip chip-red">missed ${m.missed}/${m.seen} · ${m.rate}%</span></div><div class="q">${esc(m.q)}</div>${m.explain ? `<div class="explain">${esc(m.explain)}</div>` : ""}<div class="muted small">${esc(m.id)}</div></div>`).join("");
   }
 
   function onKind() {
@@ -132,6 +139,7 @@
       s.createdAt = s.createdAt || new Date().toISOString();
       JHQ.store.saveSettings(s); flash($("set-status"), "Saved.", true); JHQ.app.refresh();
     });
+    $("mostmissed-copy").addEventListener("click", () => { const list = JHQ.stats.mostMissed(JHQ.store.qstats(), JHQ.data.questionMap()); JHQ.dashboard.openSheet("Most-missed questions", JHQ.stats.mostMissedText(list, JHQ.data.state.manifest && JHQ.data.state.manifest.appVersion)); });
     $("missed-clear-mastered").addEventListener("click", () => {
       const p = JHQ.misses.pruneMastered(JHQ.store.missed(), JHQ.store.srs()); JHQ.store.saveMissed(p.map);
       flash($("missed-status"), "Removed " + p.removed + " mastered card" + (p.removed === 1 ? "" : "s") + ".", true); render();

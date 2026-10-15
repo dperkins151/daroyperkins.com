@@ -2,6 +2,13 @@
   "note": "One entry per app version, newest first. Plain lines Roy will read on the phone after an update; no PR numbers or internals. Validated by tools/build-banks.mjs and shipped as data/changelog.json.",
   "versions": [
     {
+      "version": "1.18.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Most-missed questions (More): what you keep getting wrong across sims and drills, with a copy-for-review list"
+      ]
+    },
+    {
       "version": "1.17.0",
       "date": "2026-10-15",
       "lines": [

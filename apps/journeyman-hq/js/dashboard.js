@@ -88,6 +88,8 @@
       streak: streak(st.activity()), appVersion: JHQ.data.state.manifest ? JHQ.data.state.manifest.appVersion : null,
     });
   }
+  /** Generic text sheet (weekly report, most-missed list): title + text + Copy. */
+  function openSheet(title, text) { $("report-title").textContent = title; $("report-text").value = text; $("report").classList.remove("hidden"); $("report-copy").focus(); }
   async function copyText(text) {
     try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(text); return true; } } catch (e) {}
     try { const ta = $("report-text"); ta.focus(); ta.select(); return document.execCommand("copy"); } catch (e) { return false; }
@@ -126,7 +128,7 @@
       const s = st.settings(); s.examDate = v; s.createdAt = s.createdAt || new Date().toISOString(); st.saveSettings(s); JHQ.app.refresh();
     });
     $("cd-edit").addEventListener("click", () => JHQ.app.go("more"));
-    $("report-open").addEventListener("click", () => { $("report-text").value = buildReport(); $("report").classList.remove("hidden"); $("report-copy").focus(); });
+    $("report-open").addEventListener("click", () => openSheet("Weekly report", buildReport()));
     $("report-close").addEventListener("click", () => $("report").classList.add("hidden"));
     $("report").addEventListener("click", (e) => { if (e.target === $("report")) $("report").classList.add("hidden"); });
     $("report-copy").addEventListener("click", async () => { const ok = await copyText($("report-text").value); JHQ.util.flash($("report-status"), ok ? "Copied." : "Couldn't copy — select the text and copy it by hand.", ok); });
@@ -140,5 +142,5 @@
     }));
   }
 
-  JHQ.dashboard = { render, bind, streak };
+  JHQ.dashboard = { render, bind, streak, openSheet };
 })(typeof window !== "undefined" ? window : globalThis);

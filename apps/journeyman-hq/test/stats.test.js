@@ -57,6 +57,19 @@ test("weeklyReport: plain text with the week's sims, pace, weakest topics, activ
   assert.match(empty, /Sims: 0 · Half sims: 0 · Drills: 0 · Lookup drills: 0/); assert.match(empty, /no timed sims yet/); assert.match(empty, /no attempt data/);
 });
 
+test("mostMissed: seen ≥ 2 only, sorted by rate then misses, text for the reviewer", () => {
+  const qmap = { a: { q: "Alpha question", article: "250.66", topic: "wiring", explain: "e" }, b: { q: "Beta question", article: "430.52", topic: "equipment" }, c: { q: "Gamma question", article: "90.3", topic: "general" }, gone: { q: "x", article: "y", topic: "z" } };
+  const qs = { a: { seen: 4, missed: 3 }, b: { seen: 2, missed: 2 }, c: { seen: 1, missed: 1 }, d: { seen: 5, missed: 5 }, e: { seen: 3, missed: 0 }, gone: { seen: 2, missed: 2 } };
+  delete qmap.gone;
+  const list = stats.mostMissed(qs, qmap);
+  assert.deepEqual(list.map((m) => m.id), ["b", "a"], "c seen once, d/gone not in bank, e never missed");
+  assert.equal(list[0].rate, 100); assert.equal(list[1].rate, 75); assert.equal(list[1].explain, "e");
+  const txt = stats.mostMissedText(list, "1.18.0");
+  assert.equal(txt.split("\n")[0], "Journeyman HQ most-missed questions · 1.18.0 · 2 items (seen ≥ 2)");
+  assert.equal(txt.split("\n")[1], "1. b · NEC 430.52 · missed 2/2 (100%) · Beta question");
+  assert.equal(stats.mostMissed({}, qmap).length, 0);
+});
+
 test("daily: last N days oldest first, zeros for idle days", () => {
   const key = (d) => d.toISOString().slice(0, 10);
   const now = new Date("2026-10-15T12:00:00Z");
