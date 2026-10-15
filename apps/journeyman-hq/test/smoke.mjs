@@ -149,7 +149,7 @@ ok(Object.keys(missMap).length === expectMissed.size && [...expectMissed].every(
 await page.click('.tab-btn[data-tab="cards"]'); await page.waitForSelector('#deck-list [data-deck="__missed"]');
 ok(new RegExp("^" + nMissed + " cards").test((await page.textContent('#deck-list [data-deck="__missed"] .sub')).trim()), "Missed questions deck lists " + nMissed + " cards");
 await page.click('#deck-list [data-deck="__missed"]'); await page.waitForSelector("#flashcard:not(.hidden)");
-ok((await page.textContent("#fc-source")).trim() === "missed once", "miss card shows its source chip");
+ok(/^missed (once|\d+×)$/.test((await page.textContent("#fc-source")).trim()), "miss card shows its source chip: " + (await page.textContent("#fc-source")).trim() + " (a question missed in both the article drill and the sim reads 2×)");
 await page.click("#flashcard"); await page.waitForSelector("#fc-grade:not(.hidden)");
 ok(/^Answer: /.test(await page.textContent("#fc-text")), "miss card back leads with the correct answer");
 await page.click('.grade-btn[data-grade="4"]');
@@ -255,6 +255,11 @@ await page.click('.day[data-day="1"] .day-head').catch(() => {});
 const cb = await page.$('.day[data-day="1"] input[data-k]'); if (!(await cb.isVisible())) await page.click('.day[data-day="1"] .day-head');
 await page.click('.day[data-day="1"] input[data-k="1.0"]');
 ok((await page.textContent("#plan-pct")).trim() !== "0%", "plan progress updates: " + (await page.textContent("#plan-pct")));
+// calendar export
+const [dlIcs] = await Promise.all([page.waitForEvent("download"), page.click("#plan-ics")]);
+const icsPath = path.join(root, "dist", "smoke-plan.ics"); await dlIcs.saveAs(icsPath);
+const icsTxt = await readFile(icsPath, "utf8");
+ok(dlIcs.suggestedFilename() === "journeyman-hq-plan.ics" && icsTxt.startsWith("BEGIN:VCALENDAR\r\n") && (icsTxt.match(/BEGIN:VEVENT/g) || []).length === 47 && /SUMMARY:EXAM DAY/.test(icsTxt), ".ics export: 46 study days + exam day");
 // move the exam to 12 days out: plan compresses, the checked task survives
 await page.click('.tab-btn[data-tab="more"]'); const d12 = new Date(); d12.setDate(d12.getDate() + 11);
 await page.fill("#set-date", d12.toISOString().slice(0, 10)); await page.click("#set-save"); await page.waitForSelector("#set-status.ok");
