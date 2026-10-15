@@ -1,0 +1,29 @@
+# Apps vault: unit + stub-server tests on every PR/push that touches apps/vault. No deploy, no secrets.
+name: vault
+
+on:
+  pull_request:
+    paths: ["apps/vault/**", ".github/workflows/vault.yml"]
+  push:
+    branches: [main]
+    paths: ["apps/vault/**", ".github/workflows/vault.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Upload script against a stub vault (Basic Auth, PIN, no credential, rejection)
+        run: node --test apps/vault/test/upload-script.test.mjs
+      - name: PIN verifier unit tests
+        working-directory: apps/vault/pin/server
+        run: |
+          npm install --no-audit --no-fund
+          cd .. && node --test test/unit.test.js
