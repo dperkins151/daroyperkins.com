@@ -1,18 +1,21 @@
-# Content review queue — Journeyman HQ v2 banks
+# Content review queue — Journeyman HQ v3 banks
 
 Generated 2026-10-15. Items flagged `review: true` are uncertain and must be verified against the NEC 2020 book before Roy relies on them. Everything else was drafted from NEC 2020 article references and basic theory; Luigi samples for accuracy, Roy spot-checks.
 
 | Bank | Items | Flagged |
 |---|---|---|
-| questions | 260 | 0 |
+| questions | 308 | 3 |
 | flashcards | 182 | 2 |
 
-Questions by topic: theory 65 · wiring 74 · methods 47 · equipment 38 · special 20 · general 16 (exam blueprint per sim: theory 20 · wiring 20 · methods 10 · equipment 8 · special 6 · general 6)
+Questions by topic: theory 65 · wiring 74 · methods 47 · equipment 38 · special 50 · general 34 (exam blueprint per sim: theory 20 · wiring 20 · methods 10 · equipment 8 · special 6 · general 6)
 
 ## Flagged items
 
 | ID | Article | What to verify |
 |---|---|---|
+| G-218 | 110.16(B) | Confirm the exact 2020 110.16(B) label contents and the 1200 A threshold in the book. |
+| S-208 | 511.3(C)(1)(a) | Confirm the 2020 wording of 511.3(C)(1)(a) and its ventilation exception (6 ACH) before relying on the Division 2 option. |
+| S-220 | 555.35(A) | 2020 rewrite of Art. 555: confirm 555.35(A)(1) = 30 mA for shore-power receptacles and (A)(2) = 100 mA for feeders/branch circuits in the book. |
 | F-M101 | 314.16(B) | Verify the 2020 wording in 314.16(B)(5) for the 'more than four EGCs' quarter-allowance; the rest is settled. |
 | F-S102 | 690.7(A) / Table 690.7(A) | Confirm the Table 690.7(A) factor for −16 to −20 °C (1.18) and the 600 V dwelling limit wording in 2020 690.7. Method is settled. |
 

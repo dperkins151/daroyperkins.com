@@ -1,6 +1,6 @@
 {
   "app": "Journeyman HQ",
-  "appVersion": "1.5.0",
+  "appVersion": "1.5.1",
   "code": "NEC 2020",
   "exam": {
     "name": "Maryland Journeyman Electrician (PSI)",
@@ -51,12 +51,12 @@
   ],
   "banks": {
     "questions": {
-      "version": 2,
-      "file": "questions-v2.json",
+      "version": 3,
+      "file": "questions-v3.json",
       "count": 0,
-      "updated": "2026-10-06",
+      "updated": "2026-10-15",
       "reviewed": null,
-      "note": "v2 = v1 (192) + pack 2 (68 calc-heavy items: theory, load calcs, derating/fill, motors/transformers). Items carry pack and source."
+      "note": "v3 = v2 (260) + pack 3 (48 items: Special Occupancies/Systems depth across Ch. 5–7 and General Requirements Art. 90/100/110). Items carry pack and source."
     },
     "flashcards": {
       "version": 2,

@@ -1,0 +1,486 @@
+[
+ {
+  "id": "S-201",
+  "pack": 3,
+  "topic": "special",
+  "article": "500.5(C) / 500.6(B)",
+  "difficulty": 1,
+  "q": "A Class II hazardous (classified) location where the hazard is combustible grain, flour or wood dust falls in which material group?",
+  "choices": [
+   "Group E",
+   "Group F",
+   "Group G",
+   "Group IIC"
+  ],
+  "answer": 2,
+  "explain": "500.6(B) splits Class II dusts into Group E (combustible metal dusts), Group F (carbonaceous dusts such as coal and coke) and Group G (non-conductive dusts: grain, flour, wood, plastics, chemicals)."
+ },
+ {
+  "id": "S-202",
+  "pack": 3,
+  "topic": "special",
+  "article": "500.5(D)",
+  "difficulty": 1,
+  "q": "Easily ignitable fibers or flyings, such as those in a textile mill or woodworking plant, define which hazardous location class?",
+  "choices": [
+   "Class I",
+   "Class II",
+   "Class III",
+   "Class IV"
+  ],
+  "answer": 2,
+  "explain": "500.5(D): Class III locations are hazardous because of easily ignitable fibers or materials producing combustible flyings. Class I is gases/vapors, Class II is combustible dust; there is no Class IV."
+ },
+ {
+  "id": "S-203",
+  "pack": 3,
+  "topic": "special",
+  "article": "500.8(E)(1)",
+  "difficulty": 2,
+  "q": "Threaded conduit entering an explosionproof enclosure in a Class I location must be made up wrench-tight with at least how many threads fully engaged?",
+  "choices": [
+   "3",
+   "4½",
+   "5",
+   "7"
+  ],
+  "answer": 2,
+  "explain": "500.8(E)(1) requires threaded entries to be wrench-tight to prevent sparking and, for NPT threads, at least five threads fully engaged so the flame path is long enough to cool escaping gases."
+ },
+ {
+  "id": "S-204",
+  "pack": 3,
+  "topic": "special",
+  "article": "501.10(A)(1)",
+  "difficulty": 2,
+  "q": "Which wiring method is permitted for power circuits in a Class I, Division 1 location?",
+  "choices": [
+   "Electrical metallic tubing (EMT)",
+   "Threaded rigid metal conduit (RMC)",
+   "Schedule 40 PVC conduit",
+   "Type NM cable"
+  ],
+  "answer": 1,
+  "explain": "501.10(A)(1) lists threaded rigid metal conduit, threaded steel IMC and Type MI cable (plus a few listed options such as PVC-coated RMC) for Class I, Division 1. EMT, plain PVC and NM are not permitted."
+ },
+ {
+  "id": "S-205",
+  "pack": 3,
+  "topic": "special",
+  "article": "501.15(A)(4)",
+  "difficulty": 2,
+  "q": "A conduit leaves a Class I, Division 1 area. The conduit seal at the boundary must be located within what distance of the boundary, with no union, coupling, box or fitting between the seal and the boundary?",
+  "choices": [
+   "18 in.",
+   "5 ft",
+   "10 ft",
+   "25 ft"
+  ],
+  "answer": 2,
+  "explain": "501.15(A)(4): the boundary seal goes within 10 ft of where the conduit leaves the Division 1 location, and only explosionproof reducers are permitted between the seal and the boundary. (The 18 in. figure is the seal at enclosures with arcing parts, 501.15(A)(1).)"
+ },
+ {
+  "id": "S-206",
+  "pack": 3,
+  "topic": "special",
+  "article": "501.15(C)(3)",
+  "difficulty": 2,
+  "q": "The minimum thickness of sealing compound in a Class I conduit seal is:",
+  "choices": [
+   "Not less than ⅜ in.",
+   "Not less than the trade size of the fitting, and never less than ⅝ in.",
+   "Exactly 1 in.",
+   "Equal to the conduit's outside diameter"
+  ],
+  "answer": 1,
+  "explain": "501.15(C)(3): compound thickness must be at least the trade size of the sealing fitting and in no case less than ⅝ in."
+ },
+ {
+  "id": "S-207",
+  "pack": 3,
+  "topic": "special",
+  "article": "502.15",
+  "difficulty": 2,
+  "q": "In a Class II, Division 1 location, a raceway runs from a dust-ignitionproof enclosure to one that is not. Instead of a seal, the Code permits:",
+  "choices": [
+   "A horizontal raceway at least 10 ft long, or a vertical raceway at least 5 ft long extending downward",
+   "Any raceway at least 2 ft long",
+   "A union installed at the enclosure",
+   "No alternative — a seal is always required"
+  ],
+  "answer": 0,
+  "explain": "502.15 requires a seal to keep dust out of the dust-ignitionproof enclosure, but accepts a horizontal run of at least 10 ft or a vertical downward run of at least 5 ft in its place."
+ },
+ {
+  "id": "S-208",
+  "pack": 3,
+  "topic": "special",
+  "article": "511.3(C)(1)(a)",
+  "difficulty": 2,
+  "q": "In a major repair garage, a pit or depression below floor level that has no mechanical ventilation is classified as:",
+  "choices": [
+   "Unclassified",
+   "Class I, Division 2 up to the floor level",
+   "Class I, Division 1 up to the floor level",
+   "Class II, Division 1"
+  ],
+  "answer": 2,
+  "explain": "511.3(C)(1)(a): an unventilated pit in a major repair garage is Class I, Division 1 up to floor level. With ventilation of at least 6 air changes per hour the pit drops to Division 2 (exception).",
+  "review": true,
+  "note": "Confirm the 2020 wording of 511.3(C)(1)(a) and its ventilation exception (6 ACH) before relying on the Division 2 option."
+ },
+ {
+  "id": "S-209",
+  "pack": 3,
+  "topic": "special",
+  "article": "511.12",
+  "difficulty": 1,
+  "q": "In a commercial repair garage, GFCI protection is required for all 125 V, 15 and 20 A receptacles:",
+  "choices": [
+   "Only within 18 in. of the floor",
+   "Where electrical diagnostic equipment, hand tools or portable lighting are to be used",
+   "Only in Class I, Division 1 areas",
+   "Only if the receptacles are outdoors"
+  ],
+  "answer": 1,
+  "explain": "511.12 requires GFCI protection for 125 V, single-phase, 15 and 20 A receptacles in commercial garages where electrical diagnostic equipment, electrical hand tools or portable lighting equipment are used."
+ },
+ {
+  "id": "S-210",
+  "pack": 3,
+  "topic": "special",
+  "article": "513.3(B)",
+  "difficulty": 2,
+  "q": "In an aircraft hangar, the entire area up to what height above the floor is a Class I, Division 2 location (unless the floor area is otherwise classified)?",
+  "choices": [
+   "12 in.",
+   "18 in.",
+   "4 ft",
+   "5 ft"
+  ],
+  "answer": 1,
+  "explain": "513.3(B): the hangar area up to 18 in. above the floor is Class I, Division 2. Pits are Division 1 (513.3(A)); the zone within 5 ft of aircraft engines and fuel tanks, up to 5 ft above the upper surface, is also Division 2 (513.3(C))."
+ },
+ {
+  "id": "S-211",
+  "pack": 3,
+  "topic": "special",
+  "article": "Table 514.3(B)(1)",
+  "difficulty": 2,
+  "q": "Around a motor fuel dispenser, the Class I, Division 2 area extends up to 18 in. above grade level for what horizontal distance from the dispenser enclosure?",
+  "choices": [
+   "5 ft",
+   "10 ft",
+   "20 ft",
+   "50 ft"
+  ],
+  "answer": 2,
+  "explain": "Table 514.3(B)(1): the space up to 18 in. above grade within 20 ft horizontally of any edge of the dispenser enclosure is Class I, Division 2. Inside the dispenser enclosure is Division 1."
+ },
+ {
+  "id": "S-212",
+  "pack": 3,
+  "topic": "special",
+  "article": "514.11(B)",
+  "difficulty": 2,
+  "q": "At an attended self-service motor fuel dispensing facility, the emergency electrical disconnect for the dispensers must be:",
+  "choices": [
+   "Inside each dispenser",
+   "Within 5 ft of the dispensers",
+   "Readily accessible, more than 20 ft but not more than 100 ft from the dispensers",
+   "At the main service only"
+  ],
+  "answer": 2,
+  "explain": "514.11(B): an attended self-service facility needs a readily accessible emergency disconnect located more than 20 ft and not more than 100 ft from the dispensers, which removes power from all dispensing equipment and circuits."
+ },
+ {
+  "id": "S-213",
+  "pack": 3,
+  "topic": "special",
+  "article": "517.13(A) / 517.13(B)",
+  "difficulty": 2,
+  "q": "Branch circuits serving patient care spaces must use a wiring method that provides:",
+  "choices": [
+   "A single EGC of any type",
+   "Redundant grounding: a metal raceway or cable armor that qualifies as an EGC plus an insulated copper EGC",
+   "Only an isolated-ground receptacle",
+   "A green-insulated aluminum EGC"
+  ],
+  "answer": 1,
+  "explain": "517.13 requires two grounding paths in patient care spaces: (A) a metal raceway system or cable assembly qualified as an EGC, and (B) an insulated copper EGC run with the circuit conductors."
+ },
+ {
+  "id": "S-214",
+  "pack": 3,
+  "topic": "special",
+  "article": "517.18(C)",
+  "difficulty": 1,
+  "q": "Receptacles in pediatric locations of a health care facility (other than those in nurseries and similar areas where listed otherwise) must be:",
+  "choices": [
+   "Hospital-grade and tamper-resistant, or use a listed tamper-resistant cover",
+   "GFCI protected only",
+   "Isolated-ground type",
+   "Twist-lock type"
+  ],
+  "answer": 0,
+  "explain": "517.18(C): 15 and 20 A, 125 V receptacles in pediatric locations must be listed tamper-resistant or employ a listed tamper-resistant cover, in addition to being hospital grade where required."
+ },
+ {
+  "id": "S-215",
+  "pack": 3,
+  "topic": "special",
+  "article": "517.31(B)",
+  "difficulty": 2,
+  "q": "A hospital's Type 1 essential electrical system is divided into which branches?",
+  "choices": [
+   "Normal and emergency",
+   "Life safety, critical and equipment",
+   "Primary and secondary",
+   "Exit lighting and fire alarm"
+  ],
+  "answer": 1,
+  "explain": "517.31(B): the Type 1 essential electrical system comprises the life safety branch, the critical branch and the equipment branch, each served through its own transfer equipment."
+ },
+ {
+  "id": "S-216",
+  "pack": 3,
+  "topic": "special",
+  "article": "518.2 / 518.4(A)",
+  "difficulty": 2,
+  "q": "Article 518 (assembly occupancies) applies to buildings or portions designed for the assembly of how many persons, and which wiring method below is permitted there?",
+  "choices": [
+   "50 or more; Type NM cable in any location",
+   "100 or more; metal raceways, flexible metal raceways, or Type MI, MC or AC cable",
+   "200 or more; open wiring on insulators",
+   "300 or more; cable tray only"
+  ],
+  "answer": 1,
+  "explain": "518.2 sets the threshold at 100 or more persons. 518.4(A) permits metal raceways, flexible metal raceways, Type MI, MC and AC cables, and nonmetallic raceways encased in at least 2 in. of concrete. NM is allowed only in limited non-fire-rated spaces."
+ },
+ {
+  "id": "S-217",
+  "pack": 3,
+  "topic": "special",
+  "article": "547.10(B)",
+  "difficulty": 2,
+  "q": "The equipotential plane in a livestock confinement area must be bonded to the building grounding electrode system with a solid copper conductor not smaller than:",
+  "choices": [
+   "14 AWG",
+   "10 AWG",
+   "8 AWG",
+   "6 AWG"
+  ],
+  "answer": 2,
+  "explain": "547.10(B): bonding of the equipotential plane uses a solid copper conductor not smaller than 8 AWG, connected with pressure connectors or clamps of the proper material."
+ },
+ {
+  "id": "S-218",
+  "pack": 3,
+  "topic": "special",
+  "article": "550.32(A)",
+  "difficulty": 2,
+  "q": "Service equipment for a mobile home must be located in sight from and not more than what distance from the exterior wall of the mobile home it serves?",
+  "choices": [
+   "10 ft",
+   "20 ft",
+   "30 ft",
+   "50 ft"
+  ],
+  "answer": 2,
+  "explain": "550.32(A): the mobile home service equipment is located in sight from and not more than 30 ft from the exterior wall of the mobile home, unless an alternative is permitted by 550.32(B)."
+ },
+ {
+  "id": "S-219",
+  "pack": 3,
+  "topic": "special",
+  "article": "551.71(C)",
+  "difficulty": 2,
+  "q": "Of all NEW recreational vehicle sites with electrical supply in an RV park, the minimum percentage that must be equipped with a 50 A, 125/250 V receptacle is:",
+  "choices": [
+   "5%",
+   "20%",
+   "40%",
+   "70%"
+  ],
+  "answer": 2,
+  "explain": "551.71(C): at least 40% of all new RV sites with electrical supply get a 50 A, 125/250 V receptacle (20% is the figure for existing sites). Every site with a 50 A receptacle must also have a 30 A, 125 V receptacle, and every site gets a 20 A, 125 V receptacle."
+ },
+ {
+  "id": "S-220",
+  "pack": 3,
+  "topic": "special",
+  "article": "555.35(A)",
+  "difficulty": 3,
+  "q": "Under the 2020 NEC, a shore-power receptacle at a marina must be provided with ground-fault protection that opens the circuit at a ground-fault current not exceeding:",
+  "choices": [
+   "5 mA",
+   "30 mA",
+   "100 mA",
+   "1200 mA"
+  ],
+  "answer": 1,
+  "explain": "555.35(A)(1) (2020): each shore-power receptacle gets individual ground-fault protection set to open at no more than 30 mA; feeders and branch circuits for the marina use GFPE set at no more than 100 mA (555.35(A)(2)).",
+  "review": true,
+  "note": "2020 rewrite of Art. 555: confirm 555.35(A)(1) = 30 mA for shore-power receptacles and (A)(2) = 100 mA for feeders/branch circuits in the book."
+ },
+ {
+  "id": "S-221",
+  "pack": 3,
+  "topic": "special",
+  "article": "590.3(B)",
+  "difficulty": 1,
+  "q": "Temporary wiring for holiday decorative lighting and similar purposes is permitted for a period not to exceed:",
+  "choices": [
+   "30 days",
+   "60 days",
+   "90 days",
+   "1 year"
+  ],
+  "answer": 2,
+  "explain": "590.3(B): temporary installations for decorative lighting and similar purposes are limited to 90 days. 590.3(A) allows temporary power during construction, remodeling and demolition for the duration of the work; 590.3(D) requires removal immediately after the purpose ends."
+ },
+ {
+  "id": "S-222",
+  "pack": 3,
+  "topic": "special",
+  "article": "600.6(A)(1)",
+  "difficulty": 2,
+  "q": "The disconnecting means for an electric sign must be:",
+  "choices": [
+   "Located at the service equipment only",
+   "Within sight of the sign or outline lighting, or capable of being locked in the open position",
+   "Inside the sign enclosure",
+   "A plug and receptacle in every case"
+  ],
+  "answer": 1,
+  "explain": "600.6(A)(1): each sign and outline lighting system needs a disconnect that is within sight of the sign, or one that can be locked in the open position with the lock-out provision remaining in place (600.6(A)(1)(a)/(b)); 2020 also addresses disconnects for signs on buildings in 600.6(A)(2)."
+ },
+ {
+  "id": "S-223",
+  "pack": 3,
+  "topic": "special",
+  "article": "645.10",
+  "difficulty": 2,
+  "q": "In an information technology equipment room wired under Article 645, a disconnecting means to shut off power to all electronic equipment and HVAC in the room must be located:",
+  "choices": [
+   "At the main service",
+   "At the principal exit doors, readily accessible",
+   "Inside each equipment rack",
+   "At the fire alarm panel"
+  ],
+  "answer": 1,
+  "explain": "645.10: an approved means to disconnect power to all IT equipment and the dedicated HVAC in the room must be provided at the principal exit doors (unless the critical-operations exception of 645.10(B) applies)."
+ },
+ {
+  "id": "S-224",
+  "pack": 3,
+  "topic": "special",
+  "article": "680.26(C)",
+  "difficulty": 2,
+  "q": "Pool water is bonded by an intentional conductive surface in contact with the water of at least:",
+  "choices": [
+   "4 in²",
+   "9 in²",
+   "12 in²",
+   "1 ft²"
+  ],
+  "answer": 1,
+  "explain": "680.26(C): where none of the bonded parts is in direct contact with the water, a corrosion-resistant conductive surface of at least 9 in² must contact the water and be bonded to the equipotential grid."
+ },
+ {
+  "id": "S-225",
+  "pack": 3,
+  "topic": "special",
+  "article": "680.22(B)(1)",
+  "difficulty": 2,
+  "q": "A new luminaire installed over a permanently installed pool or within 5 ft horizontally of the inside wall must be at least how far above the maximum water level?",
+  "choices": [
+   "8 ft",
+   "10 ft",
+   "12 ft",
+   "15 ft"
+  ],
+  "answer": 2,
+  "explain": "680.22(B)(1): luminaires, lighting outlets and ceiling fans over the pool or within 5 ft horizontally must be at least 12 ft above the maximum water level. Existing luminaires may be 5 ft horizontally away or at least 5 ft above (680.22(B)(2))."
+ },
+ {
+  "id": "S-226",
+  "pack": 3,
+  "topic": "special",
+  "article": "690.12(B)(2)",
+  "difficulty": 2,
+  "q": "Under the 2020 rapid shutdown rules, controlled conductors inside the array boundary must be limited within 30 seconds of initiation to not more than:",
+  "choices": [
+   "30 V",
+   "50 V",
+   "80 V",
+   "120 V"
+  ],
+  "answer": 2,
+  "explain": "690.12(B)(2): inside the array boundary, conductors are limited to 80 V within 30 s (via a listed PV hazard control system or equivalent). Outside the boundary the limit is 30 V within 30 s (690.12(B)(1))."
+ },
+ {
+  "id": "S-227",
+  "pack": 3,
+  "topic": "special",
+  "article": "690.31(G)(1)",
+  "difficulty": 2,
+  "q": "Where PV source and output circuits operating above 30 V DC run inside a building, they must be installed in:",
+  "choices": [
+   "Type NM cable",
+   "A metal raceway, Type MC cable, or metal enclosures",
+   "Open wiring on insulators",
+   "Schedule 40 PVC only"
+  ],
+  "answer": 1,
+  "explain": "690.31(G)(1): DC PV circuits run inside a building must be contained in metal raceways, Type MC metal-clad cable complying with 250.118(10), or metal enclosures, from the point of penetration to the first readily accessible disconnect."
+ },
+ {
+  "id": "S-228",
+  "pack": 3,
+  "topic": "special",
+  "article": "700.10(B)",
+  "difficulty": 2,
+  "q": "Wiring from an emergency source to emergency loads generally must be:",
+  "choices": [
+   "Run in the same raceway as normal circuits to save space",
+   "Kept entirely independent of all other wiring, not in the same raceway, cable, box or cabinet",
+   "Only in rigid metal conduit",
+   "Identified by yellow conductor insulation"
+  ],
+  "answer": 1,
+  "explain": "700.10(B): emergency wiring is kept independent of all other wiring and equipment — not in the same raceways, cables, boxes or cabinets — with limited exceptions such as transfer-equipment enclosures and luminaires supplied from both sources."
+ },
+ {
+  "id": "S-229",
+  "pack": 3,
+  "topic": "special",
+  "article": "702.7(A)",
+  "difficulty": 1,
+  "q": "Where an optional standby system is installed, a sign is required at the service-entrance equipment indicating:",
+  "choices": [
+   "The generator's fuel type only",
+   "The type and location of each on-site standby power source",
+   "The name of the installing contractor",
+   "The system's annual test date"
+  ],
+  "answer": 1,
+  "explain": "702.7(A): a permanent sign at the service-entrance equipment (or grouped disconnects) must indicate the type and location of each on-site optional standby power source; 702.7(B) requires a sign for a non-separately-derived system warning about the neutral connection."
+ },
+ {
+  "id": "S-230",
+  "pack": 3,
+  "topic": "special",
+  "article": "705.12(B)(3)(3)",
+  "difficulty": 3,
+  "q": "Using the 'sum of breakers' option for a load-side PV interconnection, the sum of the ratings of all overcurrent devices on the busbar, excluding the main supply device, must not exceed:",
+  "choices": [
+   "100% of the busbar rating",
+   "120% of the busbar rating",
+   "125% of the busbar rating",
+   "There is no limit"
+  ],
+  "answer": 0,
+  "explain": "705.12(B)(3)(3): where the sum of all branch and feeder breakers on the panelboard (excluding the main) is no more than the busbar rating, the PV breaker may be placed anywhere. The 120% rule (705.12(B)(3)(2)) is the other common option."
+ }
+]
