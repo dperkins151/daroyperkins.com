@@ -61,7 +61,10 @@ const strip = (x) => { const { _file, ...rest } = x; return Object.assign({ sour
 const today = new Date().toISOString().slice(0, 10);
 const byTopic = (items) => Object.fromEntries(manifest.topics.map((t) => [t.id, items.filter((x) => x.topic === t.id).length]));
 const byPack = (items) => items.reduce((o, x) => { const k = "v" + (x.pack || 1); o[k] = (o[k] || 0) + 1; return o; }, {});
-const qOut = { bank: "questions", version: manifest.banks.questions.version, code: manifest.code, source: "jhq-v" + manifest.banks.questions.version, generated: today, byTopic: byTopic(questions), byPack: byPack(questions), items: questions.map(strip) };
+// questions ship as one index file + one file per topic (keeps every bundled file under the size budget as packs grow)
+const qDir = manifest.banks.questions.file.replace(/\.json$/, "");
+const qFiles = manifest.topics.map((t) => ({ topic: t.id, file: qDir + "/" + t.id + ".json", items: questions.filter((q) => q.topic === t.id).map(strip) })).filter((f) => f.items.length);
+const qOut = { bank: "questions", version: manifest.banks.questions.version, code: manifest.code, source: "jhq-v" + manifest.banks.questions.version, generated: today, byTopic: byTopic(questions), byPack: byPack(questions), count: questions.length, files: qFiles.map((f) => f.file), items: [] };
 const cOut = { bank: "flashcards", version: manifest.banks.flashcards.version, code: manifest.code, source: "jhq-v" + manifest.banks.flashcards.version, generated: today, byTopic: byTopic(cards), items: cards.map(strip) };
 manifest.banks.questions.count = questions.length;
 manifest.banks.flashcards.count = cards.length;
@@ -70,8 +73,12 @@ manifest.banks.questions.reviewFlagged = questions.filter((q) => q.review).lengt
 manifest.banks.flashcards.reviewFlagged = cards.filter((c) => c.review).length;
 manifest.generated = today;
 fs.mkdirSync(path.join(root, "data"), { recursive: true });
-const live = new Set([manifest.banks.questions.file, manifest.banks.flashcards.file, manifest.banks.plan.file, "manifest.json", "changelog.json", "tabs.json"]);
-for (const f of fs.readdirSync(path.join(root, "data"))) if (!live.has(f)) { fs.unlinkSync(path.join(root, "data", f)); console.log("removed stale bank file data/" + f); }
+const live = new Set([manifest.banks.questions.file, manifest.banks.flashcards.file, manifest.banks.plan.file, "manifest.json", "changelog.json", "tabs.json", qDir]);
+for (const f of fs.readdirSync(path.join(root, "data"))) if (!live.has(f)) { fs.rmSync(path.join(root, "data", f), { recursive: true, force: true }); console.log("removed stale bank file data/" + f); }
+fs.mkdirSync(path.join(root, "data", qDir), { recursive: true });
+const liveQ = new Set(qFiles.map((f) => path.basename(f.file)));
+for (const f of fs.readdirSync(path.join(root, "data", qDir))) if (!liveQ.has(f)) { fs.unlinkSync(path.join(root, "data", qDir, f)); console.log("removed stale topic file data/" + qDir + "/" + f); }
+qFiles.forEach((f) => fs.writeFileSync(path.join(root, "data", f.file), JSON.stringify({ bank: "questions", version: manifest.banks.questions.version, topic: f.topic, source: qOut.source, generated: today, items: f.items }, null, 1)));
 fs.writeFileSync(path.join(root, "data", manifest.banks.questions.file), JSON.stringify(qOut, null, 1));
 fs.writeFileSync(path.join(root, "data", manifest.banks.flashcards.file), JSON.stringify(cOut, null, 1));
 fs.writeFileSync(path.join(root, "data", manifest.banks.plan.file), JSON.stringify(plan, null, 1));
