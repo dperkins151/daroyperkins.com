@@ -44,6 +44,8 @@
     const planDay = plan ? JHQ.plan.currentDay() : 1;
     $("act-plan").textContent = "day " + planDay + " of " + (plan ? plan.days.length : 30);
 
+    renderProgress(attempts, act);
+
     // weak topics
     const weak = JHQ.grader.weakTopics(attempts, JHQ.data.state.topics);
     const wt = $("weak-topics");
@@ -65,6 +67,31 @@
         <div><div class="title">${esc(JHQ.exam.modeName(a.mode))}</div><div class="sub">${fmtDateTime(a.submittedAt || a.startedAt)}</div></div>
         <div class="right"><b class="${a.result.verdict}">${Math.round(a.result.score.pct)}%</b><div class="sub">${esc(a.result.verdict)}</div></div>
       </div>`).join("") : '<div class="empty">No attempts yet.</div>';
+  }
+
+  function renderProgress(attempts, act) {
+    const S = JHQ.stats, topics = JHQ.data.state.topics;
+    const box = $("progress");
+    const graded = attempts.filter((a) => a.result && a.submittedAt);
+    box.classList.toggle("hidden", !graded.length);
+    if (!graded.length) return;
+    // full-sim scores: one bar per sim, 70% line
+    const sims = S.simTrend(attempts, 10);
+    $("prog-sim").innerHTML = sims.length ? '<div class="spark-line" style="bottom:70%"></div>' + sims.map((s) => `<div class="spark-bar ${s.verdict}" style="height:${Math.max(4, s.pct)}%" title="${esc(fmtDate(s.at))} · ${s.pct}%"><span>${s.pct}</span></div>`).join("") : '<div class="empty small">No full sims yet — scores land here.</div>';
+    $("prog-sim-sub").textContent = sims.length ? (sims.length === 1 ? "1 sim" : sims.length + " sims") + " · best " + Math.max(...sims.map((s) => s.pct)) + "% · need 70%" : "";
+    // pace
+    const p = S.pace(attempts);
+    if (p.secPerQ == null) { $("prog-pace").textContent = "—"; $("prog-pace-sub").textContent = "runs a full sim to measure"; $("prog-pace-fill").style.width = "0%"; $("prog-pace-fill").className = "bar-fill"; }
+    else { $("prog-pace").textContent = p.secPerQ + " s / question"; $("prog-pace-sub").textContent = "PSI budget " + p.budget + " s · " + (p.status === "slow" ? "over budget" : p.status === "fast" ? "plenty of margin" : "on budget"); $("prog-pace-fill").style.width = Math.min(100, Math.round((p.secPerQ / p.budget) * 100)) + "%"; $("prog-pace-fill").className = "bar-fill " + (p.status === "slow" ? "bad" : "good"); }
+    // per-topic trend
+    const tt = S.topicTrend(attempts, topics, 10);
+    $("prog-topics").innerHTML = tt.map((t) => `<div class="prog-topic"><span class="name">${esc(t.name)}</span><span class="dots">${t.points.map((v) => `<i class="${v >= 70 ? "good" : "bad"}" style="height:${Math.max(2, Math.round(v / 10))}px" title="${v}%"></i>`).join("")}</span><span class="latest ${t.latest >= 70 ? "ok" : "bad"}">${t.latest}%</span><span class="delta ${t.delta == null ? "muted" : t.delta > 0 ? "ok" : t.delta < 0 ? "bad" : "muted"}">${t.delta == null ? "·" : (t.delta > 0 ? "▲ +" : t.delta < 0 ? "▼ " : "= ") + t.delta}</span></div>`).join("");
+    // 14-day activity
+    const days = S.daily(act, todayKey, 14);
+    const max = Math.max(1, ...days.map((d) => d.cards + d.questions));
+    $("prog-days").innerHTML = days.map((d) => `<div class="day-col" title="${d.key} · ${d.cards} cards · ${d.questions} questions"><div class="day-bar" style="height:${Math.round(((d.cards + d.questions) / max) * 100)}%"><div class="day-q" style="height:${d.cards + d.questions ? Math.round((d.questions / (d.cards + d.questions)) * 100) : 0}%"></div></div></div>`).join("");
+    const tc = days.reduce((s, d) => s + d.cards, 0), tq = days.reduce((s, d) => s + d.questions, 0), active = days.filter((d) => d.cards + d.questions).length;
+    $("prog-days-sub").textContent = active + " active day" + (active === 1 ? "" : "s") + " · " + tc + " cards · " + tq + " questions";
   }
 
   function bind() {

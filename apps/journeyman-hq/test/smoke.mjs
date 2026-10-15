@@ -118,6 +118,13 @@ await page.click('.tab-btn[data-tab="home"]');
 ok((await page.$$eval("#weak-topics .topic-row", (r) => r.length)) >= 1, "weak topics rendered on dashboard");
 ok((await page.textContent("#st-streak")).trim() === "1", "streak = 1 after today's activity");
 ok(/\d+ missed in the last 7 days/.test(await page.textContent("#act-misses")), "home action shows the misses count: " + (await page.textContent("#act-misses")).trim());
+// Progress card
+ok(!(await page.$eval("#progress", (e) => e.classList.contains("hidden"))), "progress card shows once attempts exist");
+ok((await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts"))[0].elapsedSec)) > 0, "sim elapsed time is recorded (timer no longer loses time on each answer)");
+ok((await page.$$eval("#prog-sim .spark-bar", (b) => b.length)) === 1, "one sim bar in the score chart");
+ok(/^\d+ s \/ question$/.test((await page.textContent("#prog-pace")).trim()) && /PSI budget 180 s/.test(await page.textContent("#prog-pace-sub")), "pace vs PSI budget: " + (await page.textContent("#prog-pace")).trim());
+ok((await page.$$eval("#prog-topics .prog-topic", (r) => r.length)) === 6, "six topic trend rows");
+ok((await page.$$eval("#prog-days .day-col", (c) => c.length)) === 14 && /1 active day · \d+ cards · \d+ questions/.test(await page.textContent("#prog-days-sub")), "14-day activity strip: " + (await page.textContent("#prog-days-sub")).trim());
 
 // Plan
 await page.click('.tab-btn[data-tab="plan"]'); await page.waitForSelector("#plan-days .day");

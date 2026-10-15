@@ -84,7 +84,7 @@
     attempt = JHQ.store.inProgress(); if (!attempt) return;
     // credit time that passed while away (sim only); auto-submit if over
     if (attempt.timeLimitSec) {
-      attempt.elapsedSec += Math.max(0, Math.round((Date.now() - (attempt.lastTick || Date.now())) / 1000));
+      attempt.elapsedSec += Math.max(0, (Date.now() - (attempt.lastTick || Date.now())) / 1000);
       if (attempt.elapsedSec >= attempt.timeLimitSec) { attempt.elapsedSec = attempt.timeLimitSec + 1; return submit(true); }
     }
     attempt.lastTick = Date.now();
@@ -95,7 +95,9 @@
     if (!confirm("Abandon this attempt? It will not be scored.")) return;
     stopTimer(); attempt = null; JHQ.store.saveInProgress(null); JHQ.app.banner(null); show("exam-lobby");
   }
-  function persist() { if (attempt) { attempt.lastTick = Date.now(); JHQ.store.saveInProgress(attempt); } }
+  // persist never touches lastTick: the timer owns it. (Resetting it on every answer tap used to drop the
+  // sub-second remainder each time, so a fast run could finish with elapsedSec = 0.)
+  function persist() { if (attempt) JHQ.store.saveInProgress(attempt); }
 
   function startTimer() {
     stopTimer();
@@ -106,7 +108,7 @@
   function tick() {
     if (!attempt) return stopTimer();
     const now = Date.now();
-    attempt.elapsedSec += Math.max(0, Math.round((now - (attempt.lastTick || now)) / 1000));
+    attempt.elapsedSec += Math.max(0, (now - (attempt.lastTick || now)) / 1000);
     attempt.lastTick = now;
     const el = $("ex-timer");
     if (attempt.timeLimitSec) {
@@ -114,7 +116,7 @@
       el.textContent = fmtClock(left); el.classList.toggle("low", left < 600);
       if (left <= 0) { attempt.elapsedSec = attempt.timeLimitSec + 1; return submit(true); }
     } else { el.textContent = fmtClock(attempt.elapsedSec); el.classList.remove("low"); }
-    if (attempt.elapsedSec % 15 === 0) persist();
+    if (Math.floor(attempt.elapsedSec) % 15 === 0) persist();
   }
 
   function renderQ() {
@@ -163,7 +165,7 @@
     const loop = JHQ.misses.record(JHQ.store.missed(), result.missed, now);
     JHQ.store.saveMissed(loop.map);
     JHQ.store.logActivity("questions", attempt.questionIds.length);
-    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: attempt.elapsedSec, timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, notes: attempt.notes, result, newCards: loop.added };
+    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: Math.round(attempt.elapsedSec), timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, notes: attempt.notes, result, newCards: loop.added };
     JHQ.store.pushAttempt(record);
     JHQ.store.saveInProgress(null);
     attempt = null;

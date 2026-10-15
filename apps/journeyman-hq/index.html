@@ -54,6 +54,16 @@
         <div class="stat"><span class="stat-label">Plan</span><span class="stat-value" id="st-plan">0%</span><span class="stat-unit">complete</span></div>
       </div>
 
+      <div id="progress" class="hidden">
+        <h2 class="section-h">Progress</h2>
+        <div class="card prog">
+          <div class="prog-row"><div class="prog-head"><span>Full sims</span><span id="prog-sim-sub" class="muted small"></span></div><div id="prog-sim" class="spark" role="img" aria-label="Sim scores"></div></div>
+          <div class="prog-row"><div class="prog-head"><span>Pace</span><span id="prog-pace-sub" class="muted small"></span></div><div class="pace"><div class="bar"><div id="prog-pace-fill" class="bar-fill"></div></div><span id="prog-pace" class="pace-num"></span></div></div>
+          <div class="prog-row"><div class="prog-head"><span>By topic</span><span class="muted small">last 10 attempts · trend</span></div><div id="prog-topics" class="prog-topics"></div></div>
+          <div class="prog-row"><div class="prog-head"><span>Last 14 days</span><span id="prog-days-sub" class="muted small"></span></div><div id="prog-days" class="days" role="img" aria-label="Daily activity"></div></div>
+        </div>
+      </div>
+
       <h2 class="section-h">Weakest topics</h2>
       <div id="weak-topics" class="list"></div>
 
@@ -244,6 +254,7 @@
 <script src="js/store.js"></script>
 <script src="js/srs.js"></script>
 <script src="js/grader.js"></script>
+<script src="js/stats.js"></script>
 <script src="js/misses.js"></script>
 <script src="js/data.js"></script>
 <script src="js/dashboard.js"></script>
