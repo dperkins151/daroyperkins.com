@@ -4,8 +4,9 @@ import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { createRequire } from "node:module";
-const require = createRequire("/opt/node22/lib/node_modules/");
-const { chromium } = require("playwright");
+// Playwright: local node_modules first (CI: npm i --no-save playwright), then the image-global install.
+function loadPlaywright() { const bases = [import.meta.url, "/opt/node22/lib/node_modules/"]; for (const b of bases) { try { return createRequire(b)("playwright"); } catch (e) {} } throw new Error("playwright not found: npm i --no-save playwright && npx playwright install chromium"); }
+const { chromium } = loadPlaywright();
 const root = path.resolve(new URL(".", import.meta.url).pathname, "..");
 const types = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".json": "application/json", ".webmanifest": "application/manifest+json", ".png": "image/png", ".svg": "image/svg+xml" };
 const srv = createServer(async (req, res) => {
