@@ -6,6 +6,7 @@
   let attempt = null;   // in-progress attempt (persisted)
   let timer = null;
   let lastResult = null;
+  let resView = "missed";   // "missed" | "all" — result-screen list filter
   const MODE = { sim: "Full simulation", drill: "Quick drill", misses: "Missed drill", lookup: "Lookup drill" };
   const MISS_DAYS = 7, MISS_N = 10;
   function modeName(m) { return MODE[m] || m; }
@@ -213,14 +214,26 @@
     $("res-lookup-text").textContent = isLookup ? (avg != null ? avg + " s per lookup on average · slowest " + Math.round(Math.max(...times)) + " s" : "") + " · the exam budgets 180 s per question, book time included" : "";
     $("res-loop").classList.toggle("hidden", !r.missed.length || isLookup);
     $("res-loop-text").textContent = r.missed.length ? r.missed.length + " missed → flashcards in your Missed deck" + (rec.newCards ? " (" + rec.newCards + " new)" : "") + " · " + deckN + " card" + (deckN === 1 ? "" : "s") + " total" : "";
-    $("res-missed").innerHTML = r.missed.length ? r.missed.map((id) => {
+    renderResultList(rec, qmap);
+  }
+
+  /** Result list: misses only (default) or every question in attempt order, each with your answer vs the correct one. */
+  function renderResultList(rec, qmap) {
+    const r = rec.result, isLookup = rec.mode === "lookup";
+    const missed = new Set(r.missed);
+    const ids = resView === "all" ? rec.questionIds : rec.questionIds.filter((id) => missed.has(id));
+    $("res-view-missed").classList.toggle("active", resView === "missed"); $("res-view-missed").setAttribute("aria-pressed", String(resView === "missed"));
+    $("res-view-all").classList.toggle("active", resView === "all"); $("res-view-all").setAttribute("aria-pressed", String(resView === "all"));
+    $("res-missed-h").textContent = resView === "all" ? "All " + rec.questionIds.length + " questions" : "Missed questions";
+    $("res-missed").innerHTML = ids.length ? ids.map((id) => {
       const q = qmap[id]; if (!q) return "";
-      const a = rec.answers[id];
+      const a = rec.answers[id]; const right = a != null && a === q.answer; const pos = rec.questionIds.indexOf(id) + 1;
       const secs = isLookup && rec.qtime && rec.qtime[id] != null ? ` · ${Math.round(rec.qtime[id])} s` : "";
-      return `<div class="missed-row">
-        <div class="fc-meta"><span class="chip">${esc(JHQ.data.topicName(q.topic))}${secs}</span>${q.article ? `<span class="chip chip-amber">NEC ${esc(q.article)}</span>` : ""}</div>
+      const flag = rec.flagged && rec.flagged[id] ? ' <span class="chip">⚑ flagged</span>' : "";
+      return `<div class="missed-row ${right ? "right" : ""}" data-qid="${esc(id)}">
+        <div class="fc-meta"><span class="idx">#${pos}</span><span class="chip">${esc(JHQ.data.topicName(q.topic))}${secs}</span>${q.article ? `<span class="chip chip-amber">NEC ${esc(q.article)}</span>` : ""}${flag}</div>
         <div class="q">${esc(q.q)}</div>
-        <div class="ans">${a == null ? '<span class="bad">No answer</span>' : `<span class="bad">You: ${esc(q.choices[a])}</span>`}<br><span class="ok">Correct: ${esc(q.choices[q.answer])}</span></div>
+        <div class="ans">${right ? `<span class="ok">✓ You: ${esc(q.choices[a])}</span>` : (a == null ? '<span class="bad">No answer</span>' : `<span class="bad">You: ${esc(q.choices[a])}</span>`) + `<br><span class="ok">Correct: ${esc(q.choices[q.answer])}</span>`}</div>
         ${q.explain ? `<div class="explain">${esc(q.explain)}</div>` : ""}
       </div>`;
     }).join("") : '<div class="empty">Clean sheet — nothing missed.</div>';
@@ -240,6 +253,8 @@
     $("q-flag").addEventListener("click", () => { const id = attempt.questionIds[attempt.idx]; attempt.flagged[id] = !attempt.flagged[id]; persist(); renderQ(); });
     $("ex-submit").addEventListener("click", () => submit(false));
     $("res-done").addEventListener("click", () => { show("exam-lobby"); JHQ.app.refresh(); });
+    $("res-view-missed").addEventListener("click", () => { resView = "missed"; if (lastResult) renderResultList(lastResult, qmapFor(lastResult)); });
+    $("res-view-all").addEventListener("click", () => { resView = "all"; if (lastResult) renderResultList(lastResult, qmapFor(lastResult)); });
     $("res-review-missed").addEventListener("click", () => { show("exam-lobby"); JHQ.app.go("cards"); JHQ.cards.start("__missed"); });
     document.addEventListener("visibilitychange", () => { if (attempt) persist(); });
   }

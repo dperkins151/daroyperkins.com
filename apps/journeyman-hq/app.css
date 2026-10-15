@@ -231,3 +231,9 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--amber); out
 .grade-row.cram { grid-template-columns: 1fr 1fr; }
 .cram-row { border-style: dashed; }
 .cram-row.cram-now { border-color: var(--amber); border-style: solid; }
+/* result view toggle + full review */
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; margin-bottom: 10px; }
+.seg-btn { background: var(--surface); color: var(--muted); border: none; padding: 6px 14px; font-size: 0.82rem; cursor: pointer; }
+.seg-btn.active { background: var(--surface-2); color: var(--text); font-weight: 700; }
+.missed-row.right { border-color: #1f4d33; }
+.missed-row .idx { color: var(--muted); font-size: 0.78rem; margin-right: 6px; }

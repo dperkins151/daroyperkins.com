@@ -83,6 +83,14 @@ await page.waitForSelector("#exam-result:not(.hidden)");
 const verdict = await page.textContent("#res-verdict"); ok(/PASS|FAIL/.test(verdict) && /\/70/.test(verdict), "verdict + score rendered: " + verdict.trim());
 const topics = await page.$$eval("#res-topics .topic-row", (r) => r.length); ok(topics === 6, "6-topic breakdown");
 ok(/10 unanswered/.test(await page.textContent("#res-sub")), "unanswered rail surfaced");
+// whole-sim review toggle
+const nMissedRows = await page.$$eval("#res-missed .missed-row", (r) => r.length);
+await page.click("#res-view-all");
+ok((await page.$$eval("#res-missed .missed-row", (r) => r.length)) === 70 && /All 70 questions/.test(await page.textContent("#res-missed-h")), "All questions view lists every sim question in order");
+ok((await page.$$eval("#res-missed .missed-row.right", (r) => r.length)) === 70 - nMissedRows && (await page.$eval("#res-missed .missed-row", (e) => e.querySelector(".idx").textContent)) === "#1", "right answers marked, numbered from #1");
+ok((await page.$$eval("#res-missed .missed-row .chip", (c) => c.filter((x) => /flagged/.test(x.textContent)).length)) === 1, "the flagged question carries its marker");
+await page.click("#res-view-missed");
+ok((await page.$$eval("#res-missed .missed-row", (r) => r.length)) === nMissedRows, "back to misses only");
 ok(!(await page.$eval("#res-loop", (e) => e.classList.contains("hidden"))) && /missed → flashcards/.test(await page.textContent("#res-loop-text")), "result links misses to the flashcard loop: " + (await page.textContent("#res-loop-text")).trim());
 await page.click("#res-done"); await page.waitForSelector("#attempt-list .row");
 ok(true, "attempt history lists the sim");
