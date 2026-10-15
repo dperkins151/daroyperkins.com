@@ -11,7 +11,7 @@ Static frontend, zero backend calls, no secrets. Lives behind the apps vault at 
 - **More** — add your own flashcard or 4-choice question (merged into decks/drills immediately), export my content as JSON (for merging into a future bank), full backup/restore, bank manifest (which versions are live), settings, reset.
 
 ## How it gets its information
-- Content ships in the bundle as versioned JSON banks: `data/questions-v1.json`, `data/flashcards-v1.json`, `data/plan-v1.json`, with `data/manifest.json` listing versions and counts. Every item carries `topic`, `article` (NEC 2020 reference), `difficulty` 1–3, `source`; uncertain items carry `review: true` + `note`.
+- Content ships in the bundle as versioned JSON banks: `data/questions-v2.json`, `data/flashcards-v2.json`, `data/plan-v1.json`, with `data/manifest.json` listing versions and counts. Every item carries `topic`, `article` (NEC 2020 reference), `difficulty` 1–3, `source`; uncertain items carry `review: true` + `note`.
 - Three ongoing feeds: (a) Roy adds cards/questions in-app → stored in this browser → **Export my content** produces JSON for the next bank; (b) new packs ship as `data/questions-v2.json` etc. plus an updated manifest through the same zip upload; (c) the app's own loop — every question missed on a sim or drill becomes a flashcard in the **Missed questions** deck (derived from the live bank, scheduled by the same SRS, dropped once its interval reaches 21 days or when you clear it under More), missed questions are weighted back into drills and sims, practice results drive the weak-topic list, SRS schedules reviews from performance.
 - Copyright rail: the NEC is NFPA-copyrighted. Banks paraphrase concepts and cite article numbers; they never reproduce Code text.
 

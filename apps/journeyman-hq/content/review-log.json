@@ -53,6 +53,17 @@
    "sources": [
     "https://www.mikeholt.com/files/PDF/23_BG_250.118.pdf"
    ]
+  },
+  {
+   "id": "F-S12",
+   "date": "2026-10-15",
+   "outcome": "resolved — both sides partly right",
+   "detail": "551.71(C) splits by site age: a minimum of 20% of EXISTING RV sites and 40% of all NEW RV sites with electrical supply get a 50 A 125/250 V receptacle. The 20%→40% step for new sites came in the 2017 cycle, not 2020. Every 50 A site also has a 30 A 125 V receptacle. Card rewritten with the existing/new split; flag cleared (two independent code-text summaries agree; still worth a glance at the printed 551.71(C)).",
+   "sources": [
+    "https://captaincode2023.leviton.com/node/352",
+    "https://captaincode2017.leviton.com/node/154",
+    "https://www.ecmweb.com/national-electrical-code/article/20898442/recreational-vehicles-and-rv-parks"
+   ]
   }
  ]
 }

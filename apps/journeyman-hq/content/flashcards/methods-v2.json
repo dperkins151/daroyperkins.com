@@ -1,0 +1,148 @@
+[
+ {
+  "id": "F-M101",
+  "topic": "methods",
+  "article": "314.16(B)",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Procedure: box fill count (what counts as 1, 2, 0)",
+  "back": "Each conductor entering and spliced/terminated = 1; unbroken pass-through = 1; a loop ≥ 2 × the 300.14 free length = 2\nPigtails that never leave the box = 0\nInternal cable clamps = 1 (largest conductor present), each support fitting (stud/hickey) = 1\nEach device yoke = 2 (largest conductor on that yoke)\nAll EGCs together = 1 (largest EGC); 2020 adds ¼ allowance for each EGC beyond four\nMultiply counts by Table 314.16(B)(1) volumes: 14 AWG 2.00 · 12 AWG 2.25 · 10 AWG 2.50 · 8 AWG 3.00 · 6 AWG 5.00 in³",
+  "review": true,
+  "note": "Verify the 2020 wording in 314.16(B)(5) for the 'more than four EGCs' quarter-allowance; the rest is settled."
+ },
+ {
+  "id": "F-M102",
+  "topic": "methods",
+  "article": "Table 314.16(B)(1)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: box for two 12-2 NM cables (with EGC) feeding one duplex receptacle, internal clamps",
+  "back": "Conductors: 4 × 12 AWG = 4\nEGCs (all) = 1\nClamps = 1\nDevice yoke = 2\nTotal 8 × 2.25 in³ = 18.0 in³ → a 4 × 1½ square (21 in³) or a 3 × 2 × 3½ device box (18 in³) works; a 3 × 2 × 2½ (12.5 in³) does not"
+ },
+ {
+  "id": "F-M103",
+  "topic": "methods",
+  "article": "Ch. 9 Table 1 / Table 4 / Table 5",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Procedure: conduit fill for mixed conductor sizes",
+  "back": "1. Table 5: area of each conductor (THHN: 12 AWG 0.0133 · 10 AWG 0.0211 · 8 AWG 0.0366 · 6 AWG 0.0507 · 4 AWG 0.0824 · 3 AWG 0.0973 · 2 AWG 0.1158 · 1 AWG 0.1562 in²)\n2. Sum them\n3. Table 4: column for the raceway type at 40 % (>2 wires), 31 % (2), 53 % (1); nipple ≤ 24 in → 60 % (Note 4)\n4. Pick the first trade size whose allowed area ≥ the sum\nSame-size wires only: Annex C is faster"
+ },
+ {
+  "id": "F-M104",
+  "topic": "methods",
+  "article": "Ch. 9 Table 4 / Table 5",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: EMT for 3 × 6 AWG THHN + 1 × 8 AWG THHN + 1 × 10 AWG THHN EGC",
+  "back": "3 × 0.0507 = 0.1521\n+ 0.0366 + 0.0211 = 0.2098 in²\nEMT at 40 % (Table 4): ¾ in = 0.213 ✔ · ½ in = 0.122 ✗\n→ ¾ in EMT (tight; 1 in = 0.346 gives pulling room)"
+ },
+ {
+  "id": "F-M105",
+  "topic": "methods",
+  "article": "Ch. 9 Table 1 Note 7",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Worked: how many 12 AWG THHN in 1 in EMT (40 % = 0.346 in²)?",
+  "back": "0.346 ÷ 0.0133 = 26.0 → 26 conductors\nNote 7: when the result's decimal is 0.8 or higher, round up (e.g., 15.8 → 16); below 0.8, round down\nAnnex C Table C.1 lists the same answer for same-size conductors"
+ },
+ {
+  "id": "F-M106",
+  "topic": "methods",
+  "article": "310.15(B)(1) / 310.15(C)(1) / 110.14(C)",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Procedure: ampacity with temperature + bundling corrections (worked: 8 × 10 AWG THHN in one conduit at 45 °C)",
+  "back": "1. Start at the conductor's insulation column: 10 AWG THHN 90 °C = 40 A\n2. × temperature factor (Table 310.15(B)(1)(1), 90 °C column, 41–45 °C) 0.87 → 34.8 A\n3. × adjustment (Table 310.15(C)(1), 7–9 conductors) 0.70 → 24.4 A\n4. Final ampacity is the lesser of that and the termination column (110.14(C): 10 AWG → 60 °C = 30 A for ≤ 100 A circuits unless listed for 75 °C) → 24.4 A governs\n5. 240.4(D) cap 30 A still applies to the OCPD"
+ },
+ {
+  "id": "F-M107",
+  "topic": "methods",
+  "article": "Table 310.15(C)(1)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: how many current-carrying conductors — 2 MWBCs (3-wire from a 120/240 V 1φ panel) + 1 × 120 V 2-wire circuit in one EMT?",
+  "back": "MWBC on 1φ 3-wire: neutral carries only the unbalance → not counted (310.15(E)(1)) → 2 each = 4\n2-wire circuit: hot + neutral both count = 2\nEGCs never count (310.15(F))\nTotal 6 → 80 % adjustment\nOn a 3φ 4-wire wye with ≥ 50 % nonlinear load, the neutral counts (310.15(E)(3))"
+ },
+ {
+  "id": "F-M108",
+  "topic": "methods",
+  "article": "310.15(B)(2)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: THWN conductors in EMT lying directly on a rooftop (½ in above the roof) at 38 °C ambient",
+  "back": "2020 rooftop rule: raceways or cables less than ⅞ in above the roof add 33 °C (60 °F) → 38 + 33 = 71 °C design ambient\nTHWN is 75 °C insulation; Table 310.15(B)(1)(1) gives no 75 °C factor above 70 °C → the conductor can't be used there\nFix: raise the raceway ≥ ⅞ in above the roof (no adder), or use 90 °C conductors (THWN-2: 0.50 at 71–75 °C)\nException: XHHW-2 is exempt from the adder"
+ },
+ {
+  "id": "F-M109",
+  "topic": "methods",
+  "article": "Table 310.15(B)(1)(1)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Temperature correction factors worth memorizing (75 °C and 90 °C columns)",
+  "back": "Ambient 31–35 °C: 0.94 / 0.96\n36–40 °C: 0.88 / 0.91\n41–45 °C: 0.82 / 0.87\n46–50 °C: 0.75 / 0.82\n51–55 °C: 0.67 / 0.76\n56–60 °C: 0.58 / 0.71\n(Table based on 30 °C / 86 °F ambient; factors shown 75 °C / 90 °C)"
+ },
+ {
+  "id": "F-M110",
+  "topic": "methods",
+  "article": "Table 310.16",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: smallest Cu conductor for a 150 A noncontinuous feeder, 75 °C terminations, no derating; same for aluminum",
+  "back": "Table 310.16, 75 °C column: 1/0 Cu = 150 A ✔\nAl 75 °C: 3/0 Al = 155 A ✔ (2/0 Al = 135 A ✗)\nRule of thumb: Al runs about two sizes larger than Cu for the same ampacity"
+ },
+ {
+  "id": "F-M111",
+  "topic": "methods",
+  "article": "310.10(G)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Parallel conductor rules (2020: 310.10(G))",
+  "back": "1/0 AWG and larger only (limited exceptions)\nEach set: same length, material, size (CM), insulation type, terminated the same way\nEach raceway or cable gets a full set, including an EGC sized per 250.122 for the OCPD\nAmpacity = sum of the sets, then apply the adjustment factor for the conductor count in each raceway"
+ },
+ {
+  "id": "F-M112",
+  "topic": "methods",
+  "article": "Table 300.5",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked burial depths: UF cable for a 20 A 120 V GFCI-protected circuit to a lamp post; PVC under a residential driveway; RMC in a yard",
+  "back": "UF, 120 V ≤ 20 A with GFCI: 12 in (Table 300.5 column 4)\nPVC under one-/two-family dwelling driveway: 18 in (column 3)\nRMC/IMC: 6 in (column 2)\nDirect-burial cable default: 24 in; under a 4 in concrete slab: 18 in"
+ },
+ {
+  "id": "F-M113",
+  "topic": "methods",
+  "article": "300.4(A) / 300.4(D)",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Worked: NM cable through bored holes in studs — hole edge 1 in from the stud face. OK?",
+  "back": "No: the hole edge must be ≥ 1¼ in from the nearest edge of the framing member, else a 1/16 in steel plate is required (300.4(A)(1))\nSame 1¼ in for cables run parallel to framing (300.4(D))\nRigid metal, IMC, EMT and RMC don't need the plate"
+ },
+ {
+  "id": "F-M114",
+  "topic": "methods",
+  "article": "358.30 / 344.30 / 334.30 / 330.30",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Support intervals — worked quiz: EMT, RMC ¾ in, NM, MC",
+  "back": "EMT: within 3 ft of each box, then ≤ 10 ft (358.30)\nRMC: within 3 ft of boxes, then Table 344.30(B)(2): ½–¾ in 10 ft · 1 in 12 ft · 1¼–1½ in 14 ft · 2–2½ in 16 ft · 3 in and larger 20 ft\nNM: within 12 in of boxes, then ≤ 4½ ft (334.30)\nMC: within 12 in of terminations, then ≤ 6 ft (330.30)"
+ },
+ {
+  "id": "F-M115",
+  "topic": "methods",
+  "article": "314.28(A)",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: pull box for a straight pull of 3 in conduit; angle pull with one 3 in and one 2 in in the same wall",
+  "back": "Straight: length ≥ 8 × largest raceway = 24 in (314.28(A)(1))\nAngle/U pull: distance to opposite wall ≥ 6 × largest + sum of the others in that row = 18 + 2 = 20 in (314.28(A)(2))\nBetween raceways with the same conductor: ≥ 6 × largest = 18 in\nApplies to 4 AWG and larger conductors"
+ },
+ {
+  "id": "F-M116",
+  "topic": "methods",
+  "article": "300.5(D) / 300.5(I)",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Underground run details that get asked",
+  "back": "Direct-buried cables/conduits emerging from grade: protected up to 8 ft above grade (300.5(D)(1))\nAll conductors of a circuit in the same trench/raceway (300.5(I))\nBackfill: no rocks/sharp material against cables; sand or protection where needed (300.5(F))\nWarning tape on underground service conductors not in raceway, ≥ 12 in above (300.5(D)(3))"
+ }
+]

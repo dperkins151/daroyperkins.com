@@ -1,0 +1,110 @@
+[
+ {
+  "id": "F-E101",
+  "topic": "equipment",
+  "article": "430.6 / 430.22 / Table 430.52 / 430.32",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Procedure: single motor circuit in five steps",
+  "back": "1. FLC from Table 430.248 (1φ) / 430.250 (3φ) — not the nameplate (430.6(A)(1))\n2. Conductors ≥ 125 % FLC (430.22)\n3. Branch SC/GF device ≤ Table 430.52 % of FLC: inverse-time breaker 250 %, dual-element fuse 175 %, non-time-delay fuse 300 %, instantaneous trip 800 % (1100 % Design B); next standard size up permitted (430.52(C)(1) Ex. 1)\n4. Overloads from nameplate FLA: 125 % (SF ≥ 1.15 or rise ≤ 40 °C) else 115 % (430.32(A)(1))\n5. Disconnect ≥ 115 % FLC (430.110), in sight (430.102)"
+ },
+ {
+  "id": "F-E102",
+  "topic": "equipment",
+  "article": "Table 430.250 / 430.22 / Table 430.52",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: 10 HP, 3φ 460 V motor (Table 430.250 FLC = 14 A), inverse-time breaker",
+  "back": "Conductors: 14 × 1.25 = 17.5 A → 14 AWG Cu at 75 °C (20 A) is permitted — the 240.4(D) small-conductor caps don't apply to motor circuits (240.4(G)); 12 AWG is the common field choice\nBreaker max: 14 × 2.5 = 35 A → 35 A standard\nNameplate 13.2 A, SF 1.15 → overload trip ≤ 1.25 × 13.2 = 16.5 A\nDisconnect ≥ 1.15 × 14 = 16.1 A"
+ },
+ {
+  "id": "F-E103",
+  "topic": "equipment",
+  "article": "430.24 / 430.62(A)",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: feeder for three 3φ 460 V motors — 25 HP (34 A), 10 HP (14 A), 5 HP (7.6 A), inverse-time breakers",
+  "back": "Feeder conductors: 125 % × largest + others = 42.5 + 14 + 7.6 = 64.1 A → 6 AWG Cu 75 °C (65 A) (430.24)\nFeeder OCPD: largest branch OCPD + other FLCs; 25 HP breaker = 34 × 2.5 = 85 A → 85 + 14 + 7.6 = 106.6 A → do NOT round up: 100 A (430.62(A))"
+ },
+ {
+  "id": "F-E104",
+  "topic": "equipment",
+  "article": "430.32(A)(1) / 430.32(C)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: overload for a motor with nameplate 28 A, SF 1.0, 50 °C rise; what if it trips on start?",
+  "back": "SF 1.0 and rise > 40 °C → 115 % × 28 = 32.2 A max\nIf that won't carry the start: next higher size allowed, but ≤ 130 % (SF 1.0 / > 40 °C) or ≤ 140 % (SF ≥ 1.15 / ≤ 40 °C) (430.32(C))\nUse nameplate current for overloads; table current for everything else"
+ },
+ {
+  "id": "F-E105",
+  "topic": "equipment",
+  "article": "Table 450.3(B)",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: 45 kVA 3φ 480–208Y/120 V transformer — primary-only protection; then primary + secondary",
+  "back": "Primary I = 45,000 ÷ (1.732 × 480) = 54.1 A; secondary I = 45,000 ÷ (1.732 × 208) = 124.9 A\nPrimary only (≥ 9 A): 125 % × 54.1 = 67.7 A → next size up permitted (Note 1) → 70 A\nPrimary + secondary: primary ≤ 250 % = 135 A → 125 A (no rounding up on the 250 % value); secondary ≤ 125 % = 156 A → 175 A permitted (Note 1)\nCurrents < 9 A: 167 %; < 2 A: 300 % (primary only)"
+ },
+ {
+  "id": "F-E106",
+  "topic": "equipment",
+  "article": "240.21(C)(2) / 240.21(C)(6)",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Transformer secondary conductor rules — the two you'll be asked",
+  "back": "10-ft rule (240.21(C)(2)): ampacity ≥ the load and ≥ the device it feeds; if outside the enclosure, ≥ 10 % of the primary OCPD × primary-to-secondary voltage ratio; single OCPD at the end\n25-ft rule (240.21(C)(6)): ampacity ≥ ⅓ of primary OCPD × ratio; ends in a single OCPD\nSecondary conductors are never protected by the primary device alone except 2-wire/3-wire delta-delta (240.21(C)(1))"
+ },
+ {
+  "id": "F-E107",
+  "topic": "equipment",
+  "article": "440.22(A) / 440.32 / 440.33",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: hermetic A/C with RLA 24 A, LRA 118 A — OCPD and conductors",
+  "back": "Conductors: 125 % × RLA (or branch-circuit selection current if larger) = 30 A → 10 AWG Cu (440.32)\nOCPD: ≤ 175 % × 24 = 42 A → 40 A; if it won't start, up to 225 % = 54 A → 50 A (440.22(A))\nNameplate 'maximum OCPD' and 'MCA' on the unit override your math (440.4(B), 110.3(B))"
+ },
+ {
+  "id": "F-E108",
+  "topic": "equipment",
+  "article": "422.10 / 422.13 / 422.11(E)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: 4500 W, 240 V storage water heater (≤ 120 gal) — circuit and OCPD",
+  "back": "Treated as continuous (422.13): 4500 ÷ 240 = 18.75 A × 1.25 = 23.4 A\nConductors ≥ 23.4 A → 10 AWG Cu\nOCPD for a single nonmotor appliance over 13.3 A: ≤ 150 % of its rating → 28.1 A; not a standard size → next size up permitted → 30 A (422.11(E)(3))\nAnswer: 30 A breaker, 10 AWG Cu"
+ },
+ {
+  "id": "F-E109",
+  "topic": "equipment",
+  "article": "430.102 / 430.107 / 430.109",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Motor disconnect — type and rating quick table",
+  "back": "Rated ≥ 115 % FLC (430.110(A)) or HP-rated ≥ motor HP\nTypes (430.109): motor-circuit switch rated in HP; molded-case breaker; molded-case switch; instantaneous-trip breaker in a listed combination controller; listed manual motor controller marked 'suitable as motor disconnect'\n≤ ⅛ HP stationary: the branch OCPD may serve (430.109(B)); cord-and-plug ok for portable (430.109(F))\nController disconnect in sight of controller; motor disconnect in sight of motor or lockable (430.102(B))"
+ },
+ {
+  "id": "F-E110",
+  "topic": "equipment",
+  "article": "Table 430.248 / 430.250",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "FLC quick-recall — 3φ 460 V and 1φ 230 V (memorize for speed, confirm in the table)",
+  "back": "3φ 460 V: 1 HP 2.1 · 3 HP 4.8 · 5 HP 7.6 · 10 HP 14 · 20 HP 27 · 25 HP 34 · 50 HP 65 · 100 HP 124\n1φ 230 V: ½ HP 4.9 · 1 HP 8 · 2 HP 12 · 3 HP 17 · 5 HP 28 · 10 HP 50\nAt 230 V 3φ, double the 460 V value; at 208 V multiply the 230 V value by ≈ 1.1"
+ },
+ {
+  "id": "F-E111",
+  "topic": "equipment",
+  "article": "408.36 / 408.30 / 210.4",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Panelboard quick numbers",
+  "back": "Protected by an OCPD ≤ the panel rating, on the supply side (408.36); a 100 A panel on a 200 A feeder fails\n3φ 4-wire delta 'high-leg' panels: high leg on phase B, marked orange (408.3(E), 110.15)\nNo 42-circuit limit — the count is per the panel's listing\nMWBC breakers need a common trip or identified handle tie (210.4(B))"
+ },
+ {
+  "id": "F-E112",
+  "topic": "equipment",
+  "article": "410.130(G) / 410.16 / 410.10(D)",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Luminaire numbers that show up",
+  "back": "Fluorescent luminaires with double-ended lamps and ballasts: disconnecting means in sight or lockable — not required in dwellings (410.130(G))\nClothes closets (410.16(C)): surface incandescent/LED with enclosed source ≥ 12 in from storage; surface fluorescent ≥ 6 in; recessed (enclosed source) ≥ 6 in; luminaires identified for storage areas may sit in the storage space\nTubs/showers: no cord-connected, chain-hung, pendant or track luminaires within 3 ft horizontally and 8 ft vertically of the rim (410.10(D))"
+ }
+]

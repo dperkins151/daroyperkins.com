@@ -1,0 +1,155 @@
+[
+ {
+  "id": "F-W101",
+  "topic": "wiring",
+  "article": "220.12 / 220.42 / 220.52",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Procedure: dwelling general lighting + small appliance + laundry (standard method)",
+  "back": "1. Floor area × 3 VA/ft² (Table 220.12)\n2. + 1500 VA × 2 small-appliance circuits (220.52(A)) + 1500 VA laundry (220.52(B))\n3. Apply Table 220.42: first 3000 VA @ 100 %, 3001–120,000 VA @ 35 %, rest @ 25 %\n4. Add range (Table 220.55), dryer (220.54), fixed appliances (220.53, 75 % if ≥ 4), heat or A/C — larger of the two (220.60) @ 100 %"
+ },
+ {
+  "id": "F-W102",
+  "topic": "wiring",
+  "article": "Table 220.42",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: 2400 ft² dwelling — general lighting after demand",
+  "back": "2400 × 3 = 7200 VA\n+ 3000 (small appliance) + 1500 (laundry) = 11,700 VA\nFirst 3000 @ 100 % = 3000\nRemaining 8700 @ 35 % = 3045\nDemand load = 6045 VA"
+ },
+ {
+  "id": "F-W103",
+  "topic": "wiring",
+  "article": "Table 220.55",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: one 12 kW range; one 15 kW range; branch-circuit minimum",
+  "back": "≤ 12 kW, one range: column C = 8 kW demand\n15 kW: 8 kW + 5 % per kW over 12 → 8 × 1.15 = 9.2 kW (Note 1)\nBranch: 9200 ÷ 240 = 38.3 A → 40 A circuit; 210.19(A)(3) sets 40 A minimum for 8¾ kW and larger ranges anyway"
+ },
+ {
+  "id": "F-W104",
+  "topic": "wiring",
+  "article": "220.54 / 220.61(B)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: dryer load and neutral for a 5.5 kW dryer",
+  "back": "Dryer: nameplate or 5000 VA, whichever is larger → 5500 VA (220.54)\nTable 220.54: 1–4 dryers @ 100 %\nNeutral for ranges/dryers: 70 % of the demand → 5500 × 0.70 = 3850 VA (220.61(B)(1))"
+ },
+ {
+  "id": "F-W105",
+  "topic": "wiring",
+  "article": "220.82",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: optional method — 2000 ft² dwelling, 12 kW range, 5 kW dryer, 4.5 kW water heater, 5 kW A/C vs 10 kW electric heat",
+  "back": "General: 2000 × 3 = 6000 + 3000 + 1500 = 10,500\nAppliances at nameplate: 12,000 + 5000 + 4500 = 21,500\nTotal 32,000 VA → first 10 kVA @ 100 % + 22,000 @ 40 % = 10,000 + 8800 = 18,800 VA\nHeat/AC (220.82(C)): larger of A/C @ 100 % (5000) or 4+ separately controlled heat units @ 40 % (4000) → 5000\nService = 23,800 ÷ 240 = 99.2 A → 100 A min (230.79(C))"
+ },
+ {
+  "id": "F-W106",
+  "topic": "wiring",
+  "article": "220.14(I) / 220.44",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: 60 general-purpose receptacles in an office — load and demand",
+  "back": "180 VA per yoke (220.14(I)) → 60 × 180 = 10,800 VA\nTable 220.44 (nondwelling receptacles): first 10 kVA @ 100 %, remainder @ 50 %\n10,000 + 400 = 10,400 VA\nOne quad = 2 yokes = 360 VA; a multi-outlet assembly is per 220.14(H)"
+ },
+ {
+  "id": "F-W107",
+  "topic": "wiring",
+  "article": "210.19(A)(1) / 210.20(A)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Procedure: size conductor + OCPD for a continuous load (worked: 20 A continuous + 8 A noncontinuous)",
+  "back": "Minimum = 125 % × continuous + 100 % × noncontinuous\n= 25 + 8 = 33 A\nOCPD: next standard size ≥ 33 A → 35 A (240.6(A))\nConductor: ampacity ≥ 33 A after corrections; 10 AWG Cu 75 °C (35 A) works, but 240.4(D) caps 10 AWG at 30 A → 8 AWG"
+ },
+ {
+  "id": "F-W108",
+  "topic": "wiring",
+  "article": "240.4(B) / 240.6(A)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: a conductor's corrected ampacity is 115 A — which OCPD? The rounding rules",
+  "back": "No standard size at 115 A → the next size up, 125 A, is permitted (240.4(B)) when: ≤ 800 A, not a multi-outlet branch circuit for cord-and-plug loads, and the conductor isn't already capped by 240.4(D)\nAbove 800 A: OCPD must be ≤ the conductor ampacity (240.4(C))\nStandard sizes to recall (240.6(A)): 15 20 25 30 35 40 45 50 60 70 80 90 100 110 125 150 175 200 225 250 300 350 400 450 500 600"
+ },
+ {
+  "id": "F-W109",
+  "topic": "wiring",
+  "article": "Table 250.66",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: GEC for a 200 A service with 3/0 Cu service conductors; and if the only electrode is a ground rod",
+  "back": "3/0 Cu → Table 250.66 row '2/0 or 3/0' → 4 AWG Cu GEC\nRod/pipe/plate only: GEC never required larger than 6 AWG Cu (250.66(A))\nConcrete-encased electrode only: not larger than 4 AWG Cu (250.66(B))\nParallel sets: add the CM of one phase to pick the row"
+ },
+ {
+  "id": "F-W110",
+  "topic": "wiring",
+  "article": "Table 250.122 / 250.122(B)",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: EGC when 100 A feeder conductors are upsized from 3 AWG to 1 AWG Cu for voltage drop",
+  "back": "Base EGC for a 100 A OCPD = 8 AWG Cu (Table 250.122)\nUpsize in proportion to circular mils (250.122(B)): 1 AWG 83,690 ÷ 3 AWG 52,620 = 1.59\n8 AWG 16,510 × 1.59 = 26,258 cmil — just over 6 AWG (26,240) → 4 AWG Cu\nEGC never needs to be larger than the circuit conductors (250.122(A))"
+ },
+ {
+  "id": "F-W111",
+  "topic": "wiring",
+  "article": "Table 250.102(C)(1)",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: supply-side bonding jumper for 600 kcmil Cu service conductors; and for 2 × 500 kcmil per phase",
+  "back": "600 kcmil Cu → row 'over 350 through 600' → 1/0 Cu\n2 × 500 kcmil per phase = 1000 kcmil → row 'over 600 through 1100' → 2/0 Cu\nOver 1100 kcmil Cu: jumper ≥ 12½ % of the largest phase conductor area (Table 250.102(C)(1) Note 1)\nParallel sets: add the areas of one phase to pick the row"
+ },
+ {
+  "id": "F-W112",
+  "topic": "wiring",
+  "article": "310.12(A) / 230.42",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: 200 A dwelling service — minimum conductor using the 83 % rule",
+  "back": "200 × 0.83 = 166 A required ampacity (310.12(A), services 100–400 A to a single dwelling)\nTable 310.16, 75 °C: 2/0 Cu = 175 A ✔ (vs 3/0 without the rule)\n4/0 Al = 180 A ✔\nFeeder to the whole dwelling load qualifies too (310.12(B))"
+ },
+ {
+  "id": "F-W113",
+  "topic": "wiring",
+  "article": "240.21(B)(1) / (B)(2)",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Procedure: 10-ft and 25-ft feeder tap checks",
+  "back": "10-ft tap: ampacity ≥ calculated load AND ≥ the device it feeds; if leaving the enclosure, ≥ 10 % of the feeder OCPD; ends in a single OCPD or device; in a raceway\n25-ft tap: ampacity ≥ ⅓ of feeder OCPD; ends in a single OCPD rated ≤ tap ampacity; protected from damage\nWorked: 400 A feeder → 25-ft tap needs ≥ 133 A (1/0 Cu at 150 A)"
+ },
+ {
+  "id": "F-W114",
+  "topic": "wiring",
+  "article": "210.21(B)(2) / Table 210.21(B)(3)",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Worked: biggest cord-and-plug load on a 20 A receptacle; receptacle choices on a 30 A circuit",
+  "back": "Single cord-and-plug load ≤ 80 % of the receptacle rating: 20 A → 16 A; 15 A → 12 A; 30 A → 24 A\n30 A branch circuit (2+ receptacles): 30 A receptacles only\n20 A circuit: 15 or 20 A receptacles; 15 A circuit: 15 A only; 40/50 A circuit: 40 or 50 A"
+ },
+ {
+  "id": "F-W115",
+  "topic": "wiring",
+  "article": "220.61(B)(2)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: feeder neutral for a 500 A unbalanced load (no nonlinear loads)",
+  "back": "First 200 A @ 100 % = 200\nRemainder 300 A @ 70 % = 210\nNeutral demand = 410 A\nNo reduction for the portion from nonlinear loads or for 3-wire 1φ from a 4-wire 3φ wye (220.61(C))"
+ },
+ {
+  "id": "F-W116",
+  "topic": "wiring",
+  "article": "215.2(A)(1) / 215.3",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: feeder for 60 A continuous + 40 A noncontinuous",
+  "back": "Conductor: 125 % × 60 + 40 = 115 A min (215.2(A)(1))\nOCPD: same 115 A min → 125 A standard (215.3, 240.6)\nIf the OCPD is 100 %-rated and listed: conductors and OCPD at 100 % (exception)\nTable 310.16 75 °C: 1 AWG Cu = 130 A ✔"
+ },
+ {
+  "id": "F-W117",
+  "topic": "wiring",
+  "article": "230.42(A) / 230.79",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Service minimums checklist",
+  "back": "Service conductors sized to the calculated load per Art. 220 (230.42(A)); continuous loads × 125 %\nDisconnect rating: one-family dwelling ≥ 100 A (230.79(C)); 2 circuits ≥ 30 A; one circuit ≥ 15 A; everything else ≥ 60 A\nMax 6 disconnects — 2020: each in its own enclosure or compartment (230.71)"
+ }
+]
