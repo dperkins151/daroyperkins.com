@@ -14,7 +14,7 @@ sed -e "s#__VERSION__#${VERSION}-${BANK_STAMP}#" -e "s#__SHELL__#${SHELL_LIST}#"
 node --check sw.js
 OUT="dist/journeyman-hq-v${VERSION}.zip"
 mkdir -p dist
-rm -f "$OUT"
+rm -f dist/journeyman-hq-v*.zip     # one zip in dist: the current version replaces every older one
 # Bundle = runtime files only. No sources, tests, tools, or docs. No secrets exist in this app.
 zip -r -X "$OUT" index.html app.css js data README.md manifest.webmanifest sw.js icons >/dev/null
 # secret scan on the bundle contents (fail closed)

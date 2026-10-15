@@ -45,8 +45,9 @@ jobs:
       - name: Read version
         id: v
         run: |
-          echo "version=$(node -p "require('./data/manifest.json').appVersion")" >> "$GITHUB_OUTPUT"
-          echo "sha=$(sha256sum dist/journeyman-hq-v*.zip | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          VERSION=$(node -p "require('./data/manifest.json').appVersion")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "sha=$(sha256sum "dist/journeyman-hq-v${VERSION}.zip" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"   # the versioned zip by name: a glob would list every zip in dist
 
       - name: Upload zip as a workflow artifact
         uses: actions/upload-artifact@v4
