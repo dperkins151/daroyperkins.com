@@ -45,6 +45,12 @@
     return Object.keys(map || {}).filter((qid) => qmap[qid]).map((qid) => toCard(qmap[qid], map[qid]));
   }
 
+  /** Question ids missed within the last `days` days, most recent miss first. */
+  function recent(map, now = Date.now(), days = 7) {
+    const cutoff = now - days * 86400000;
+    return Object.keys(map || {}).filter((qid) => (map[qid].last || 0) >= cutoff).sort((a, b) => (map[b].last || 0) - (map[a].last || 0));
+  }
+
   function mastered(srsState) { return !!srsState && (srsState.interval || 0) >= MASTERED_DAYS; }
 
   /** Drop entries whose card the SRS considers mastered. Returns { map, removed }. */
@@ -54,7 +60,7 @@
     return { map: next, removed };
   }
 
-  const api = { PREFIX, MASTERED_DAYS, cardId, isMissCard, qidOf, record, needsChoices, front, back, toCard, cards, mastered, pruneMastered };
+  const api = { PREFIX, MASTERED_DAYS, cardId, isMissCard, qidOf, record, needsChoices, front, back, toCard, cards, recent, mastered, pruneMastered };
   JHQ.misses = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

@@ -45,3 +45,11 @@ test("mastered = SRS interval ≥ 21 days; pruneMastered drops only those", () =
   const p = misses.pruneMastered(map, { "mq-T1": st });
   assert.equal(p.removed, 1); assert.deepEqual(Object.keys(p.map), ["W1"]);
 });
+
+test("recent: misses inside the window, most recent first; older ones excluded", () => {
+  const DAY = 86400000, now = 100 * DAY;
+  const map = { A: { misses: 1, first: now - 8 * DAY, last: now - 8 * DAY }, B: { misses: 2, first: now - 10 * DAY, last: now - 1 * DAY }, C: { misses: 1, first: now - 6 * DAY, last: now - 6 * DAY } };
+  assert.deepEqual(misses.recent(map, now), ["B", "C"]);
+  assert.deepEqual(misses.recent(map, now, 30), ["B", "C", "A"]);
+  assert.deepEqual(misses.recent({}, now), []);
+});

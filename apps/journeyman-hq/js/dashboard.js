@@ -54,11 +54,15 @@
         <div class="bar"><div class="bar-fill ${t.status === "weak" ? "bad" : t.status === "strong" ? "good" : ""}" style="width:${t.pct}%"></div></div>
       </div>`).join("");
 
+    const mp = JHQ.exam.missPool().length;
+    $("act-misses").textContent = mp ? mp + " missed in the last 7 days" : "nothing missed lately";
+    $("act-misses").parentElement.disabled = !mp;
+
     const ha = $("home-attempts");
     const recent = attempts.slice(-3).reverse();
     ha.innerHTML = recent.length ? recent.map((a) => `
       <div class="row">
-        <div><div class="title">${a.mode === "sim" ? "Full simulation" : "Quick drill"}</div><div class="sub">${fmtDateTime(a.submittedAt || a.startedAt)}</div></div>
+        <div><div class="title">${esc(JHQ.exam.modeName(a.mode))}</div><div class="sub">${fmtDateTime(a.submittedAt || a.startedAt)}</div></div>
         <div class="right"><b class="${a.result.verdict}">${Math.round(a.result.score.pct)}%</b><div class="sub">${esc(a.result.verdict)}</div></div>
       </div>`).join("") : '<div class="empty">No attempts yet.</div>';
   }
@@ -74,6 +78,7 @@
     document.querySelectorAll(".action[data-go]").forEach((b) => b.addEventListener("click", () => {
       const g = b.dataset.go;
       if (g === "drill") { JHQ.app.go("exam"); JHQ.exam.startDrill(); }
+      else if (g === "misses") { JHQ.app.go("exam"); JHQ.exam.startMisses(); }
       else if (g === "exam") { JHQ.app.go("exam"); }
       else JHQ.app.go(g);
     }));

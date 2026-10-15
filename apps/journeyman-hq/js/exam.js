@@ -6,6 +6,11 @@
   let attempt = null;   // in-progress attempt (persisted)
   let timer = null;
   let lastResult = null;
+  const MODE = { sim: "Full simulation", drill: "Quick drill", misses: "Missed drill" };
+  const MISS_DAYS = 7, MISS_N = 10;
+  function modeName(m) { return MODE[m] || m; }
+  /** Questions missed in the last 7 days that are still in the bank, most recent first. */
+  function missPool() { const qmap = JHQ.data.questionMap(); return JHQ.misses.recent(JHQ.store.missed(), Date.now(), MISS_DAYS).filter((id) => qmap[id]); }
 
   function examCfg() {
     const m = JHQ.data.state.manifest || {};
@@ -18,10 +23,13 @@
     $("lobby-blueprint").innerHTML = Object.entries(cfg.blueprint).map(([t, n]) => `<span class="chip">${esc(JHQ.data.topicName(t))} · ${n}</span>`).join("");
     const ip = JHQ.store.inProgress();
     $("exam-resume-box").classList.toggle("hidden", !ip);
+    const mp = missPool().length;
+    $("misses-start").textContent = "Drill my misses" + (mp ? " (" + Math.min(mp, MISS_N) + " of " + mp + " from the last " + MISS_DAYS + " days)" : " — nothing missed in the last " + MISS_DAYS + " days");
+    $("misses-start").disabled = !mp;
     const list = JHQ.store.attempts().slice().reverse();
     $("attempt-list").innerHTML = list.length ? list.map((a) => `
       <div class="row clickable" data-attempt="${esc(a.id)}">
-        <div><div class="title">${a.mode === "sim" ? "Full simulation" : "Quick drill"} · ${a.result.score.correct}/${a.result.score.total}</div>
+        <div><div class="title">${esc(modeName(a.mode))} · ${a.result.score.correct}/${a.result.score.total}</div>
         <div class="sub">${fmtDateTime(a.submittedAt || a.startedAt)} · ${fmtClock(a.elapsedSec)}${a.result.timing && a.result.timing.timedOut ? " · timed out" : ""}</div></div>
         <div class="right"><b class="${a.result.verdict}">${Math.round(a.result.score.pct)}%</b><div class="sub">${esc(a.result.verdict)}</div></div>
       </div>`).join("") : '<div class="empty">No attempts yet. Start a simulation above.</div>';
@@ -39,6 +47,14 @@
     const cfg = examCfg();
     const pool = JHQ.data.allQuestions();
     if (pool.length < 10) { JHQ.app.banner("Not enough questions loaded to run an exam."); return null; }
+    if (mode === "misses") {
+      // untimed, only questions missed in the last 7 days, most recent misses first, no blueprint
+      const ids = missPool().slice(0, MISS_N);
+      if (!ids.length) { JHQ.app.banner("Nothing missed in the last " + MISS_DAYS + " days — run a drill or a sim first."); return null; }
+      const qmap = JHQ.data.questionMap();
+      const order = shuffle(ids).map((id) => ({ id, perm: shuffle([0, 1, 2, 3].slice(0, qmap[id].choices.length)) }));
+      return { id: uid("att"), mode, startedAt: new Date().toISOString(), submittedAt: null, questionIds: order.map((o) => o.id), perms: Object.fromEntries(order.map((o) => [o.id, o.perm])), answers: {}, flagged: {}, idx: 0, elapsedSec: 0, timeLimitSec: 0, notes: ["missed drill: " + ids.length + " question" + (ids.length === 1 ? "" : "s") + " missed in the last " + MISS_DAYS + " days"], lastTick: Date.now() };
+    }
     let blueprint, timeLimitSec;
     if (mode === "sim") { blueprint = cfg.blueprint; timeLimitSec = cfg.minutes * 60; }
     else {
@@ -63,6 +79,7 @@
 
   function startSim() { const a = build("sim"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startDrill() { const a = build("drill"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
+  function startMisses() { const a = build("misses"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function resume() {
     attempt = JHQ.store.inProgress(); if (!attempt) return;
     // credit time that passed while away (sim only); auto-submit if over
@@ -160,7 +177,7 @@
     show("exam-result");
     const hero = $("res-pct"); hero.textContent = Math.round(r.score.pct) + "%";
     hero.className = "hero-num " + (r.verdict === "pass" ? "pass" : r.verdict === "fail" ? "fail" : "");
-    $("res-verdict").textContent = (r.verdict === "pass" ? "PASS" : r.verdict === "fail" ? "FAIL" : r.verdict.toUpperCase()) + " · " + r.score.correct + "/" + r.score.total + (rec.mode === "sim" ? " · need " + r.score.passPct + "%" : " · quick drill");
+    $("res-verdict").textContent = (r.verdict === "pass" ? "PASS" : r.verdict === "fail" ? "FAIL" : r.verdict.toUpperCase()) + " · " + r.score.correct + "/" + r.score.total + (rec.mode === "sim" ? " · need " + r.score.passPct + "%" : " · " + modeName(rec.mode).toLowerCase());
     $("res-sub").textContent = fmtClock(rec.elapsedSec) + (r.timing && r.timing.timedOut ? " · time expired" : "") + (r.unanswered.length ? " · " + r.unanswered.length + " unanswered" : "") + (r.rails.length ? " · " + r.rails.join("; ") : "");
     const topics = Object.values(r.byTopic).sort((a, b) => a.pct - b.pct);
     $("res-topics").innerHTML = topics.map((t) => `
@@ -186,6 +203,7 @@
   function bind() {
     $("exam-start").addEventListener("click", () => { if (JHQ.store.inProgress() && !confirm("Discard the attempt in progress and start fresh?")) return; startSim(); });
     $("drill-start").addEventListener("click", () => { if (JHQ.store.inProgress() && !confirm("Discard the attempt in progress and start a drill?")) return; startDrill(); });
+    $("misses-start").addEventListener("click", () => { if (JHQ.store.inProgress() && !confirm("Discard the attempt in progress and drill your misses?")) return; startMisses(); });
     $("exam-resume").addEventListener("click", resume);
     $("exam-abandon").addEventListener("click", abandon);
     $("ex-prev").addEventListener("click", () => { if (attempt.idx > 0) { attempt.idx--; persist(); renderQ(); } });
@@ -202,5 +220,5 @@
   function render() { if (!attempt) show("exam-lobby"); }
   function active() { return !!attempt; }
 
-  JHQ.exam = { render, bind, startSim, startDrill, resume, active, showResult };
+  JHQ.exam = { render, bind, startSim, startDrill, startMisses, resume, active, showResult, modeName, missPool };
 })(typeof window !== "undefined" ? window : globalThis);

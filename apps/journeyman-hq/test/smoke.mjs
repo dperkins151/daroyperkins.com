@@ -98,10 +98,25 @@ ok((await page.textContent("#ex-pos")).trim() === "1 / 10", "quick drill is 10 q
 for (let i = 0; i < 10; i++) { await page.click(".choice >> nth=1"); await page.click("#ex-next"); }
 await page.click("#ex-submit"); await page.waitForSelector("#exam-result:not(.hidden)"); await page.click("#res-done");
 
+// Drill my misses: only questions missed in the last 7 days, untimed, 10 max
+await page.waitForSelector("#exam-lobby:not(.hidden)");
+ok(/^Drill my misses \(10 of \d+ from the last 7 days\)$/.test((await page.textContent("#misses-start")).trim()), "lobby offers the missed drill: " + (await page.textContent("#misses-start")).trim());
+await page.click("#misses-start"); await page.waitForSelector("#exam-run:not(.hidden)");
+ok((await page.textContent("#ex-pos")).trim() === "1 / 10", "missed drill is 10 questions");
+const missIds = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempt.inprogress")).questionIds);
+const missMap2 = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.missed")));
+ok(missIds.every((id) => missMap2[id]), "every drill question is one that was missed");
+for (let i = 0; i < 10; i++) { await page.click(".choice >> nth=2"); await page.click("#ex-next"); }
+await page.click("#ex-submit"); await page.waitForSelector("#exam-result:not(.hidden)");
+ok(/missed drill/.test(await page.textContent("#res-verdict")), "result labelled as a missed drill");
+await page.click("#res-done");
+ok(/Missed drill/.test(await page.textContent("#attempt-list")), "attempt history lists the missed drill");
+
 // Dashboard weak topics
 await page.click('.tab-btn[data-tab="home"]');
 ok((await page.$$eval("#weak-topics .topic-row", (r) => r.length)) >= 1, "weak topics rendered on dashboard");
 ok((await page.textContent("#st-streak")).trim() === "1", "streak = 1 after today's activity");
+ok(/\d+ missed in the last 7 days/.test(await page.textContent("#act-misses")), "home action shows the misses count: " + (await page.textContent("#act-misses")).trim());
 
 // Plan
 await page.click('.tab-btn[data-tab="plan"]'); await page.waitForSelector("#plan-days .day");
