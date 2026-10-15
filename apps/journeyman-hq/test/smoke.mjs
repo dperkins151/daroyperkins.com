@@ -118,7 +118,9 @@ const bt = attempts[0].result.byTopic; ok(bt.theory.total === 20 && bt.wiring.to
 // Missed-question → flashcard loop
 const nMissed = attempts[0].result.missed.length;
 const missMap = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.missed")));
-ok(Object.keys(missMap).length === nMissed && Object.values(missMap).every((m) => m.misses === 1), "every missed question recorded once (" + nMissed + ")");
+// expected entries = misses ∪ lucky guesses (question 1 was marked as a guess; whether it was right depends on the draw)
+const expectMissed = new Set([...attempts[0].result.missed, ...attempts[0].result.guessed.right]);
+ok(Object.keys(missMap).length === expectMissed.size && [...expectMissed].every((id) => missMap[id] && missMap[id].misses === 1), "every missed question (+ lucky guess) recorded once (" + expectMissed.size + ")");
 await page.click('.tab-btn[data-tab="cards"]'); await page.waitForSelector('#deck-list [data-deck="__missed"]');
 ok(new RegExp("^" + nMissed + " cards").test((await page.textContent('#deck-list [data-deck="__missed"] .sub')).trim()), "Missed questions deck lists " + nMissed + " cards");
 await page.click('#deck-list [data-deck="__missed"]'); await page.waitForSelector("#flashcard:not(.hidden)");
