@@ -195,7 +195,7 @@ ok(/Missed drill/.test(await page.textContent("#attempt-list")), "attempt histor
 const missedBefore = await page.evaluate(() => localStorage.getItem("jhq.missed"));
 await page.click("#lookup-start"); await page.waitForSelector("#exam-run:not(.hidden)");
 ok((await page.textContent("#ex-pos")).trim() === "1 / 10" && /^Which NEC reference covers this\?/.test(await page.textContent("#q-text")), "lookup drill: 10 generated prompts");
-ok((await page.$$eval(".choice", (b) => b.map((x) => x.textContent))).every((t) => /\d{3}/.test(t)), "choices are NEC references");
+ok((await page.$$eval(".choice", (b) => b.map((x) => x.textContent))).every((t) => /(^|\D)(90|\d{3})(\.\d+)?/.test(t)), "choices are NEC references (Art. 90 has two digits)");
 await page.waitForTimeout(1100);
 for (let i = 0; i < 10; i++) { await page.click(".choice >> nth=0"); await page.click("#ex-next"); }
 await page.click("#ex-submit"); await page.waitForSelector("#exam-result:not(.hidden)");
@@ -213,8 +213,22 @@ ok((await page.$$eval("#weak-topics .topic-row", (r) => r.length)) >= 1, "weak t
 ok((await page.textContent("#st-streak")).trim() === "1", "streak = 1 after today's activity");
 ok(/\d+ missed in the last 7 days/.test(await page.textContent("#act-misses")), "home action shows the misses count: " + (await page.textContent("#act-misses")).trim());
 // Weekly report: plain text from this week's data, copy with fallback
+await page.evaluate(() => { navigator.share = (d) => { window.__shared = d; return Promise.resolve(); }; });   // headless has no share sheet: stub the Web Share API
 await page.click("#report-open"); await page.waitForSelector("#report:not(.hidden)");
 const reportTxt = await page.$eval("#report-text", (t) => t.value);
+ok(!(await page.$eval("#report-share", (b) => b.classList.contains("hidden"))), "Share… offered when the browser has a share sheet");
+await page.click("#report-share"); await page.waitForFunction(() => !!window.__shared);
+const shared = await page.evaluate(() => window.__shared);
+ok(shared.title === "Weekly report" && shared.text === reportTxt, "share hands the sheet exactly the report title + text");
+await page.evaluate(() => { navigator.share = (d) => Promise.reject(Object.assign(new Error("closed"), { name: "AbortError" })); });
+await page.click("#report-share"); await page.waitForTimeout(100);
+ok(await page.$eval("#report-status", (e) => e.classList.contains("hidden")), "closing the share sheet says nothing");
+await page.evaluate(() => { navigator.share = (d) => Promise.reject(new Error("nope")); });
+await page.click("#report-share"); await page.waitForSelector("#report-status:not(.hidden)");
+ok(/use Copy/.test(await page.textContent("#report-status")), "a failed share points to Copy");
+await page.evaluate(() => { delete navigator.share; }); await page.click("#report-close"); await page.click("#report-open"); await page.waitForSelector("#report:not(.hidden)");
+ok(await page.$eval("#report-share", (b) => b.classList.contains("hidden")), "no share sheet in the browser → no Share button");
+await page.waitForFunction(() => document.getElementById("report-status").classList.contains("hidden"), null, { timeout: 6000 });   // the "use Copy" flash clears before the Copy check below
 ok(/^Journeyman HQ — week of /.test(reportTxt) && /Sims: 1 \(best \d+%, last \d+%\) · Half sims: 1/.test(reportTxt) && /Plan: day 1 of 46/.test(reportTxt) && !/undefined|NaN/.test(reportTxt), "weekly report text built: " + reportTxt.split("\n")[1]);
 await page.click("#report-copy"); await page.waitForSelector("#report-status:not(.hidden)");
 ok(/Copied|copy it by hand/.test(await page.textContent("#report-status")), "copy reports its outcome: " + (await page.textContent("#report-status")).trim());

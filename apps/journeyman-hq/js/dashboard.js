@@ -89,7 +89,14 @@
     });
   }
   /** Generic text sheet (weekly report, most-missed list): title + text + Copy. */
-  function openSheet(title, text) { $("report-title").textContent = title; $("report-text").value = text; $("report").classList.remove("hidden"); $("report-copy").focus(); }
+  function openSheet(title, text) { $("report-title").textContent = title; $("report-text").value = text; $("report-share").classList.toggle("hidden", !canShare()); $("report").classList.remove("hidden"); $("report-copy").focus(); }
+  /** Phone share sheet (Web Share API) — only offered when the browser has one; nothing of ours sends anything. */
+  function canShare() { return typeof navigator !== "undefined" && typeof navigator.share === "function"; }
+  async function shareText(title, text) {
+    if (!canShare()) return false;
+    try { await navigator.share({ title, text }); return true; }
+    catch (e) { if (e && e.name === "AbortError") return null; return false; }   // null = user closed the sheet: say nothing
+  }
   async function copyText(text) {
     try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(text); return true; } } catch (e) {}
     try { const ta = $("report-text"); ta.focus(); ta.select(); return document.execCommand("copy"); } catch (e) { return false; }
@@ -135,6 +142,7 @@
     $("report-close").addEventListener("click", () => $("report").classList.add("hidden"));
     $("report").addEventListener("click", (e) => { if (e.target === $("report")) $("report").classList.add("hidden"); });
     $("report-copy").addEventListener("click", async () => { const ok = await copyText($("report-text").value); JHQ.util.flash($("report-status"), ok ? "Copied." : "Couldn't copy — select the text and copy it by hand.", ok); });
+    $("report-share").addEventListener("click", async () => { const r = await shareText($("report-title").textContent, $("report-text").value); if (r === false) JHQ.util.flash($("report-status"), "Couldn't open the share sheet — use Copy.", false); });
     document.querySelectorAll(".action[data-go]").forEach((b) => b.addEventListener("click", () => {
       const g = b.dataset.go;
       if (g === "drill") { JHQ.app.go("exam"); JHQ.exam.startDrill(); }
@@ -145,5 +153,5 @@
     }));
   }
 
-  JHQ.dashboard = { render, bind, streak, openSheet };
+  JHQ.dashboard = { render, bind, streak, openSheet, shareText, canShare };
 })(typeof window !== "undefined" ? window : globalThis);
