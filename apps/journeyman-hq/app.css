@@ -237,3 +237,8 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--amber); out
 .seg-btn.active { background: var(--surface-2); color: var(--text); font-weight: 700; }
 .missed-row.right { border-color: #1f4d33; }
 .missed-row .idx { color: var(--muted); font-size: 0.78rem; margin-right: 6px; }
+/* accessibility */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+button:focus-visible, [tabindex]:focus-visible, a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.row.clickable:focus-visible, .day-head:focus-visible { outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } html { scroll-behavior: auto; } }

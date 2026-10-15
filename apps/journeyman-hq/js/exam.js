@@ -129,6 +129,7 @@
     if (attempt.timeLimitSec) {
       const left = attempt.timeLimitSec - attempt.elapsedSec;
       el.textContent = fmtClock(left); el.classList.toggle("low", left < 600);
+      if (left < 600 && !attempt.warned10) { attempt.warned10 = true; JHQ.keys && JHQ.keys.announce("Ten minutes left"); }
       if (left <= 0) { attempt.elapsedSec = attempt.timeLimitSec + 1; return submit(true); }
     } else { el.textContent = fmtClock(attempt.elapsedSec); el.classList.remove("low"); }
     if (Math.floor(attempt.elapsedSec) % 15 === 0) persist();
@@ -144,7 +145,7 @@
     const perm = attempt.perms[id] || q.choices.map((_, i) => i);
     const sel = attempt.answers[id];
     $("q-choices").innerHTML = perm.map((orig, i) => `
-      <button class="choice ${sel === orig ? "selected" : ""}" data-orig="${orig}"><span class="letter">${"ABCD"[i]}</span><span>${esc(q.choices[orig])}</span></button>`).join("");
+      <button class="choice ${sel === orig ? "selected" : ""}" data-orig="${orig}" role="radio" aria-checked="${sel === orig ? "true" : "false"}"><span class="letter" aria-hidden="true">${"ABCD"[i]}</span><span>${esc(q.choices[orig])}</span></button>`).join("");
     $("q-choices").querySelectorAll(".choice").forEach((b) => b.addEventListener("click", () => {
       attempt.answers[id] = Number(b.dataset.orig); persist(); renderQ();
     }));

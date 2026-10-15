@@ -42,8 +42,10 @@ await page.click('#deck-list [data-deck="theory"]'); await page.waitForSelector(
 const front = await page.textContent("#fc-text"); await page.click("#flashcard"); await page.waitForSelector("#fc-grade:not(.hidden)");
 ok((await page.textContent("#fc-text")) !== front, "card flips");
 await page.click('.grade-btn[data-grade="4"]'); await page.click("#flashcard"); await page.click('.grade-btn[data-grade="1"]');
+// keyboard: Space flips, "2" = got it
+await page.keyboard.press("Space"); await page.waitForSelector("#fc-grade:not(.hidden)"); await page.keyboard.press("2");
 const srs = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.srs")));
-ok(Object.keys(srs).length === 2, "SRS state persisted for 2 cards");
+ok(Object.keys(srs).length === 3, "SRS state persisted for 3 cards (third graded by keyboard)");
 ok(Object.values(srs).some((s) => s.lapses === 1) && Object.values(srs).some((s) => s.interval === 1), "needs-work lapses, got-it schedules 1 day");
 
 // Cram: every card shuffled, grades never touch SRS state
@@ -64,6 +66,14 @@ await page.click('.tab-btn[data-tab="exam"]'); await page.waitForSelector("#exam
 await page.click("#exam-start"); await page.waitForSelector("#exam-run:not(.hidden)");
 ok((await page.textContent("#ex-pos")).trim() === "1 / 70", "70-question sim started");
 ok(/^3:30:0\d$|^3:29:5\d$/.test((await page.textContent("#ex-timer")).trim()), "210-minute timer running: " + (await page.textContent("#ex-timer")));
+// keyboard-only: 2 answers B, → / ← move, F flags and unflags; choices are a radiogroup
+ok((await page.$$eval("#q-choices [role=radio]", (c) => c.length)) === 4 && (await page.$eval("#q-choices", (g) => g.getAttribute("role"))) === "radiogroup", "choices exposed as a radiogroup");
+await page.keyboard.press("2"); ok((await page.$$eval("#q-choices .choice", (c) => c.map((x) => x.getAttribute("aria-checked")))).join() === "false,true,false,false", "key 2 selects choice B (aria-checked)");
+await page.keyboard.press("ArrowRight"); ok((await page.textContent("#ex-pos")).trim() === "2 / 70", "→ moves to question 2");
+await page.keyboard.press("ArrowLeft"); ok((await page.textContent("#ex-pos")).trim() === "1 / 70", "← moves back");
+await page.keyboard.press("f"); ok((await page.getAttribute("#q-flag", "aria-pressed")) === "true", "F flags"); await page.keyboard.press("f"); ok((await page.getAttribute("#q-flag", "aria-pressed")) === "false", "F again unflags");
+ok((await page.$eval('.tab-btn[data-tab="exam"]', (b) => b.getAttribute("aria-current"))) === "page", "active tab carries aria-current");
+ok((await page.$$eval("#deck-list .row.clickable", (r) => r.every((x) => x.getAttribute("tabindex") === "0" && x.getAttribute("role") === "button"))), "deck rows are keyboard-operable");
 await page.click("#q-flag"); ok((await page.getAttribute("#q-flag", "aria-pressed")) === "true", "flag toggles");
 for (let i = 0; i < 70; i++) {
   if (i < 60) await page.click(".choice >> nth=0");   // answer first 60, leave 10 blank

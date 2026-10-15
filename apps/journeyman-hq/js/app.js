@@ -13,7 +13,7 @@
     if (current === "exam" && tab !== "exam" && JHQ.exam.active()) { /* leaving a running exam is allowed; timer keeps going, state persisted */ }
     current = tab;
     document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t.id === "tab-" + tab));
-    document.querySelectorAll(".tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.tab === tab));
+    document.querySelectorAll(".tab-btn").forEach((b) => { b.classList.toggle("active", b.dataset.tab === tab); if (b.dataset.tab === tab) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
     JHQ[views[tab]].render();
     window.scrollTo(0, 0);
   }
@@ -28,6 +28,7 @@
       return;
     }
     Object.values(views).forEach((v) => JHQ[v].bind());
+    JHQ.keys.bind();
     const s = JHQ.store.settings();
     if (!s.createdAt) { s.createdAt = new Date().toISOString(); JHQ.store.saveSettings(s); }
     $("setup-date").min = JHQ.util.todayKey();

@@ -47,3 +47,7 @@ Deploy = Roy uploads the zip at `https://apps.daroyperkins.com/upload/` with the
 ## CI / releases
 
 `.github/workflows/journeyman-hq.yml` runs the validator, unit tests, build and browser smoke test on every PR that touches this app. On merge to main it attaches `dist/journeyman-hq-v<appVersion>.zip` (+ `.sha256`) to a GitHub release tagged `journeyman-hq-v<appVersion>` — one click to download, then upload to the vault. If the tag already exists the release step is skipped: bump `appVersion` in `content/manifest.src.json` to cut a new one. No secrets, no deploy.
+
+## Keyboard + accessibility
+
+Exam: `1`–`4` answer, `←`/`→` move, `F` flag, `R` review grid. Cards: `Space`/`Enter` flip, `1`/`2`/`3` = needs work / got it / easy, `S`/`D` = shaky / solid in cram, `Esc` back to decks. Deck rows and plan days are keyboard-operable (Enter/Space). Answer choices are a `radiogroup`, the active tab carries `aria-current`, a polite live region announces "Ten minutes left", focus is visible (`:focus-visible`), and `prefers-reduced-motion` turns off transitions. Shortcuts are ignored while typing in a field.

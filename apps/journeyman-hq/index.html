@@ -16,6 +16,7 @@
 </head>
 <body>
 
+<div id="sr-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 <div id="banner" class="banner hidden" role="alert"></div>
 <div id="update" class="banner update hidden" role="status">New version ready. <button id="update-btn" class="link-btn">Reload</button></div>
 
@@ -141,13 +142,13 @@
     <div id="exam-run" class="hidden">
       <div class="exam-bar">
         <span id="ex-pos" class="ex-pos"></span>
-        <span id="ex-timer" class="ex-timer"></span>
+        <span id="ex-timer" class="ex-timer" aria-label="Time"></span>
         <button id="ex-review-btn" class="ghost-btn">Review</button>
       </div>
       <div class="q-card">
         <div class="q-meta"><span id="q-topic" class="chip"></span><button id="q-flag" class="flag-btn" aria-pressed="false">⚑ Flag</button></div>
         <div id="q-text" class="q-text"></div>
-        <div id="q-choices" class="choices"></div>
+        <div id="q-choices" class="choices" role="radiogroup" aria-label="Answer choices"></div>
       </div>
       <div class="exam-nav">
         <button id="ex-prev" class="ghost-btn">← Prev</button>
@@ -251,7 +252,7 @@
   </section>
 </main>
 
-<nav class="tabbar" aria-label="Primary">
+<nav class="tabbar" aria-label="Primary"><p class="sr-only">Keys: 1–4 answer, arrows move, F flag, R review · cards: Space flip, 1/2/3 grade</p>
   <button class="tab-btn active" data-tab="home">Home</button>
   <button class="tab-btn" data-tab="cards">Cards</button>
   <button class="tab-btn" data-tab="exam">Exam</button>
@@ -273,6 +274,7 @@
 <script src="js/exam.js"></script>
 <script src="js/plan.js"></script>
 <script src="js/library.js"></script>
+<script src="js/keys.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
