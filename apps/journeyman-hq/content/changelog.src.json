@@ -2,6 +2,13 @@
   "note": "One entry per app version, newest first. Plain lines Roy will read on the phone after an update; no PR numbers or internals. Validated by tools/build-banks.mjs and shipped as data/changelog.json.",
   "versions": [
     {
+      "version": "1.19.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Sunlight mode (More → Settings): light, high-contrast, larger text for studying outdoors"
+      ]
+    },
+    {
       "version": "1.18.0",
       "date": "2026-10-15",
       "lines": [

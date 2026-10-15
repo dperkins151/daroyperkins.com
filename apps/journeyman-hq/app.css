@@ -258,3 +258,11 @@ button:focus-visible, [tabindex]:focus-visible, a:focus-visible { outline: 2px s
 .spark-bar.half { border-style: dashed; }
 /* weekly report */
 #report-text { width: 100%; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; line-height: 1.45; background: var(--surface-2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin: 8px 0 10px; resize: vertical; }
+/* sunlight mode: light, high contrast, larger type */
+:root[data-theme="sunlight"] { --bg: #fbfaf5; --surface: #ffffff; --surface-2: #f1efe6; --border: #8a8577; --text: #111111; --muted: #3d3a33; --amber: #9a5a00; --amber-light: #7a4600; --red: #b00020; --green: #0b6b2e; }
+:root[data-theme="sunlight"] body { font-size: 19px; }
+:root[data-theme="sunlight"] .chip, :root[data-theme="sunlight"] .badge { border-width: 1.5px; }
+:root[data-theme="sunlight"] .primary-btn { background: #111; color: #fff; }
+:root[data-theme="sunlight"] .choice.selected { outline: 3px solid #111; }
+:root[data-theme="sunlight"] .bar-fill { background: #7a4600; }
+:root[data-theme="sunlight"] .offline-chip, :root[data-theme="sunlight"] .stat-label { color: #3d3a33; }

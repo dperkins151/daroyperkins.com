@@ -19,6 +19,8 @@
     return true;
   }
   function markSeen() { const s = JHQ.store.settings(); const m = JHQ.data.state.manifest; if (m && s.seenVersion !== m.appVersion) { s.seenVersion = m.appVersion; JHQ.store.saveSettings(s); } }
+  /** Sunlight mode: light high-contrast palette + larger type, from settings.sunlight. */
+  function applyTheme() { const on = !!JHQ.store.settings().sunlight; document.documentElement.setAttribute("data-theme", on ? "sunlight" : "dark"); }
   function banner(msg) { const b = $("banner"); if (!msg) return b.classList.add("hidden"); b.textContent = msg; b.classList.remove("hidden"); }
 
   function go(tab) {
@@ -33,6 +35,7 @@
   function refresh() { JHQ[views[current]].render(); if (current !== "home") JHQ.dashboard.render(); }
 
   async function boot() {
+    applyTheme();
     document.querySelectorAll(".tab-btn").forEach((b) => b.addEventListener("click", () => go(b.dataset.tab)));
     try {
       await JHQ.data.load();
@@ -71,6 +74,6 @@
     document.querySelector(".topbar-inner .brand").appendChild(chip);
     const sync = () => chip.classList.toggle("hidden", navigator.onLine); window.addEventListener("online", sync); window.addEventListener("offline", sync); sync();
   }
-  JHQ.app = { go, refresh, banner, installPWA, whatsNew, cmpVer };
+  JHQ.app = { go, refresh, banner, installPWA, whatsNew, cmpVer, applyTheme };
   document.addEventListener("DOMContentLoaded", () => { boot(); installPWA(); });
 })(typeof window !== "undefined" ? window : globalThis);

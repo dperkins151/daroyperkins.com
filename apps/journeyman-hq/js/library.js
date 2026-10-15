@@ -36,7 +36,7 @@
     renderTabs();
     renderMostMissed();
     const s = JHQ.store.settings();
-    $("set-date").value = s.examDate || ""; $("set-goal").value = s.dailyGoal || 30;
+    $("set-date").value = s.examDate || ""; $("set-goal").value = s.dailyGoal || 30; $("set-sunlight").checked = !!s.sunlight;
     $("backup-line").textContent = backupText(s) + " · everything lives in this browser until you back it up.";
   }
 
@@ -132,6 +132,7 @@
     $("export-all").addEventListener("click", exportAll);
     $("import-file").addEventListener("change", () => { if ($("import-file").files[0]) importFile($("import-file").files[0]); $("import-file").value = ""; });
     $("setup-import").addEventListener("change", () => { if ($("setup-import").files[0]) importFile($("setup-import").files[0], $("setup-import-status")); $("setup-import").value = ""; });
+    $("set-sunlight").addEventListener("change", () => { const s = JHQ.store.settings(); s.sunlight = $("set-sunlight").checked; JHQ.store.saveSettings(s); JHQ.app.applyTheme(); });
     $("set-save").addEventListener("click", () => {
       const s = JHQ.store.settings();
       const d = $("set-date").value; if (d) s.examDate = d;

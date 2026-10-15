@@ -263,6 +263,16 @@ const custom = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.cu
 ok(custom.length === 1 && custom[0].source === "custom", "custom card saved");
 const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#export-custom")]);
 ok(/journeyman-hq-my-content/.test(dl.suggestedFilename()), "export downloads JSON: " + dl.suggestedFilename());
+// sunlight mode: toggle → light theme now and after reload, toggle back
+await page.click('.tab-btn[data-tab="more"]');
+const bgDark = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+await page.check("#set-sunlight");
+const bgLight = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+ok((await page.$eval("html", (h) => h.dataset.theme)) === "sunlight" && bgLight !== bgDark && /^rgb\(2\d\d, 2\d\d, 2\d\d\)$/.test(bgLight), "sunlight mode flips to a light background: " + bgLight);
+await page.reload(); await page.waitForSelector("#home-main:not(.hidden)");
+ok((await page.$eval("html", (h) => h.dataset.theme)) === "sunlight", "sunlight mode persists across reload");
+await page.click('.tab-btn[data-tab="more"]'); await page.uncheck("#set-sunlight");
+ok((await page.$eval("html", (h) => h.dataset.theme)) === "dark" && (await page.evaluate(() => getComputedStyle(document.body).backgroundColor)) === bgDark, "toggle off restores the dark theme");
 // most-missed questions (seen ≥ 2: the missed drill re-asked sim misses)
 await page.click('.tab-btn[data-tab="more"]');
 const mmRows = await page.$$eval("#mostmissed-list .missed-row", (r) => r.length);
