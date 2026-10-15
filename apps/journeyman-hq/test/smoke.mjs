@@ -120,6 +120,13 @@ ok((await page.$$eval("#res-missed .missed-row.right", (r) => r.length)) === 70 
 ok((await page.$$eval("#res-missed .missed-row .chip", (c) => c.filter((x) => /flagged/.test(x.textContent)).length)) === 1, "the flagged question carries its marker");
 await page.click("#res-view-missed");
 ok((await page.$$eval("#res-missed .missed-row", (r) => r.length)) === nMissedRows, "back to misses only");
+// save a result row as one of my cards (deduped)
+const saveQid = await page.$eval("#res-missed [data-savecard]", (b) => b.dataset.savecard);
+await page.click("#res-missed [data-savecard]");
+const savedCards = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.custom.cards") || "[]"));
+ok(savedCards.length === 1 && savedCards[0].origin === saveQid && /^Answer: /.test(savedCards[0].back) && savedCards[0].source === "custom", "Save as card creates a prefilled custom card from the question");
+ok(/Saved as card/.test(await page.$eval(`#res-missed .missed-row[data-qid="${saveQid}"] .link-btn`, (b) => b.textContent)), "button confirms the save");
+ok((await page.evaluate((id) => JHQ.library.saveQuestionAsCard(id).reason, saveQid)) === "already a card", "saving the same question again is refused");
 ok(!(await page.$eval("#res-loop", (e) => e.classList.contains("hidden"))) && /missed → flashcards/.test(await page.textContent("#res-loop-text")), "result links misses to the flashcard loop: " + (await page.textContent("#res-loop-text")).trim());
 await page.click("#res-done"); await page.waitForSelector("#attempt-list .row");
 ok(true, "attempt history lists the sim");
@@ -262,7 +269,7 @@ await page.click('.tab-btn[data-tab="more"]');
 await page.fill("#ac-article", "250.66"); await page.fill("#ac-front", "Test front"); await page.fill("#ac-back", "Test back");
 await page.click('#add-card-form button[type="submit"]'); await page.waitForSelector("#ac-status.ok");
 const custom = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.custom.cards")));
-ok(custom.length === 1 && custom[0].source === "custom", "custom card saved");
+ok(custom.length === 2 && custom.every((c) => c.source === "custom") && custom.some((c) => !c.origin && c.front === "Test front"), "custom card saved (alongside the one saved from a result)");
 const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#export-custom")]);
 ok(/journeyman-hq-my-content/.test(dl.suggestedFilename()), "export downloads JSON: " + dl.suggestedFilename());
 // calc scratchpad: voltage drop worked example, then motor OCPD

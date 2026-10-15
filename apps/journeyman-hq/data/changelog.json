@@ -1,8 +1,15 @@
 {
  "app": "Journeyman HQ",
- "current": "1.22.0",
+ "current": "1.23.0",
  "generated": "2026-10-15",
  "versions": [
+  {
+   "version": "1.23.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Save any question as one of your cards from a result or an article page (prefilled, no duplicates)"
+   ]
+  },
   {
    "version": "1.22.0",
    "date": "2026-10-15",
