@@ -36,7 +36,8 @@ ok((await page.textContent("#top-countdown")).trim() === "45d", "top bar countdo
 
 // Flashcards
 await page.click('.tab-btn[data-tab="cards"]'); await page.waitForSelector("#deck-list .row");
-const decks = await page.$$eval("#deck-list .row", (r) => r.length); ok(decks === 7, "7 decks (6 topics + everything due), got " + decks);
+const decks = await page.$$eval("#deck-list .row[data-deck]", (r) => r.length); ok(decks === 7, "7 decks (6 topics + everything due), got " + decks);
+ok((await page.$$eval("#deck-list .cram-row", (r) => r.length)) === 1, "cram row offered below the decks");
 await page.click('#deck-list [data-deck="theory"]'); await page.waitForSelector("#flashcard:not(.hidden)");
 const front = await page.textContent("#fc-text"); await page.click("#flashcard"); await page.waitForSelector("#fc-grade:not(.hidden)");
 ok((await page.textContent("#fc-text")) !== front, "card flips");
@@ -44,6 +45,19 @@ await page.click('.grade-btn[data-grade="4"]'); await page.click("#flashcard"); 
 const srs = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.srs")));
 ok(Object.keys(srs).length === 2, "SRS state persisted for 2 cards");
 ok(Object.values(srs).some((s) => s.lapses === 1) && Object.values(srs).some((s) => s.interval === 1), "needs-work lapses, got-it schedules 1 day");
+
+// Cram: every card shuffled, grades never touch SRS state
+await page.click("#cards-exit"); await page.waitForSelector("#deck-list .cram-row");
+const srsBefore = await page.evaluate(() => localStorage.getItem("jhq.srs"));
+await page.click("#deck-list .cram-row"); await page.waitForSelector("#flashcard:not(.hidden)");
+ok(!(await page.$eval("#cards-mode", (e) => e.classList.contains("hidden"))) && /^1 \/ \d+$/.test((await page.textContent("#cards-progress")).trim()), "cram session starts with the rail chip: " + (await page.textContent("#cards-progress")).trim());
+const cramTotal = Number((await page.textContent("#cards-progress")).trim().split("/")[1]);
+await page.click("#flashcard"); await page.waitForSelector("#fc-cram:not(.hidden)");
+ok(await page.$eval("#fc-grade", (e) => e.classList.contains("hidden")), "SRS grade buttons hidden in cram");
+await page.click('[data-cram-grade="shaky"]'); await page.click("#flashcard"); await page.click('[data-cram-grade="solid"]');
+ok((await page.textContent("#cards-progress")).trim() === "3 / " + (cramTotal + 1), "shaky card re-queued at the end of the pass (progress " + (await page.textContent("#cards-progress")).trim() + ", expected 3 / " + (cramTotal + 1) + ")");
+ok((await page.evaluate(() => localStorage.getItem("jhq.srs"))) === srsBefore, "cram wrote nothing to SRS state");
+await page.click("#cards-exit");
 
 // Full sim
 await page.click('.tab-btn[data-tab="exam"]'); await page.waitForSelector("#exam-lobby:not(.hidden)");

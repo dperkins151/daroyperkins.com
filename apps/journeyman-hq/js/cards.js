@@ -3,7 +3,9 @@
   "use strict";
   const JHQ = (root.JHQ = root.JHQ || {});
   const { $, esc } = JHQ.util;
-  let session = null; // { queue:[ids], idx, flipped, deck }
+  let session = null; // { queue:[ids], idx, flipped, deck, cram, shaky }
+  const CRAM_DAYS = 3;
+  function daysToExam() { const s = JHQ.store.settings(); return s.examDate ? JHQ.util.daysBetween(JHQ.util.todayKey(), s.examDate) : null; }
 
   function decks() {
     const cards = JHQ.data.allCards(), srs = JHQ.store.srs();
@@ -22,11 +24,18 @@
     const el = $("deck-list");
     const d = decks();
     if (!JHQ.data.allCards().length) { el.innerHTML = '<div class="empty">No flashcards loaded.</div>'; return; }
-    el.innerHTML = d.map((k) => `
+    const dte = daysToExam(), cramNow = dte != null && dte >= 0 && dte <= CRAM_DAYS;
+    const all = JHQ.data.allCards().length;
+    const cramRow = `<div class="row clickable cram-row ${cramNow ? "cram-now" : ""}" data-cram="__all">
+        <div><div class="title">Cram — every card, shuffled</div><div class="sub">${cramNow ? "Exam in " + (dte === 0 ? "0 days — light pass only" : dte + " day" + (dte === 1 ? "" : "s")) + " · " : ""}${all} cards · nothing gets scheduled or rescored</div></div>
+        <div class="right"><b>${all}</b><div class="sub">cram</div></div>
+      </div>`;
+    el.innerHTML = (cramNow ? cramRow : "") + d.map((k) => `
       <div class="row clickable" data-deck="${esc(k.id)}">
         <div><div class="title">${esc(k.name)}</div><div class="sub">${k.total} cards · ${k.fresh} new${k.mastered ? " · " + k.mastered + " mastered" : ""}</div></div>
         <div class="right"><b>${k.due + Math.min(k.fresh, k.id === "__all" ? 20 : 10)}</b><div class="sub">to review</div></div>
-      </div>`).join("");
+      </div>`).join("") + (cramNow ? "" : cramRow);
+    el.querySelectorAll("[data-cram]").forEach((r) => r.addEventListener("click", () => startCram()));
     el.querySelectorAll("[data-deck]").forEach((r) => r.addEventListener("click", () => start(r.dataset.deck)));
   }
 
@@ -35,7 +44,20 @@
     const srs = JHQ.store.srs();
     const goal = Number(JHQ.store.settings().dailyGoal) || 30;
     const q = JHQ.srs.queue(d.ids, srs, { newLimit: deckId === "__all" ? 20 : 10, limit: goal });
-    session = { queue: q, idx: 0, flipped: false, deck: d, done: 0 };
+    session = { queue: q, idx: 0, flipped: false, deck: d, done: 0, cram: false, shaky: 0 };
+    $("cards-mode").classList.add("hidden");
+    $("cards-picker").classList.add("hidden"); $("cards-session").classList.remove("hidden");
+    $("cards-done").classList.add("hidden");
+    showCard();
+  }
+
+  /** Cram: every card once, shuffled; grades only re-queue within the session. SRS state is never written. */
+  function startCram(topic) {
+    const cards = JHQ.data.allCards().filter((c) => !topic || c.topic === topic);
+    if (!cards.length) return;
+    const q = JHQ.srs.cramQueue(cards.map((c) => c.id));
+    session = { queue: q, idx: 0, flipped: false, deck: { id: "__cram", name: "Cram" }, done: 0, cram: true, shaky: 0 };
+    $("cards-mode").classList.remove("hidden");
     $("cards-picker").classList.add("hidden"); $("cards-session").classList.remove("hidden");
     $("cards-done").classList.add("hidden");
     showCard();
@@ -46,7 +68,7 @@
     if (!session || session.idx >= session.queue.length) {
       fc.classList.add("hidden"); grade.classList.add("hidden");
       $("cards-done").classList.remove("hidden");
-      $("cards-done-text").textContent = session && session.done ? "Reviewed " + session.done + " card" + (session.done === 1 ? "" : "s") + ". Come back when more are due." : "Nothing due in this deck right now.";
+      $("cards-done-text").textContent = session && session.cram ? "Crammed " + session.done + " card" + (session.done === 1 ? "" : "s") + (session.shaky ? " · " + session.shaky + " marked shaky" : "") + ". Nothing was scheduled — your review queue is exactly as it was." : session && session.done ? "Reviewed " + session.done + " card" + (session.done === 1 ? "" : "s") + ". Come back when more are due." : "Nothing due in this deck right now.";
       $("cards-progress").textContent = "";
       return;
     }
@@ -61,7 +83,7 @@
     src.classList.toggle("hidden", !src.textContent);
     $("fc-text").textContent = card.front;
     $("fc-flip-hint").textContent = "tap to flip";
-    grade.classList.add("hidden");
+    grade.classList.add("hidden"); $("fc-cram").classList.add("hidden");
     $("cards-progress").textContent = (session.idx + 1) + " / " + session.queue.length;
   }
 
@@ -73,13 +95,14 @@
     fc.classList.toggle("flipped", session.flipped);
     $("fc-text").textContent = session.flipped ? card.back : card.front;
     $("fc-flip-hint").textContent = session.flipped ? "how did you do?" : "tap to flip";
+    if (session.cram) { $("fc-cram").classList.toggle("hidden", !session.flipped); return; }
     const st = JHQ.store.srs()[card.id];
     $("g-good").textContent = JHQ.srs.preview(st, 4); $("g-easy").textContent = JHQ.srs.preview(st, 5);
     $("fc-grade").classList.toggle("hidden", !session.flipped);
   }
 
   function gradeCard(g) {
-    if (!session || !session.flipped) return;
+    if (!session || !session.flipped || session.cram) return;   // cram never grades into SRS
     const id = session.queue[session.idx];
     const srs = JHQ.store.srs();
     srs[id] = JHQ.srs.review(srs[id], g);
@@ -91,15 +114,26 @@
     showCard();
   }
 
+  function cramGrade(kind) {
+    if (!session || !session.cram || !session.flipped) return;
+    const id = session.queue[session.idx];
+    JHQ.store.logActivity("cards", 1);   // counts for the streak; SRS untouched by design
+    session.done++;
+    if (kind === "shaky") { session.shaky++; session.queue.push(id); }
+    session.idx++;
+    showCard();
+  }
+
   function exit() { session = null; $("cards-session").classList.add("hidden"); $("cards-picker").classList.remove("hidden"); renderPicker(); }
 
   function bind() {
     $("flashcard").addEventListener("click", flip);
     $("flashcard").addEventListener("keydown", (e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); } });
-    document.querySelectorAll(".grade-btn").forEach((b) => b.addEventListener("click", () => gradeCard(Number(b.dataset.grade))));
+    document.querySelectorAll(".grade-btn[data-grade]").forEach((b) => b.addEventListener("click", () => gradeCard(Number(b.dataset.grade))));
+    document.querySelectorAll("[data-cram-grade]").forEach((b) => b.addEventListener("click", () => cramGrade(b.dataset.cramGrade)));
     $("cards-exit").addEventListener("click", exit);
     $("cards-done-back").addEventListener("click", exit);
   }
 
-  JHQ.cards = { render: renderPicker, bind, start, decks };
+  JHQ.cards = { render: renderPicker, bind, start, startCram, decks, CRAM_DAYS };
 })(typeof window !== "undefined" ? window : globalThis);

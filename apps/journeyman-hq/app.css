@@ -227,3 +227,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--amber); out
 /* adaptive schedule */
 .day.buffer { border-style: dashed; opacity: 0.9; }
 .day.buffer .n { color: var(--muted); }
+/* cram mode */
+.grade-row.cram { grid-template-columns: 1fr 1fr; }
+.cram-row { border-style: dashed; }
+.cram-row.cram-now { border-color: var(--amber); border-style: solid; }

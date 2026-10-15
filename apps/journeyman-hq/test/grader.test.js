@@ -4,6 +4,16 @@ const assert = require("node:assert/strict");
 const grader = require("../js/grader.js");
 const srs = require("../js/srs.js");
 
+test("cramQueue: a shuffled permutation of every card, deterministic with a seeded rnd, input untouched", () => {
+  const ids = Array.from({ length: 50 }, (_, i) => "c" + i);
+  let s = 3; const rnd = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+  const q = srs.cramQueue(ids, rnd);
+  assert.equal(q.length, 50); assert.deepEqual([...q].sort(), [...ids].sort()); assert.notDeepEqual(q, ids);
+  assert.deepEqual(ids, Array.from({ length: 50 }, (_, i) => "c" + i), "input not mutated");
+  let s2 = 3; const rnd2 = () => { s2 = (s2 * 9301 + 49297) % 233280; return s2 / 233280; };
+  assert.deepEqual(srs.cramQueue(ids, rnd2), q);
+});
+
 const bank = {};
 const topics = { theory: { name: "Theory" }, wiring: { name: "Wiring" }, general: { name: "General" } };
 let n = 0;

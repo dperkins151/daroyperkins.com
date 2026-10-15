@@ -92,6 +92,7 @@
     <div id="cards-session" class="hidden">
       <div class="session-bar">
         <button id="cards-exit" class="ghost-btn">← decks</button>
+        <span id="cards-mode" class="chip chip-red hidden">cram · nothing scheduled</span>
         <span id="cards-progress" class="muted"></span>
       </div>
       <div id="flashcard" class="flashcard" tabindex="0" role="button" aria-label="Flip card">
@@ -103,6 +104,10 @@
         <button class="grade-btn again" data-grade="1">Needs work<small>again soon</small></button>
         <button class="grade-btn good" data-grade="4">Got it<small id="g-good"></small></button>
         <button class="grade-btn easy" data-grade="5">Easy<small id="g-easy"></small></button>
+      </div>
+      <div id="fc-cram" class="grade-row cram hidden">
+        <button class="grade-btn again" data-cram-grade="shaky">Shaky<small>see it again this pass</small></button>
+        <button class="grade-btn good" data-cram-grade="solid">Solid<small>next card</small></button>
       </div>
       <div id="cards-done" class="card center hidden">
         <h3>Deck clear for now</h3>
