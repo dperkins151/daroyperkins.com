@@ -263,6 +263,12 @@ const custom = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.cu
 ok(custom.length === 1 && custom[0].source === "custom", "custom card saved");
 const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#export-custom")]);
 ok(/journeyman-hq-my-content/.test(dl.suggestedFilename()), "export downloads JSON: " + dl.suggestedFilename());
+// calc scratchpad: voltage drop worked example, then motor OCPD
+await page.click('.tab-btn[data-tab="more"]');
+await page.fill('#calc-form [data-k="amps"]', "16"); await page.fill('#calc-form [data-k="length"]', "150"); await page.fill('#calc-form [data-k="cmil"]', "6530"); await page.fill('#calc-form [data-k="volts"]', "120");
+ok(/^9\.48/.test((await page.textContent("#calc-out .calc-val")).trim()) && /7\.9 %/.test(await page.textContent("#calc-out")), "voltage drop calc shows 9.48 V and 7.9 %: " + (await page.textContent("#calc-out .calc-val")).trim());
+await page.click('.seg-btn[data-calc="motor"]'); await page.fill('#calc-form [data-k="flc"]', "14");
+ok(/^35/.test((await page.textContent("#calc-out .calc-val")).trim()) && /17\.5 A/.test(await page.textContent("#calc-out")), "motor OCPD calc: 35 A max, conductors 17.5 A");
 // sunlight mode: toggle → light theme now and after reload, toggle back
 await page.click('.tab-btn[data-tab="more"]');
 const bgDark = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);

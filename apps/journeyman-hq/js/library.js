@@ -155,6 +155,7 @@
       JHQ.store.clear(); location.reload();
     });
     onKind();
+    JHQ.calcui.bind();
   }
 
   JHQ.library = { render, bind, backupText };

@@ -1,8 +1,15 @@
 {
  "app": "Journeyman HQ",
- "current": "1.19.0",
+ "current": "1.20.0",
  "generated": "2026-10-15",
  "versions": [
+  {
+   "version": "1.20.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Calc scratchpad (More): voltage drop, minimum circular mils, current from kVA, box fill, conduit fill and motor OCPD with every step shown"
+   ]
+  },
   {
    "version": "1.19.0",
    "date": "2026-10-15",

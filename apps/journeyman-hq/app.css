@@ -266,3 +266,13 @@ button:focus-visible, [tabindex]:focus-visible, a:focus-visible { outline: 2px s
 :root[data-theme="sunlight"] .choice.selected { outline: 3px solid #111; }
 :root[data-theme="sunlight"] .bar-fill { background: #7a4600; }
 :root[data-theme="sunlight"] .offline-chip, :root[data-theme="sunlight"] .stat-label { color: #3d3a33; }
+/* calc scratchpad */
+.calc-form h3 { font-size: 1rem; margin: 10px 0 4px; }
+.calc-form label { display: block; margin: 6px 0; font-size: 0.85rem; color: var(--muted); }
+.calc-form input, .calc-form select { width: 100%; margin-top: 2px; }
+.calc-out { margin-top: 12px; }
+.calc-val { font-family: var(--font-head); font-size: 1.6rem; font-weight: 700; }
+.calc-val small { font-size: 0.9rem; color: var(--muted); font-weight: 400; }
+.calc-steps { margin: 8px 0 0 18px; font-size: 0.88rem; color: var(--muted); }
+.calc-steps li { margin: 3px 0; }
+.seg { flex-wrap: wrap; }
