@@ -19,6 +19,7 @@
       if (k === "ArrowRight") { if (press("ex-next")) e.preventDefault(); return; }
       if (k === "ArrowLeft") { if (press("ex-prev")) e.preventDefault(); return; }
       if (k === "f" || k === "F") { if (press("q-flag")) e.preventDefault(); return; }
+      if (k === "g" || k === "G") { if (press("q-guess")) e.preventDefault(); return; }
       if (k === "r" || k === "R") { if (press("ex-review-btn")) e.preventDefault(); return; }
       return;
     }

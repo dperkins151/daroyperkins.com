@@ -2,6 +2,13 @@
   "note": "One entry per app version, newest first. Plain lines Roy will read on the phone after an update; no PR numbers or internals. Validated by tools/build-banks.mjs and shipped as data/changelog.json.",
   "versions": [
     {
+      "version": "1.13.0",
+      "date": "2026-10-15",
+      "lines": [
+        "\"? Guess\" marker (or G) on every question: results split right-by-knowledge from right-by-luck, and lucky guesses go to the Missed deck"
+      ]
+    },
+    {
       "version": "1.12.0",
       "date": "2026-10-15",
       "lines": [

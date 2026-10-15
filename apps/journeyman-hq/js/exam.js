@@ -55,7 +55,7 @@
       const items = JHQ.lookup.generate(pool, JHQ.data.allCards(), { n: 10, topics: JHQ.data.state.topics });
       if (items.length < 4) { JHQ.app.banner("Not enough tagged items to build a lookup drill."); return null; }
       const gen = Object.fromEntries(items.map((it) => [it.id, it]));
-      return { id: uid("att"), mode, startedAt: new Date().toISOString(), submittedAt: null, questionIds: items.map((it) => it.id), perms: Object.fromEntries(items.map((it) => [it.id, [0, 1, 2, 3]])), answers: {}, flagged: {}, idx: 0, elapsedSec: 0, timeLimitSec: 0, qtime: {}, gen, notes: ["lookup drill: " + items.length + " references, timed per question"], lastTick: Date.now() };
+      return { id: uid("att"), mode, startedAt: new Date().toISOString(), submittedAt: null, questionIds: items.map((it) => it.id), perms: Object.fromEntries(items.map((it) => [it.id, [0, 1, 2, 3]])), answers: {}, flagged: {}, guessed: {}, idx: 0, elapsedSec: 0, timeLimitSec: 0, qtime: {}, gen, notes: ["lookup drill: " + items.length + " references, timed per question"], lastTick: Date.now() };
     }
     if (mode === "misses") {
       // untimed, only questions missed in the last 7 days, most recent misses first, no blueprint
@@ -63,7 +63,7 @@
       if (!ids.length) { JHQ.app.banner("Nothing missed in the last " + MISS_DAYS + " days — run a drill or a sim first."); return null; }
       const qmap = JHQ.data.questionMap();
       const order = shuffle(ids).map((id) => ({ id, perm: shuffle([0, 1, 2, 3].slice(0, qmap[id].choices.length)) }));
-      return { id: uid("att"), mode, startedAt: new Date().toISOString(), submittedAt: null, questionIds: order.map((o) => o.id), perms: Object.fromEntries(order.map((o) => [o.id, o.perm])), answers: {}, flagged: {}, idx: 0, elapsedSec: 0, timeLimitSec: 0, notes: ["missed drill: " + ids.length + " question" + (ids.length === 1 ? "" : "s") + " missed in the last " + MISS_DAYS + " days"], lastTick: Date.now() };
+      return { id: uid("att"), mode, startedAt: new Date().toISOString(), submittedAt: null, questionIds: order.map((o) => o.id), perms: Object.fromEntries(order.map((o) => [o.id, o.perm])), answers: {}, flagged: {}, guessed: {}, idx: 0, elapsedSec: 0, timeLimitSec: 0, notes: ["missed drill: " + ids.length + " question" + (ids.length === 1 ? "" : "s") + " missed in the last " + MISS_DAYS + " days"], lastTick: Date.now() };
     }
     let blueprint, timeLimitSec;
     if (mode === "sim") { blueprint = cfg.blueprint; timeLimitSec = cfg.minutes * 60; }
@@ -84,7 +84,7 @@
     return {
       id: uid("att"), mode, startedAt: new Date().toISOString(), submittedAt: null,
       questionIds: order.map((o) => o.id), perms: Object.fromEntries(order.map((o) => [o.id, o.perm])),
-      answers: {}, flagged: {}, idx: 0, elapsedSec: 0, timeLimitSec, notes: (opt.topic ? ["topic drill: " + JHQ.data.topicName(opt.topic)] : []).concat(sel.notes), focus: opt.topic || undefined, lastTick: Date.now(),
+      answers: {}, flagged: {}, guessed: {}, idx: 0, elapsedSec: 0, timeLimitSec, notes: (opt.topic ? ["topic drill: " + JHQ.data.topicName(opt.topic)] : []).concat(sel.notes), focus: opt.topic || undefined, lastTick: Date.now(),
     };
   }
 
@@ -141,6 +141,7 @@
     $("ex-pos").textContent = (attempt.idx + 1) + " / " + attempt.questionIds.length;
     $("q-topic").textContent = JHQ.data.topicName(q.topic) + (q.difficulty ? " · L" + q.difficulty : "");
     $("q-flag").setAttribute("aria-pressed", attempt.flagged[id] ? "true" : "false");
+    $("q-guess").setAttribute("aria-pressed", attempt.guessed && attempt.guessed[id] ? "true" : "false");
     $("q-text").textContent = q.q;
     const perm = attempt.perms[id] || q.choices.map((_, i) => i);
     const sel = attempt.answers[id];
@@ -157,7 +158,7 @@
     const n = attempt.questionIds.length, answered = Object.values(attempt.answers).filter((v) => v != null).length;
     const flagged = Object.keys(attempt.flagged).filter((k) => attempt.flagged[k]).length;
     $("rv-summary").textContent = answered + "/" + n + " answered · " + flagged + " flagged";
-    $("rv-grid").innerHTML = attempt.questionIds.map((id, i) => `<button class="rv-cell ${attempt.answers[id] != null ? "answered" : ""} ${attempt.flagged[id] ? "flagged" : ""} ${i === attempt.idx ? "current" : ""}" data-i="${i}">${i + 1}</button>`).join("");
+    $("rv-grid").innerHTML = attempt.questionIds.map((id, i) => `<button class="rv-cell ${attempt.answers[id] != null ? "answered" : ""} ${attempt.flagged[id] ? "flagged" : ""} ${attempt.guessed && attempt.guessed[id] ? "guessed" : ""} ${i === attempt.idx ? "current" : ""}" data-i="${i}">${i + 1}</button>`).join("");
     $("rv-grid").querySelectorAll(".rv-cell").forEach((c) => c.addEventListener("click", () => { attempt.idx = Number(c.dataset.i); show("exam-run"); renderQ(); }));
     $("ex-submit").textContent = answered < n ? "Submit with " + (n - answered) + " unanswered" : "Submit exam";
   }
@@ -178,14 +179,15 @@
       // question stats (drives re-queue of misses)
       const qs = JHQ.store.qstats();
       attempt.questionIds.forEach((id) => { qs[id] = qs[id] || { seen: 0, missed: 0 }; qs[id].seen++; qs[id].lastSeen = now; });
-      result.missed.forEach((id) => { qs[id].missed++; qs[id].lastMissed = now; });
+      const weak = result.missed.concat(result.guessed ? result.guessed.right : []);   // lucky guesses count as misses for re-queue + cards
+      weak.forEach((id) => { qs[id].missed++; qs[id].lastMissed = now; });
       JHQ.store.saveQstats(qs);
-      // missed-question → flashcard loop: every miss becomes (or re-counts) a card in the Missed deck
-      loop = JHQ.misses.record(JHQ.store.missed(), result.missed, now);
+      // missed-question → flashcard loop: every miss (and lucky guess) becomes (or re-counts) a card in the Missed deck
+      loop = JHQ.misses.record(JHQ.store.missed(), weak, now);
       JHQ.store.saveMissed(loop.map);
     }
     JHQ.store.logActivity("questions", attempt.questionIds.length);
-    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: Math.round(attempt.elapsedSec), timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, notes: attempt.notes, focus: attempt.focus, result, newCards: loop.added, gen: attempt.gen || undefined, qtime: attempt.qtime ? Object.fromEntries(Object.entries(attempt.qtime).map(([k, v]) => [k, Math.round(v * 10) / 10])) : undefined };
+    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: Math.round(attempt.elapsedSec), timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, guessed: attempt.guessed || {}, notes: attempt.notes, focus: attempt.focus, result, newCards: loop.added, gen: attempt.gen || undefined, qtime: attempt.qtime ? Object.fromEntries(Object.entries(attempt.qtime).map(([k, v]) => [k, Math.round(v * 10) / 10])) : undefined };
     JHQ.store.pushAttempt(record);
     JHQ.store.saveInProgress(null);
     attempt = null;
@@ -200,7 +202,8 @@
     const hero = $("res-pct"); hero.textContent = Math.round(r.score.pct) + "%";
     hero.className = "hero-num " + (r.verdict === "pass" ? "pass" : r.verdict === "fail" ? "fail" : "");
     $("res-verdict").textContent = (r.verdict === "pass" ? "PASS" : r.verdict === "fail" ? "FAIL" : r.verdict.toUpperCase()) + " · " + r.score.correct + "/" + r.score.total + (rec.mode === "sim" ? " · need " + r.score.passPct + "%" : " · " + modeName(rec.mode).toLowerCase() + (rec.focus ? " · " + JHQ.data.topicName(rec.focus) : ""));
-    $("res-sub").textContent = fmtClock(rec.elapsedSec) + (r.timing && r.timing.timedOut ? " · time expired" : "") + (r.unanswered.length ? " · " + r.unanswered.length + " unanswered" : "") + (r.rails.length ? " · " + r.rails.join("; ") : "");
+    const lucky = r.score.lucky || 0;
+    $("res-sub").textContent = fmtClock(rec.elapsedSec) + (r.timing && r.timing.timedOut ? " · time expired" : "") + (r.unanswered.length ? " · " + r.unanswered.length + " unanswered" : "") + (lucky ? " · right by knowledge " + (r.score.correct - lucky) + ", by luck " + lucky + " (" + r.score.knowledgePct + "% without the guesses)" : "") + (r.rails.length ? " · " + r.rails.filter((s) => !/right by guess/.test(s)).join("; ") : "");
     const topics = Object.values(r.byTopic).sort((a, b) => a.pct - b.pct);
     $("res-topics").innerHTML = topics.map((t) => `
       <div class="topic-row">
@@ -221,8 +224,8 @@
   /** Result list: misses only (default) or every question in attempt order, each with your answer vs the correct one. */
   function renderResultList(rec, qmap) {
     const r = rec.result, isLookup = rec.mode === "lookup";
-    const missed = new Set(r.missed);
-    const ids = resView === "all" ? rec.questionIds : rec.questionIds.filter((id) => missed.has(id));
+    const missed = new Set(r.missed), luckySet = new Set(r.guessed ? r.guessed.right : []);
+    const ids = resView === "all" ? rec.questionIds : rec.questionIds.filter((id) => missed.has(id) || luckySet.has(id));
     $("res-view-missed").classList.toggle("active", resView === "missed"); $("res-view-missed").setAttribute("aria-pressed", String(resView === "missed"));
     $("res-view-all").classList.toggle("active", resView === "all"); $("res-view-all").setAttribute("aria-pressed", String(resView === "all"));
     $("res-missed-h").textContent = resView === "all" ? "All " + rec.questionIds.length + " questions" : "Missed questions";
@@ -230,7 +233,7 @@
       const q = qmap[id]; if (!q) return "";
       const a = rec.answers[id]; const right = a != null && a === q.answer; const pos = rec.questionIds.indexOf(id) + 1;
       const secs = isLookup && rec.qtime && rec.qtime[id] != null ? ` · ${Math.round(rec.qtime[id])} s` : "";
-      const flag = rec.flagged && rec.flagged[id] ? ' <span class="chip">⚑ flagged</span>' : "";
+      const flag = (rec.flagged && rec.flagged[id] ? ' <span class="chip">⚑ flagged</span>' : "") + (rec.guessed && rec.guessed[id] ? (right ? ' <span class="chip chip-red">lucky guess</span>' : ' <span class="chip">guessed</span>') : "");
       return `<div class="missed-row ${right ? "right" : ""}" data-qid="${esc(id)}">
         <div class="fc-meta"><span class="idx">#${pos}</span><span class="chip">${esc(JHQ.data.topicName(q.topic))}${secs}</span>${q.article ? `<span class="chip chip-amber">NEC ${esc(q.article)}</span>` : ""}${flag}</div>
         <div class="q">${esc(q.q)}</div>
@@ -252,6 +255,7 @@
     $("ex-review-btn").addEventListener("click", () => { show("exam-review"); renderReview(); });
     $("rv-back").addEventListener("click", () => { show("exam-run"); renderQ(); });
     $("q-flag").addEventListener("click", () => { const id = attempt.questionIds[attempt.idx]; attempt.flagged[id] = !attempt.flagged[id]; persist(); renderQ(); });
+    $("q-guess").addEventListener("click", () => { const id = attempt.questionIds[attempt.idx]; attempt.guessed = attempt.guessed || {}; attempt.guessed[id] = !attempt.guessed[id]; persist(); renderQ(); });
     $("ex-submit").addEventListener("click", () => submit(false));
     $("res-done").addEventListener("click", () => { show("exam-lobby"); JHQ.app.refresh(); });
     $("res-view-missed").addEventListener("click", () => { resView = "missed"; if (lastResult) renderResultList(lastResult, qmapFor(lastResult)); });

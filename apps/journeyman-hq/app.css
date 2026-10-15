@@ -250,3 +250,7 @@ button:focus-visible, [tabindex]:focus-visible, a:focus-visible { outline: 2px s
 .wn-ver { margin-bottom: 12px; }
 .wn-ver ul { margin: 6px 0 0 18px; color: var(--muted); font-size: 0.92rem; }
 .wn-ver li { margin: 4px 0; }
+/* guess marker */
+.q-tools { display: flex; gap: 6px; }
+#q-guess[aria-pressed="true"] { border-color: var(--red); color: var(--red); }
+.rv-cell.guessed { border-style: dashed; }

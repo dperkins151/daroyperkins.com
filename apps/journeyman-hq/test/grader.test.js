@@ -28,6 +28,16 @@ test("pass verdict at or above 70% on a submitted attempt", () => {
   assert.equal(r.missed.length, 4);
 });
 
+test("guessed marker: lucky hits split out of the score, listed for the missed loop, wrong guesses stay plain misses", () => {
+  const answers = { ...perfect }; answers.wiring0 = (bank.wiring0.answer + 1) % 4;
+  const r = grader.grade({ questionIds: allIds, answers, guessed: { theory0: true, theory1: true, wiring0: true }, submittedAt: "x" }, bank, topics);
+  assert.equal(r.score.correct, 14); assert.equal(r.score.lucky, 2); assert.equal(r.score.knowledgePct, 80);
+  assert.deepEqual(r.guessed.right.sort(), ["theory0", "theory1"]); assert.deepEqual(r.guessed.wrong, ["wiring0"]);
+  assert.ok(r.rails.some((s) => /2 right by guess/.test(s)));
+  const r2 = grader.grade({ questionIds: allIds, answers: perfect, submittedAt: "x" }, bank, topics);
+  assert.equal(r2.score.lucky, 0); assert.equal(r2.score.knowledgePct, 100); assert.deepEqual(r2.guessed, { right: [], wrong: [] });
+});
+
 test("fail verdict below 70%; unanswered count wrong and are reported with a rail", () => {
   const answers = {}; allIds.slice(0, 8).forEach((id) => { answers[id] = bank[id].answer; });
   const r = grader.grade({ questionIds: allIds, answers, submittedAt: "x" }, bank, topics);

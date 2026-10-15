@@ -75,6 +75,7 @@ await page.keyboard.press("f"); ok((await page.getAttribute("#q-flag", "aria-pre
 ok((await page.$eval('.tab-btn[data-tab="exam"]', (b) => b.getAttribute("aria-current"))) === "page", "active tab carries aria-current");
 ok((await page.$$eval("#deck-list .row.clickable", (r) => r.every((x) => x.getAttribute("tabindex") === "0" && x.getAttribute("role") === "button"))), "deck rows are keyboard-operable");
 await page.click("#q-flag"); ok((await page.getAttribute("#q-flag", "aria-pressed")) === "true", "flag toggles");
+await page.keyboard.press("g"); ok((await page.getAttribute("#q-guess", "aria-pressed")) === "true", "G marks question 1 as a guess");
 for (let i = 0; i < 70; i++) {
   if (i < 60) await page.click(".choice >> nth=0");   // answer first 60, leave 10 blank
   await page.click("#ex-next");
@@ -105,6 +106,12 @@ ok(!(await page.$eval("#res-loop", (e) => e.classList.contains("hidden"))) && /m
 await page.click("#res-done"); await page.waitForSelector("#attempt-list .row");
 ok(true, "attempt history lists the sim");
 const attempts = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts")));
+// guess marker: question 1 was a guess → it is either a lucky guess (fed to the missed loop) or a plain miss
+const g1 = attempts[0].questionIds[0]; const res0 = attempts[0].result;
+ok(res0.guessed.right.length + res0.guessed.wrong.length === 1 && [...res0.guessed.right, ...res0.guessed.wrong][0] === g1, "guess recorded on question 1");
+const missedNow = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.missed")));
+ok(!!missedNow[g1], "a guessed question (lucky or wrong) lands in the missed deck");
+ok(res0.score.lucky === res0.guessed.right.length && res0.score.knowledgePct === Math.round(((res0.score.correct - res0.score.lucky) / 70) * 1000) / 10, "score splits knowledge vs luck: lucky " + res0.score.lucky + ", knowledge " + res0.score.knowledgePct + "%");
 const bt = attempts[0].result.byTopic; ok(bt.theory.total === 20 && bt.wiring.total === 20 && bt.methods.total === 10 && bt.equipment.total === 8 && bt.special.total === 6 && bt.general.total === 6, "blueprint honored 20/20/10/8/6/6");
 
 // Missed-question → flashcard loop
