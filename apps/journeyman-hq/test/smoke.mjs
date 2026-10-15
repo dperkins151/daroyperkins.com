@@ -128,11 +128,22 @@ ok((await page.$$eval("#prog-days .day-col", (c) => c.length)) === 14 && /1 acti
 
 // Plan
 await page.click('.tab-btn[data-tab="plan"]'); await page.waitForSelector("#plan-days .day");
-ok((await page.$$eval("#plan-days .day", (r) => r.length)) === 30, "30 plan days");
+ok((await page.$$eval("#plan-days .day", (r) => r.length)) === 46, "plan stretched to the 46 calendar days through exam day");
+ok((await page.$$eval("#plan-days .day.buffer", (r) => r.length)) === 16, "16 review buffer days inserted");
+ok(/46-day plan/.test(await page.textContent("#plan-title")) && /16 review days added/.test(await page.textContent("#plan-sub")), "plan header explains the stretch: " + (await page.textContent("#plan-sub")).trim());
+ok((await page.$$eval('#plan-days .day[data-day="46"]', (d) => d[0].querySelector(".n").textContent)) === "D30", "exam day pinned to the last calendar day");
 await page.click('.day[data-day="1"] .day-head').catch(() => {});
 const cb = await page.$('.day[data-day="1"] input[data-k]'); if (!(await cb.isVisible())) await page.click('.day[data-day="1"] .day-head');
 await page.click('.day[data-day="1"] input[data-k="1.0"]');
 ok((await page.textContent("#plan-pct")).trim() !== "0%", "plan progress updates: " + (await page.textContent("#plan-pct")));
+// move the exam to 12 days out: plan compresses, the checked task survives
+await page.click('.tab-btn[data-tab="more"]'); const d12 = new Date(); d12.setDate(d12.getDate() + 11);
+await page.fill("#set-date", d12.toISOString().slice(0, 10)); await page.click("#set-save"); await page.waitForSelector("#set-status.ok");
+await page.click('.tab-btn[data-tab="plan"]'); await page.waitForSelector("#plan-days .day");
+ok((await page.$$eval("#plan-days .day", (r) => r.length)) === 12 && /30 plan days packed into 12/.test(await page.textContent("#plan-sub")), "plan compressed to 12 days: " + (await page.textContent("#plan-sub")).trim());
+ok(await page.$eval('#plan-days input[data-k="1.0"]', (c) => c.checked), "checked task survives the date change");
+ok((await page.textContent("#plan-pct")).trim() !== "0%", "progress percentage unchanged by the schedule");
+await page.click('.tab-btn[data-tab="more"]');
 
 // Add a card + export
 await page.click('.tab-btn[data-tab="more"]');

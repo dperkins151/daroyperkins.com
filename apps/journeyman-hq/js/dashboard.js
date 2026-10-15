@@ -42,7 +42,7 @@
     const doneTasks = Object.keys(done).filter((k) => done[k]).length;
     $("st-plan").textContent = pct(doneTasks, totalTasks) + "%";
     const planDay = plan ? JHQ.plan.currentDay() : 1;
-    $("act-plan").textContent = "day " + planDay + " of " + (plan ? plan.days.length : 30);
+    $("act-plan").textContent = "day " + planDay + " of " + (plan ? JHQ.plan.length() : 30);
 
     renderProgress(attempts, act);
 

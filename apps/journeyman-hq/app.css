@@ -224,3 +224,6 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--amber); out
 .day-col { flex: 1; height: 100%; display: flex; align-items: flex-end; }
 .day-bar { width: 100%; min-height: 2px; background: var(--amber); border-radius: 2px 2px 0 0; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; opacity: 0.85; }
 .day-q { width: 100%; background: var(--amber-light); opacity: 0.6; }
+/* adaptive schedule */
+.day.buffer { border-style: dashed; opacity: 0.9; }
+.day.buffer .n { color: var(--muted); }
