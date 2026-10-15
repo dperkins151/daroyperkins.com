@@ -48,8 +48,25 @@ const srs = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.srs")
 ok(Object.keys(srs).length === 3, "SRS state persisted for 3 cards (third graded by keyboard)");
 ok(Object.values(srs).some((s) => s.lapses === 1) && Object.values(srs).some((s) => s.interval === 1), "needs-work lapses, got-it schedules 1 day");
 
-// Cram: every card shuffled, grades never touch SRS state
-await page.click("#cards-exit"); await page.waitForSelector("#deck-list .cram-row");
+// Browse by article: Code-order index → article page → run its cards / drill it
+await page.click("#cards-exit"); await page.waitForSelector("#browse-chapters .day");
+const chN = await page.$$eval("#browse-chapters .day", (d) => d.length); ok(chN >= 6, "chapters listed in Code order: " + chN);
+await page.click('#browse-chapters .day[data-ch="2"] .day-head'); await page.waitForSelector('#browse-chapters [data-ref="210.52"]');
+await page.click('#browse-chapters [data-ref="210.52"]'); await page.waitForSelector("#browse-article:not(.hidden)");
+const nC = await page.$$eval("#browse-cards-list .missed-row", (r) => r.length), nQ = await page.$$eval("#browse-q-list .missed-row", (r) => r.length);
+ok(/NEC 210\.52/.test(await page.textContent("#browse-ref")) && nC + nQ >= 2, "article page lists its cards and questions (" + nC + " cards, " + nQ + " questions)");
+await page.click("#browse-drill"); await page.waitForSelector("#exam-run:not(.hidden)");
+const artIds = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempt.inprogress")).questionIds);
+const artOk = await page.evaluate((ids) => { const m = {}; JHQ.data.allQuestions().forEach((q) => { m[q.id] = q.article; }); return ids.every((i) => /210\.52/.test(m[i])); }, artIds);
+ok(artOk && artIds.length === Math.min(10, nQ), "article drill uses only questions citing 210.52 (" + artIds.length + ")");
+for (let i = 0; i < artIds.length; i++) { await page.click(".choice >> nth=0"); await page.click("#ex-next"); }
+await page.click("#ex-submit"); await page.waitForSelector("#exam-result:not(.hidden)"); ok(/NEC 210\.52/.test(await page.textContent("#res-verdict")), "article drill labelled in the result"); await page.click("#res-done");
+await page.click('.tab-btn[data-tab="cards"]'); await page.evaluate(() => JHQ.cards.openRef("210.52")); await page.waitForSelector("#browse-article:not(.hidden)");   // chapter 2 is still expanded from before
+if (nC) { await page.click("#browse-cards"); await page.waitForSelector("#flashcard:not(.hidden)"); ok((await page.textContent("#cards-progress")).trim() === "1 / " + nC, "Run these cards starts a session over the article's cards"); await page.click("#cards-exit"); } else { await page.click("#browse-back"); }
+await page.waitForSelector("#cards-picker:not(.hidden)");
+
+// Cram: every card shuffled, grades never touch SRS state (picker already visible after the browse block)
+await page.waitForSelector("#deck-list .cram-row");
 const srsBefore = await page.evaluate(() => localStorage.getItem("jhq.srs"));
 await page.click("#deck-list .cram-row"); await page.waitForSelector("#flashcard:not(.hidden)");
 ok(!(await page.$eval("#cards-mode", (e) => e.classList.contains("hidden"))) && /^1 \/ \d+$/.test((await page.textContent("#cards-progress")).trim()), "cram session starts with the rail chip: " + (await page.textContent("#cards-progress")).trim());
@@ -107,20 +124,21 @@ ok(!(await page.$eval("#res-loop", (e) => e.classList.contains("hidden"))) && /m
 await page.click("#res-done"); await page.waitForSelector("#attempt-list .row");
 ok(true, "attempt history lists the sim");
 const attempts = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts")));
+const simRec = attempts.find((a) => a.mode === "sim");   // the article drill from the browse block comes first in history
 // guess marker: question 1 was a guess → it is either a lucky guess (fed to the missed loop) or a plain miss
-const g1 = attempts[0].questionIds[0]; const res0 = attempts[0].result;
+const g1 = simRec.questionIds[0]; const res0 = simRec.result;
 ok(res0.guessed.right.length + res0.guessed.wrong.length === 1 && [...res0.guessed.right, ...res0.guessed.wrong][0] === g1, "guess recorded on question 1");
 const missedNow = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.missed")));
 ok(!!missedNow[g1], "a guessed question (lucky or wrong) lands in the missed deck");
 ok(res0.score.lucky === res0.guessed.right.length && res0.score.knowledgePct === Math.round(((res0.score.correct - res0.score.lucky) / 70) * 1000) / 10, "score splits knowledge vs luck: lucky " + res0.score.lucky + ", knowledge " + res0.score.knowledgePct + "%");
-const bt = attempts[0].result.byTopic; ok(bt.theory.total === 20 && bt.wiring.total === 20 && bt.methods.total === 10 && bt.equipment.total === 8 && bt.special.total === 6 && bt.general.total === 6, "blueprint honored 20/20/10/8/6/6");
+const bt = simRec.result.byTopic; ok(bt.theory.total === 20 && bt.wiring.total === 20 && bt.methods.total === 10 && bt.equipment.total === 8 && bt.special.total === 6 && bt.general.total === 6, "blueprint honored 20/20/10/8/6/6");
 
 // Missed-question → flashcard loop
-const nMissed = attempts[0].result.missed.length;
 const missMap = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.missed")));
 // expected entries = misses ∪ lucky guesses (question 1 was marked as a guess; whether it was right depends on the draw)
-const expectMissed = new Set([...attempts[0].result.missed, ...attempts[0].result.guessed.right]);
-ok(Object.keys(missMap).length === expectMissed.size && [...expectMissed].every((id) => missMap[id] && missMap[id].misses === 1), "every missed question (+ lucky guess) recorded once (" + expectMissed.size + ")");
+const expectMissed = new Set(attempts.flatMap((a) => [...a.result.missed, ...((a.result.guessed && a.result.guessed.right) || [])]));   // article drill + sim
+const nMissed = expectMissed.size;
+ok(Object.keys(missMap).length === expectMissed.size && [...expectMissed].every((id) => missMap[id] && missMap[id].misses >= 1), "every missed question (+ lucky guess) across attempts recorded (" + expectMissed.size + ")");
 await page.click('.tab-btn[data-tab="cards"]'); await page.waitForSelector('#deck-list [data-deck="__missed"]');
 ok(new RegExp("^" + nMissed + " cards").test((await page.textContent('#deck-list [data-deck="__missed"] .sub')).trim()), "Missed questions deck lists " + nMissed + " cards");
 await page.click('#deck-list [data-deck="__missed"]'); await page.waitForSelector("#flashcard:not(.hidden)");
@@ -196,7 +214,7 @@ ok(/Copied|copy it by hand/.test(await page.textContent("#report-status")), "cop
 await page.click("#report-close"); ok(await page.$eval("#report", (e) => e.classList.contains("hidden")), "report sheet closes");
 // Progress card
 ok(!(await page.$eval("#progress", (e) => e.classList.contains("hidden"))), "progress card shows once attempts exist");
-ok((await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts"))[0].elapsedSec)) > 0, "sim elapsed time is recorded (timer no longer loses time on each answer)");
+ok((await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts")).find((a) => a.mode === "sim").elapsedSec)) > 0, "sim elapsed time is recorded (timer no longer loses time on each answer)");
 ok((await page.$$eval("#prog-sim .spark-bar", (b) => b.length)) === 2 && (await page.$$eval("#prog-sim .spark-bar.half", (b) => b.length)) === 1, "full + half sim bars in the score chart (half dashed)");
 ok(/^\d+ s \/ question$/.test((await page.textContent("#prog-pace")).trim()) && /PSI budget 180 s/.test(await page.textContent("#prog-pace-sub")), "pace vs PSI budget: " + (await page.textContent("#prog-pace")).trim());
 ok((await page.$$eval("#prog-topics .prog-topic", (r) => r.length)) === 6, "six topic trend rows");

@@ -7,8 +7,21 @@ test("primaryRef / baseOf: first article-like segment, tables kept, base number 
   assert.equal(L.primaryRef("430.6 / 430.22 / Table 430.52"), "430.6");
   assert.equal(L.primaryRef("Table 250.66"), "Table 250.66"); assert.equal(L.baseOf("Table 250.66"), "250.66");
   assert.equal(L.primaryRef("250.122(B)"), "250.122(B)"); assert.equal(L.baseOf("250.122(B)"), "250.122");
-  assert.equal(L.primaryRef("Ohm's law"), null); assert.equal(L.primaryRef("Art. 100 / 90.5"), null, "Art. 100 is not a numeric reference");
+  assert.equal(L.primaryRef("Ohm's law"), null); assert.equal(L.primaryRef("Art. 100 / 90.5"), "90.5", "Art. 100 is skipped, Art. 90 counts"); assert.equal(L.primaryRef("90.3"), "90.3"); assert.equal(L.baseOf("90.3"), "90.3");
   assert.equal(L.primaryRef("Ch. 9 Table 1 / Table 4"), null);
+});
+
+test("index: Code-order chapters, one entry per base reference with the ids that cite it", () => {
+  const qs = [{ id: "q1", topic: "wiring", article: "250.66 / Table 250.66", q: "x" }, { id: "q2", topic: "wiring", article: "250.66(A)", q: "y" }, { id: "q3", topic: "general", article: "90.3", q: "z" }, { id: "q4", topic: "methods", article: "Table 310.16", q: "w" }, { id: "q5", topic: "theory", article: "Ohm's law", q: "v" }];
+  const cards = [{ id: "c1", topic: "wiring", article: "Table 250.66", front: "f", source: "jhq-v1" }, { id: "mq-x", topic: "wiring", article: "250.66", front: "m", source: "missed" }];
+  const idx = L.index(qs, cards);
+  assert.deepEqual(idx.map((c) => c.chapter), [0, 2, 3]);
+  assert.equal(idx[0].title, "Introduction (Art. 90)"); assert.deepEqual(idx[0].refs.map((r) => r.ref), ["90.3"]);
+  const ch2 = idx[1]; assert.deepEqual(ch2.refs.map((r) => r.ref), ["250.66", "Table 250.66"], "article before its table");
+  const a = ch2.refs[0]; assert.deepEqual(a.questions, ["q1", "q2"]); assert.deepEqual(a.cards, [], "missed-derived cards excluded"); assert.equal(a.topic, "wiring");
+  const t = ch2.refs[1]; assert.deepEqual(t.questions, ["q1"]); assert.deepEqual(t.cards, ["c1"]); assert.equal(t.kind, "table");
+  assert.deepEqual(idx[2].refs.map((r) => r.ref), ["Table 310.16"]);
+  assert.equal(L.chapterOf("90.3"), 0); assert.equal(L.chapterOf("110.26"), 1); assert.equal(L.chapterOf("705.12"), 7);
 });
 
 test("generate: 4 distinct-base choices per item, answer index right, same-topic distractors preferred, deterministic with a seeded rnd", () => {

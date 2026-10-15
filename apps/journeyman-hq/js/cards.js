@@ -21,6 +21,7 @@
   }
 
   function renderPicker() {
+    renderBrowse();
     const el = $("deck-list");
     const d = decks();
     if (!JHQ.data.allCards().length) { el.innerHTML = '<div class="empty">No flashcards loaded.</div>'; return; }
@@ -124,6 +125,40 @@
     showCard();
   }
 
+  // ---- Browse by article ----
+  let browseOpen = {};   // chapter → expanded
+  let browseRef = null;
+  function renderBrowse() {
+    const idx = JHQ.lookup.index(JHQ.data.allQuestions(), JHQ.data.allCards());
+    const el = $("browse-chapters");
+    el.innerHTML = idx.map((ch) => `
+      <div class="day ${browseOpen[ch.chapter] ? "" : ""}" data-ch="${ch.chapter}">
+        <div class="day-head"><span><span class="n">${ch.chapter === 0 ? "90" : ch.chapter === 9 ? "T" : ch.chapter}</span><span class="t">${esc(ch.title)}</span></span><span class="muted small">${ch.refs.length} ref${ch.refs.length === 1 ? "" : "s"}</span></div>
+        <div class="day-tasks ${browseOpen[ch.chapter] ? "" : "hidden"}">${ch.refs.map((r) => `<div class="row clickable" data-ref="${esc(r.ref)}"><div><div class="title">${esc(r.ref)}</div><div class="sub">${esc(JHQ.data.topicName(r.topic))} · ${r.cards.length} card${r.cards.length === 1 ? "" : "s"} · ${r.questions.length} question${r.questions.length === 1 ? "" : "s"}</div></div></div>`).join("")}</div>
+      </div>`).join("");
+    el.querySelectorAll(".day-head").forEach((h) => h.addEventListener("click", () => { const c = Number(h.parentElement.dataset.ch); browseOpen[c] = !browseOpen[c]; renderBrowse(); }));
+    el.querySelectorAll("[data-ref]").forEach((r) => r.addEventListener("click", () => openRef(r.dataset.ref)));
+  }
+  function findRef(ref) { for (const ch of JHQ.lookup.index(JHQ.data.allQuestions(), JHQ.data.allCards())) { const r = ch.refs.find((x) => x.ref === ref); if (r) return r; } return null; }
+  function openRef(ref) {
+    const r = findRef(ref); if (!r) return; browseRef = r;
+    const cmap = JHQ.data.cardMap(), qmap = JHQ.data.questionMap();
+    $("browse-ref").textContent = "NEC " + r.ref + " · " + JHQ.data.topicName(r.topic);
+    $("browse-cards").disabled = !r.cards.length; $("browse-drill").disabled = !r.questions.length;
+    $("browse-cards-list").innerHTML = r.cards.length ? r.cards.map((id) => { const c = cmap[id]; return c ? `<div class="missed-row"><div class="q">${esc(c.front)}</div><div class="explain">${esc(c.back)}</div></div>` : ""; }).join("") : '<div class="empty">No cards cite this reference yet.</div>';
+    $("browse-q-list").innerHTML = r.questions.length ? r.questions.map((id) => { const q = qmap[id]; return q ? `<div class="missed-row"><div class="q">${esc(q.q)}</div><div class="ans"><span class="ok">${esc(q.choices[q.answer])}</span></div>${q.explain ? `<div class="explain">${esc(q.explain)}</div>` : ""}</div>` : ""; }).join("") : '<div class="empty">No questions cite this reference yet.</div>';
+    $("cards-picker").classList.add("hidden"); $("browse-article").classList.remove("hidden"); window.scrollTo(0, 0);
+  }
+  function closeRef() { browseRef = null; $("browse-article").classList.add("hidden"); $("cards-picker").classList.remove("hidden"); }
+  /** Session over an explicit card id list (article view): due/new rules skipped, every card once. */
+  function startIds(ids, name) {
+    if (!ids || !ids.length) return;
+    session = { queue: ids.slice(), idx: 0, flipped: false, deck: { id: "__ids", name }, done: 0, cram: false, shaky: 0 };
+    $("cards-mode").classList.add("hidden"); $("browse-article").classList.add("hidden");
+    $("cards-picker").classList.add("hidden"); $("cards-session").classList.remove("hidden"); $("cards-done").classList.add("hidden");
+    showCard();
+  }
+
   function exit() { session = null; $("cards-session").classList.add("hidden"); $("cards-picker").classList.remove("hidden"); renderPicker(); }
 
   function bind() {
@@ -132,8 +167,11 @@
     document.querySelectorAll(".grade-btn[data-grade]").forEach((b) => b.addEventListener("click", () => gradeCard(Number(b.dataset.grade))));
     document.querySelectorAll("[data-cram-grade]").forEach((b) => b.addEventListener("click", () => cramGrade(b.dataset.cramGrade)));
     $("cards-exit").addEventListener("click", exit);
+    $("browse-back").addEventListener("click", closeRef);
+    $("browse-cards").addEventListener("click", () => { if (browseRef) startIds(browseRef.cards, "NEC " + browseRef.ref); });
+    $("browse-drill").addEventListener("click", () => { if (browseRef) { const r = browseRef; closeRef(); JHQ.app.go("exam"); JHQ.exam.startIdsDrill(r.questions, "NEC " + r.ref); } });
     $("cards-done-back").addEventListener("click", exit);
   }
 
-  JHQ.cards = { render: renderPicker, bind, start, startCram, decks, CRAM_DAYS };
+  JHQ.cards = { render: renderPicker, bind, start, startIds, startCram, openRef, decks, CRAM_DAYS };
 })(typeof window !== "undefined" ? window : globalThis);

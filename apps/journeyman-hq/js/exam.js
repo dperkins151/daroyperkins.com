@@ -60,6 +60,13 @@
     const cfg = examCfg();
     const pool = JHQ.data.allQuestions();
     if (pool.length < 10) { JHQ.app.banner("Not enough questions loaded to run an exam."); return null; }
+    if (mode === "drill" && opt.ids) {
+      // explicit id list (Browse by article): up to 10, shuffled, untimed
+      const qmap = JHQ.data.questionMap(); const ids = shuffle(opt.ids.filter((id) => qmap[id])).slice(0, 10);
+      if (!ids.length) { JHQ.app.banner("No questions to drill here yet."); return null; }
+      const order = ids.map((id) => ({ id, perm: shuffle([0, 1, 2, 3].slice(0, qmap[id].choices.length)) }));
+      return { id: uid("att"), mode, startedAt: new Date().toISOString(), submittedAt: null, questionIds: order.map((o) => o.id), perms: Object.fromEntries(order.map((o) => [o.id, o.perm])), answers: {}, flagged: {}, guessed: {}, idx: 0, elapsedSec: 0, timeLimitSec: 0, notes: ["article drill: " + (opt.label || "")], label: opt.label || undefined, lastTick: Date.now() };
+    }
     if (mode === "lookup") {
       // article-lookup drill: generated from the bank's article tags, untimed overall but timed per question
       const items = JHQ.lookup.generate(pool, JHQ.data.allCards(), { n: 10, topics: JHQ.data.state.topics });
@@ -103,6 +110,7 @@
   function startSim() { const a = build("sim"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startDrill() { const a = build("drill"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startMisses() { const a = build("misses"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
+  function startIdsDrill(ids, label) { const a = build("drill", { ids, label }); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startTopicDrill(topic) { const a = build("drill", { topic }); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startLookup() { const a = build("lookup"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function resume() {
@@ -199,7 +207,7 @@
       JHQ.store.saveMissed(loop.map);
     }
     JHQ.store.logActivity("questions", attempt.questionIds.length);
-    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: Math.round(attempt.elapsedSec), timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, guessed: attempt.guessed || {}, notes: attempt.notes, focus: attempt.focus, result, newCards: loop.added, gen: attempt.gen || undefined, qtime: attempt.qtime ? Object.fromEntries(Object.entries(attempt.qtime).map(([k, v]) => [k, Math.round(v * 10) / 10])) : undefined };
+    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: Math.round(attempt.elapsedSec), timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, guessed: attempt.guessed || {}, notes: attempt.notes, focus: attempt.focus, label: attempt.label, result, newCards: loop.added, gen: attempt.gen || undefined, qtime: attempt.qtime ? Object.fromEntries(Object.entries(attempt.qtime).map(([k, v]) => [k, Math.round(v * 10) / 10])) : undefined };
     JHQ.store.pushAttempt(record);
     JHQ.store.saveInProgress(null);
     attempt = null;
@@ -213,7 +221,7 @@
     show("exam-result");
     const hero = $("res-pct"); hero.textContent = Math.round(r.score.pct) + "%";
     hero.className = "hero-num " + (r.verdict === "pass" ? "pass" : r.verdict === "fail" ? "fail" : "");
-    $("res-verdict").textContent = (r.verdict === "pass" ? "PASS" : r.verdict === "fail" ? "FAIL" : r.verdict.toUpperCase()) + " · " + r.score.correct + "/" + r.score.total + (rec.mode === "sim" || rec.mode === "half" ? " · need " + r.score.passPct + "%" + (rec.mode === "half" ? " · half sim" : "") : " · " + modeName(rec.mode).toLowerCase() + (rec.focus ? " · " + JHQ.data.topicName(rec.focus) : ""));
+    $("res-verdict").textContent = (r.verdict === "pass" ? "PASS" : r.verdict === "fail" ? "FAIL" : r.verdict.toUpperCase()) + " · " + r.score.correct + "/" + r.score.total + (rec.mode === "sim" || rec.mode === "half" ? " · need " + r.score.passPct + "%" + (rec.mode === "half" ? " · half sim" : "") : " · " + modeName(rec.mode).toLowerCase() + (rec.focus ? " · " + JHQ.data.topicName(rec.focus) : "") + (rec.label ? " · " + rec.label : ""));
     const lucky = r.score.lucky || 0;
     $("res-sub").textContent = fmtClock(rec.elapsedSec) + (r.timing && r.timing.timedOut ? " · time expired" : "") + (r.unanswered.length ? " · " + r.unanswered.length + " unanswered" : "") + (lucky ? " · right by knowledge " + (r.score.correct - lucky) + ", by luck " + lucky + " (" + r.score.knowledgePct + "% without the guesses)" : "") + (r.rails.length ? " · " + r.rails.filter((s) => !/right by guess/.test(s)).join("; ") : "");
     const topics = Object.values(r.byTopic).sort((a, b) => a.pct - b.pct);
@@ -280,5 +288,5 @@
   function render() { if (!attempt) show("exam-lobby"); }
   function active() { return !!attempt; }
 
-  JHQ.exam = { render, bind, startSim, startHalf, halfBlueprint, startDrill, startTopicDrill, startMisses, startLookup, resume, active, showResult, modeName, missPool };
+  JHQ.exam = { render, bind, startSim, startHalf, halfBlueprint, startDrill, startTopicDrill, startIdsDrill, startMisses, startLookup, resume, active, showResult, modeName, missPool };
 })(typeof window !== "undefined" ? window : globalThis);

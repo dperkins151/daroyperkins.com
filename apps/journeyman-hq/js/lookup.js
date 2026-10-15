@@ -5,7 +5,7 @@
 (function (root) {
   "use strict";
   const JHQ = (root.JHQ = root.JHQ || {});
-  const REF = /^(Table\s+)?\d{3}(\.\d+[A-Za-z0-9()./]*)?/;
+  const REF = /^(Table\s+)?(90|\d{3})(\.\d+[A-Za-z0-9()./]*)?(?!\d)/;   // Art. 90 is the only two-digit article
 
   /** Primary reference of an item: first "/"-separated segment that looks like an article or table. */
   function primaryRef(article) {
@@ -14,7 +14,7 @@
     return null;
   }
   /** Base article number ("250.66(A)" → "250.66", "Table 310.16" → "310.16") used to keep distractors distinct. */
-  function baseOf(ref) { const m = String(ref || "").match(/\d{3}(\.\d+)?/); return m ? m[0] : null; }
+  function baseOf(ref) { const m = String(ref || "").match(/(?:^|\D)((?:90|\d{3})(?:\.\d+)?)/); return m ? m[1] : null; }
 
   function pool(questions, cards) {
     const out = [];
@@ -47,7 +47,34 @@
     }).filter((x) => x.choices.length === 4 && x.answer >= 0);
   }
 
-  const api = { primaryRef, baseOf, pool, generate };
+  const CHAPTERS = { 0: "Introduction (Art. 90)", 1: "Ch. 1 · General", 2: "Ch. 2 · Wiring & Protection", 3: "Ch. 3 · Wiring Methods & Materials", 4: "Ch. 4 · Equipment for General Use", 5: "Ch. 5 · Special Occupancies", 6: "Ch. 6 · Special Equipment", 7: "Ch. 7 · Special Conditions", 8: "Ch. 8 · Communications", 9: "Ch. 9 · Tables" };
+  function chapterOf(base) { const n = parseInt(base, 10); if (!Number.isFinite(n)) return null; return n < 100 ? 0 : Math.min(9, Math.floor(n / 100)); }
+
+  /**
+   * Code-order index: every base reference the bank cites, with the card and question ids that cite it.
+   * Returns [{ chapter, title, refs: [{ ref, kind, base, cards: [ids], questions: [ids], topic }] }] in numeric order.
+   */
+  function index(questions, cards) {
+    const refs = {};
+    const add = (it, list) => {
+      const seen = new Set();
+      String(it.article || "").split(/\s*\/\s*/).forEach((seg) => {
+        const r = primaryRef(seg); if (!r) return;
+        const base = baseOf(r); const key = (/^Table/i.test(r) ? "Table " : "") + base; if (seen.has(key)) return; seen.add(key);
+        const e = (refs[key] = refs[key] || { ref: key, kind: /^Table/.test(key) ? "table" : "article", base, cards: [], questions: [], topics: {} });
+        e[list].push(it.id); e.topics[it.topic] = (e.topics[it.topic] || 0) + 1;
+      });
+    };
+    (cards || []).forEach((c) => { if (c.source !== "missed") add(c, "cards"); });
+    (questions || []).forEach((q) => add(q, "questions"));
+    const list = Object.values(refs).map((e) => Object.assign(e, { topic: Object.entries(e.topics).sort((a, b) => b[1] - a[1])[0][0], chapter: chapterOf(e.base) }));
+    list.sort((a, b) => parseFloat(a.base) - parseFloat(b.base) || (a.kind === "table") - (b.kind === "table"));
+    const byCh = {};
+    list.forEach((e) => { (byCh[e.chapter] = byCh[e.chapter] || []).push(e); });
+    return Object.keys(byCh).map(Number).sort((a, b) => a - b).map((ch) => ({ chapter: ch, title: CHAPTERS[ch] || "Ch. " + ch, refs: byCh[ch] }));
+  }
+
+  const api = { primaryRef, baseOf, pool, generate, index, chapterOf, CHAPTERS };
   JHQ.lookup = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

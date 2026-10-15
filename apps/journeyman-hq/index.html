@@ -99,6 +99,15 @@
       <h2 class="section-h">Decks</h2>
       <p class="hint">Spaced repetition (SM-2 lite). Cards you mark <b>needs work</b> come back sooner; <b>got it</b> pushes them out.</p>
       <div id="deck-list" class="list"></div>
+      <h2 class="section-h">Browse by article</h2>
+      <p class="hint">Every article and table this bank cites, in Code order. Open one to see its cards and questions, run just those cards, or drill it.</p>
+      <div id="browse-chapters" class="list"></div>
+    </div>
+    <div id="browse-article" class="hidden">
+      <div class="session-bar"><button id="browse-back" class="ghost-btn">← articles</button><span id="browse-ref" class="muted"></span></div>
+      <div class="btn-row"><button id="browse-cards" class="secondary-btn small-btn">Run these cards</button><button id="browse-drill" class="secondary-btn small-btn">Drill this article</button></div>
+      <h2 class="section-h">Cards</h2><div id="browse-cards-list" class="list"></div>
+      <h2 class="section-h">Questions</h2><div id="browse-q-list" class="list"></div>
     </div>
     <div id="cards-session" class="hidden">
       <div class="session-bar">
