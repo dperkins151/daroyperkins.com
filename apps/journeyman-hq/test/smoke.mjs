@@ -68,10 +68,29 @@ await page.waitForSelector("#exam-result:not(.hidden)");
 const verdict = await page.textContent("#res-verdict"); ok(/PASS|FAIL/.test(verdict) && /\/70/.test(verdict), "verdict + score rendered: " + verdict.trim());
 const topics = await page.$$eval("#res-topics .topic-row", (r) => r.length); ok(topics === 6, "6-topic breakdown");
 ok(/10 unanswered/.test(await page.textContent("#res-sub")), "unanswered rail surfaced");
+ok(!(await page.$eval("#res-loop", (e) => e.classList.contains("hidden"))) && /missed → flashcards/.test(await page.textContent("#res-loop-text")), "result links misses to the flashcard loop: " + (await page.textContent("#res-loop-text")).trim());
 await page.click("#res-done"); await page.waitForSelector("#attempt-list .row");
 ok(true, "attempt history lists the sim");
 const attempts = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts")));
 const bt = attempts[0].result.byTopic; ok(bt.theory.total === 20 && bt.wiring.total === 20 && bt.methods.total === 10 && bt.equipment.total === 8 && bt.special.total === 6 && bt.general.total === 6, "blueprint honored 20/20/10/8/6/6");
+
+// Missed-question → flashcard loop
+const nMissed = attempts[0].result.missed.length;
+const missMap = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.missed")));
+ok(Object.keys(missMap).length === nMissed && Object.values(missMap).every((m) => m.misses === 1), "every missed question recorded once (" + nMissed + ")");
+await page.click('.tab-btn[data-tab="cards"]'); await page.waitForSelector('#deck-list [data-deck="__missed"]');
+ok(new RegExp("^" + nMissed + " cards").test((await page.textContent('#deck-list [data-deck="__missed"] .sub')).trim()), "Missed questions deck lists " + nMissed + " cards");
+await page.click('#deck-list [data-deck="__missed"]'); await page.waitForSelector("#flashcard:not(.hidden)");
+ok((await page.textContent("#fc-source")).trim() === "missed once", "miss card shows its source chip");
+await page.click("#flashcard"); await page.waitForSelector("#fc-grade:not(.hidden)");
+ok(/^Answer: /.test(await page.textContent("#fc-text")), "miss card back leads with the correct answer");
+await page.click('.grade-btn[data-grade="4"]');
+const srs2 = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.srs")));
+ok(Object.keys(srs2).some((k) => k.startsWith("mq-")), "miss card graded into the shared SRS");
+await page.click("#cards-exit");
+await page.click('.tab-btn[data-tab="more"]');
+ok(!(await page.$eval("#missed-deck", (e) => e.classList.contains("hidden"))) && new RegExp("^" + nMissed + " cards").test((await page.textContent("#missed-deck-sub")).trim()), "More tab manages the Missed deck");
+await page.click('.tab-btn[data-tab="exam"]');
 
 // Quick drill
 await page.click("#drill-start"); await page.waitForSelector("#exam-run:not(.hidden)");

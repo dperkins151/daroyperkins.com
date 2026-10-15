@@ -12,6 +12,9 @@
     const list = Object.entries(byTopic).map(([t, ids]) => ({ id: t, name: JHQ.data.topicName(t), total: ids.length, due: JHQ.srs.dueCount(ids, srs), fresh: JHQ.srs.newCount(ids, srs), ids }));
     const allIds = cards.map((c) => c.id);
     list.unshift({ id: "__all", name: "Everything due", total: allIds.length, due: JHQ.srs.dueCount(allIds, srs), fresh: JHQ.srs.newCount(allIds, srs), ids: allIds });
+    // Missed-question deck: every question missed on a sim/drill, as a card, until the SRS calls it mastered.
+    const missIds = cards.filter((c) => c.source === "missed").map((c) => c.id);
+    if (missIds.length) list.splice(1, 0, { id: "__missed", name: "Missed questions", total: missIds.length, due: JHQ.srs.dueCount(missIds, srs), fresh: JHQ.srs.newCount(missIds, srs), ids: missIds, mastered: missIds.filter((id) => JHQ.misses.mastered(srs[id])).length });
     return list;
   }
 
@@ -21,7 +24,7 @@
     if (!JHQ.data.allCards().length) { el.innerHTML = '<div class="empty">No flashcards loaded.</div>'; return; }
     el.innerHTML = d.map((k) => `
       <div class="row clickable" data-deck="${esc(k.id)}">
-        <div><div class="title">${esc(k.name)}</div><div class="sub">${k.total} cards · ${k.fresh} new</div></div>
+        <div><div class="title">${esc(k.name)}</div><div class="sub">${k.total} cards · ${k.fresh} new${k.mastered ? " · " + k.mastered + " mastered" : ""}</div></div>
         <div class="right"><b>${k.due + Math.min(k.fresh, k.id === "__all" ? 20 : 10)}</b><div class="sub">to review</div></div>
       </div>`).join("");
     el.querySelectorAll("[data-deck]").forEach((r) => r.addEventListener("click", () => start(r.dataset.deck)));
@@ -53,7 +56,9 @@
     session.flipped = false;
     fc.classList.remove("flipped");
     $("fc-topic").textContent = JHQ.data.topicName(card.topic);
-    $("fc-article").textContent = card.article ? "NEC " + card.article : (card.source === "custom" ? "my card" : "");
+    $("fc-article").textContent = card.article ? "NEC " + card.article : "";
+    const src = $("fc-source"); src.textContent = card.source === "missed" ? "missed " + (card.misses > 1 ? card.misses + "×" : "once") : card.source === "custom" ? "my card" : "";
+    src.classList.toggle("hidden", !src.textContent);
     $("fc-text").textContent = card.front;
     $("fc-flip-hint").textContent = "tap to flip";
     grade.classList.add("hidden");

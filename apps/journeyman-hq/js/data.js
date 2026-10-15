@@ -25,10 +25,12 @@
   }
 
   function allQuestions() { return state.questions.concat(JHQ.store.customQuestions()); }
-  function allCards() { return state.cards.concat(JHQ.store.customCards()); }
   function questionMap() { const m = {}; allQuestions().forEach((q) => { m[q.id] = q; }); return m; }
+  /** Bank cards + my cards + cards derived from missed questions (see js/misses.js). */
+  function missedCards() { return JHQ.misses.cards(JHQ.store.missed(), questionMap()); }
+  function allCards() { return state.cards.concat(JHQ.store.customCards(), missedCards()); }
   function cardMap() { const m = {}; allCards().forEach((c) => { m[c.id] = c; }); return m; }
   function topicName(id) { return (state.topics[id] && state.topics[id].name) || id; }
 
-  JHQ.data = { state, load, allQuestions, allCards, questionMap, cardMap, topicName };
+  JHQ.data = { state, load, allQuestions, allCards, missedCards, questionMap, cardMap, topicName };
 })(typeof window !== "undefined" ? window : globalThis);

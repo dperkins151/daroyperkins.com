@@ -142,8 +142,11 @@
     attempt.questionIds.forEach((id) => { qs[id] = qs[id] || { seen: 0, missed: 0 }; qs[id].seen++; qs[id].lastSeen = now; });
     result.missed.forEach((id) => { qs[id].missed++; qs[id].lastMissed = now; });
     JHQ.store.saveQstats(qs);
+    // missed-question → flashcard loop: every miss becomes (or re-counts) a card in the Missed deck
+    const loop = JHQ.misses.record(JHQ.store.missed(), result.missed, now);
+    JHQ.store.saveMissed(loop.map);
     JHQ.store.logActivity("questions", attempt.questionIds.length);
-    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: attempt.elapsedSec, timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, notes: attempt.notes, result };
+    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: attempt.elapsedSec, timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, notes: attempt.notes, result, newCards: loop.added };
     JHQ.store.pushAttempt(record);
     JHQ.store.saveInProgress(null);
     attempt = null;
@@ -165,6 +168,9 @@
         <div class="topic-top"><span>${esc(t.name)}</span><span class="pct">${t.status === "uncertain" ? "? " : ""}${Math.round(t.pct)}% <small class="muted">· ${t.correct}/${t.total}${t.status === "uncertain" ? " · small sample" : ""}</small></span></div>
         <div class="bar"><div class="bar-fill ${t.status === "weak" ? "bad" : t.status === "strong" ? "good" : ""}" style="width:${t.pct}%"></div></div>
       </div>`).join("");
+    const deckN = JHQ.data.missedCards().length;
+    $("res-loop").classList.toggle("hidden", !r.missed.length);
+    $("res-loop-text").textContent = r.missed.length ? r.missed.length + " missed → flashcards in your Missed deck" + (rec.newCards ? " (" + rec.newCards + " new)" : "") + " · " + deckN + " card" + (deckN === 1 ? "" : "s") + " total" : "";
     $("res-missed").innerHTML = r.missed.length ? r.missed.map((id) => {
       const q = qmap[id]; if (!q) return "";
       const a = rec.answers[id];
@@ -189,6 +195,7 @@
     $("q-flag").addEventListener("click", () => { const id = attempt.questionIds[attempt.idx]; attempt.flagged[id] = !attempt.flagged[id]; persist(); renderQ(); });
     $("ex-submit").addEventListener("click", () => submit(false));
     $("res-done").addEventListener("click", () => { show("exam-lobby"); JHQ.app.refresh(); });
+    $("res-review-missed").addEventListener("click", () => { show("exam-lobby"); JHQ.app.go("cards"); JHQ.cards.start("__missed"); });
     document.addEventListener("visibilitychange", () => { if (attempt) persist(); });
   }
 

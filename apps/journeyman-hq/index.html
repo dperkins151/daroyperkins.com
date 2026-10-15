@@ -83,7 +83,7 @@
         <span id="cards-progress" class="muted"></span>
       </div>
       <div id="flashcard" class="flashcard" tabindex="0" role="button" aria-label="Flip card">
-        <div class="fc-meta"><span id="fc-topic" class="chip"></span><span id="fc-article" class="chip chip-amber"></span></div>
+        <div class="fc-meta"><span id="fc-topic" class="chip"></span><span id="fc-article" class="chip chip-amber"></span><span id="fc-source" class="chip chip-red hidden"></span></div>
         <div id="fc-text" class="fc-text"></div>
         <div id="fc-flip-hint" class="fc-hint">tap to flip</div>
       </div>
@@ -154,6 +154,7 @@
       <h2 class="section-h">By topic</h2>
       <div id="res-topics" class="list"></div>
       <h2 class="section-h">Missed questions</h2>
+      <div id="res-loop" class="loop-row hidden"><span id="res-loop-text"></span><button id="res-review-missed" class="secondary-btn small-btn">Review missed now</button></div>
       <div id="res-missed" class="list"></div>
       <button id="res-done" class="primary-btn">Done</button>
     </div>
@@ -207,6 +208,9 @@
         <label class="secondary-btn file-btn">Import JSON<input id="import-file" type="file" accept=".json,application/json" hidden></label>
       </div>
       <p id="io-status" class="status hidden"></p>
+      <div id="missed-deck" class="row hidden"><div><div class="title">Missed-question deck</div><div class="sub" id="missed-deck-sub"></div></div>
+        <div class="right"><button id="missed-clear-mastered" class="link-btn">clear mastered</button><button id="missed-clear" class="link-btn danger">clear all</button></div></div>
+      <p id="missed-status" class="status hidden"></p>
     </div>
 
     <div class="card">
@@ -238,6 +242,7 @@
 <script src="js/store.js"></script>
 <script src="js/srs.js"></script>
 <script src="js/grader.js"></script>
+<script src="js/misses.js"></script>
 <script src="js/data.js"></script>
 <script src="js/dashboard.js"></script>
 <script src="js/cards.js"></script>

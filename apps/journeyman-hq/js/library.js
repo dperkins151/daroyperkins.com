@@ -21,6 +21,12 @@
       render();
     }));
 
+    const miss = JHQ.store.missed(), missIds = Object.keys(miss);
+    const mastered = JHQ.misses.pruneMastered(miss, JHQ.store.srs()).removed;
+    $("missed-deck").classList.toggle("hidden", !missIds.length);
+    $("missed-deck-sub").textContent = missIds.length + " card" + (missIds.length === 1 ? "" : "s") + " from missed sim/drill questions · " + mastered + " mastered (SRS interval ≥ " + JHQ.misses.MASTERED_DAYS + " d)";
+    $("missed-clear-mastered").disabled = !mastered;
+
     const m = JHQ.data.state.manifest;
     if (m) {
       const rows = Object.entries(m.banks).map(([k, b]) => `<div class="row"><div><div class="title">${esc(k)} · v${esc(b.version)}</div><div class="sub">${esc(b.file)} · ${b.count} items${b.reviewed ? " · reviewed " + esc(b.reviewed) : " · <span style='color:var(--amber)'>awaiting review</span>"}</div></div><div class="right muted small">${esc(b.updated || "")}</div></div>`);
@@ -103,6 +109,14 @@
       const g = Number($("set-goal").value); if (g >= 5) s.dailyGoal = g;
       s.createdAt = s.createdAt || new Date().toISOString();
       JHQ.store.saveSettings(s); flash($("set-status"), "Saved.", true); JHQ.app.refresh();
+    });
+    $("missed-clear-mastered").addEventListener("click", () => {
+      const p = JHQ.misses.pruneMastered(JHQ.store.missed(), JHQ.store.srs()); JHQ.store.saveMissed(p.map);
+      flash($("missed-status"), "Removed " + p.removed + " mastered card" + (p.removed === 1 ? "" : "s") + ".", true); render();
+    });
+    $("missed-clear").addEventListener("click", () => {
+      if (!confirm("Clear the whole Missed-questions deck? Future misses will rebuild it.")) return;
+      JHQ.store.saveMissed({}); flash($("missed-status"), "Missed deck cleared.", true); render();
     });
     $("reset-all").addEventListener("click", () => {
       if (!confirm("Erase ALL local data (progress, attempts, my cards)? Export a backup first.")) return;
