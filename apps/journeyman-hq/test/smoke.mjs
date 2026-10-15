@@ -222,6 +222,17 @@ const mv = await page.textContent("#manifest-view");
 ok(mv.includes(manifest.app + " " + manifest.appVersion), "manifest view shows app + version " + manifest.appVersion);
 ok(mv.includes("questions · v" + manifest.banks.questions.version) && mv.includes(String(manifest.banks.questions.count) + " items"), "manifest lists questions bank v" + manifest.banks.questions.version + " with " + manifest.banks.questions.count + " items");
 
+// What's new: silent on first install, shown once after an update, re-openable from More
+ok((await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.settings")).seenVersion)) === manifest.appVersion && (await page.$eval("#whatsnew", (e) => e.classList.contains("hidden"))), "first install records seenVersion without a sheet");
+await page.evaluate(() => { const s = JSON.parse(localStorage.getItem("jhq.settings")); s.seenVersion = "1.0.0"; localStorage.setItem("jhq.settings", JSON.stringify(s)); });
+await page.reload(); await page.waitForSelector("#whatsnew:not(.hidden)");
+ok((await page.textContent("#wn-title")).trim() === "What's new in " + manifest.appVersion && (await page.$$eval("#wn-body li", (l) => l.length)) >= 1, "update from 1.0.0 shows the What's new sheet: " + (await page.textContent("#wn-title")).trim());
+await page.click("#wn-ok");
+ok((await page.$eval("#whatsnew", (e) => e.classList.contains("hidden"))) && (await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.settings")).seenVersion)) === manifest.appVersion, "Got it dismisses and records the version");
+await page.click('.tab-btn[data-tab="more"]'); await page.click("#wn-open"); await page.waitForSelector("#whatsnew:not(.hidden)"); await page.click("#wn-ok");
+ok(true, "More → What's new reopens the sheet");
+await page.click('.tab-btn[data-tab="home"]');
+
 // PWA: manifest + service worker + offline
 const mf = await page.evaluate(async () => (await fetch("manifest.webmanifest")).ok); ok(mf, "web manifest is served");
 await page.waitForFunction(() => navigator.serviceWorker && navigator.serviceWorker.controller, null, { timeout: 15000 }).catch(() => {});

@@ -17,6 +17,9 @@
 <body>
 
 <div id="sr-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+<div id="whatsnew" class="sheet-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="wn-title">
+  <div class="sheet"><h2 id="wn-title">What's new</h2><div id="wn-body" class="wn-body"></div><button id="wn-ok" class="primary-btn">Got it</button></div>
+</div>
 <div id="banner" class="banner hidden" role="alert"></div>
 <div id="update" class="banner update hidden" role="status">New version ready. <button id="update-btn" class="link-btn">Reload</button></div>
 
@@ -243,6 +246,7 @@
 
     <div class="card">
       <h2>Settings</h2>
+      <p class="hint"><button id="wn-open" class="link-btn">What's new in this version</button></p>
       <label>Exam date <input id="set-date" type="date"></label>
       <label>Daily card goal <input id="set-goal" type="number" min="5" max="200" step="5"></label>
       <button id="set-save" class="secondary-btn">Save settings</button>

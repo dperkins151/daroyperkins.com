@@ -2,7 +2,7 @@
 (function (root) {
   "use strict";
   const JHQ = (root.JHQ = root.JHQ || {});
-  const state = { manifest: null, topics: {}, questions: [], cards: [], plan: null, loaded: false, errors: [] };
+  const state = { manifest: null, topics: {}, questions: [], cards: [], plan: null, changelog: null, loaded: false, errors: [] };
 
   async function getJSON(path) {
     const r = await fetch(path, { cache: "no-cache" });
@@ -20,6 +20,7 @@
     state.questions = (q.items || []).map((x) => Object.assign({ source: q.source || "bank" }, x));
     state.cards = (c.items || []).map((x) => Object.assign({ source: c.source || "bank" }, x));
     state.plan = p;
+    try { state.changelog = await getJSON("data/changelog.json"); } catch (e) { state.changelog = null; }   // optional
     state.loaded = true;
     return state;
   }

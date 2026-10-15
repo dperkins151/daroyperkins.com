@@ -39,6 +39,20 @@ for (const c of cards) {
   if (!c.front || !c.back) errors.push(`${c.id}: front/back required`);
 }
 const plan = read("content/plan.src.json");
+// changelog: newest first, valid versions, 1–8 non-empty lines each, current appVersion present
+const changelog = read("content/changelog.src.json");
+const semver = (v) => { const m = /^(\d+)\.(\d+)\.(\d+)$/.exec(String(v)); return m ? m.slice(1).map(Number) : null; };
+const cmp = (a, b) => { const x = semver(a), y = semver(b); for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] - y[i]; return 0; };
+if (!Array.isArray(changelog.versions) || !changelog.versions.length) errors.push("changelog: versions array missing");
+else {
+  changelog.versions.forEach((v, i) => {
+    if (!semver(v.version)) errors.push(`changelog: bad version '${v.version}'`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(v.date || "")) errors.push(`changelog ${v.version}: date must be YYYY-MM-DD`);
+    if (!Array.isArray(v.lines) || !v.lines.length || v.lines.length > 8 || v.lines.some((l) => typeof l !== "string" || l.trim().length < 8)) errors.push(`changelog ${v.version}: 1–8 lines of at least 8 characters`);
+    if (i > 0 && semver(v.version) && semver(changelog.versions[i - 1].version) && cmp(v.version, changelog.versions[i - 1].version) >= 0) errors.push(`changelog: ${v.version} must come after a newer version (newest first)`);
+  });
+  if (!changelog.versions.some((v) => v.version === manifest.appVersion)) errors.push(`changelog: no entry for appVersion ${manifest.appVersion}`);
+}
 plan.days.forEach((d, i) => { if (d.day !== i + 1) errors.push(`plan day ${d.day} out of order`); if (!topicIds.has(d.topic)) errors.push(`plan day ${d.day}: bad topic`); if (!d.tasks?.length) errors.push(`plan day ${d.day}: no tasks`); });
 if (errors.length) { console.error("BANK VALIDATION FAILED\n" + errors.map((e) => " - " + e).join("\n")); process.exit(1); }
 
@@ -55,12 +69,13 @@ manifest.banks.questions.reviewFlagged = questions.filter((q) => q.review).lengt
 manifest.banks.flashcards.reviewFlagged = cards.filter((c) => c.review).length;
 manifest.generated = today;
 fs.mkdirSync(path.join(root, "data"), { recursive: true });
-const live = new Set([manifest.banks.questions.file, manifest.banks.flashcards.file, manifest.banks.plan.file, "manifest.json"]);
+const live = new Set([manifest.banks.questions.file, manifest.banks.flashcards.file, manifest.banks.plan.file, "manifest.json", "changelog.json"]);
 for (const f of fs.readdirSync(path.join(root, "data"))) if (!live.has(f)) { fs.unlinkSync(path.join(root, "data", f)); console.log("removed stale bank file data/" + f); }
 fs.writeFileSync(path.join(root, "data", manifest.banks.questions.file), JSON.stringify(qOut, null, 1));
 fs.writeFileSync(path.join(root, "data", manifest.banks.flashcards.file), JSON.stringify(cOut, null, 1));
 fs.writeFileSync(path.join(root, "data", manifest.banks.plan.file), JSON.stringify(plan, null, 1));
 fs.writeFileSync(path.join(root, "data", "manifest.json"), JSON.stringify(manifest, null, 2));
+fs.writeFileSync(path.join(root, "data", "changelog.json"), JSON.stringify({ app: manifest.app, current: manifest.appVersion, generated: today, versions: changelog.versions }, null, 1));
 
 // blueprint feasibility
 const bp = manifest.exam.blueprint; const short = Object.entries(bp).filter(([t, n]) => qOut.byTopic[t] < n * 2);

@@ -242,3 +242,11 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--amber); out
 button:focus-visible, [tabindex]:focus-visible, a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 .row.clickable:focus-visible, .day-head:focus-visible { outline-offset: -2px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } html { scroll-behavior: auto; } }
+/* what's new sheet */
+.sheet-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 80; display: flex; align-items: flex-end; justify-content: center; }
+.sheet-backdrop.hidden { display: none; }
+.sheet { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius) var(--radius) 0 0; padding: 20px 18px 24px; width: 100%; max-width: 640px; max-height: 80vh; overflow: auto; }
+.sheet h2 { margin-bottom: 10px; }
+.wn-ver { margin-bottom: 12px; }
+.wn-ver ul { margin: 6px 0 0 18px; color: var(--muted); font-size: 0.92rem; }
+.wn-ver li { margin: 4px 0; }
