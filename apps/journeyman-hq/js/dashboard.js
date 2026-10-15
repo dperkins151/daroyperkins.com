@@ -106,6 +106,7 @@
       const g = b.dataset.go;
       if (g === "drill") { JHQ.app.go("exam"); JHQ.exam.startDrill(); }
       else if (g === "misses") { JHQ.app.go("exam"); JHQ.exam.startMisses(); }
+      else if (g === "lookup") { JHQ.app.go("exam"); JHQ.exam.startLookup(); }
       else if (g === "exam") { JHQ.app.go("exam"); }
       else JHQ.app.go(g);
     }));

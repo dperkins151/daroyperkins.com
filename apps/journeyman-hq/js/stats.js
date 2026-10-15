@@ -5,7 +5,8 @@
   const DAY = 86400000;
   const PSI_SEC_PER_Q = Math.round((210 * 60) / 70); // 180 s budget per question on the real exam
 
-  const graded = (attempts) => (attempts || []).filter((a) => a && a.result && a.result.score && a.submittedAt);
+  // lookup drills measure book speed, not knowledge: excluded from every stat here
+  const graded = (attempts) => (attempts || []).filter((a) => a && a.result && a.result.score && a.submittedAt && a.mode !== "lookup");
 
   /** Full-sim scores in order, last `limit`: [{ at, pct, verdict }]. */
   function simTrend(attempts, limit = 10) {

@@ -72,6 +72,7 @@
         <button class="action" data-go="cards"><b>Review cards</b><small id="act-cards">due now</small></button>
         <button class="action" data-go="drill"><b>Quick drill</b><small>10 Qs · weak topics + misses</small></button>
         <button class="action" data-go="misses"><b>Drill my misses</b><small id="act-misses">nothing missed lately</small></button>
+        <button class="action" data-go="lookup"><b>Lookup drill</b><small>find the article · timed</small></button>
         <button class="action" data-go="exam"><b>Full simulation</b><small>70 · 210 min · 70%</small></button>
         <button class="action" data-go="plan"><b>Study plan</b><small id="act-plan">day 1 of 30</small></button>
       </div>
@@ -121,6 +122,7 @@
         <button id="exam-start" class="primary-btn">Start full simulation</button>
         <button id="drill-start" class="secondary-btn">Quick drill (10 questions, untimed)</button>
         <button id="misses-start" class="secondary-btn">Drill my misses</button>
+        <button id="lookup-start" class="secondary-btn">Article lookup drill (10, timed per question)</button>
         <div id="exam-resume-box" class="resume hidden">
           <span>You have an attempt in progress.</span>
           <button id="exam-resume" class="ghost-btn">Resume</button>
@@ -166,6 +168,7 @@
       <h2 class="section-h">By topic</h2>
       <div id="res-topics" class="list"></div>
       <h2 class="section-h">Missed questions</h2>
+      <div id="res-lookup" class="loop-row hidden"><span id="res-lookup-text"></span></div>
       <div id="res-loop" class="loop-row hidden"><span id="res-loop-text"></span><button id="res-review-missed" class="secondary-btn small-btn">Review missed now</button></div>
       <div id="res-missed" class="list"></div>
       <button id="res-done" class="primary-btn">Done</button>
@@ -254,6 +257,7 @@
 <script src="js/store.js"></script>
 <script src="js/srs.js"></script>
 <script src="js/grader.js"></script>
+<script src="js/lookup.js"></script>
 <script src="js/schedule.js"></script>
 <script src="js/stats.js"></script>
 <script src="js/misses.js"></script>

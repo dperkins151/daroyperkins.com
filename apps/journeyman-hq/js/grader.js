@@ -99,7 +99,7 @@
    */
   function weakTopics(attempts, topics = {}, { window = 5, minSample = 3, passPct = 70 } = {}) {
     const agg = {};
-    attempts.slice(-window).forEach((a) => {
+    attempts.filter((a) => a && a.mode !== "lookup").slice(-window).forEach((a) => {
       if (!a || !a.result || !a.result.byTopic) return;
       Object.values(a.result.byTopic).forEach((t) => {
         agg[t.topic] = agg[t.topic] || { topic: t.topic, name: (topics[t.topic] && topics[t.topic].name) || t.name || t.topic, correct: 0, total: 0 };

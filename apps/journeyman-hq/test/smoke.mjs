@@ -113,6 +113,22 @@ ok(/missed drill/.test(await page.textContent("#res-verdict")), "result labelled
 await page.click("#res-done");
 ok(/Missed drill/.test(await page.textContent("#attempt-list")), "attempt history lists the missed drill");
 
+// Article lookup drill: generated from bank tags, timed per question, never touches qstats / the missed deck
+const missedBefore = await page.evaluate(() => localStorage.getItem("jhq.missed"));
+await page.click("#lookup-start"); await page.waitForSelector("#exam-run:not(.hidden)");
+ok((await page.textContent("#ex-pos")).trim() === "1 / 10" && /^Which NEC reference covers this\?/.test(await page.textContent("#q-text")), "lookup drill: 10 generated prompts");
+ok((await page.$$eval(".choice", (b) => b.map((x) => x.textContent))).every((t) => /\d{3}/.test(t)), "choices are NEC references");
+await page.waitForTimeout(1100);
+for (let i = 0; i < 10; i++) { await page.click(".choice >> nth=0"); await page.click("#ex-next"); }
+await page.click("#ex-submit"); await page.waitForSelector("#exam-result:not(.hidden)");
+ok(/lookup drill/.test(await page.textContent("#res-verdict")) && /s per lookup on average/.test(await page.textContent("#res-lookup-text")), "lookup result shows seconds per lookup: " + (await page.textContent("#res-lookup-text")).trim());
+ok(await page.$eval("#res-loop", (e) => e.classList.contains("hidden")), "lookup misses do not feed the flashcard loop");
+await page.click("#res-done");
+ok((await page.evaluate(() => localStorage.getItem("jhq.missed"))) === missedBefore, "missed map unchanged by the lookup drill");
+ok(/Lookup drill/.test(await page.textContent("#attempt-list")), "attempt history lists the lookup drill");
+const lookupRec = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts")).find((a) => a.mode === "lookup"));
+ok(lookupRec.qtime && Object.values(lookupRec.qtime).some((v) => v >= 1), "per-question time recorded");
+
 // Dashboard weak topics
 await page.click('.tab-btn[data-tab="home"]');
 ok((await page.$$eval("#weak-topics .topic-row", (r) => r.length)) >= 1, "weak topics rendered on dashboard");

@@ -6,9 +6,11 @@
   let attempt = null;   // in-progress attempt (persisted)
   let timer = null;
   let lastResult = null;
-  const MODE = { sim: "Full simulation", drill: "Quick drill", misses: "Missed drill" };
+  const MODE = { sim: "Full simulation", drill: "Quick drill", misses: "Missed drill", lookup: "Lookup drill" };
   const MISS_DAYS = 7, MISS_N = 10;
   function modeName(m) { return MODE[m] || m; }
+  /** Bank questions plus any generated items carried by the attempt (lookup drill). */
+  function qmapFor(a) { const m = JHQ.data.questionMap(); return a && a.gen ? Object.assign({}, m, a.gen) : m; }
   /** Questions missed in the last 7 days that are still in the bank, most recent first. */
   function missPool() { const qmap = JHQ.data.questionMap(); return JHQ.misses.recent(JHQ.store.missed(), Date.now(), MISS_DAYS).filter((id) => qmap[id]); }
 
@@ -47,6 +49,13 @@
     const cfg = examCfg();
     const pool = JHQ.data.allQuestions();
     if (pool.length < 10) { JHQ.app.banner("Not enough questions loaded to run an exam."); return null; }
+    if (mode === "lookup") {
+      // article-lookup drill: generated from the bank's article tags, untimed overall but timed per question
+      const items = JHQ.lookup.generate(pool, JHQ.data.allCards(), { n: 10, topics: JHQ.data.state.topics });
+      if (items.length < 4) { JHQ.app.banner("Not enough tagged items to build a lookup drill."); return null; }
+      const gen = Object.fromEntries(items.map((it) => [it.id, it]));
+      return { id: uid("att"), mode, startedAt: new Date().toISOString(), submittedAt: null, questionIds: items.map((it) => it.id), perms: Object.fromEntries(items.map((it) => [it.id, [0, 1, 2, 3]])), answers: {}, flagged: {}, idx: 0, elapsedSec: 0, timeLimitSec: 0, qtime: {}, gen, notes: ["lookup drill: " + items.length + " references, timed per question"], lastTick: Date.now() };
+    }
     if (mode === "misses") {
       // untimed, only questions missed in the last 7 days, most recent misses first, no blueprint
       const ids = missPool().slice(0, MISS_N);
@@ -80,6 +89,7 @@
   function startSim() { const a = build("sim"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startDrill() { const a = build("drill"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startMisses() { const a = build("misses"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
+  function startLookup() { const a = build("lookup"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function resume() {
     attempt = JHQ.store.inProgress(); if (!attempt) return;
     // credit time that passed while away (sim only); auto-submit if over
@@ -108,7 +118,9 @@
   function tick() {
     if (!attempt) return stopTimer();
     const now = Date.now();
-    attempt.elapsedSec += Math.max(0, (now - (attempt.lastTick || now)) / 1000);
+    const dt = Math.max(0, (now - (attempt.lastTick || now)) / 1000);
+    attempt.elapsedSec += dt;
+    if (attempt.qtime) { const cid = attempt.questionIds[attempt.idx]; attempt.qtime[cid] = (attempt.qtime[cid] || 0) + dt; }
     attempt.lastTick = now;
     const el = $("ex-timer");
     if (attempt.timeLimitSec) {
@@ -120,7 +132,7 @@
   }
 
   function renderQ() {
-    const qmap = JHQ.data.questionMap();
+    const qmap = qmapFor(attempt);
     const id = attempt.questionIds[attempt.idx], q = qmap[id];
     $("ex-pos").textContent = (attempt.idx + 1) + " / " + attempt.questionIds.length;
     $("q-topic").textContent = JHQ.data.topicName(q.topic) + (q.difficulty ? " · L" + q.difficulty : "");
@@ -154,18 +166,22 @@
     }
     stopTimer();
     attempt.submittedAt = new Date().toISOString();
-    const qmap = JHQ.data.questionMap();
+    const qmap = qmapFor(attempt);
     const result = JHQ.grader.grade(attempt, qmap, JHQ.data.state.topics, { passPct: examCfg().passPct });
-    // question stats (drives re-queue of misses)
-    const qs = JHQ.store.qstats(); const now = Date.now();
-    attempt.questionIds.forEach((id) => { qs[id] = qs[id] || { seen: 0, missed: 0 }; qs[id].seen++; qs[id].lastSeen = now; });
-    result.missed.forEach((id) => { qs[id].missed++; qs[id].lastMissed = now; });
-    JHQ.store.saveQstats(qs);
-    // missed-question → flashcard loop: every miss becomes (or re-counts) a card in the Missed deck
-    const loop = JHQ.misses.record(JHQ.store.missed(), result.missed, now);
-    JHQ.store.saveMissed(loop.map);
+    const now = Date.now();
+    let loop = { added: 0 };
+    if (attempt.mode !== "lookup") {   // generated lookup items are not bank questions: no qstats, no missed-card loop
+      // question stats (drives re-queue of misses)
+      const qs = JHQ.store.qstats();
+      attempt.questionIds.forEach((id) => { qs[id] = qs[id] || { seen: 0, missed: 0 }; qs[id].seen++; qs[id].lastSeen = now; });
+      result.missed.forEach((id) => { qs[id].missed++; qs[id].lastMissed = now; });
+      JHQ.store.saveQstats(qs);
+      // missed-question → flashcard loop: every miss becomes (or re-counts) a card in the Missed deck
+      loop = JHQ.misses.record(JHQ.store.missed(), result.missed, now);
+      JHQ.store.saveMissed(loop.map);
+    }
     JHQ.store.logActivity("questions", attempt.questionIds.length);
-    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: Math.round(attempt.elapsedSec), timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, notes: attempt.notes, result, newCards: loop.added };
+    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: Math.round(attempt.elapsedSec), timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, notes: attempt.notes, result, newCards: loop.added, gen: attempt.gen || undefined, qtime: attempt.qtime ? Object.fromEntries(Object.entries(attempt.qtime).map(([k, v]) => [k, Math.round(v * 10) / 10])) : undefined };
     JHQ.store.pushAttempt(record);
     JHQ.store.saveInProgress(null);
     attempt = null;
@@ -175,7 +191,7 @@
 
   function showResult(rec) {
     lastResult = rec;
-    const r = rec.result, qmap = JHQ.data.questionMap();
+    const r = rec.result, qmap = qmapFor(rec);
     show("exam-result");
     const hero = $("res-pct"); hero.textContent = Math.round(r.score.pct) + "%";
     hero.className = "hero-num " + (r.verdict === "pass" ? "pass" : r.verdict === "fail" ? "fail" : "");
@@ -188,13 +204,19 @@
         <div class="bar"><div class="bar-fill ${t.status === "weak" ? "bad" : t.status === "strong" ? "good" : ""}" style="width:${t.pct}%"></div></div>
       </div>`).join("");
     const deckN = JHQ.data.missedCards().length;
-    $("res-loop").classList.toggle("hidden", !r.missed.length);
+    const isLookup = rec.mode === "lookup";
+    const times = isLookup && rec.qtime ? rec.questionIds.map((id) => rec.qtime[id] || 0) : [];
+    const avg = times.length ? Math.round(times.reduce((s, x) => s + x, 0) / times.length) : null;
+    $("res-lookup").classList.toggle("hidden", !isLookup);
+    $("res-lookup-text").textContent = isLookup ? (avg != null ? avg + " s per lookup on average · slowest " + Math.round(Math.max(...times)) + " s" : "") + " · the exam budgets 180 s per question, book time included" : "";
+    $("res-loop").classList.toggle("hidden", !r.missed.length || isLookup);
     $("res-loop-text").textContent = r.missed.length ? r.missed.length + " missed → flashcards in your Missed deck" + (rec.newCards ? " (" + rec.newCards + " new)" : "") + " · " + deckN + " card" + (deckN === 1 ? "" : "s") + " total" : "";
     $("res-missed").innerHTML = r.missed.length ? r.missed.map((id) => {
       const q = qmap[id]; if (!q) return "";
       const a = rec.answers[id];
+      const secs = isLookup && rec.qtime && rec.qtime[id] != null ? ` · ${Math.round(rec.qtime[id])} s` : "";
       return `<div class="missed-row">
-        <div class="fc-meta"><span class="chip">${esc(JHQ.data.topicName(q.topic))}</span>${q.article ? `<span class="chip chip-amber">NEC ${esc(q.article)}</span>` : ""}</div>
+        <div class="fc-meta"><span class="chip">${esc(JHQ.data.topicName(q.topic))}${secs}</span>${q.article ? `<span class="chip chip-amber">NEC ${esc(q.article)}</span>` : ""}</div>
         <div class="q">${esc(q.q)}</div>
         <div class="ans">${a == null ? '<span class="bad">No answer</span>' : `<span class="bad">You: ${esc(q.choices[a])}</span>`}<br><span class="ok">Correct: ${esc(q.choices[q.answer])}</span></div>
         ${q.explain ? `<div class="explain">${esc(q.explain)}</div>` : ""}
@@ -206,6 +228,7 @@
     $("exam-start").addEventListener("click", () => { if (JHQ.store.inProgress() && !confirm("Discard the attempt in progress and start fresh?")) return; startSim(); });
     $("drill-start").addEventListener("click", () => { if (JHQ.store.inProgress() && !confirm("Discard the attempt in progress and start a drill?")) return; startDrill(); });
     $("misses-start").addEventListener("click", () => { if (JHQ.store.inProgress() && !confirm("Discard the attempt in progress and drill your misses?")) return; startMisses(); });
+    $("lookup-start").addEventListener("click", () => { if (JHQ.store.inProgress() && !confirm("Discard the attempt in progress and start a lookup drill?")) return; startLookup(); });
     $("exam-resume").addEventListener("click", resume);
     $("exam-abandon").addEventListener("click", abandon);
     $("ex-prev").addEventListener("click", () => { if (attempt.idx > 0) { attempt.idx--; persist(); renderQ(); } });
@@ -222,5 +245,5 @@
   function render() { if (!attempt) show("exam-lobby"); }
   function active() { return !!attempt; }
 
-  JHQ.exam = { render, bind, startSim, startDrill, startMisses, resume, active, showResult, modeName, missPool };
+  JHQ.exam = { render, bind, startSim, startDrill, startMisses, startLookup, resume, active, showResult, modeName, missPool };
 })(typeof window !== "undefined" ? window : globalThis);
