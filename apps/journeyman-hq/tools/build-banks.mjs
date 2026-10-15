@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import lookup from "../js/lookup.js";
 const root = path.resolve(new URL(".", import.meta.url).pathname, "..");
+import { findNearDuplicates } from "./lib/similarity.mjs";
 const read = (p) => JSON.parse(fs.readFileSync(path.join(root, p), "utf8"));
 const manifest = read("content/manifest.src.json");
 const topicIds = new Set(manifest.topics.map((t) => t.id));
@@ -39,6 +40,13 @@ for (const c of cards) {
   if (seen.has(c.id)) errors.push(`duplicate id ${c.id}`); seen.add(c.id);
   if (!c.front || !c.back) errors.push(`${c.id}: front/back required`);
 }
+// Duplicate-stem lint: a re-ask of an existing item (same words, same numbers) across packs is an error at ≥ 0.9
+// similarity, a review-queue entry at ≥ 0.75; number variants of one template are fine and not listed.
+const DUP_ERROR = 0.9, DUP_REVIEW = 0.75;
+const dupes = [...findNearDuplicates(questions, { key: "q", threshold: DUP_REVIEW }).map((p) => ({ ...p, bank: "questions" })), ...findNearDuplicates(cards, { key: "front", threshold: DUP_REVIEW }).map((p) => ({ ...p, bank: "flashcards" }))]
+  .filter((p) => p.kind !== "variant");
+for (const p of dupes) if (p.kind === "exact" || p.score >= DUP_ERROR) errors.push(`${p.bank}: ${p.a} and ${p.b} are the same item in other words (${p.kind}, ${p.score}) — drop one or change what it asks`);
+const nearDupes = dupes.filter((p) => p.kind === "near" && p.score < DUP_ERROR);
 const plan = read("content/plan.src.json");
 // changelog: newest first, valid versions, 1–8 non-empty lines each, current appVersion present
 const changelog = read("content/changelog.src.json");
@@ -61,7 +69,10 @@ const strip = (x) => { const { _file, ...rest } = x; return Object.assign({ sour
 const today = new Date().toISOString().slice(0, 10);
 const byTopic = (items) => Object.fromEntries(manifest.topics.map((t) => [t.id, items.filter((x) => x.topic === t.id).length]));
 const byPack = (items) => items.reduce((o, x) => { const k = "v" + (x.pack || 1); o[k] = (o[k] || 0) + 1; return o; }, {});
-const qOut = { bank: "questions", version: manifest.banks.questions.version, code: manifest.code, source: "jhq-v" + manifest.banks.questions.version, generated: today, byTopic: byTopic(questions), byPack: byPack(questions), items: questions.map(strip) };
+// questions ship as one index file + one file per topic (keeps every bundled file under the size budget as packs grow)
+const qDir = manifest.banks.questions.file.replace(/\.json$/, "");
+const qFiles = manifest.topics.map((t) => ({ topic: t.id, file: qDir + "/" + t.id + ".json", items: questions.filter((q) => q.topic === t.id).map(strip) })).filter((f) => f.items.length);
+const qOut = { bank: "questions", version: manifest.banks.questions.version, code: manifest.code, source: "jhq-v" + manifest.banks.questions.version, generated: today, byTopic: byTopic(questions), byPack: byPack(questions), count: questions.length, files: qFiles.map((f) => f.file), items: [] };
 const cOut = { bank: "flashcards", version: manifest.banks.flashcards.version, code: manifest.code, source: "jhq-v" + manifest.banks.flashcards.version, generated: today, byTopic: byTopic(cards), items: cards.map(strip) };
 manifest.banks.questions.count = questions.length;
 manifest.banks.flashcards.count = cards.length;
@@ -70,8 +81,12 @@ manifest.banks.questions.reviewFlagged = questions.filter((q) => q.review).lengt
 manifest.banks.flashcards.reviewFlagged = cards.filter((c) => c.review).length;
 manifest.generated = today;
 fs.mkdirSync(path.join(root, "data"), { recursive: true });
-const live = new Set([manifest.banks.questions.file, manifest.banks.flashcards.file, manifest.banks.plan.file, "manifest.json", "changelog.json", "tabs.json"]);
-for (const f of fs.readdirSync(path.join(root, "data"))) if (!live.has(f)) { fs.unlinkSync(path.join(root, "data", f)); console.log("removed stale bank file data/" + f); }
+const live = new Set([manifest.banks.questions.file, manifest.banks.flashcards.file, manifest.banks.plan.file, "manifest.json", "changelog.json", "tabs.json", qDir]);
+for (const f of fs.readdirSync(path.join(root, "data"))) if (!live.has(f)) { fs.rmSync(path.join(root, "data", f), { recursive: true, force: true }); console.log("removed stale bank file data/" + f); }
+fs.mkdirSync(path.join(root, "data", qDir), { recursive: true });
+const liveQ = new Set(qFiles.map((f) => path.basename(f.file)));
+for (const f of fs.readdirSync(path.join(root, "data", qDir))) if (!liveQ.has(f)) { fs.unlinkSync(path.join(root, "data", qDir, f)); console.log("removed stale topic file data/" + qDir + "/" + f); }
+qFiles.forEach((f) => fs.writeFileSync(path.join(root, "data", f.file), JSON.stringify({ bank: "questions", version: manifest.banks.questions.version, topic: f.topic, source: qOut.source, generated: today, items: f.items }, null, 1)));
 fs.writeFileSync(path.join(root, "data", manifest.banks.questions.file), JSON.stringify(qOut, null, 1));
 fs.writeFileSync(path.join(root, "data", manifest.banks.flashcards.file), JSON.stringify(cOut, null, 1));
 fs.writeFileSync(path.join(root, "data", manifest.banks.plan.file), JSON.stringify(plan, null, 1));
@@ -99,11 +114,12 @@ let md = `# Content review queue — Journeyman HQ v${manifest.banks.questions.v
 md += `| Bank | Items | Flagged |\n|---|---|---|\n| questions | ${questions.length} | ${manifest.banks.questions.reviewFlagged} |\n| flashcards | ${cards.length} | ${manifest.banks.flashcards.reviewFlagged} |\n\nQuestions by topic: ${Object.entries(qOut.byTopic).map(([t, n]) => `${t} ${n}`).join(" · ")} (exam blueprint per sim: ${Object.entries(bp).map(([t, n]) => `${t} ${n}`).join(" · ")})\n\n`;
 if (short.length) md += `Pool depth warning (less than 2× blueprint): ${short.map(([t]) => t).join(", ")}. Add questions there in v2.\n\n`;
 md += `## Flagged items\n\n` + (review.length ? `| ID | Article | What to verify |\n|---|---|---|\n` + review.map((x) => `| ${x.id} | ${x.article} | ${x.note} |`).join("\n") + "\n" : "None open.\n");
+md += `\n## Near-duplicate stems\n\nSame words and the same numbers at ≥ ${DUP_REVIEW} similarity (≥ ${DUP_ERROR} fails the build). Number variants of one template are not listed.\n\n` + (nearDupes.length ? `| Bank | A | B | Similarity |\n|---|---|---|---|\n` + nearDupes.map((p) => `| ${p.bank} | ${p.a} | ${p.b} | ${p.score} |`).join("\n") + "\n" : "None.\n");
 const logPath = path.join(root, "content/review-log.json");
 if (fs.existsSync(logPath)) {
   const log = JSON.parse(fs.readFileSync(logPath, "utf8")).resolved || [];
   md += `\n## Resolved\n\n| ID | Date | Outcome | Detail | Source |\n|---|---|---|---|---|\n` + log.map((r) => `| ${r.id} | ${r.date} | ${r.outcome} | ${r.detail} | ${(r.sources || []).map((u) => `[link](${u})`).join(" ")} |`).join("\n") + "\n";
 }
 fs.writeFileSync(path.join(root, "CONTENT-REVIEW.md"), md);
-console.log(`OK: ${questions.length} questions, ${cards.length} cards, ${plan.days.length} plan days → data/. Flagged for review: ${review.length}.`);
+console.log(`OK: ${questions.length} questions, ${cards.length} cards, ${plan.days.length} plan days → data/. Flagged for review: ${review.length}. Near-duplicate stems: ${nearDupes.length}.`);
 console.log("by topic:", qOut.byTopic, "by pack:", qOut.byPack);

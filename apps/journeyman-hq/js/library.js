@@ -58,6 +58,26 @@
     $("mostmissed-list").innerHTML = list.map((m, i) => `<div class="missed-row"><div class="fc-meta"><span class="idx">#${i + 1}</span><span class="chip">${esc(JHQ.data.topicName(m.topic))}</span>${m.article ? `<span class="chip chip-amber">NEC ${esc(m.article)}</span>` : ""}<span class="chip chip-red">missed ${m.missed}/${m.seen} · ${m.rate}%</span></div><div class="q">${esc(m.q)}</div>${m.explain ? `<div class="explain">${esc(m.explain)}</div>` : ""}<div class="muted small">${esc(m.id)}</div></div>`).join("");
   }
 
+  /** Turn a bank question into one of my cards (front = stem, back = answer + explanation). Deduped on origin. */
+  function saveQuestionAsCard(qid) {
+    const q = JHQ.data.questionMap()[qid]; if (!q || q.source === "lookup") return { added: false, reason: "not a bank question" };
+    const list = JHQ.store.customCards();
+    if (list.some((c) => c.origin === qid)) return { added: false, reason: "already a card" };
+    const card = { id: uid("MC"), front: q.q, back: "Answer: " + q.choices[q.answer] + (q.explain ? "\n\n" + q.explain : ""), topic: q.topic, article: q.article || null, difficulty: q.difficulty || 2, source: "custom", origin: qid, createdAt: new Date().toISOString() };
+    list.push(card); JHQ.store.saveCustomCards(list);
+    return { added: true, card };
+  }
+  /** Click delegation for any list that renders [data-savecard] buttons. */
+  function bindSaveCard(container) {
+    container.addEventListener("click", (e) => {
+      const b = e.target.closest && e.target.closest("[data-savecard]"); if (!b) return;
+      e.preventDefault(); e.stopPropagation();
+      const r = saveQuestionAsCard(b.dataset.savecard);
+      b.textContent = r.added ? "Saved as card ✓" : r.reason === "already a card" ? "Already a card" : "Can't save this one"; b.disabled = true;
+      if (r.added) { render(); JHQ.dashboard.render(); if (JHQ.search) JHQ.search.refresh(); }
+    });
+  }
+
   function onKind() {
     const q = $("ac-kind").value === "question";
     $("ac-q-extra").classList.toggle("hidden", !q);
@@ -155,7 +175,9 @@
       JHQ.store.clear(); location.reload();
     });
     onKind();
+    JHQ.calcui.bind();
+    bindSaveCard($("res-missed")); bindSaveCard($("browse-q-list"));
   }
 
-  JHQ.library = { render, bind, backupText };
+  JHQ.library = { render, bind, backupText, saveQuestionAsCard, bindSaveCard };
 })(typeof window !== "undefined" ? window : globalThis);

@@ -34,3 +34,9 @@ Hard rails kept: plain HTML/CSS/JS, no build step, no frameworks, no external re
 
 ## Verification done in this lane
 - Both pages load from a stub server that fakes the three API routes (see `apps/vault/test/smoke.mjs`): list renders, manifest badge appears for an app that has one, delete calls `DELETE /api/apps/<name>` only after confirm, bad slug blocked client-side, non-zip blocked, good upload hits `PUT /api/upload?name=` and renders the live link, API error text is surfaced.
+
+## Tests
+
+- `node --test apps/vault/test/upload-script.test.mjs` — runs `tools/vault-upload.sh` against an in-process stub vault: Basic-Auth header, PIN login + cookie reuse, no credential (exit 3, no request), bad zip/name (exit 2), uploader rejection and wrong password (exit 4); asserts the password and PIN never appear in output.
+- `node apps/vault/test/smoke.mjs` — headless launcher/uploader pages against a stub API.
+- `.github/workflows/vault.yml` runs the script test and the PIN verifier unit tests on every change under `apps/vault/`.

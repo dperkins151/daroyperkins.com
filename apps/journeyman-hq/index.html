@@ -17,9 +17,10 @@
 <body>
 
 <div id="sr-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+<section id="print-sheet" class="print-sheet" aria-hidden="true"></section>
 <div id="report" class="sheet-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="report-title">
   <div class="sheet"><h2 id="report-title">Weekly report</h2><p class="hint small">Plain text, nothing leaves the phone until you paste it.</p><textarea id="report-text" rows="9" readonly></textarea>
-  <div class="btn-row"><button id="report-copy" class="primary-btn">Copy</button><button id="report-close" class="secondary-btn">Close</button></div><p id="report-status" class="status hidden"></p></div>
+  <div class="btn-row"><button id="report-copy" class="primary-btn">Copy</button><button id="report-share" class="secondary-btn hidden">Share…</button><button id="report-close" class="secondary-btn">Close</button></div><p id="report-status" class="status hidden"></p></div>
 </div>
 <div id="whatsnew" class="sheet-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="wn-title">
   <div class="sheet"><h2 id="wn-title">What's new</h2><div id="wn-body" class="wn-body"></div><button id="wn-ok" class="primary-btn">Got it</button></div>
@@ -77,6 +78,12 @@
       <div id="weak-topics" class="list"></div>
 
       <h2 class="section-h">Today</h2>
+      <div id="focus-card" class="card focus" data-state="idle">
+        <div class="focus-head"><span class="focus-title">Focus block</span><div id="focus-len" class="seg" role="group" aria-label="Block length"><button class="seg-btn" data-len="15">15</button><button class="seg-btn active" data-len="25">25</button><button class="seg-btn" data-len="45">45</button><span class="seg-unit">min</span></div></div>
+        <div id="focus-clock" class="focus-clock" role="timer" aria-live="off">25:00</div>
+        <div class="focus-btns"><button id="focus-start" class="primary-btn" data-state="idle">Start</button><button id="focus-reset" class="secondary-btn">Reset</button></div>
+        <p id="focus-sub" class="hint small">no blocks yet today</p>
+      </div>
       <div class="action-grid">
         <button class="action" data-go="cards"><b>Review cards</b><small id="act-cards">due now</small></button>
         <button class="action" data-go="drill"><b>Quick drill</b><small>10 Qs · weak topics + misses</small></button>
@@ -89,13 +96,17 @@
       <h2 class="section-h">Recent attempts</h2>
       <div id="home-attempts" class="list"></div>
       <p id="backup-nudge" class="hint small hidden"></p>
-      <div class="btn-row"><button id="report-open" class="secondary-btn">Weekly report (copy as text)</button></div>
+      <div class="btn-row"><button id="report-open" class="secondary-btn">Weekly report (copy as text)</button><button id="print-open" class="secondary-btn">Print study sheet</button></div>
     </div>
   </section>
 
   <!-- ================= FLASHCARDS ================= -->
   <section id="tab-cards" class="tab">
     <div id="cards-picker">
+      <div class="search">
+        <div class="search-box"><input id="search-q" type="search" placeholder="Search questions + cards · word or article (250.66)" aria-label="Search the bank" autocomplete="off" autocapitalize="off"><button id="search-clear" class="ghost-btn hidden" aria-label="Clear search">✕</button></div>
+        <div id="search-out" class="hidden"></div>
+      </div>
       <h2 class="section-h">Decks</h2>
       <p class="hint">Spaced repetition (SM-2 lite). Cards you mark <b>needs work</b> come back sooner; <b>got it</b> pushes them out.</p>
       <div id="deck-list" class="list"></div>
@@ -210,6 +221,7 @@
         <div class="ring" id="plan-ring"><span id="plan-pct">0%</span></div>
       </div>
       <div class="bar"><div id="plan-bar" class="bar-fill"></div></div>
+      <div class="btn-row"><button id="plan-ics" class="secondary-btn small-btn">Add to calendar (.ics)</button></div>
     </div>
     <div id="plan-days" class="list"></div>
   </section>
@@ -256,6 +268,16 @@
       <p id="missed-status" class="status hidden"></p>
     </div>
 
+    <div class="card" id="calc-card">
+      <h2>Calc scratchpad</h2>
+      <p class="hint">The exam's working formulas with the math shown. Numbers in, answer out — the formula and every step stay visible so it sticks. Constants: K = 12.9 Ω·cmil/ft (Cu), 21.2 (Al).</p>
+      <div class="seg" role="group" aria-label="Calculator">
+        <button class="seg-btn active" data-calc="vd">Voltage drop</button><button class="seg-btn" data-calc="cm">Min. CM</button><button class="seg-btn" data-calc="cur">Current</button><button class="seg-btn" data-calc="box">Box fill</button><button class="seg-btn" data-calc="conduit">Conduit fill</button><button class="seg-btn" data-calc="motor">Motor OCPD</button>
+      </div>
+      <form id="calc-form" class="form calc-form"></form>
+      <div id="calc-out" class="calc-out"></div>
+    </div>
+
     <div class="card hidden" id="mostmissed-card">
       <h2>Most-missed questions</h2>
       <p class="hint">Questions you have missed most across sims and drills (seen at least twice). A question everyone misses is either a weak spot or a bad item — this list tells the reviewer which to look at. <button id="mostmissed-copy" class="link-btn">Copy for review</button></p>
@@ -300,6 +322,7 @@
 <script src="js/store.js"></script>
 <script src="js/srs.js"></script>
 <script src="js/grader.js"></script>
+<script src="js/calc.js"></script>
 <script src="js/lookup.js"></script>
 <script src="js/schedule.js"></script>
 <script src="js/stats.js"></script>
@@ -310,6 +333,10 @@
 <script src="js/exam.js"></script>
 <script src="js/plan.js"></script>
 <script src="js/library.js"></script>
+<script src="js/calcui.js"></script>
+<script src="js/print.js"></script>
+<script src="js/focus.js"></script>
+<script src="js/search.js"></script>
 <script src="js/keys.js"></script>
 <script src="js/app.js"></script>
 </body>

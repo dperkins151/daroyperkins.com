@@ -1,0 +1,637 @@
+{
+ "bank": "questions",
+ "version": 3,
+ "topic": "general",
+ "source": "jhq-v3",
+ "generated": "2026-10-15",
+ "items": [
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-201",
+   "topic": "general",
+   "article": "90.1(B)",
+   "difficulty": 1,
+   "q": "Compliance with the NEC plus proper maintenance results in an installation that is:",
+   "choices": [
+    "Guaranteed efficient, convenient and adequate for future expansion",
+    "Essentially free from hazard, but not necessarily efficient, convenient or adequate for good service or future expansion",
+    "Approved by the manufacturer",
+    "Exempt from local inspection"
+   ],
+   "answer": 1,
+   "explain": "90.1(B): the Code's purpose is practical safeguarding; an installation that complies and is properly maintained is essentially free from hazard but not necessarily efficient, convenient or adequate for good service or future expansion."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-202",
+   "topic": "general",
+   "article": "90.4",
+   "difficulty": 1,
+   "q": "Who has the authority to interpret the NEC, approve equipment and materials, and grant special permission for alternative methods?",
+   "choices": [
+    "The electrical contractor",
+    "The equipment manufacturer",
+    "The authority having jurisdiction (AHJ)",
+    "The NFPA"
+   ],
+   "answer": 2,
+   "explain": "90.4: the authority having jurisdiction enforces the Code, interprets the rules, approves equipment and materials, and may grant special permission or waive specific requirements where equivalent objectives are achieved."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-203",
+   "topic": "general",
+   "article": "90.7",
+   "difficulty": 1,
+   "q": "Factory-installed internal wiring of listed equipment:",
+   "choices": [
+    "Must be re-inspected at installation",
+    "Need not be inspected at installation except to detect alterations or damage",
+    "Must be replaced with field wiring",
+    "Must be run in metal raceway"
+   ],
+   "answer": 1,
+   "explain": "90.7: listed, labeled or identified equipment's internal wiring and construction need not be inspected at the time of installation, except to detect alterations or damage, if the equipment has been listed by a qualified testing laboratory."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-204",
+   "topic": "general",
+   "article": "Art. 100 — Approved",
+   "difficulty": 1,
+   "q": "In Article 100, 'approved' means:",
+   "choices": [
+    "Listed by a testing laboratory",
+    "Acceptable to the authority having jurisdiction",
+    "Recommended by the manufacturer",
+    "Identified for the specific purpose"
+   ],
+   "answer": 1,
+   "explain": "Article 100 defines 'Approved' as acceptable to the authority having jurisdiction. 'Listed' and 'Identified' are separate, narrower terms."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-205",
+   "topic": "general",
+   "article": "Art. 100 — Bonded (Bonding)",
+   "difficulty": 1,
+   "q": "'Bonded' or 'bonding' in Article 100 means:",
+   "choices": [
+    "Connected to earth",
+    "Connected to establish electrical continuity and conductivity",
+    "Insulated from other metal parts",
+    "Protected by an overcurrent device"
+   ],
+   "answer": 1,
+   "explain": "Article 100: Bonded (Bonding) is connecting metal parts to establish electrical continuity and conductivity. Connecting to earth is 'grounded'."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-206",
+   "topic": "general",
+   "article": "Art. 100 — Dwelling Unit",
+   "difficulty": 1,
+   "q": "A 'dwelling unit' per Article 100 is a single unit that provides complete and independent living facilities, including permanent provisions for:",
+   "choices": [
+    "Living and sleeping only",
+    "Living, sleeping, cooking and sanitation",
+    "Cooking and parking",
+    "Sleeping and laundry"
+   ],
+   "answer": 1,
+   "explain": "Article 100: a dwelling unit has permanent provisions for living, sleeping, cooking and sanitation. A one-family dwelling is a building with one dwelling unit; a duplex has two."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-207",
+   "topic": "general",
+   "article": "Art. 100 — Feeder",
+   "difficulty": 1,
+   "q": "The conductors between the service equipment (or other power source) and the final branch-circuit overcurrent device are called:",
+   "choices": [
+    "Service conductors",
+    "Branch-circuit conductors",
+    "Feeder conductors",
+    "Tap conductors"
+   ],
+   "answer": 2,
+   "explain": "Article 100: Feeder — all circuit conductors between the service equipment, the source of a separately derived system or other power supply source and the final branch-circuit overcurrent device."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-208",
+   "topic": "general",
+   "article": "Art. 100 — GFCI",
+   "difficulty": 2,
+   "q": "A Class A ground-fault circuit interrupter is designed to open the circuit when the ground-fault current reaches:",
+   "choices": [
+    "4 to 6 mA",
+    "30 mA",
+    "100 mA",
+    "5 A"
+   ],
+   "answer": 0,
+   "explain": "Article 100 (and the Informational Note): a Class A GFCI trips when the ground-fault current is 6 mA or higher and does not trip below 4 mA. The 30 mA and 100 mA values are GFPE (equipment protection) thresholds."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-209",
+   "topic": "general",
+   "article": "Art. 100 — Interrupting Rating",
+   "difficulty": 2,
+   "q": "'Interrupting rating' is best described as:",
+   "choices": [
+    "The maximum continuous current a device can carry",
+    "The highest current at rated voltage a device is identified to interrupt under standard test conditions",
+    "The current that trips a GFCI",
+    "The voltage rating of the enclosure"
+   ],
+   "answer": 1,
+   "explain": "Article 100: Interrupting Rating — the highest current at rated voltage that a device is identified to interrupt under standard test conditions. Short-circuit current rating is the related term for equipment that doesn't interrupt current."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-210",
+   "topic": "general",
+   "article": "Art. 100 — Overload",
+   "difficulty": 1,
+   "q": "Which condition is NOT an 'overload' as defined in Article 100?",
+   "choices": [
+    "A motor running at 130% of its full-load rating",
+    "A conductor carrying current above its ampacity for an extended time",
+    "A short circuit between two ungrounded conductors",
+    "Equipment operated above its normal full-load rating long enough to cause damage"
+   ],
+   "answer": 2,
+   "explain": "Article 100: Overload is operation in excess of normal full-load rating or a conductor's ampacity that, if long enough, would cause damage; a fault such as a short circuit or ground fault is specifically not an overload."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-211",
+   "topic": "general",
+   "article": "Art. 100 — Service Point",
+   "difficulty": 1,
+   "q": "The 'service point' is the point of connection between:",
+   "choices": [
+    "The meter and the main breaker",
+    "The facilities of the serving utility and the premises wiring",
+    "The service disconnect and the first feeder",
+    "The grounding electrode and the service neutral"
+   ],
+   "answer": 1,
+   "explain": "Article 100: Service Point — the point of connection between the facilities of the serving utility and the premises wiring. Everything on the load side is premises wiring covered by the NEC."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-212",
+   "topic": "general",
+   "article": "110.9",
+   "difficulty": 2,
+   "q": "Equipment intended to interrupt current at fault levels must have an interrupting rating:",
+   "choices": [
+    "Of at least 10,000 A",
+    "Not less than the nominal circuit voltage and the current that is available at the line terminals",
+    "Equal to the conductor ampacity",
+    "Marked by the installer"
+   ],
+   "answer": 1,
+   "explain": "110.9: equipment intended to interrupt fault current must have an interrupting rating at nominal circuit voltage at least equal to the current available at the line terminals of the equipment. 110.10 covers coordinating components to withstand the fault."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-213",
+   "topic": "general",
+   "article": "110.14(D)",
+   "difficulty": 2,
+   "q": "Where a tightening torque is indicated on equipment or in installation instructions, the 2020 NEC requires the connection to be made with:",
+   "choices": [
+    "A standard screwdriver, hand tight",
+    "A calibrated torque tool or other approved means to achieve the indicated torque",
+    "An impact driver",
+    "Any tool, as long as the conductor doesn't pull out"
+   ],
+   "answer": 1,
+   "explain": "110.14(D) (2020): where torque values are indicated, terminations must be made using a calibrated torque tool or another approved means (such as a torque-indicating device or breakaway screw) that achieves the indicated torque."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-214",
+   "topic": "general",
+   "article": "110.22(A)",
+   "difficulty": 1,
+   "q": "Each disconnecting means must be legibly marked to indicate its purpose:",
+   "choices": [
+    "Only in industrial occupancies",
+    "Unless located and arranged so the purpose is evident",
+    "Only when more than six disconnects are grouped",
+    "Only for circuits over 100 A"
+   ],
+   "answer": 1,
+   "explain": "110.22(A): each disconnecting means is legibly marked to indicate its purpose unless located and arranged so that the purpose is evident; the marking must be durable for the environment."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-215",
+   "topic": "general",
+   "article": "110.24(A)",
+   "difficulty": 2,
+   "q": "Service equipment in a non-dwelling occupancy must be field-marked with:",
+   "choices": [
+    "The name of the utility",
+    "The maximum available fault current, including the date the calculation was performed",
+    "The conductor insulation type",
+    "The meter number"
+   ],
+   "answer": 1,
+   "explain": "110.24(A): service equipment other than in dwelling units must be legibly marked in the field with the maximum available fault current and the date of the calculation; 110.24(B) requires updating when modifications change the available fault current."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-216",
+   "topic": "general",
+   "article": "110.27(A)",
+   "difficulty": 1,
+   "q": "Live parts of electrical equipment operating at 50 V or more must be guarded against accidental contact by approved enclosures or by one of the listed means, such as:",
+   "choices": [
+    "Painting them red",
+    "Location in a room or enclosure accessible only to qualified persons, or elevation 8 ft or more above the floor",
+    "A warning sign alone",
+    "Covering with electrical tape"
+   ],
+   "answer": 1,
+   "explain": "110.27(A): live parts at 50 V or more are guarded by approved enclosures, a room or vault accessible only to qualified persons, suitable permanent partitions or screens, an elevated balcony/platform, or elevation of 8 ft or more above the floor or working surface."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-217",
+   "topic": "general",
+   "article": "Table 110.28",
+   "difficulty": 1,
+   "q": "An enclosure installed outdoors where it will be exposed to rain and to corrosive agents (such as a coastal environment or a chemical plant) should be at least which NEMA type?",
+   "choices": [
+    "Type 1",
+    "Type 3R",
+    "Type 4X",
+    "Type 12"
+   ],
+   "answer": 2,
+   "explain": "Table 110.28: Type 4X enclosures are rated for outdoor use with protection against rain, sleet, windblown dust, hose-directed water and corrosion. Type 3R handles rain but not corrosion; Type 1 and 12 are indoor types."
+  },
+  {
+   "source": "jhq-v3",
+   "pack": 3,
+   "id": "G-218",
+   "topic": "general",
+   "article": "110.16(B)",
+   "difficulty": 2,
+   "q": "Under the 2020 NEC, service equipment rated 1200 A or more (other than dwelling units) must carry a permanent label with:",
+   "choices": [
+    "The installer's license number",
+    "Nominal system voltage, available fault current, clearing time of the service overcurrent device, and the date the label was applied",
+    "Only an arc-flash warning sticker",
+    "The feeder sizes"
+   ],
+   "answer": 1,
+   "explain": "110.16(B) (2020): in other than dwelling units, service equipment rated 1200 A or more must be field-marked with the nominal system voltage, available fault current at the service OCPDs, the clearing time of the service OCPDs based on that fault current, and the date; this is in addition to the general arc-flash warning of 110.16(A).",
+   "review": true,
+   "note": "Confirm the exact 2020 110.16(B) label contents and the 1200 A threshold in the book."
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-001",
+   "topic": "general",
+   "article": "90.2(B)",
+   "difficulty": 1,
+   "q": "Which installation is NOT covered by the NEC?",
+   "choices": [
+    "A detached garage at a dwelling",
+    "A commercial office building",
+    "Equipment under the exclusive control of an electric utility in its generating plant",
+    "A recreational vehicle park's site supply"
+   ],
+   "answer": 2,
+   "explain": "Art. 90.2(B) lists installations outside the Code's scope, including utility-controlled generation, transmission and distribution installations, ships, railway rolling stock, and mines.",
+   "tags": [
+    "scope"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-002",
+   "topic": "general",
+   "article": "90.3",
+   "difficulty": 1,
+   "q": "Which NEC chapter is NOT subject to the requirements of Chapters 1 through 7 except where those chapters specifically reference it?",
+   "choices": [
+    "Chapter 4",
+    "Chapter 6",
+    "Chapter 8",
+    "Chapter 9"
+   ],
+   "answer": 2,
+   "explain": "Chapters 1–4 apply generally; 5, 6 and 7 supplement or modify them; Chapter 8 (communications) stands alone unless referenced; Chapter 9 holds tables.",
+   "tags": [
+    "arrangement"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-003",
+   "topic": "general",
+   "article": "90.5(C)",
+   "difficulty": 1,
+   "q": "Informational Notes in the NEC are:",
+   "choices": [
+    "Mandatory requirements",
+    "Permissive rules",
+    "Explanatory material that is not enforceable",
+    "Local amendments"
+   ],
+   "answer": 2,
+   "explain": "'Shall' marks mandatory rules, 'shall be permitted' marks permissive rules, and informational notes only explain.",
+   "tags": [
+    "arrangement"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-004",
+   "topic": "general",
+   "article": "Art. 100 — Readily Accessible",
+   "difficulty": 1,
+   "q": "Equipment that can be reached quickly without climbing over obstacles or using portable ladders is described as:",
+   "choices": [
+    "Accessible",
+    "Readily accessible",
+    "Exposed",
+    "Within sight"
+   ],
+   "answer": 1,
+   "explain": "'Readily accessible' adds the 'quickly, no ladders or obstacles' condition to plain 'accessible'. Keys and tools for locks are allowed.",
+   "tags": [
+    "definitions"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-005",
+   "topic": "general",
+   "article": "Art. 100 — In Sight From",
+   "difficulty": 1,
+   "q": "For equipment to be 'in sight from' another piece of equipment, it must be visible and not more than how far away?",
+   "choices": [
+    "10 ft",
+    "25 ft",
+    "50 ft",
+    "100 ft"
+   ],
+   "answer": 2,
+   "explain": "Visible and within 50 ft (15 m). This drives motor and HVAC disconnect placement.",
+   "tags": [
+    "definitions"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-006",
+   "topic": "general",
+   "article": "Art. 100 — Continuous Load",
+   "difficulty": 1,
+   "q": "A load is 'continuous' when the maximum current is expected to continue for:",
+   "choices": [
+    "1 hour or more",
+    "2 hours or more",
+    "3 hours or more",
+    "8 hours or more"
+   ],
+   "answer": 2,
+   "explain": "Three hours or more. Continuous loads are sized at 125% for conductors and overcurrent devices.",
+   "tags": [
+    "definitions"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-007",
+   "topic": "general",
+   "article": "Art. 100 — Ampacity",
+   "difficulty": 1,
+   "q": "The maximum current a conductor can carry continuously under its conditions of use without exceeding its temperature rating is its:",
+   "choices": [
+    "Rated current",
+    "Ampacity",
+    "Demand load",
+    "Overcurrent"
+   ],
+   "answer": 1,
+   "explain": "Ampacity depends on conditions of use — ambient temperature and number of conductors — not just the conductor's size.",
+   "tags": [
+    "definitions"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-008",
+   "topic": "general",
+   "article": "110.14(C)(1)(a)",
+   "difficulty": 2,
+   "q": "For a circuit rated 100 A or less, conductor ampacity is generally selected from which temperature column unless the equipment terminations are marked otherwise?",
+   "choices": [
+    "60°C",
+    "75°C",
+    "90°C",
+    "105°C"
+   ],
+   "answer": 0,
+   "explain": "Terminations limit the conductor: 100 A or less (or 14–1 AWG) defaults to the 60°C column; over 100 A defaults to 75°C. Equipment marked 75°C allows the 75°C column.",
+   "tags": [
+    "terminations"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-009",
+   "topic": "general",
+   "article": "Table 110.26(A)(1)",
+   "difficulty": 2,
+   "q": "A 480 V panelboard has exposed live parts on both sides of the working space (Condition 3). What minimum working-space depth is required?",
+   "choices": [
+    "3 ft",
+    "3½ ft",
+    "4 ft",
+    "6 ft"
+   ],
+   "answer": 2,
+   "explain": "For 151–600 V to ground: Condition 1 = 3 ft, Condition 2 = 3½ ft, Condition 3 = 4 ft. For 0–150 V every condition is 3 ft.",
+   "tags": [
+    "working-space"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-010",
+   "topic": "general",
+   "article": "110.26(A)(2)",
+   "difficulty": 1,
+   "q": "The minimum width of working space in front of electrical equipment is:",
+   "choices": [
+    "24 in. or the width of the equipment, whichever is greater",
+    "30 in. or the width of the equipment, whichever is greater",
+    "36 in. in all cases",
+    "The width of the equipment only"
+   ],
+   "answer": 1,
+   "explain": "30 in. or equipment width, whichever is greater, and doors must open at least 90°. Height is 6½ ft or the equipment height.",
+   "tags": [
+    "working-space"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-011",
+   "topic": "general",
+   "article": "110.3(B)",
+   "difficulty": 1,
+   "q": "Listed or labeled equipment shall be installed and used:",
+   "choices": [
+    "However the installer sees fit",
+    "In accordance with any instructions included in the listing or labeling",
+    "Only by the manufacturer",
+    "Only after AHJ field evaluation"
+   ],
+   "answer": 1,
+   "explain": "Manufacturer's listing instructions are enforceable through 110.3(B).",
+   "tags": [
+    "listing"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-012",
+   "topic": "general",
+   "article": "110.16(A)",
+   "difficulty": 1,
+   "q": "Arc-flash hazard warning labels are required on switchboards, panelboards, and similar equipment likely to require work while energized in:",
+   "choices": [
+    "Dwelling units only",
+    "Other than dwelling units",
+    "All occupancies without exception",
+    "Hazardous locations only"
+   ],
+   "answer": 1,
+   "explain": "Field or factory marking to warn qualified persons, required in other than dwelling units.",
+   "tags": [
+    "labeling"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-013",
+   "topic": "general",
+   "article": "Art. 100 — Branch Circuit",
+   "difficulty": 1,
+   "q": "The circuit conductors between the final overcurrent device protecting the circuit and the outlet(s) are the:",
+   "choices": [
+    "Feeder",
+    "Service conductors",
+    "Branch circuit",
+    "Tap conductors"
+   ],
+   "answer": 2,
+   "explain": "Feeders run between the service equipment (or other supply) and the final branch-circuit overcurrent device.",
+   "tags": [
+    "definitions"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-014",
+   "topic": "general",
+   "article": "110.26(E)(1)(a)",
+   "difficulty": 2,
+   "q": "Indoors, the dedicated equipment space above a panelboard extends from the floor to what height?",
+   "choices": [
+    "3 ft above the equipment",
+    "6 ft above the equipment or to the structural ceiling, whichever is lower",
+    "To the structural ceiling in all cases",
+    "8 ft above the floor"
+   ],
+   "answer": 1,
+   "explain": "No piping, ducts or foreign equipment in that zone; sprinkler protection is permitted above it.",
+   "tags": [
+    "working-space"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-015",
+   "topic": "general",
+   "article": "110.26(A)(3)",
+   "difficulty": 1,
+   "q": "Minimum headroom (height) of working space for equipment operating at 1000 V or less is generally:",
+   "choices": [
+    "5 ft",
+    "6 ft",
+    "6½ ft or the height of the equipment, whichever is greater",
+    "8 ft"
+   ],
+   "answer": 2,
+   "explain": "6½ ft (2.0 m) or the equipment height. Exceptions exist for existing dwelling-unit service equipment up to 200 A.",
+   "tags": [
+    "working-space"
+   ]
+  },
+  {
+   "source": "jhq-v1",
+   "pack": 1,
+   "id": "G-016",
+   "topic": "general",
+   "article": "Art. 100 — Qualified Person",
+   "difficulty": 1,
+   "q": "A 'qualified person' per Article 100 is one who has:",
+   "choices": [
+    "A journeyman license",
+    "Skills and knowledge of the electrical equipment and installations plus safety training to recognize and avoid the hazards",
+    "Five years of experience",
+    "Completed OSHA 30"
+   ],
+   "answer": 1,
+   "explain": "The definition is about demonstrated skills, knowledge and safety training, not a specific credential.",
+   "tags": [
+    "definitions"
+   ]
+  }
+ ]
+}

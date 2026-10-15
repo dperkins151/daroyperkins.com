@@ -15,6 +15,10 @@
     state.manifest = manifest;
     (manifest.topics || []).forEach((t) => { state.topics[t.id] = t; });
     const q = await getJSON("data/" + manifest.banks.questions.file);
+    if (Array.isArray(q.files) && q.files.length) {   // split bank: one file per topic, fetched in parallel
+      const parts = await Promise.all(q.files.map((f) => getJSON("data/" + f)));
+      q.items = parts.flatMap((p) => p.items || []);
+    }
     const c = await getJSON("data/" + manifest.banks.flashcards.file);
     const p = await getJSON("data/" + manifest.banks.plan.file);
     state.questions = (q.items || []).map((x) => Object.assign({ source: q.source || "bank" }, x));
