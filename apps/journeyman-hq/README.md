@@ -46,7 +46,7 @@ Deploy = Roy uploads the zip at `https://apps.daroyperkins.com/upload/` with the
 
 ## CI / releases
 
-`.github/workflows/journeyman-hq.yml` runs the validator, unit tests, build and browser smoke test on every PR that touches this app. On merge to main it attaches `dist/journeyman-hq-v<appVersion>.zip` (+ `.sha256`) to a GitHub release tagged `journeyman-hq-v<appVersion>` — one click to download, then upload to the vault. If the tag already exists the release step is skipped: bump `appVersion` in `content/manifest.src.json` to cut a new one. No secrets, no deploy.
+`.github/workflows/journeyman-hq.yml` runs the validator, unit tests, build and browser smoke test on every PR that touches this app. On merge to main it attaches `dist/journeyman-hq-v<appVersion>.zip` (+ `.sha256`) to a GitHub release tagged `journeyman-hq-v<appVersion>` — one click to download, then upload to the vault. If the tag already exists the release step is skipped: bump `appVersion` in `content/manifest.src.json` to cut a new one. No secrets, no deploy. `build.sh` also enforces a size budget (zip ≤ 600 KB, any bundled file ≤ 200 KB) so the offline cache stays cheap on a weak signal.
 
 ## Keyboard + accessibility
 

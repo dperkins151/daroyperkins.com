@@ -22,6 +22,13 @@ zip -r -X "$OUT" index.html app.css js data README.md manifest.webmanifest sw.js
 if unzip -p "$OUT" | grep -Eq '((api[_-]?key|secret|password|token)["'"'"']?\s*[:=]\s*["'"'"'][A-Za-z0-9_\-]{12,}|sk-[A-Za-z0-9]{16,}|Bearer [A-Za-z0-9._\-]{16,}|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY)'; then
   echo "SECRET SCAN FAILED — bundle contains a credential-looking string" >&2; exit 1
 fi
+# size budget (fail closed): the offline cache must stay cheap on a weak signal
+ZIP_MAX_KB=600; FILE_MAX_KB=200
+ZIP_KB=$(( $(stat -c %s "$OUT") / 1024 ))
+if (( ZIP_KB > ZIP_MAX_KB )); then echo "SIZE BUDGET FAILED — zip is ${ZIP_KB} KB, budget ${ZIP_MAX_KB} KB" >&2; exit 1; fi
+BIG=$(unzip -l "$OUT" | awk -v max=$((FILE_MAX_KB * 1024)) '$1 ~ /^[0-9]+$/ && $2 ~ /[0-9]-[0-9]/ && $1 > max { print $4 " (" int($1/1024) " KB)" }')
+if [[ -n "$BIG" ]]; then echo "SIZE BUDGET FAILED — files over ${FILE_MAX_KB} KB: $BIG" >&2; exit 1; fi
+echo "size budget: zip ${ZIP_KB} KB of ${ZIP_MAX_KB}; largest file $(unzip -l "$OUT" | awk '$1 ~ /^[0-9]+$/ && $2 ~ /[0-9]-[0-9]/ { if ($1 > m) { m = $1; n = $4 } } END { print n " " int(m/1024) " KB" }') of ${FILE_MAX_KB}"
 unzip -l "$OUT"
 echo "sha256: $(sha256sum "$OUT" | cut -d' ' -f1)"
 echo "built $OUT"
