@@ -33,9 +33,22 @@
       rows.push(`<div class="row"><div><div class="title">My content</div><div class="sub">${cc.length} cards · ${cq.length} questions (this browser only — export to keep)</div></div></div>`);
       $("manifest-view").innerHTML = `<div class="row"><div><div class="title">${esc(m.app)} ${esc(m.appVersion)}</div><div class="sub">${esc(m.exam.name || "")} · ${esc(m.code || "")}</div></div></div>` + rows.join("");
     }
+    renderTabs();
     const s = JHQ.store.settings();
     $("set-date").value = s.examDate || ""; $("set-goal").value = s.dailyGoal || 30;
     $("backup-line").textContent = backupText(s) + " · everything lives in this browser until you back it up.";
+  }
+
+  /** Tab your book: the bank's most-cited references as a check-off list. */
+  function renderTabs() {
+    const t = JHQ.data.state.tabs, done = JHQ.store.tabs();
+    const card = $("tabs-card"); if (!t || !t.items || !t.items.length) { card.classList.add("hidden"); return; }
+    card.classList.remove("hidden");
+    const n = t.items.filter((i) => done[i.ref]).length;
+    $("tabs-progress").textContent = n + " of " + t.items.length + " tabbed";
+    $("tabs-bar").style.width = Math.round((n / t.items.length) * 100) + "%";
+    $("tabs-list").innerHTML = t.items.map((i) => `<label class="task ${done[i.ref] ? "done" : ""}"><input type="checkbox" data-tab="${esc(i.ref)}" ${done[i.ref] ? "checked" : ""}><span><b>${esc(i.ref)}</b> <span class="muted small">· ${esc(JHQ.data.topicName(i.topic))} · cited ${i.count}×</span></span></label>`).join("");
+    $("tabs-list").querySelectorAll("input[data-tab]").forEach((c) => c.addEventListener("change", () => { const d = JHQ.store.tabs(); if (c.checked) d[c.dataset.tab] = true; else delete d[c.dataset.tab]; JHQ.store.saveTabs(d); renderTabs(); }));
   }
 
   function onKind() {

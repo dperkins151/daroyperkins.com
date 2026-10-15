@@ -1,8 +1,15 @@
 {
  "app": "Journeyman HQ",
- "current": "1.13.0",
+ "current": "1.14.0",
  "generated": "2026-10-15",
  "versions": [
+  {
+   "version": "1.14.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Tab your book (More): the 30 references this bank cites most, as a check-off list for tabbing the printed NEC"
+   ]
+  },
   {
    "version": "1.13.0",
    "date": "2026-10-15",

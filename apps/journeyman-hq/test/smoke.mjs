@@ -225,6 +225,13 @@ const custom = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.cu
 ok(custom.length === 1 && custom[0].source === "custom", "custom card saved");
 const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#export-custom")]);
 ok(/journeyman-hq-my-content/.test(dl.suggestedFilename()), "export downloads JSON: " + dl.suggestedFilename());
+// tab-your-book checklist
+await page.click('.tab-btn[data-tab="more"]');
+ok((await page.$$eval("#tabs-list input[data-tab]", (c) => c.length)) === 30 && /0 of 30 tabbed/.test(await page.textContent("#tabs-progress")), "Tab your book lists the 30 most-cited references");
+await page.click('#tabs-list input[data-tab="210.52"]');
+ok(/1 of 30 tabbed/.test(await page.textContent("#tabs-progress")), "ticking a tab updates the count");
+await page.reload(); await page.waitForSelector("#home-main:not(.hidden)"); await page.click('.tab-btn[data-tab="more"]');
+ok(await page.$eval('#tabs-list input[data-tab="210.52"]', (c) => c.checked), "tabs persist across reloads");
 // backup nudge + full backup
 await page.click('.tab-btn[data-tab="home"]');
 ok(!(await page.$eval("#backup-nudge", (e) => e.classList.contains("hidden"))) && /No backup yet/.test(await page.textContent("#backup-nudge")), "Home nudges when progress exists and no backup was made");
