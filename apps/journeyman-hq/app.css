@@ -100,7 +100,7 @@ main { max-width: 640px; margin: 0 auto; padding: 14px 16px 24px; }
 /* forms */
 .form { display: flex; flex-direction: column; gap: 10px; }
 label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 0.88rem; }
-input[type=text], input[type=date], input[type=number], select, textarea {
+input[type=text], input[type=search], input[type=date], input[type=number], select, textarea {
   background: var(--surface-2); border: 1px solid var(--border); color: var(--text);
   border-radius: 10px; padding: 11px 12px; font-size: 16px; width: 100%; font-family: var(--font-body);
 }
@@ -308,3 +308,14 @@ button:focus-visible, [tabindex]:focus-visible, a:focus-visible { outline: 2px s
 .focus-btns > * { flex: 1; margin-top: 0; }
 .focus .seg-btn:disabled { opacity: 0.5; cursor: default; }
 .focus .hint { margin-bottom: 0; }
+
+/* Search the bank (Cards) */
+.search { margin-bottom: 14px; }
+.search-box { display: flex; gap: 8px; align-items: center; }
+.search-box input[type=search] { flex: 1; margin: 0; -webkit-appearance: none; appearance: none; }
+.search-box input[type=search]::-webkit-search-cancel-button { display: none; }
+.search-head { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 4px; font-size: 0.9rem; color: var(--muted); }
+.search-refs { display: flex; flex-wrap: wrap; gap: 6px; }
+.search-refs .chip { cursor: pointer; font: inherit; font-size: 0.74rem; }
+.section-h.small { font-size: 0.95rem; margin-top: 14px; }
+#search-out .list { display: flex; flex-direction: column; gap: 8px; }

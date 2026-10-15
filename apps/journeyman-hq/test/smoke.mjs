@@ -285,6 +285,30 @@ const custom = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.cu
 ok(custom.length === 2 && custom.every((c) => c.source === "custom") && custom.some((c) => !c.origin && c.front === "Test front"), "custom card saved (alongside the one saved from a result)");
 const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#export-custom")]);
 ok(/journeyman-hq-my-content/.test(dl.suggestedFilename()), "export downloads JSON: " + dl.suggestedFilename());
+// Search the bank: article number, keyword, ref chip → article page, drill the hits, save a card from a row, Esc clears
+await page.click('.tab-btn[data-tab="cards"]'); await page.waitForSelector("#cards-picker:not(.hidden)");
+await page.fill("#search-q", "210.52"); await page.waitForSelector("#search-out:not(.hidden) [data-qid]");
+const sArt = await page.evaluate(() => { const r = JHQ.search.search("210.52", JHQ.data.allQuestions(), JHQ.data.allCards(), { limit: 1000 }); return { q: r.totalQuestions, c: r.totalCards, refs: r.refs.map((x) => x.ref), ids: r.questions.map((x) => x.id) }; });
+ok(sArt.q >= 1 && (await page.textContent("#search-count")).trim() === sArt.q + " question" + (sArt.q === 1 ? "" : "s") + " · " + sArt.c + " card" + (sArt.c === 1 ? "" : "s") && (await page.$$eval("#search-out [data-qid]", (r) => r.length)) === Math.min(20, sArt.q), "article search 210.52 → " + sArt.q + " questions · " + sArt.c + " cards");
+ok(sArt.refs.includes("210.52") && (await page.$$eval("#search-out .missed-row", (r) => r.every((x) => /210\.52/.test(x.textContent)))), "every hit cites 210.52 (article tag or text) and the ref chip is offered");
+await page.click('#search-out [data-ref="210.52"]'); await page.waitForSelector("#browse-article:not(.hidden)");
+ok(/NEC 210\.52/.test(await page.textContent("#browse-ref")), "ref chip opens the article page"); await page.click("#browse-back"); await page.waitForSelector("#cards-picker:not(.hidden)");
+const sWord = await page.evaluate(() => { const r = JHQ.search.search("receptacle", JHQ.data.allQuestions(), JHQ.data.allCards(), { limit: 1000 }); return { q: r.totalQuestions, c: r.totalCards, ids: r.questions.map((x) => x.id), cids: r.cards.map((x) => x.id) }; });
+// (210.52 is the receptacle article, so wait on the count line, not on a row mentioning the word)
+await page.fill("#search-q", "receptacle"); await page.waitForFunction((n) => (document.querySelector("#search-count")?.textContent || "").trim().startsWith(n + " questions"), sWord.q);
+const sRows = await page.evaluate(() => ({ q: [...document.querySelectorAll("#search-out [data-qid]")].map((e) => e.dataset.qid), c: [...document.querySelectorAll("#search-out [data-cid]")].map((e) => e.dataset.cid) }));
+ok(sWord.q >= 2 && (await page.textContent("#search-count")).trim().startsWith(sWord.q + " questions") && sRows.q.length === Math.min(20, sWord.q) && sRows.q.every((id) => sWord.ids.includes(id)) && sRows.c.length === Math.min(20, sWord.c) && sRows.c.every((id) => sWord.cids.includes(id)), "keyword search 'receptacle' → " + sWord.q + " questions · " + sWord.c + " cards; rows are the top hits (stem, choices, explanation, card front/back)");
+const beforeSave = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.custom.cards")).length);
+const searchQid = await page.$eval("#search-out [data-savecard]", (b) => b.dataset.savecard); await page.click("#search-out [data-savecard]");
+await page.waitForFunction((n) => JSON.parse(localStorage.getItem("jhq.custom.cards")).length === n + 1, beforeSave);
+ok((await page.evaluate((id) => JSON.parse(localStorage.getItem("jhq.custom.cards")).some((c) => c.origin === id), searchQid)) && (await page.$eval(`#search-out [data-qid="${searchQid}"] .link-btn`, (b) => b.disabled && /Already a card/.test(b.textContent))), "Save as card from a search row, list refreshed to 'Already a card'");
+await page.click("#search-drill"); await page.waitForSelector("#exam-run:not(.hidden)");
+const sIds = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempt.inprogress")).questionIds);
+ok(sIds.length === Math.min(10, sWord.q) && sIds.every((i) => sWord.ids.includes(i)), "Drill the hits runs " + sIds.length + " of the matching questions");
+for (let i = 0; i < sIds.length; i++) { await page.click(".choice >> nth=0"); await page.click("#ex-next"); }
+await page.click("#ex-submit"); await page.waitForSelector("#exam-result:not(.hidden)"); ok(/search: receptacle/.test(await page.textContent("#res-verdict")), "search drill labelled in the result"); await page.click("#res-done");
+await page.click('.tab-btn[data-tab="cards"]'); await page.focus("#search-q"); await page.keyboard.press("Escape");
+ok((await page.$eval("#search-q", (i) => i.value)) === "" && (await page.$eval("#search-out", (e) => e.classList.contains("hidden"))), "Esc clears the search");
 // calc scratchpad: voltage drop worked example, then motor OCPD
 await page.click('.tab-btn[data-tab="more"]');
 await page.fill('#calc-form [data-k="amps"]', "16"); await page.fill('#calc-form [data-k="length"]', "150"); await page.fill('#calc-form [data-k="cmil"]', "6530"); await page.fill('#calc-form [data-k="volts"]', "120");

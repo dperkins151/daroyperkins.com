@@ -103,6 +103,10 @@
   <!-- ================= FLASHCARDS ================= -->
   <section id="tab-cards" class="tab">
     <div id="cards-picker">
+      <div class="search">
+        <div class="search-box"><input id="search-q" type="search" placeholder="Search questions + cards · word or article (250.66)" aria-label="Search the bank" autocomplete="off" autocapitalize="off"><button id="search-clear" class="ghost-btn hidden" aria-label="Clear search">✕</button></div>
+        <div id="search-out" class="hidden"></div>
+      </div>
       <h2 class="section-h">Decks</h2>
       <p class="hint">Spaced repetition (SM-2 lite). Cards you mark <b>needs work</b> come back sooner; <b>got it</b> pushes them out.</p>
       <div id="deck-list" class="list"></div>
@@ -332,6 +336,7 @@
 <script src="js/calcui.js"></script>
 <script src="js/print.js"></script>
 <script src="js/focus.js"></script>
+<script src="js/search.js"></script>
 <script src="js/keys.js"></script>
 <script src="js/app.js"></script>
 </body>

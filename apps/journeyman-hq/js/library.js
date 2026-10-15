@@ -74,7 +74,7 @@
       e.preventDefault(); e.stopPropagation();
       const r = saveQuestionAsCard(b.dataset.savecard);
       b.textContent = r.added ? "Saved as card ✓" : r.reason === "already a card" ? "Already a card" : "Can't save this one"; b.disabled = true;
-      if (r.added) { render(); JHQ.dashboard.render(); }
+      if (r.added) { render(); JHQ.dashboard.render(); if (JHQ.search) JHQ.search.refresh(); }
     });
   }
 
