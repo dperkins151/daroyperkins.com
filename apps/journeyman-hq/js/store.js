@@ -13,6 +13,8 @@
     customCards: "custom.cards",
     customQuestions: "custom.questions",
     qstats: "qstats",            // { [qid]: {seen, missed, lastMissed, lastSeen} }
+    tabs: "tabs",                // { [ref]: true } — book tabs the user has placed
+    missed: "missed",            // { [qid]: {misses, first, last} } → derived "mq-<qid>" flashcards (js/misses.js)
   };
   function read(key, fallback) {
     try { const v = localStorage.getItem(NS + key); return v == null ? fallback : JSON.parse(v); } catch (e) { return fallback; }
@@ -48,6 +50,10 @@
     saveCustomQuestions(q) { return write(KEYS.customQuestions, q); },
     qstats() { return read(KEYS.qstats, {}); },
     saveQstats(s) { return write(KEYS.qstats, s); },
+    tabs() { return read(KEYS.tabs, {}); },
+    saveTabs(t) { return write(KEYS.tabs, t); },
+    missed() { return read(KEYS.missed, {}); },
+    saveMissed(m) { return write(KEYS.missed, m); },
   };
   JHQ.store = store;
 })(typeof window !== "undefined" ? window : globalThis);

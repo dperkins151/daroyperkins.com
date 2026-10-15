@@ -1,0 +1,47 @@
+[
+ {
+  "id": "F-G101",
+  "topic": "general",
+  "article": "Table 110.26(A)(1) / 110.26(A)(2)/(3)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: working-space depth — 480Y/277 V panel with grounded metal on the opposite wall; 208Y/120 V panel facing another live panel",
+  "back": "The table uses voltage TO GROUND\n480Y/277 V (277 V to ground → 151–600 V row): Condition 1 = 3 ft · Condition 2 (grounded parts opposite) = 3½ ft · Condition 3 (live parts both sides) = 4 ft → 3½ ft\n208Y/120 V or 120/240 V (≤ 150 V to ground): 3 ft in every condition → 3 ft\nWidth ≥ 30 in or the equipment width; height ≥ 6½ ft; doors must open 90°"
+ },
+ {
+  "id": "F-G102",
+  "topic": "general",
+  "article": "110.14(C)(1)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: terminal temperature — 90 °C THHN on a 60 A circuit with breaker marked 60/75 °C",
+  "back": "Circuits ≤ 100 A or 14–1 AWG: use the 60 °C column unless equipment is listed and marked for 75 °C (110.14(C)(1)(a))\nBreaker marked 60/75 °C → 75 °C column: 6 AWG THHN = 65 A ✔ (90 °C 75 A can be used only for derating math)\nOver 100 A or > 1 AWG: 75 °C column (110.14(C)(1)(b))"
+ },
+ {
+  "id": "F-G103",
+  "topic": "general",
+  "article": "Art. 100 / 90.5",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Reading a Code question — words that change the answer",
+  "back": "'shall' = mandatory; 'shall be permitted' = allowed; Informational Note = advisory only (90.5)\n'Readily accessible' = quickly, no tools/ladders/locks (keys are OK); 'accessible (wiring)' = not permanently closed in\n'In sight' = visible and ≤ 50 ft\n'Dwelling unit' vs 'one-family dwelling' — a duplex is two dwelling units\n'Ampacity' = continuous current without exceeding temp rating"
+ },
+ {
+  "id": "F-G104",
+  "topic": "general",
+  "article": "110.26(E) / 110.26(F)",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Dedicated equipment space — numbers",
+  "back": "Indoor: footprint of the equipment extended from the floor to 6 ft above the equipment or to the structural ceiling; no foreign systems (ducts, pipes) in that zone (110.26(E)(1)(a))\nSprinklers allowed if the space is protected; dripping protection required over the equipment\nOutdoor: same 6 ft; equipment enclosures suitable for the conditions\nWorking space (110.26(A)) and dedicated space are two different requirements"
+ },
+ {
+  "id": "F-G105",
+  "topic": "general",
+  "article": "90.2 / 90.4 / 90.7",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Scope and authority quick recall",
+  "back": "Covers premises wiring, yards, carnivals, industrial substations, PV, EV... (90.2(A)); NOT utility-controlled installations, ships, mines, railway rolling stock (90.2(B))\nAHJ interprets rules, approves equipment, grants special permission (90.4)\nListed equipment: internal wiring not re-inspected at install (90.7)\nMaryland: PSI tests the NEC 2020 edition — verify the version on your test notice"
+ }
+]

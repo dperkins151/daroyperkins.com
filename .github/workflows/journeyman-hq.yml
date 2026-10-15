@@ -1,0 +1,74 @@
+# Journeyman HQ: validate + test on every PR that touches the app; on merge to main, build the
+# vault-ready zip and attach it (with its sha256) to a GitHub release tagged journeyman-hq-v<appVersion>.
+# No secrets beyond the repo's own GITHUB_TOKEN. No deploy: Roy still uploads the zip to the vault.
+name: journeyman-hq
+
+on:
+  pull_request:
+    paths: ["apps/journeyman-hq/**", ".github/workflows/journeyman-hq.yml"]
+  push:
+    branches: [main]
+    paths: ["apps/journeyman-hq/**", ".github/workflows/journeyman-hq.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: journeyman-hq-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/journeyman-hq
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright (icons + browser smoke test)
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.56.1
+          npx playwright install --with-deps chromium
+
+      - name: Validate banks, unit tests, build zip
+        run: ./build.sh
+
+      - name: Browser smoke test (offline PWA, exam, cards, loop)
+        run: node test/smoke.mjs
+
+      - name: Read version
+        id: v
+        run: |
+          echo "version=$(node -p "require('./data/manifest.json').appVersion")" >> "$GITHUB_OUTPUT"
+          echo "sha=$(sha256sum dist/journeyman-hq-v*.zip | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+
+      - name: Upload zip as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: journeyman-hq-v${{ steps.v.outputs.version }}
+          path: apps/journeyman-hq/dist/journeyman-hq-v*.zip
+          if-no-files-found: error
+
+      - name: Release (main only; skipped when the tag already exists)
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.v.outputs.version }}
+          SHA: ${{ steps.v.outputs.sha }}
+        run: |
+          TAG="journeyman-hq-v${VERSION}"
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::notice::release $TAG already exists — bump appVersion in content/manifest.src.json to cut a new one"
+            exit 0
+          fi
+          echo "$SHA  journeyman-hq-v${VERSION}.zip" > "dist/journeyman-hq-v${VERSION}.zip.sha256"
+          gh release create "$TAG" "dist/journeyman-hq-v${VERSION}.zip" "dist/journeyman-hq-v${VERSION}.zip.sha256" \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "Journeyman HQ ${VERSION}" \
+            --notes "Vault-ready zip for apps.daroyperkins.com (upload as \`journeyman-hq\`). sha256 \`${SHA}\`. Built from ${GITHUB_SHA} by the journeyman-hq workflow; validator, unit and browser smoke tests passed."

@@ -4,6 +4,16 @@ const assert = require("node:assert/strict");
 const grader = require("../js/grader.js");
 const srs = require("../js/srs.js");
 
+test("cramQueue: a shuffled permutation of every card, deterministic with a seeded rnd, input untouched", () => {
+  const ids = Array.from({ length: 50 }, (_, i) => "c" + i);
+  let s = 3; const rnd = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+  const q = srs.cramQueue(ids, rnd);
+  assert.equal(q.length, 50); assert.deepEqual([...q].sort(), [...ids].sort()); assert.notDeepEqual(q, ids);
+  assert.deepEqual(ids, Array.from({ length: 50 }, (_, i) => "c" + i), "input not mutated");
+  let s2 = 3; const rnd2 = () => { s2 = (s2 * 9301 + 49297) % 233280; return s2 / 233280; };
+  assert.deepEqual(srs.cramQueue(ids, rnd2), q);
+});
+
 const bank = {};
 const topics = { theory: { name: "Theory" }, wiring: { name: "Wiring" }, general: { name: "General" } };
 let n = 0;
@@ -16,6 +26,16 @@ test("pass verdict at or above 70% on a submitted attempt", () => {
   const r = grader.grade({ questionIds: allIds, answers, submittedAt: "x", elapsedSec: 100, timeLimitSec: 1000 }, bank, topics);
   assert.equal(r.score.correct, 11); assert.equal(r.score.total, 15); assert.equal(r.score.pct, 73.3); assert.equal(r.verdict, "pass");
   assert.equal(r.missed.length, 4);
+});
+
+test("guessed marker: lucky hits split out of the score, listed for the missed loop, wrong guesses stay plain misses", () => {
+  const answers = { ...perfect }; answers.wiring0 = (bank.wiring0.answer + 1) % 4;
+  const r = grader.grade({ questionIds: allIds, answers, guessed: { theory0: true, theory1: true, wiring0: true }, submittedAt: "x" }, bank, topics);
+  assert.equal(r.score.correct, 14); assert.equal(r.score.lucky, 2); assert.equal(r.score.knowledgePct, 80);
+  assert.deepEqual(r.guessed.right.sort(), ["theory0", "theory1"]); assert.deepEqual(r.guessed.wrong, ["wiring0"]);
+  assert.ok(r.rails.some((s) => /2 right by guess/.test(s)));
+  const r2 = grader.grade({ questionIds: allIds, answers: perfect, submittedAt: "x" }, bank, topics);
+  assert.equal(r2.score.lucky, 0); assert.equal(r2.score.knowledgePct, 100); assert.deepEqual(r2.guessed, { right: [], wrong: [] });
 });
 
 test("fail verdict below 70%; unanswered count wrong and are reported with a rail", () => {

@@ -1,0 +1,94 @@
+[
+ {
+  "id": "F-S101",
+  "topic": "special",
+  "article": "690.8(A) / 690.8(B)",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: PV source circuit, 10 modules in series, Isc = 9.5 A — circuit current and conductor ampacity",
+  "back": "Max circuit current = 125 % × Isc = 11.9 A (690.8(A)(1))\nConductor ampacity ≥ 125 % × that = 14.8 A before corrections (690.8(B)(1)) — i.e., 156 % of Isc\nOR ampacity ≥ 11.9 A after temperature/conduit-fill corrections — use the larger result (690.8(B)(2))\nSeries string: current stays 9.5 A, voltage adds"
+ },
+ {
+  "id": "F-S102",
+  "topic": "special",
+  "article": "690.7(A) / Table 690.7(A)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: max PV system voltage for 12 modules in series, Voc = 45 V, lowest expected ambient −20 °C",
+  "back": "Table 690.7(A) factor at −16 to −20 °C ≈ 1.18 (when the module temperature coefficient isn't given)\n12 × 45 × 1.18 = 637 V dc\nOne- and two-family dwellings: ≤ 600 V (690.7) — this fails; 11 modules = 584 V ✔ or use the module's own coefficient\nOther buildings: ≤ 1000 V; up to 1500 V only where not on or in buildings",
+  "review": true,
+  "note": "Confirm the Table 690.7(A) factor for −16 to −20 °C (1.18) and the 600 V dwelling limit wording in 2020 690.7. Method is settled."
+ },
+ {
+  "id": "F-S103",
+  "topic": "special",
+  "article": "705.12(B)(3)(2)",
+  "difficulty": 3,
+  "pack": 2,
+  "front": "Worked: 120 % rule — 200 A busbar, 200 A main, adding a PV breaker",
+  "back": "Allowed: main + inverter OCPD ≤ 120 % × busbar = 240 A\n240 − 200 = 40 A max PV breaker, located at the opposite end from the main (705.12(B)(3)(2))\nInverter output 7.6 kW at 240 V = 31.7 A → 125 % = 39.6 A → 40 A breaker ✔ fits exactly\nAlternative: sum of all breakers excluding main ≤ busbar rating (705.12(B)(3)(3))"
+ },
+ {
+  "id": "F-S104",
+  "topic": "special",
+  "article": "625.41 / 625.42",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: EV charger rated 48 A continuous — branch circuit",
+  "back": "EVSE is continuous (625.41): 48 × 1.25 = 60 A → 60 A breaker, 6 AWG Cu 75 °C (65 A)\nA 40 A EVSE → 50 A circuit; 32 A → 40 A\n2020 625.42: load management systems may set the max to the managed value"
+ },
+ {
+  "id": "F-S105",
+  "topic": "special",
+  "article": "680.21 / 680.22(A) / 680.23",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Pool numbers — worked distances",
+  "back": "Receptacles: ≥ 6 ft from the inside wall; at least one general-purpose receptacle 6–20 ft (680.22(A)); GFCI for 15/20 A 125 V receptacles within 20 ft\nPump motor: GFCI on 15/20 A 125–250 V 1φ outlets (680.21(C))\nWet-niche luminaires: top of the lens ≥ 18 in below the normal water level (680.23(A)(5))\nSwitches: ≥ 5 ft horizontally from the inside wall unless separated by a barrier (680.22(C))"
+ },
+ {
+  "id": "F-S106",
+  "topic": "special",
+  "article": "517.18(B) / 517.19(B)",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: receptacles at a patient bed location — general care vs critical care",
+  "back": "Category 2 (general care): ≥ 8 receptacles, at least one from the normal system and one from the critical branch, or from 2 critical branch transfer switches (517.18(B))\nCategory 1 (critical care): ≥ 14 receptacles, at least one normal + one critical branch (517.19(B)(1))\nAll hospital-grade, listed, identified"
+ },
+ {
+  "id": "F-S107",
+  "topic": "special",
+  "article": "700.12 / 701.12 / 702",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Transfer times and testing — worked recall",
+  "back": "Emergency (700): power available within 10 s (700.12); monthly testing/maintenance records (700.3)\nLegally required standby (701): within 60 s (701.12)\nOptional standby (702): no time limit; load calc per 702.4\nEmergency wiring kept separate from other wiring (700.10(B))"
+ },
+ {
+  "id": "F-S108",
+  "topic": "special",
+  "article": "501.15(A)(4) / 501.10",
+  "difficulty": 2,
+  "pack": 2,
+  "front": "Worked: Class I Div 1 conduit seals — where within what distance?",
+  "back": "Seal within 18 in of each enclosure containing arcing/sparking parts, or any conductor splice/terminal (501.15(A)(1))\nSeal where conduit leaves the Div 1 area — within 10 ft of the boundary, no unions/couplings/boxes between the seal and the boundary (501.15(A)(4))\nConduit 2 in and larger entering enclosures with splices/taps: seal within 18 in (501.15(A)(1)(2))\nThreaded RMC/IMC with ≥ 5 threads engaged (500.8(E))"
+ },
+ {
+  "id": "F-S109",
+  "topic": "special",
+  "article": "511.3 / 511.4 / 511.12",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Commercial garage quick recall",
+  "back": "Major repair garage, unventilated: Class I Div 2 up to 18 in above floor (511.3(C)); ventilated (4 ACH or 1 cfm/ft²) → unclassified\nPits without ventilation: Div 1\nMinor repair, no fuel work: unclassified\nGFCI on 125 V 15/20 A receptacles for tools, diagnostics, etc. (511.12)"
+ },
+ {
+  "id": "F-S110",
+  "topic": "special",
+  "article": "547.5 / 547.10",
+  "difficulty": 1,
+  "pack": 2,
+  "front": "Agricultural buildings quick recall",
+  "back": "Equipotential plane in concrete floors of livestock confinement areas and outdoor concrete areas where livestock stand and energized equipment is nearby (547.10)\nGFCI: all 125 V 15/20 A general-purpose receptacles in areas with equipotential planes, outdoors, damp/wet locations, dirt confinement areas (547.5(G))\nSite-isolating device at the distribution point (547.9)\nCorrosion-resistant wiring methods; dust-tight boxes"
+ }
+]

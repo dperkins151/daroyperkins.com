@@ -1,0 +1,292 @@
+[
+ {
+  "id": "G-201",
+  "pack": 3,
+  "topic": "general",
+  "article": "90.1(B)",
+  "difficulty": 1,
+  "q": "Compliance with the NEC plus proper maintenance results in an installation that is:",
+  "choices": [
+   "Guaranteed efficient, convenient and adequate for future expansion",
+   "Essentially free from hazard, but not necessarily efficient, convenient or adequate for good service or future expansion",
+   "Approved by the manufacturer",
+   "Exempt from local inspection"
+  ],
+  "answer": 1,
+  "explain": "90.1(B): the Code's purpose is practical safeguarding; an installation that complies and is properly maintained is essentially free from hazard but not necessarily efficient, convenient or adequate for good service or future expansion."
+ },
+ {
+  "id": "G-202",
+  "pack": 3,
+  "topic": "general",
+  "article": "90.4",
+  "difficulty": 1,
+  "q": "Who has the authority to interpret the NEC, approve equipment and materials, and grant special permission for alternative methods?",
+  "choices": [
+   "The electrical contractor",
+   "The equipment manufacturer",
+   "The authority having jurisdiction (AHJ)",
+   "The NFPA"
+  ],
+  "answer": 2,
+  "explain": "90.4: the authority having jurisdiction enforces the Code, interprets the rules, approves equipment and materials, and may grant special permission or waive specific requirements where equivalent objectives are achieved."
+ },
+ {
+  "id": "G-203",
+  "pack": 3,
+  "topic": "general",
+  "article": "90.7",
+  "difficulty": 1,
+  "q": "Factory-installed internal wiring of listed equipment:",
+  "choices": [
+   "Must be re-inspected at installation",
+   "Need not be inspected at installation except to detect alterations or damage",
+   "Must be replaced with field wiring",
+   "Must be run in metal raceway"
+  ],
+  "answer": 1,
+  "explain": "90.7: listed, labeled or identified equipment's internal wiring and construction need not be inspected at the time of installation, except to detect alterations or damage, if the equipment has been listed by a qualified testing laboratory."
+ },
+ {
+  "id": "G-204",
+  "pack": 3,
+  "topic": "general",
+  "article": "Art. 100 — Approved",
+  "difficulty": 1,
+  "q": "In Article 100, 'approved' means:",
+  "choices": [
+   "Listed by a testing laboratory",
+   "Acceptable to the authority having jurisdiction",
+   "Recommended by the manufacturer",
+   "Identified for the specific purpose"
+  ],
+  "answer": 1,
+  "explain": "Article 100 defines 'Approved' as acceptable to the authority having jurisdiction. 'Listed' and 'Identified' are separate, narrower terms."
+ },
+ {
+  "id": "G-205",
+  "pack": 3,
+  "topic": "general",
+  "article": "Art. 100 — Bonded (Bonding)",
+  "difficulty": 1,
+  "q": "'Bonded' or 'bonding' in Article 100 means:",
+  "choices": [
+   "Connected to earth",
+   "Connected to establish electrical continuity and conductivity",
+   "Insulated from other metal parts",
+   "Protected by an overcurrent device"
+  ],
+  "answer": 1,
+  "explain": "Article 100: Bonded (Bonding) is connecting metal parts to establish electrical continuity and conductivity. Connecting to earth is 'grounded'."
+ },
+ {
+  "id": "G-206",
+  "pack": 3,
+  "topic": "general",
+  "article": "Art. 100 — Dwelling Unit",
+  "difficulty": 1,
+  "q": "A 'dwelling unit' per Article 100 is a single unit that provides complete and independent living facilities, including permanent provisions for:",
+  "choices": [
+   "Living and sleeping only",
+   "Living, sleeping, cooking and sanitation",
+   "Cooking and parking",
+   "Sleeping and laundry"
+  ],
+  "answer": 1,
+  "explain": "Article 100: a dwelling unit has permanent provisions for living, sleeping, cooking and sanitation. A one-family dwelling is a building with one dwelling unit; a duplex has two."
+ },
+ {
+  "id": "G-207",
+  "pack": 3,
+  "topic": "general",
+  "article": "Art. 100 — Feeder",
+  "difficulty": 1,
+  "q": "The conductors between the service equipment (or other power source) and the final branch-circuit overcurrent device are called:",
+  "choices": [
+   "Service conductors",
+   "Branch-circuit conductors",
+   "Feeder conductors",
+   "Tap conductors"
+  ],
+  "answer": 2,
+  "explain": "Article 100: Feeder — all circuit conductors between the service equipment, the source of a separately derived system or other power supply source and the final branch-circuit overcurrent device."
+ },
+ {
+  "id": "G-208",
+  "pack": 3,
+  "topic": "general",
+  "article": "Art. 100 — GFCI",
+  "difficulty": 2,
+  "q": "A Class A ground-fault circuit interrupter is designed to open the circuit when the ground-fault current reaches:",
+  "choices": [
+   "4 to 6 mA",
+   "30 mA",
+   "100 mA",
+   "5 A"
+  ],
+  "answer": 0,
+  "explain": "Article 100 (and the Informational Note): a Class A GFCI trips when the ground-fault current is 6 mA or higher and does not trip below 4 mA. The 30 mA and 100 mA values are GFPE (equipment protection) thresholds."
+ },
+ {
+  "id": "G-209",
+  "pack": 3,
+  "topic": "general",
+  "article": "Art. 100 — Interrupting Rating",
+  "difficulty": 2,
+  "q": "'Interrupting rating' is best described as:",
+  "choices": [
+   "The maximum continuous current a device can carry",
+   "The highest current at rated voltage a device is identified to interrupt under standard test conditions",
+   "The current that trips a GFCI",
+   "The voltage rating of the enclosure"
+  ],
+  "answer": 1,
+  "explain": "Article 100: Interrupting Rating — the highest current at rated voltage that a device is identified to interrupt under standard test conditions. Short-circuit current rating is the related term for equipment that doesn't interrupt current."
+ },
+ {
+  "id": "G-210",
+  "pack": 3,
+  "topic": "general",
+  "article": "Art. 100 — Overload",
+  "difficulty": 1,
+  "q": "Which condition is NOT an 'overload' as defined in Article 100?",
+  "choices": [
+   "A motor running at 130% of its full-load rating",
+   "A conductor carrying current above its ampacity for an extended time",
+   "A short circuit between two ungrounded conductors",
+   "Equipment operated above its normal full-load rating long enough to cause damage"
+  ],
+  "answer": 2,
+  "explain": "Article 100: Overload is operation in excess of normal full-load rating or a conductor's ampacity that, if long enough, would cause damage; a fault such as a short circuit or ground fault is specifically not an overload."
+ },
+ {
+  "id": "G-211",
+  "pack": 3,
+  "topic": "general",
+  "article": "Art. 100 — Service Point",
+  "difficulty": 1,
+  "q": "The 'service point' is the point of connection between:",
+  "choices": [
+   "The meter and the main breaker",
+   "The facilities of the serving utility and the premises wiring",
+   "The service disconnect and the first feeder",
+   "The grounding electrode and the service neutral"
+  ],
+  "answer": 1,
+  "explain": "Article 100: Service Point — the point of connection between the facilities of the serving utility and the premises wiring. Everything on the load side is premises wiring covered by the NEC."
+ },
+ {
+  "id": "G-212",
+  "pack": 3,
+  "topic": "general",
+  "article": "110.9",
+  "difficulty": 2,
+  "q": "Equipment intended to interrupt current at fault levels must have an interrupting rating:",
+  "choices": [
+   "Of at least 10,000 A",
+   "Not less than the nominal circuit voltage and the current that is available at the line terminals",
+   "Equal to the conductor ampacity",
+   "Marked by the installer"
+  ],
+  "answer": 1,
+  "explain": "110.9: equipment intended to interrupt fault current must have an interrupting rating at nominal circuit voltage at least equal to the current available at the line terminals of the equipment. 110.10 covers coordinating components to withstand the fault."
+ },
+ {
+  "id": "G-213",
+  "pack": 3,
+  "topic": "general",
+  "article": "110.14(D)",
+  "difficulty": 2,
+  "q": "Where a tightening torque is indicated on equipment or in installation instructions, the 2020 NEC requires the connection to be made with:",
+  "choices": [
+   "A standard screwdriver, hand tight",
+   "A calibrated torque tool or other approved means to achieve the indicated torque",
+   "An impact driver",
+   "Any tool, as long as the conductor doesn't pull out"
+  ],
+  "answer": 1,
+  "explain": "110.14(D) (2020): where torque values are indicated, terminations must be made using a calibrated torque tool or another approved means (such as a torque-indicating device or breakaway screw) that achieves the indicated torque."
+ },
+ {
+  "id": "G-214",
+  "pack": 3,
+  "topic": "general",
+  "article": "110.22(A)",
+  "difficulty": 1,
+  "q": "Each disconnecting means must be legibly marked to indicate its purpose:",
+  "choices": [
+   "Only in industrial occupancies",
+   "Unless located and arranged so the purpose is evident",
+   "Only when more than six disconnects are grouped",
+   "Only for circuits over 100 A"
+  ],
+  "answer": 1,
+  "explain": "110.22(A): each disconnecting means is legibly marked to indicate its purpose unless located and arranged so that the purpose is evident; the marking must be durable for the environment."
+ },
+ {
+  "id": "G-215",
+  "pack": 3,
+  "topic": "general",
+  "article": "110.24(A)",
+  "difficulty": 2,
+  "q": "Service equipment in a non-dwelling occupancy must be field-marked with:",
+  "choices": [
+   "The name of the utility",
+   "The maximum available fault current, including the date the calculation was performed",
+   "The conductor insulation type",
+   "The meter number"
+  ],
+  "answer": 1,
+  "explain": "110.24(A): service equipment other than in dwelling units must be legibly marked in the field with the maximum available fault current and the date of the calculation; 110.24(B) requires updating when modifications change the available fault current."
+ },
+ {
+  "id": "G-216",
+  "pack": 3,
+  "topic": "general",
+  "article": "110.27(A)",
+  "difficulty": 1,
+  "q": "Live parts of electrical equipment operating at 50 V or more must be guarded against accidental contact by approved enclosures or by one of the listed means, such as:",
+  "choices": [
+   "Painting them red",
+   "Location in a room or enclosure accessible only to qualified persons, or elevation 8 ft or more above the floor",
+   "A warning sign alone",
+   "Covering with electrical tape"
+  ],
+  "answer": 1,
+  "explain": "110.27(A): live parts at 50 V or more are guarded by approved enclosures, a room or vault accessible only to qualified persons, suitable permanent partitions or screens, an elevated balcony/platform, or elevation of 8 ft or more above the floor or working surface."
+ },
+ {
+  "id": "G-217",
+  "pack": 3,
+  "topic": "general",
+  "article": "Table 110.28",
+  "difficulty": 1,
+  "q": "An enclosure installed outdoors where it will be exposed to rain and to corrosive agents (such as a coastal environment or a chemical plant) should be at least which NEMA type?",
+  "choices": [
+   "Type 1",
+   "Type 3R",
+   "Type 4X",
+   "Type 12"
+  ],
+  "answer": 2,
+  "explain": "Table 110.28: Type 4X enclosures are rated for outdoor use with protection against rain, sleet, windblown dust, hose-directed water and corrosion. Type 3R handles rain but not corrosion; Type 1 and 12 are indoor types."
+ },
+ {
+  "id": "G-218",
+  "pack": 3,
+  "topic": "general",
+  "article": "110.16(B)",
+  "difficulty": 2,
+  "q": "Under the 2020 NEC, service equipment rated 1200 A or more (other than dwelling units) must carry a permanent label with:",
+  "choices": [
+   "The installer's license number",
+   "Nominal system voltage, available fault current, clearing time of the service overcurrent device, and the date the label was applied",
+   "Only an arc-flash warning sticker",
+   "The feeder sizes"
+  ],
+  "answer": 1,
+  "explain": "110.16(B) (2020): in other than dwelling units, service equipment rated 1200 A or more must be field-marked with the nominal system voltage, available fault current at the service OCPDs, the clearing time of the service OCPDs based on that fault current, and the date; this is in addition to the general arc-flash warning of 110.16(A).",
+  "review": true,
+  "note": "Confirm the exact 2020 110.16(B) label contents and the 1200 A threshold in the book."
+ }
+]

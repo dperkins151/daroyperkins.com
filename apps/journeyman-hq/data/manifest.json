@@ -1,6 +1,6 @@
 {
   "app": "Journeyman HQ",
-  "appVersion": "1.1.0",
+  "appVersion": "1.19.0",
   "code": "NEC 2020",
   "exam": {
     "name": "Maryland Journeyman Electrician (PSI)",
@@ -51,21 +51,22 @@
   ],
   "banks": {
     "questions": {
-      "version": 2,
-      "file": "questions-v2.json",
-      "count": 260,
-      "updated": "2026-10-06",
+      "version": 3,
+      "file": "questions-v3.json",
+      "count": 308,
+      "updated": "2026-10-15",
       "reviewed": null,
-      "note": "v2 = v1 (192) + pack 2 (68 calc-heavy items: theory, load calcs, derating/fill, motors/transformers). Items carry pack and source.",
-      "reviewFlagged": 0
+      "note": "v3 = v2 (260) + pack 3 (48 items: Special Occupancies/Systems depth across Ch. 5–7 and General Requirements Art. 90/100/110). Items carry pack and source.",
+      "reviewFlagged": 3
     },
     "flashcards": {
-      "version": 1,
-      "file": "flashcards-v1.json",
-      "count": 104,
-      "updated": "2026-10-01",
+      "version": 2,
+      "file": "flashcards-v2.json",
+      "count": 182,
+      "updated": "2026-10-15",
       "reviewed": null,
-      "reviewFlagged": 1
+      "note": "v2 = v1 (104) + pack 2 (worked calcs and procedures: voltage drop, dwelling load calc, motor/transformer/HVAC sizing, box and conduit fill, derating, PV/EV/pool numbers). Items carry pack and source.",
+      "reviewFlagged": 2
     },
     "plan": {
       "version": 1,
@@ -76,5 +77,5 @@
     }
   },
   "contentPolicy": "Paraphrase concepts and cite NEC 2020 article numbers. Never reproduce Code text verbatim (NFPA copyright). Items with review=true are flagged uncertain and must be verified before relying on them.",
-  "generated": "2026-10-06"
+  "generated": "2026-10-15"
 }

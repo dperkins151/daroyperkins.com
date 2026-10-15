@@ -2,7 +2,7 @@
 (function (root) {
   "use strict";
   const JHQ = (root.JHQ = root.JHQ || {});
-  const state = { manifest: null, topics: {}, questions: [], cards: [], plan: null, loaded: false, errors: [] };
+  const state = { manifest: null, topics: {}, questions: [], cards: [], plan: null, changelog: null, tabs: null, loaded: false, errors: [] };
 
   async function getJSON(path) {
     const r = await fetch(path, { cache: "no-cache" });
@@ -20,15 +20,19 @@
     state.questions = (q.items || []).map((x) => Object.assign({ source: q.source || "bank" }, x));
     state.cards = (c.items || []).map((x) => Object.assign({ source: c.source || "bank" }, x));
     state.plan = p;
+    try { state.changelog = await getJSON("data/changelog.json"); } catch (e) { state.changelog = null; }   // optional
+    try { state.tabs = await getJSON("data/tabs.json"); } catch (e) { state.tabs = null; }                   // optional
     state.loaded = true;
     return state;
   }
 
   function allQuestions() { return state.questions.concat(JHQ.store.customQuestions()); }
-  function allCards() { return state.cards.concat(JHQ.store.customCards()); }
   function questionMap() { const m = {}; allQuestions().forEach((q) => { m[q.id] = q; }); return m; }
+  /** Bank cards + my cards + cards derived from missed questions (see js/misses.js). */
+  function missedCards() { return JHQ.misses.cards(JHQ.store.missed(), questionMap()); }
+  function allCards() { return state.cards.concat(JHQ.store.customCards(), missedCards()); }
   function cardMap() { const m = {}; allCards().forEach((c) => { m[c.id] = c; }); return m; }
   function topicName(id) { return (state.topics[id] && state.topics[id].name) || id; }
 
-  JHQ.data = { state, load, allQuestions, allCards, questionMap, cardMap, topicName };
+  JHQ.data = { state, load, allQuestions, allCards, missedCards, questionMap, cardMap, topicName };
 })(typeof window !== "undefined" ? window : globalThis);

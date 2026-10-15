@@ -53,10 +53,17 @@
     return due.concat(fresh_.slice(0, newLimit)).slice(0, limit);
   }
 
+  /** Cram order: every card once, shuffled (Fisher–Yates with an injectable rnd). Pure; never touches SRS state. */
+  function cramQueue(cardIds, rnd = Math.random) {
+    const a = cardIds.slice();
+    for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+    return a;
+  }
+
   function dueCount(cardIds, srsMap, now = Date.now()) { return cardIds.filter((id) => srsMap[id] && isDue(srsMap[id], now)).length; }
   function newCount(cardIds, srsMap) { return cardIds.filter((id) => !srsMap[id]).length; }
 
-  const api = { fresh, review, preview, isDue, queue, dueCount, newCount, DAY, MIN };
+  const api = { fresh, review, preview, isDue, queue, cramQueue, dueCount, newCount, DAY, MIN };
   JHQ.srs = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

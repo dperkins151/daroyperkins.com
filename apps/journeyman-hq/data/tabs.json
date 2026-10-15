@@ -1,0 +1,218 @@
+{
+ "app": "Journeyman HQ",
+ "generated": "2026-10-15",
+ "note": "Most-cited NEC references across the question and card banks; tab these in the printed book.",
+ "total": 200,
+ "items": [
+  {
+   "rank": 1,
+   "ref": "210.52",
+   "kind": "article",
+   "count": 11,
+   "topic": "wiring"
+  },
+  {
+   "rank": 2,
+   "ref": "110.26",
+   "kind": "article",
+   "count": 7,
+   "topic": "general"
+  },
+  {
+   "rank": 3,
+   "ref": "Table 310.16",
+   "kind": "table",
+   "count": 7,
+   "topic": "methods"
+  },
+  {
+   "rank": 4,
+   "ref": "110.14",
+   "kind": "article",
+   "count": 6,
+   "topic": "general"
+  },
+  {
+   "rank": 5,
+   "ref": "240.4",
+   "kind": "article",
+   "count": 6,
+   "topic": "wiring"
+  },
+  {
+   "rank": 6,
+   "ref": "Table 300.5",
+   "kind": "table",
+   "count": 6,
+   "topic": "methods"
+  },
+  {
+   "rank": 7,
+   "ref": "Table 310.15",
+   "kind": "table",
+   "count": 6,
+   "topic": "methods"
+  },
+  {
+   "rank": 8,
+   "ref": "Table 450.3",
+   "kind": "table",
+   "count": 6,
+   "topic": "equipment"
+  },
+  {
+   "rank": 9,
+   "ref": "210.19",
+   "kind": "article",
+   "count": 5,
+   "topic": "wiring"
+  },
+  {
+   "rank": 10,
+   "ref": "240.21",
+   "kind": "article",
+   "count": 5,
+   "topic": "wiring"
+  },
+  {
+   "rank": 11,
+   "ref": "300.4",
+   "kind": "article",
+   "count": 5,
+   "topic": "methods"
+  },
+  {
+   "rank": 12,
+   "ref": "310.15",
+   "kind": "article",
+   "count": 5,
+   "topic": "methods"
+  },
+  {
+   "rank": 13,
+   "ref": "314.28",
+   "kind": "article",
+   "count": 5,
+   "topic": "methods"
+  },
+  {
+   "rank": 14,
+   "ref": "430.22",
+   "kind": "article",
+   "count": 5,
+   "topic": "equipment"
+  },
+  {
+   "rank": 15,
+   "ref": "430.32",
+   "kind": "article",
+   "count": 5,
+   "topic": "equipment"
+  },
+  {
+   "rank": 16,
+   "ref": "500.5",
+   "kind": "article",
+   "count": 5,
+   "topic": "special"
+  },
+  {
+   "rank": 17,
+   "ref": "501.15",
+   "kind": "article",
+   "count": 5,
+   "topic": "special"
+  },
+  {
+   "rank": 18,
+   "ref": "517.18",
+   "kind": "article",
+   "count": 5,
+   "topic": "special"
+  },
+  {
+   "rank": 19,
+   "ref": "680.22",
+   "kind": "article",
+   "count": 5,
+   "topic": "special"
+  },
+  {
+   "rank": 20,
+   "ref": "Table 430.52",
+   "kind": "table",
+   "count": 5,
+   "topic": "equipment"
+  },
+  {
+   "rank": 21,
+   "ref": "210.11",
+   "kind": "article",
+   "count": 4,
+   "topic": "wiring"
+  },
+  {
+   "rank": 22,
+   "ref": "220.82",
+   "kind": "article",
+   "count": 4,
+   "topic": "wiring"
+  },
+  {
+   "rank": 23,
+   "ref": "230.79",
+   "kind": "article",
+   "count": 4,
+   "topic": "wiring"
+  },
+  {
+   "rank": 24,
+   "ref": "314.16",
+   "kind": "article",
+   "count": 4,
+   "topic": "methods"
+  },
+  {
+   "rank": 25,
+   "ref": "511.3",
+   "kind": "article",
+   "count": 4,
+   "topic": "special"
+  },
+  {
+   "rank": 26,
+   "ref": "705.12",
+   "kind": "article",
+   "count": 4,
+   "topic": "special"
+  },
+  {
+   "rank": 27,
+   "ref": "Table 220.55",
+   "kind": "table",
+   "count": 4,
+   "topic": "wiring"
+  },
+  {
+   "rank": 28,
+   "ref": "Table 250.122",
+   "kind": "table",
+   "count": 4,
+   "topic": "wiring"
+  },
+  {
+   "rank": 29,
+   "ref": "Table 310.12",
+   "kind": "table",
+   "count": 4,
+   "topic": "methods"
+  },
+  {
+   "rank": 30,
+   "ref": "Table 430.248",
+   "kind": "table",
+   "count": 4,
+   "topic": "equipment"
+  }
+ ]
+}

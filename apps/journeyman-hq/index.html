@@ -4,13 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0b0b0d">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Journeyman">
 <meta name="robots" content="noindex, nofollow">
 <title>Journeyman HQ</title>
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
 
+<div id="sr-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+<div id="report" class="sheet-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="report-title">
+  <div class="sheet"><h2 id="report-title">Weekly report</h2><p class="hint small">Plain text, nothing leaves the phone until you paste it.</p><textarea id="report-text" rows="9" readonly></textarea>
+  <div class="btn-row"><button id="report-copy" class="primary-btn">Copy</button><button id="report-close" class="secondary-btn">Close</button></div><p id="report-status" class="status hidden"></p></div>
+</div>
+<div id="whatsnew" class="sheet-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="wn-title">
+  <div class="sheet"><h2 id="wn-title">What's new</h2><div id="wn-body" class="wn-body"></div><button id="wn-ok" class="primary-btn">Got it</button></div>
+</div>
 <div id="banner" class="banner hidden" role="alert"></div>
+<div id="update" class="banner update hidden" role="status">New version ready. <button id="update-btn" class="link-btn">Reload</button></div>
 
 <header class="topbar">
   <div class="topbar-inner">
@@ -30,6 +45,7 @@
         <input id="setup-date" type="date">
       </label>
       <button id="setup-save" class="primary-btn">Start the countdown</button>
+      <p class="hint small">New phone? <label class="link-btn file-btn">Restore a backup<input id="setup-import" type="file" accept=".json,application/json" hidden></label><span id="setup-import-status" class="status hidden"></span></p>
     </div>
 
     <div id="home-main" class="hidden">
@@ -47,6 +63,16 @@
         <div class="stat"><span class="stat-label">Plan</span><span class="stat-value" id="st-plan">0%</span><span class="stat-unit">complete</span></div>
       </div>
 
+      <div id="progress" class="hidden">
+        <h2 class="section-h">Progress</h2>
+        <div class="card prog">
+          <div class="prog-row"><div class="prog-head"><span>Full sims</span><span id="prog-sim-sub" class="muted small"></span></div><div id="prog-sim" class="spark" role="img" aria-label="Sim scores"></div></div>
+          <div class="prog-row"><div class="prog-head"><span>Pace</span><span id="prog-pace-sub" class="muted small"></span></div><div class="pace"><div class="bar"><div id="prog-pace-fill" class="bar-fill"></div></div><span id="prog-pace" class="pace-num"></span></div></div>
+          <div class="prog-row"><div class="prog-head"><span>By topic</span><span class="muted small">last 10 attempts · trend</span></div><div id="prog-topics" class="prog-topics"></div></div>
+          <div class="prog-row"><div class="prog-head"><span>Last 14 days</span><span id="prog-days-sub" class="muted small"></span></div><div id="prog-days" class="days" role="img" aria-label="Daily activity"></div></div>
+        </div>
+      </div>
+
       <h2 class="section-h">Weakest topics</h2>
       <div id="weak-topics" class="list"></div>
 
@@ -54,12 +80,16 @@
       <div class="action-grid">
         <button class="action" data-go="cards"><b>Review cards</b><small id="act-cards">due now</small></button>
         <button class="action" data-go="drill"><b>Quick drill</b><small>10 Qs · weak topics + misses</small></button>
+        <button class="action" data-go="misses"><b>Drill my misses</b><small id="act-misses">nothing missed lately</small></button>
+        <button class="action" data-go="lookup"><b>Lookup drill</b><small>find the article · timed</small></button>
         <button class="action" data-go="exam"><b>Full simulation</b><small>70 · 210 min · 70%</small></button>
         <button class="action" data-go="plan"><b>Study plan</b><small id="act-plan">day 1 of 30</small></button>
       </div>
 
       <h2 class="section-h">Recent attempts</h2>
       <div id="home-attempts" class="list"></div>
+      <p id="backup-nudge" class="hint small hidden"></p>
+      <div class="btn-row"><button id="report-open" class="secondary-btn">Weekly report (copy as text)</button></div>
     </div>
   </section>
 
@@ -69,14 +99,24 @@
       <h2 class="section-h">Decks</h2>
       <p class="hint">Spaced repetition (SM-2 lite). Cards you mark <b>needs work</b> come back sooner; <b>got it</b> pushes them out.</p>
       <div id="deck-list" class="list"></div>
+      <h2 class="section-h">Browse by article</h2>
+      <p class="hint">Every article and table this bank cites, in Code order. Open one to see its cards and questions, run just those cards, or drill it.</p>
+      <div id="browse-chapters" class="list"></div>
+    </div>
+    <div id="browse-article" class="hidden">
+      <div class="session-bar"><button id="browse-back" class="ghost-btn">← articles</button><span id="browse-ref" class="muted"></span></div>
+      <div class="btn-row"><button id="browse-cards" class="secondary-btn small-btn">Run these cards</button><button id="browse-drill" class="secondary-btn small-btn">Drill this article</button></div>
+      <h2 class="section-h">Cards</h2><div id="browse-cards-list" class="list"></div>
+      <h2 class="section-h">Questions</h2><div id="browse-q-list" class="list"></div>
     </div>
     <div id="cards-session" class="hidden">
       <div class="session-bar">
         <button id="cards-exit" class="ghost-btn">← decks</button>
+        <span id="cards-mode" class="chip chip-red hidden">cram · nothing scheduled</span>
         <span id="cards-progress" class="muted"></span>
       </div>
       <div id="flashcard" class="flashcard" tabindex="0" role="button" aria-label="Flip card">
-        <div class="fc-meta"><span id="fc-topic" class="chip"></span><span id="fc-article" class="chip chip-amber"></span></div>
+        <div class="fc-meta"><span id="fc-topic" class="chip"></span><span id="fc-article" class="chip chip-amber"></span><span id="fc-source" class="chip chip-red hidden"></span></div>
         <div id="fc-text" class="fc-text"></div>
         <div id="fc-flip-hint" class="fc-hint">tap to flip</div>
       </div>
@@ -84,6 +124,10 @@
         <button class="grade-btn again" data-grade="1">Needs work<small>again soon</small></button>
         <button class="grade-btn good" data-grade="4">Got it<small id="g-good"></small></button>
         <button class="grade-btn easy" data-grade="5">Easy<small id="g-easy"></small></button>
+      </div>
+      <div id="fc-cram" class="grade-row cram hidden">
+        <button class="grade-btn again" data-cram-grade="shaky">Shaky<small>see it again this pass</small></button>
+        <button class="grade-btn good" data-cram-grade="solid">Solid<small>next card</small></button>
       </div>
       <div id="cards-done" class="card center hidden">
         <h3>Deck clear for now</h3>
@@ -101,7 +145,10 @@
         <p class="hint">Full PSI-format simulation: <b id="lobby-count">70</b> questions, <b id="lobby-min">210</b> minutes, <b id="lobby-pass">70%</b> to pass. Unanswered counts wrong. Mix weighted toward Electrical Theory and Wiring &amp; Protection.</p>
         <div id="lobby-blueprint" class="blueprint"></div>
         <button id="exam-start" class="primary-btn">Start full simulation</button>
+        <button id="half-start" class="secondary-btn">Half sim (35 questions, 105 min)</button>
         <button id="drill-start" class="secondary-btn">Quick drill (10 questions, untimed)</button>
+        <button id="misses-start" class="secondary-btn">Drill my misses</button>
+        <button id="lookup-start" class="secondary-btn">Article lookup drill (10, timed per question)</button>
         <div id="exam-resume-box" class="resume hidden">
           <span>You have an attempt in progress.</span>
           <button id="exam-resume" class="ghost-btn">Resume</button>
@@ -115,13 +162,13 @@
     <div id="exam-run" class="hidden">
       <div class="exam-bar">
         <span id="ex-pos" class="ex-pos"></span>
-        <span id="ex-timer" class="ex-timer"></span>
+        <span id="ex-timer" class="ex-timer" aria-label="Time"></span>
         <button id="ex-review-btn" class="ghost-btn">Review</button>
       </div>
       <div class="q-card">
-        <div class="q-meta"><span id="q-topic" class="chip"></span><button id="q-flag" class="flag-btn" aria-pressed="false">⚑ Flag</button></div>
+        <div class="q-meta"><span id="q-topic" class="chip"></span><span class="q-tools"><button id="q-guess" class="flag-btn" aria-pressed="false" title="Mark as a guess (G)">? Guess</button><button id="q-flag" class="flag-btn" aria-pressed="false">⚑ Flag</button></span></div>
         <div id="q-text" class="q-text"></div>
-        <div id="q-choices" class="choices"></div>
+        <div id="q-choices" class="choices" role="radiogroup" aria-label="Answer choices"></div>
       </div>
       <div class="exam-nav">
         <button id="ex-prev" class="ghost-btn">← Prev</button>
@@ -146,7 +193,10 @@
       </div>
       <h2 class="section-h">By topic</h2>
       <div id="res-topics" class="list"></div>
-      <h2 class="section-h">Missed questions</h2>
+      <h2 class="section-h" id="res-missed-h">Missed questions</h2>
+      <div class="seg" role="group" aria-label="Which questions to show"><button id="res-view-missed" class="seg-btn active" aria-pressed="true">Misses only</button><button id="res-view-all" class="seg-btn" aria-pressed="false">All questions</button></div>
+      <div id="res-lookup" class="loop-row hidden"><span id="res-lookup-text"></span></div>
+      <div id="res-loop" class="loop-row hidden"><span id="res-loop-text"></span><button id="res-review-missed" class="secondary-btn small-btn">Review missed now</button></div>
       <div id="res-missed" class="list"></div>
       <button id="res-done" class="primary-btn">Done</button>
     </div>
@@ -156,7 +206,7 @@
   <section id="tab-plan" class="tab">
     <div class="card">
       <div class="plan-head">
-        <div><h2>30-day plan</h2><p class="hint" id="plan-sub"></p></div>
+        <div><h2 id="plan-title">30-day plan</h2><p class="hint" id="plan-sub"></p></div>
         <div class="ring" id="plan-ring"><span id="plan-pct">0%</span></div>
       </div>
       <div class="bar"><div id="plan-bar" class="bar-fill"></div></div>
@@ -194,12 +244,29 @@
     <div class="card">
       <h2>My content</h2>
       <div id="my-content" class="list"></div>
+      <p id="backup-line" class="hint small"></p>
       <div class="btn-row">
         <button id="export-custom" class="secondary-btn">Export my cards/questions</button>
         <button id="export-all" class="secondary-btn">Backup everything</button>
         <label class="secondary-btn file-btn">Import JSON<input id="import-file" type="file" accept=".json,application/json" hidden></label>
       </div>
       <p id="io-status" class="status hidden"></p>
+      <div id="missed-deck" class="row hidden"><div><div class="title">Missed-question deck</div><div class="sub" id="missed-deck-sub"></div></div>
+        <div class="right"><button id="missed-clear-mastered" class="link-btn">clear mastered</button><button id="missed-clear" class="link-btn danger">clear all</button></div></div>
+      <p id="missed-status" class="status hidden"></p>
+    </div>
+
+    <div class="card hidden" id="mostmissed-card">
+      <h2>Most-missed questions</h2>
+      <p class="hint">Questions you have missed most across sims and drills (seen at least twice). A question everyone misses is either a weak spot or a bad item — this list tells the reviewer which to look at. <button id="mostmissed-copy" class="link-btn">Copy for review</button></p>
+      <div id="mostmissed-list" class="list"></div>
+    </div>
+
+    <div class="card hidden" id="tabs-card">
+      <h2>Tab your book</h2>
+      <p class="hint">The references this bank cites most. Tab them in the printed NEC (permanent tabs; check PSI's current rules on tabs and notes before exam day) and tick them off here. <span id="tabs-progress" class="muted"></span></p>
+      <div class="bar"><div id="tabs-bar" class="bar-fill"></div></div>
+      <div id="tabs-list" class="tasks" style="margin-top:10px"></div>
     </div>
 
     <div class="card">
@@ -210,8 +277,10 @@
 
     <div class="card">
       <h2>Settings</h2>
+      <p class="hint"><button id="wn-open" class="link-btn">What's new in this version</button></p>
       <label>Exam date <input id="set-date" type="date"></label>
       <label>Daily card goal <input id="set-goal" type="number" min="5" max="200" step="5"></label>
+      <label class="task"><input type="checkbox" id="set-sunlight"><span><b>Sunlight mode</b> <span class="muted small">— light, high-contrast, larger text for the roof at noon</span></span></label>
       <button id="set-save" class="secondary-btn">Save settings</button>
       <button id="reset-all" class="link-btn danger">Reset all local data</button>
       <p id="set-status" class="status hidden"></p>
@@ -219,7 +288,7 @@
   </section>
 </main>
 
-<nav class="tabbar" aria-label="Primary">
+<nav class="tabbar" aria-label="Primary"><p class="sr-only">Keys: 1–4 answer, arrows move, F flag, G guess, R review · cards: Space flip, 1/2/3 grade</p>
   <button class="tab-btn active" data-tab="home">Home</button>
   <button class="tab-btn" data-tab="cards">Cards</button>
   <button class="tab-btn" data-tab="exam">Exam</button>
@@ -231,12 +300,17 @@
 <script src="js/store.js"></script>
 <script src="js/srs.js"></script>
 <script src="js/grader.js"></script>
+<script src="js/lookup.js"></script>
+<script src="js/schedule.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/misses.js"></script>
 <script src="js/data.js"></script>
 <script src="js/dashboard.js"></script>
 <script src="js/cards.js"></script>
 <script src="js/exam.js"></script>
 <script src="js/plan.js"></script>
 <script src="js/library.js"></script>
+<script src="js/keys.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

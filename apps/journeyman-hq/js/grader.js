@@ -36,6 +36,7 @@
     const ids = Array.isArray(attempt && attempt.questionIds) ? attempt.questionIds : [];
     const answers = (attempt && attempt.answers) || {};
     const flagged = (attempt && attempt.flagged) || {};
+    const guessed = (attempt && attempt.guessed) || {};
 
     if (!ids.length) {
       rails.push("invalid: attempt has no questions");
@@ -49,6 +50,7 @@
 
     let correct = 0;
     const missed = [], unanswered = [], byTopic = {};
+    const guessRight = [], guessWrong = [];   // "I guessed" marker: lucky hits are not knowledge
     for (const id of ids) {
       const q = bank[id];
       const t = q.topic || "untagged";
@@ -57,8 +59,9 @@
       const a = answers[id];
       const answered = a !== null && a !== undefined;
       if (!answered) unanswered.push(id);
-      if (answered && Number(a) === Number(q.answer)) { correct++; byTopic[t].correct++; }
-      else { missed.push(id); byTopic[t].missedIds.push(id); }
+      const right = answered && Number(a) === Number(q.answer);
+      if (right) { correct++; byTopic[t].correct++; if (guessed[id]) guessRight.push(id); }
+      else { missed.push(id); byTopic[t].missedIds.push(id); if (guessed[id]) guessWrong.push(id); }
     }
     const total = ids.length;
     const pctScore = Math.round((correct / total) * 1000) / 10;
@@ -70,6 +73,8 @@
     }
     if (Object.values(byTopic).some((t) => t.status === "uncertain")) rails.push("topic sample < " + cfg.minTopicSample + " marked uncertain, not weak");
     if (unanswered.length) rails.push(unanswered.length + " unanswered counted wrong (PSI rule)");
+    const knowledgePct = Math.round(((correct - guessRight.length) / total) * 1000) / 10;
+    if (guessRight.length) rails.push(guessRight.length + " right by guess — " + knowledgePct + "% by knowledge; lucky guesses go to the missed deck");
 
     const submitted = !!(attempt.submittedAt);
     const elapsed = Number(attempt.elapsedSec) || 0;
@@ -85,7 +90,8 @@
 
     return {
       verdict, rails,
-      score: { correct, total, pct: pctScore, passPct: cfg.passPct },
+      score: { correct, total, pct: pctScore, passPct: cfg.passPct, lucky: guessRight.length, knowledgePct },
+      guessed: { right: guessRight, wrong: guessWrong },
       byTopic, weakest,
       missed, unanswered, flagged: ids.filter((id) => flagged[id]),
       timing: { elapsedSec: elapsed, timeLimitSec: limit, timedOut, secPerQuestion: total ? Math.round(elapsed / total) : 0 },
@@ -99,7 +105,7 @@
    */
   function weakTopics(attempts, topics = {}, { window = 5, minSample = 3, passPct = 70 } = {}) {
     const agg = {};
-    attempts.slice(-window).forEach((a) => {
+    attempts.filter((a) => a && a.mode !== "lookup").slice(-window).forEach((a) => {
       if (!a || !a.result || !a.result.byTopic) return;
       Object.values(a.result.byTopic).forEach((t) => {
         agg[t.topic] = agg[t.topic] || { topic: t.topic, name: (topics[t.topic] && topics[t.topic].name) || t.name || t.topic, correct: 0, total: 0 };
