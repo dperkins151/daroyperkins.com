@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import lookup from "../js/lookup.js";
 const root = path.resolve(new URL(".", import.meta.url).pathname, "..");
+import { findNearDuplicates } from "./lib/similarity.mjs";
 const read = (p) => JSON.parse(fs.readFileSync(path.join(root, p), "utf8"));
 const manifest = read("content/manifest.src.json");
 const topicIds = new Set(manifest.topics.map((t) => t.id));
@@ -39,6 +40,13 @@ for (const c of cards) {
   if (seen.has(c.id)) errors.push(`duplicate id ${c.id}`); seen.add(c.id);
   if (!c.front || !c.back) errors.push(`${c.id}: front/back required`);
 }
+// Duplicate-stem lint: a re-ask of an existing item (same words, same numbers) across packs is an error at ≥ 0.9
+// similarity, a review-queue entry at ≥ 0.75; number variants of one template are fine and not listed.
+const DUP_ERROR = 0.9, DUP_REVIEW = 0.75;
+const dupes = [...findNearDuplicates(questions, { key: "q", threshold: DUP_REVIEW }).map((p) => ({ ...p, bank: "questions" })), ...findNearDuplicates(cards, { key: "front", threshold: DUP_REVIEW }).map((p) => ({ ...p, bank: "flashcards" }))]
+  .filter((p) => p.kind !== "variant");
+for (const p of dupes) if (p.kind === "exact" || p.score >= DUP_ERROR) errors.push(`${p.bank}: ${p.a} and ${p.b} are the same item in other words (${p.kind}, ${p.score}) — drop one or change what it asks`);
+const nearDupes = dupes.filter((p) => p.kind === "near" && p.score < DUP_ERROR);
 const plan = read("content/plan.src.json");
 // changelog: newest first, valid versions, 1–8 non-empty lines each, current appVersion present
 const changelog = read("content/changelog.src.json");
@@ -106,11 +114,12 @@ let md = `# Content review queue — Journeyman HQ v${manifest.banks.questions.v
 md += `| Bank | Items | Flagged |\n|---|---|---|\n| questions | ${questions.length} | ${manifest.banks.questions.reviewFlagged} |\n| flashcards | ${cards.length} | ${manifest.banks.flashcards.reviewFlagged} |\n\nQuestions by topic: ${Object.entries(qOut.byTopic).map(([t, n]) => `${t} ${n}`).join(" · ")} (exam blueprint per sim: ${Object.entries(bp).map(([t, n]) => `${t} ${n}`).join(" · ")})\n\n`;
 if (short.length) md += `Pool depth warning (less than 2× blueprint): ${short.map(([t]) => t).join(", ")}. Add questions there in v2.\n\n`;
 md += `## Flagged items\n\n` + (review.length ? `| ID | Article | What to verify |\n|---|---|---|\n` + review.map((x) => `| ${x.id} | ${x.article} | ${x.note} |`).join("\n") + "\n" : "None open.\n");
+md += `\n## Near-duplicate stems\n\nSame words and the same numbers at ≥ ${DUP_REVIEW} similarity (≥ ${DUP_ERROR} fails the build). Number variants of one template are not listed.\n\n` + (nearDupes.length ? `| Bank | A | B | Similarity |\n|---|---|---|---|\n` + nearDupes.map((p) => `| ${p.bank} | ${p.a} | ${p.b} | ${p.score} |`).join("\n") + "\n" : "None.\n");
 const logPath = path.join(root, "content/review-log.json");
 if (fs.existsSync(logPath)) {
   const log = JSON.parse(fs.readFileSync(logPath, "utf8")).resolved || [];
   md += `\n## Resolved\n\n| ID | Date | Outcome | Detail | Source |\n|---|---|---|---|---|\n` + log.map((r) => `| ${r.id} | ${r.date} | ${r.outcome} | ${r.detail} | ${(r.sources || []).map((u) => `[link](${u})`).join(" ")} |`).join("\n") + "\n";
 }
 fs.writeFileSync(path.join(root, "CONTENT-REVIEW.md"), md);
-console.log(`OK: ${questions.length} questions, ${cards.length} cards, ${plan.days.length} plan days → data/. Flagged for review: ${review.length}.`);
+console.log(`OK: ${questions.length} questions, ${cards.length} cards, ${plan.days.length} plan days → data/. Flagged for review: ${review.length}. Near-duplicate stems: ${nearDupes.length}.`);
 console.log("by topic:", qOut.byTopic, "by pack:", qOut.byPack);

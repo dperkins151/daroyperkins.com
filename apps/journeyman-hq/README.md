@@ -43,7 +43,8 @@ Deploy = Roy uploads the zip at `https://apps.daroyperkins.com/upload/` with the
 ## Adding content (packs)
 1. Add items to a new per-topic file such as `content/questions/<topic>-v3.json` with `"pack": 3` on each item (IDs stay unique across all files; the builder stamps `source: jhq-v<pack>`). Roy's in-app **Export my cards/questions** file goes through `node tools/import-custom.mjs <export.json> [--pack N] [--write]`: dry run by default; `--write` appends to `content/questions/custom-v<pack>.json` / `content/flashcards/custom-v<pack>.json` (IDs `RQ-<pack>-nnn` / `RC-<pack>-nnn`, original app id kept as `origId`) and runs the validator. Items without an NEC article or explanation are imported with `review: true` so they land in CONTENT-REVIEW.md; questions without exactly 4 choices, duplicates and unknown topics are skipped and listed. Re-running the same export is a no-op. v2 (2026-10-06) added 68 calculation-heavy items as `*-v2.json`.
 2. Bump `banks.*.version` and `file` names in `content/manifest.src.json`, then `./build.sh`. The validator rejects bad topics, missing articles, wrong choice counts, duplicate IDs, and "all of the above" choices.
-3. Luigi samples flagged + new items against the book; clear `review` flags once verified and set `reviewed` dates in the manifest.
+3. The builder lints for re-asks: two question stems (or card fronts) with the same words **and** the same numbers fail the build at ≥ 0.9 token-set similarity and land in CONTENT-REVIEW.md "Near-duplicate stems" at ≥ 0.75 (`tools/lib/similarity.mjs`, unit-tested). Number variants of one template ("25 kVA" vs "45 kVA") are wanted and not listed.
+4. Luigi samples flagged + new items against the book; clear `review` flags once verified and set `reviewed` dates in the manifest.
 
 ## CI / releases
 
