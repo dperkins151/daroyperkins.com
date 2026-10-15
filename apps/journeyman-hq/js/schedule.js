@@ -12,12 +12,19 @@
   function addDays(key, n) { const d = new Date(key + "T00:00:00"); d.setDate(d.getDate() + n); return keyOf(d); }
   function between(a, b) { return Math.round((new Date(b + "T00:00:00") - new Date(a + "T00:00:00")) / DAY); }
 
-  function bufferDay(cal, date, n) {
-    return { cal, date, buffer: true, base: [], topic: "general", title: "Review day " + n, articles: [],
+  /** Generic review day, or a weak-topic review day when `focus` ({topic, name, articles}) is given. */
+  function bufferDay(cal, date, n, focus) {
+    if (!focus) return { cal, date, buffer: true, base: [], topic: "general", focus: null, title: "Review day " + n, articles: [],
       tasks: [
         { key: "buf." + date + ".0", text: "Clear every flashcard due today (Everything due deck)" },
         { key: "buf." + date + ".1", text: "Quick drill (10 questions) — then Drill my misses if anything is pending" },
         { key: "buf." + date + ".2", text: "Re-read the explanations of this week's missed questions in the book" },
+      ] };
+    return { cal, date, buffer: true, base: [], topic: focus.topic, focus: focus.topic, title: "Review day · " + focus.name, articles: (focus.articles || []).slice(0, 4),
+      tasks: [
+        { key: "buf." + date + ".0", text: "Flashcards: run the " + focus.name + " deck until nothing is due" },
+        { key: "buf." + date + ".1", text: "Topic drill: 10 questions on " + focus.name + " — then Drill my misses" },
+        { key: "buf." + date + ".2", text: "Re-read this week's missed " + focus.name + " questions in the book, tab the articles" },
       ] };
   }
 
@@ -26,10 +33,14 @@
    * @param {object} plan  base plan { days: [{day, topic, title, articles, tasks}] }
    * @param {string} startKey  YYYY-MM-DD the plan started (first run)
    * @param {string|null} examKey  YYYY-MM-DD exam date, or null for the base 30-day layout
+   * @param {object} [opts]  { weak: [{topic, name}] } — weakest topics first; review days rotate through them
    * @returns {Array<{cal, date, buffer, base: number[], topic, title, articles, tasks: [{key, text}]}>}
    */
-  function build(plan, startKey, examKey) {
+  function build(plan, startKey, examKey, opts = {}) {
     const base = (plan && plan.days) || [];
+    const weak = (opts.weak || []).filter((w) => w && w.topic);
+    const artsOf = (topic) => { const s = []; base.forEach((d) => { if (d.topic === topic) (d.articles || []).forEach((a) => { if (!s.includes(a)) s.push(a); }); }); return s; };
+    const focusFor = (i) => (weak.length ? Object.assign({ articles: artsOf(weak[i % weak.length].topic) }, weak[i % weak.length]) : null);
     const n = base.length; if (!n) return [];
     let span = examKey ? between(startKey, examKey) + 1 : n;
     if (!Number.isFinite(span) || span < 1) span = 1;
@@ -42,7 +53,7 @@
       for (let c = 0; c < span; c++) {
         const date = addDays(startKey, c);
         if (bi < n && slot(bi + 1) === c) { const d = base[bi++]; out.push(Object.assign({ cal: c + 1, date, buffer: false, base: [d.day] }, toDay(d))); }
-        else out.push(bufferDay(c + 1, date, ++bufN));
+        else { out.push(bufferDay(c + 1, date, ++bufN, focusFor(bufN - 1))); }
       }
     } else {
       // compress: calendar day c takes base days whose floor(i * span / n) lands on it; every base day appears exactly once

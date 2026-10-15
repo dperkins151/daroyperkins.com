@@ -148,6 +148,22 @@ ok((await page.$$eval("#plan-days .day", (r) => r.length)) === 46, "plan stretch
 ok((await page.$$eval("#plan-days .day.buffer", (r) => r.length)) === 16, "16 review buffer days inserted");
 ok(/46-day plan/.test(await page.textContent("#plan-title")) && /16 review days added/.test(await page.textContent("#plan-sub")), "plan header explains the stretch: " + (await page.textContent("#plan-sub")).trim());
 ok((await page.$$eval('#plan-days .day[data-day="46"]', (d) => d[0].querySelector(".n").textContent)) === "D30", "exam day pinned to the last calendar day");
+// weak-topic review days: after the sims above, buffers target the weakest topics and launch a topic drill
+const firstBuf = await page.$("#plan-days .day.buffer");
+const bufTitle = await firstBuf.$eval(".t", (e) => e.textContent);
+ok(/^Review day · /.test(bufTitle), "review day targets a weak topic: " + bufTitle);
+await firstBuf.$eval(".day-head", (h) => h.click());
+await page.waitForSelector("#plan-days .day.buffer [data-drill]");
+const focusTopic = await page.$eval("#plan-days .day.buffer [data-drill]", (b) => b.dataset.drill);
+await page.click("#plan-days .day.buffer [data-drill]"); await page.waitForSelector("#exam-run:not(.hidden)");
+ok((await page.textContent("#ex-pos")).trim() === "1 / 10", "topic drill from the review day is 10 questions");
+const drillIds = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempt.inprogress")).questionIds);
+const topicOf = await page.evaluate((ids) => { const m = {}; JHQ.data.allQuestions().forEach((q) => { m[q.id] = q.topic; }); return ids.map((i) => m[i]); }, drillIds);
+ok(topicOf.every((t) => t === focusTopic), "every question is from the review day's topic (" + focusTopic + ")");
+for (let i = 0; i < 10; i++) { await page.click(".choice >> nth=0"); await page.click("#ex-next"); }
+await page.click("#ex-submit"); await page.waitForSelector("#exam-result:not(.hidden)");
+ok(new RegExp("quick drill · ").test(await page.textContent("#res-verdict")), "result names the topic drill: " + (await page.textContent("#res-verdict")).trim());
+await page.click("#res-done"); await page.click('.tab-btn[data-tab="plan"]'); await page.waitForSelector("#plan-days .day");
 await page.click('.day[data-day="1"] .day-head').catch(() => {});
 const cb = await page.$('.day[data-day="1"] input[data-k]'); if (!(await cb.isVisible())) await page.click('.day[data-day="1"] .day-head');
 await page.click('.day[data-day="1"] input[data-k="1.0"]');

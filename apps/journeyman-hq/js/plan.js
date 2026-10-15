@@ -13,7 +13,9 @@
     let start = s.createdAt ? s.createdAt.slice(0, 10) : todayKey();
     if (s.examDate && s.examDate < start) start = s.examDate;
     if (s.examDate && start > todayKey()) start = todayKey();
-    return JHQ.schedule.build(plan, start, s.examDate || null);
+    // review days target the weakest topics from recent attempts (weakest first); generic when there is no data yet
+    const weak = JHQ.grader.weakTopics(JHQ.store.attempts(), JHQ.data.state.topics).filter((t) => t.status !== "uncertain").map((t) => ({ topic: t.topic, name: t.name }));
+    return JHQ.schedule.build(plan, start, s.examDate || null, { weak: weak.slice(0, 3) });
   }
   function currentDay() { const sc = schedule(); return sc.length ? JHQ.schedule.currentIndex(sc, todayKey()) : 1; }
   function length() { return schedule().length; }
@@ -40,11 +42,14 @@
         <div class="day-head"><span><span class="n">${esc(label)}</span><span class="t">${esc(d.title)}</span></span><span class="muted small">${esc(JHQ.util.fmtDate(d.date + "T00:00:00").replace(/, \d{4}$/, ""))} · ${dn}/${d.tasks.length} ${isDone ? "✓" : ""}</span></div>
         <div class="day-tasks ${open === d.cal ? "" : "hidden"}">
           ${d.tasks.map((t) => `<label class="task ${done[t.key] ? "done" : ""}"><input type="checkbox" data-k="${esc(t.key)}" ${done[t.key] ? "checked" : ""}><span>${esc(t.text)}</span></label>`).join("")}
-          <div class="day-refs"><span class="chip">${esc(d.buffer ? "review" : JHQ.data.topicName(d.topic))}</span>${(d.articles || []).map((a) => `<span class="chip chip-amber">NEC ${esc(a)}</span>`).join("")}</div>
+          <div class="day-refs"><span class="chip">${esc(d.buffer ? (d.focus ? "review · " + JHQ.data.topicName(d.focus) : "review") : JHQ.data.topicName(d.topic))}</span>${(d.articles || []).map((a) => `<span class="chip chip-amber">NEC ${esc(a)}</span>`).join("")}</div>
+          ${d.buffer && d.focus ? `<div class="btn-row"><button class="secondary-btn small-btn" data-cards="${esc(d.focus)}">${esc(JHQ.data.topicName(d.focus))} cards</button><button class="secondary-btn small-btn" data-drill="${esc(d.focus)}">Drill ${esc(JHQ.data.topicName(d.focus))}</button></div>` : ""}
         </div>
       </div>`;
     }).join("");
     $("plan-days").querySelectorAll(".day-head").forEach((h) => h.addEventListener("click", () => { const d = Number(h.parentElement.dataset.day); open = open === d ? -1 : d; render(); }));
+    $("plan-days").querySelectorAll("[data-cards]").forEach((b) => b.addEventListener("click", () => { JHQ.app.go("cards"); JHQ.cards.start(b.dataset.cards); }));
+    $("plan-days").querySelectorAll("[data-drill]").forEach((b) => b.addEventListener("click", () => { JHQ.app.go("exam"); JHQ.exam.startTopicDrill(b.dataset.drill); }));
     $("plan-days").querySelectorAll("input[data-k]").forEach((c) => c.addEventListener("change", () => {
       const dn = JHQ.store.plan(); dn[c.dataset.k] = c.checked; JHQ.store.savePlan(dn); if (c.checked) JHQ.store.logActivity("plan", 1); render();
     }));

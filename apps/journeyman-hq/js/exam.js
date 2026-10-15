@@ -45,7 +45,7 @@
     if (view === "exam-lobby") renderLobby();
   }
 
-  function build(mode) {
+  function build(mode, opt = {}) {
     const cfg = examCfg();
     const pool = JHQ.data.allQuestions();
     if (pool.length < 10) { JHQ.app.banner("Not enough questions loaded to run an exam."); return null; }
@@ -72,9 +72,10 @@
       blueprint = {};
       const topics = Object.keys(cfg.blueprint).length ? Object.keys(cfg.blueprint) : [...new Set(pool.map((q) => q.topic))];
       let left = 10;
-      weak.slice(0, 2).forEach((t) => { blueprint[t] = 3; left -= 3; });
+      if (opt.topic) { blueprint[opt.topic] = 10; left = 0; }   // topic drill: all ten from one topic
+      else weak.slice(0, 2).forEach((t) => { blueprint[t] = 3; left -= 3; });
       const rest = topics.filter((t) => !blueprint[t]);
-      rest.forEach((t, i) => { blueprint[t] = (blueprint[t] || 0) + Math.floor(left / rest.length) + (i < left % rest.length ? 1 : 0); });
+      if (left) rest.forEach((t, i) => { blueprint[t] = (blueprint[t] || 0) + Math.floor(left / rest.length) + (i < left % rest.length ? 1 : 0); });
       timeLimitSec = 0;
     }
     const sel = JHQ.grader.select(pool, blueprint, JHQ.store.qstats());
@@ -82,13 +83,14 @@
     return {
       id: uid("att"), mode, startedAt: new Date().toISOString(), submittedAt: null,
       questionIds: order.map((o) => o.id), perms: Object.fromEntries(order.map((o) => [o.id, o.perm])),
-      answers: {}, flagged: {}, idx: 0, elapsedSec: 0, timeLimitSec, notes: sel.notes, lastTick: Date.now(),
+      answers: {}, flagged: {}, idx: 0, elapsedSec: 0, timeLimitSec, notes: (opt.topic ? ["topic drill: " + JHQ.data.topicName(opt.topic)] : []).concat(sel.notes), focus: opt.topic || undefined, lastTick: Date.now(),
     };
   }
 
   function startSim() { const a = build("sim"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startDrill() { const a = build("drill"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startMisses() { const a = build("misses"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
+  function startTopicDrill(topic) { const a = build("drill", { topic }); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startLookup() { const a = build("lookup"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function resume() {
     attempt = JHQ.store.inProgress(); if (!attempt) return;
@@ -181,7 +183,7 @@
       JHQ.store.saveMissed(loop.map);
     }
     JHQ.store.logActivity("questions", attempt.questionIds.length);
-    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: Math.round(attempt.elapsedSec), timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, notes: attempt.notes, result, newCards: loop.added, gen: attempt.gen || undefined, qtime: attempt.qtime ? Object.fromEntries(Object.entries(attempt.qtime).map(([k, v]) => [k, Math.round(v * 10) / 10])) : undefined };
+    const record = { id: attempt.id, mode: attempt.mode, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, elapsedSec: Math.round(attempt.elapsedSec), timeLimitSec: attempt.timeLimitSec, questionIds: attempt.questionIds, answers: attempt.answers, flagged: attempt.flagged, notes: attempt.notes, focus: attempt.focus, result, newCards: loop.added, gen: attempt.gen || undefined, qtime: attempt.qtime ? Object.fromEntries(Object.entries(attempt.qtime).map(([k, v]) => [k, Math.round(v * 10) / 10])) : undefined };
     JHQ.store.pushAttempt(record);
     JHQ.store.saveInProgress(null);
     attempt = null;
@@ -195,7 +197,7 @@
     show("exam-result");
     const hero = $("res-pct"); hero.textContent = Math.round(r.score.pct) + "%";
     hero.className = "hero-num " + (r.verdict === "pass" ? "pass" : r.verdict === "fail" ? "fail" : "");
-    $("res-verdict").textContent = (r.verdict === "pass" ? "PASS" : r.verdict === "fail" ? "FAIL" : r.verdict.toUpperCase()) + " · " + r.score.correct + "/" + r.score.total + (rec.mode === "sim" ? " · need " + r.score.passPct + "%" : " · " + modeName(rec.mode).toLowerCase());
+    $("res-verdict").textContent = (r.verdict === "pass" ? "PASS" : r.verdict === "fail" ? "FAIL" : r.verdict.toUpperCase()) + " · " + r.score.correct + "/" + r.score.total + (rec.mode === "sim" ? " · need " + r.score.passPct + "%" : " · " + modeName(rec.mode).toLowerCase() + (rec.focus ? " · " + JHQ.data.topicName(rec.focus) : ""));
     $("res-sub").textContent = fmtClock(rec.elapsedSec) + (r.timing && r.timing.timedOut ? " · time expired" : "") + (r.unanswered.length ? " · " + r.unanswered.length + " unanswered" : "") + (r.rails.length ? " · " + r.rails.join("; ") : "");
     const topics = Object.values(r.byTopic).sort((a, b) => a.pct - b.pct);
     $("res-topics").innerHTML = topics.map((t) => `
@@ -245,5 +247,5 @@
   function render() { if (!attempt) show("exam-lobby"); }
   function active() { return !!attempt; }
 
-  JHQ.exam = { render, bind, startSim, startDrill, startMisses, startLookup, resume, active, showResult, modeName, missPool };
+  JHQ.exam = { render, bind, startSim, startDrill, startTopicDrill, startMisses, startLookup, resume, active, showResult, modeName, missPool };
 })(typeof window !== "undefined" ? window : globalThis);

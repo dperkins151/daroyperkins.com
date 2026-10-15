@@ -36,6 +36,20 @@ test("12 days → base days merged, every task kept once, exam-day tasks on the 
   assert.equal(s[0].title, "Day 1 + Day 2 + Day 3"); assert.deepEqual(s[0].articles, ["A1", "A2", "A3"]); assert.equal(s[0].topic, "general");
 });
 
+test("weak topics: review days rotate through them (weakest first) with that topic's articles and tasks; generic without", () => {
+  const weak = [{ topic: "wiring", name: "Wiring & Protection" }, { topic: "theory", name: "Electrical Theory" }];
+  const s = S.build(plan, START, "2026-11-14", { weak });
+  const b = s.filter((d) => d.buffer);
+  assert.equal(b.length, 15);
+  assert.deepEqual(b.slice(0, 4).map((d) => d.focus), ["wiring", "theory", "wiring", "theory"], "rotation, weakest first");
+  assert.equal(b[0].title, "Review day · Wiring & Protection"); assert.equal(b[0].topic, "wiring");
+  assert.ok(b[0].tasks.every((t) => /Wiring & Protection/.test(t.text)) && b[0].tasks[0].key.startsWith("buf."), "tasks name the topic, buffer keys");
+  assert.ok(b[0].articles.length > 0 && b[0].articles.length <= 4 && b[0].articles.every((a) => plan.days.filter((d) => d.topic === "wiring").some((d) => d.articles.includes(a))), "articles come from that topic's plan days");
+  const g = S.build(plan, START, "2026-11-14").filter((d) => d.buffer)[0];
+  assert.equal(g.focus, null); assert.equal(g.title, "Review day 1");
+  assert.deepEqual(S.build(plan, START, "2026-11-14", { weak: [] }).filter((d) => d.buffer).map((d) => d.focus), new Array(15).fill(null));
+});
+
 test("exam today or in the past → one calendar day holding everything", () => {
   const s = S.build(plan, START, START); assert.equal(s.length, 1); assert.equal(s[0].base.length, 30);
   assert.equal(S.build(plan, START, "2026-09-20").length, 1);
