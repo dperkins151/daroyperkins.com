@@ -118,7 +118,8 @@
     const max = Math.max(1, ...days.map((d) => d.cards + d.questions));
     $("prog-days").innerHTML = days.map((d) => `<div class="day-col" title="${d.key} · ${d.cards} cards · ${d.questions} questions"><div class="day-bar" style="height:${Math.round(((d.cards + d.questions) / max) * 100)}%"><div class="day-q" style="height:${d.cards + d.questions ? Math.round((d.questions / (d.cards + d.questions)) * 100) : 0}%"></div></div></div>`).join("");
     const tc = days.reduce((s, d) => s + d.cards, 0), tq = days.reduce((s, d) => s + d.questions, 0), active = days.filter((d) => d.cards + d.questions).length;
-    $("prog-days-sub").textContent = active + " active day" + (active === 1 ? "" : "s") + " · " + tc + " cards · " + tq + " questions";
+    const tm = days.reduce((s, d) => s + d.minutes, 0);
+    $("prog-days-sub").textContent = active + " active day" + (active === 1 ? "" : "s") + " · " + tc + " cards · " + tq + " questions" + (tm ? " · " + tm + " min focused" : "");
   }
 
   function bind() {

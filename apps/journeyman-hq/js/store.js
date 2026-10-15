@@ -15,6 +15,7 @@
     qstats: "qstats",            // { [qid]: {seen, missed, lastMissed, lastSeen} }
     tabs: "tabs",                // { [ref]: true } — book tabs the user has placed
     missed: "missed",            // { [qid]: {misses, first, last} } → derived "mq-<qid>" flashcards (js/misses.js)
+    focus: "focus",              // current focus block { len, accumulated, startedAt, completedAt } (js/focus.js)
   };
   function read(key, fallback) {
     try { const v = localStorage.getItem(NS + key); return v == null ? fallback : JSON.parse(v); } catch (e) { return fallback; }
@@ -40,7 +41,7 @@
     activity() { return read(KEYS.activity, {}); },
     logActivity(kind, n = 1) {
       const act = read(KEYS.activity, {}); const k = JHQ.util.todayKey();
-      act[k] = act[k] || { cards: 0, questions: 0 }; act[k][kind] = (act[k][kind] || 0) + n; write(KEYS.activity, act);
+      act[k] = act[k] || { cards: 0, questions: 0 }; act[k][kind] = (act[k][kind] || 0) + n; write(KEYS.activity, act);   // kinds: cards, questions, blocks, minutes
     },
     plan() { return read(KEYS.plan, {}); },
     savePlan(p) { return write(KEYS.plan, p); },
@@ -54,6 +55,8 @@
     saveTabs(t) { return write(KEYS.tabs, t); },
     missed() { return read(KEYS.missed, {}); },
     saveMissed(m) { return write(KEYS.missed, m); },
+    focus() { return read(KEYS.focus, null); },
+    saveFocus(f) { return f ? write(KEYS.focus, f) : remove(KEYS.focus); },
   };
   JHQ.store = store;
 })(typeof window !== "undefined" ? window : globalThis);

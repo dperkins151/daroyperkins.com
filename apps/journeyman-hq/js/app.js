@@ -45,6 +45,7 @@
     }
     Object.values(views).forEach((v) => JHQ[v].bind());
     JHQ.keys.bind();
+    JHQ.focus.bind();
     const s = JHQ.store.settings();
     if (!s.createdAt) { s.createdAt = new Date().toISOString(); JHQ.store.saveSettings(s); }
     $("setup-date").min = JHQ.util.todayKey();

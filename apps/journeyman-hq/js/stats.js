@@ -47,7 +47,7 @@
     for (let i = days - 1; i >= 0; i--) {
       const d = new Date(now.getTime() - i * DAY); const key = todayKey(d);
       const a = (activity || {})[key] || {};
-      out.push({ key, cards: a.cards || 0, questions: a.questions || 0 });
+      out.push({ key, cards: a.cards || 0, questions: a.questions || 0, blocks: a.blocks || 0, minutes: a.minutes || 0 });
     }
     return out;
   }
@@ -75,6 +75,8 @@
     lines.push("Pace: " + (p.secPerQ != null ? p.secPerQ + " s/question (budget " + p.budget + ", " + p.status + ")" : "no timed sims yet"));
     lines.push("Weakest: " + (weak.length ? weak.map((t) => t.name + " " + t.latest + "%" + (t.delta != null ? " (" + (t.delta > 0 ? "+" : "") + t.delta + ")" : "")).join(", ") : "no attempt data"));
     lines.push("Cards: " + cards + " reviewed, " + qs + " questions answered over " + active + " active day" + (active === 1 ? "" : "s") + " · " + (ctx.cardsDue != null ? ctx.cardsDue + " due now" : "") + (ctx.missedDeck != null ? " · Missed deck " + ctx.missedDeck : ""));
+    const blocks = days.reduce((s, d) => s + d.blocks, 0), mins = days.reduce((s, d) => s + d.minutes, 0);
+    if (blocks) lines.push("Focus: " + blocks + " block" + (blocks === 1 ? "" : "s") + " · " + mins + " min");
     if (ctx.plan) lines.push("Plan: day " + ctx.plan.day + " of " + ctx.plan.total + " · " + ctx.plan.pct + "% of tasks done");
     lines.push("Streak: " + (ctx.streak || 0) + " day" + (ctx.streak === 1 ? "" : "s") + (ctx.appVersion ? " · Journeyman HQ " + ctx.appVersion : ""));
     return lines.join("\n");

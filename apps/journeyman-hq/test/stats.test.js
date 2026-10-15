@@ -56,6 +56,9 @@ test("weeklyReport: plain text with the week's sims, pace, weakest topics, activ
   assert.equal(L[5], "Plan: day 10 of 46 · 34% of tasks done");
   assert.equal(L[6], "Streak: 3 days · Journeyman HQ 1.16.0");
   assert.ok(!/undefined|NaN/.test(txt));
+  assert.ok(!/Focus:/.test(txt), "no focus line without blocks");
+  const withFocus = stats.weeklyReport({ attempts, activity: { "2026-10-15": { cards: 1, blocks: 2, minutes: 50 }, "2026-10-12": { blocks: 1, minutes: 15 } }, topics, todayKey: key, now });
+  assert.match(withFocus, /^Focus: 3 blocks · 65 min$/m);
   const empty = stats.weeklyReport({ attempts: [], activity: {}, topics, todayKey: key, now });
   assert.match(empty, /Sims: 0 · Half sims: 0 · Drills: 0 · Lookup drills: 0/); assert.match(empty, /no timed sims yet/); assert.match(empty, /no attempt data/);
 });
@@ -76,7 +79,7 @@ test("mostMissed: seen ≥ 2 only, sorted by rate then misses, text for the revi
 test("daily: last N days oldest first, zeros for idle days", () => {
   const key = (d) => d.toISOString().slice(0, 10);
   const now = new Date("2026-10-15T12:00:00Z");
-  const act = { "2026-10-15": { cards: 12, questions: 10 }, "2026-10-13": { cards: 5 } };
+  const act = { "2026-10-15": { cards: 12, questions: 10, blocks: 2, minutes: 50 }, "2026-10-13": { cards: 5 } };
   const d = stats.daily(act, key, 3, now);
-  assert.deepEqual(d, [{ key: "2026-10-13", cards: 5, questions: 0 }, { key: "2026-10-14", cards: 0, questions: 0 }, { key: "2026-10-15", cards: 12, questions: 10 }]);
+  assert.deepEqual(d, [{ key: "2026-10-13", cards: 5, questions: 0, blocks: 0, minutes: 0 }, { key: "2026-10-14", cards: 0, questions: 0, blocks: 0, minutes: 0 }, { key: "2026-10-15", cards: 12, questions: 10, blocks: 2, minutes: 50 }]);
 });

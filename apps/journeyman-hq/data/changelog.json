@@ -1,8 +1,15 @@
 {
  "app": "Journeyman HQ",
- "current": "1.25.0",
+ "current": "1.26.0",
  "generated": "2026-10-15",
  "versions": [
+  {
+   "version": "1.26.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Focus block (Home): 15 / 25 / 45-minute study timer that survives closing the app; finished blocks count as study minutes for the day"
+   ]
+  },
   {
    "version": "1.25.0",
    "date": "2026-10-15",

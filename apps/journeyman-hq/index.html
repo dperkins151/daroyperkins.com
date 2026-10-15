@@ -78,6 +78,12 @@
       <div id="weak-topics" class="list"></div>
 
       <h2 class="section-h">Today</h2>
+      <div id="focus-card" class="card focus" data-state="idle">
+        <div class="focus-head"><span class="focus-title">Focus block</span><div id="focus-len" class="seg" role="group" aria-label="Block length"><button class="seg-btn" data-len="15">15</button><button class="seg-btn active" data-len="25">25</button><button class="seg-btn" data-len="45">45</button><span class="seg-unit">min</span></div></div>
+        <div id="focus-clock" class="focus-clock" role="timer" aria-live="off">25:00</div>
+        <div class="focus-btns"><button id="focus-start" class="primary-btn" data-state="idle">Start</button><button id="focus-reset" class="secondary-btn">Reset</button></div>
+        <p id="focus-sub" class="hint small">no blocks yet today</p>
+      </div>
       <div class="action-grid">
         <button class="action" data-go="cards"><b>Review cards</b><small id="act-cards">due now</small></button>
         <button class="action" data-go="drill"><b>Quick drill</b><small>10 Qs · weak topics + misses</small></button>
@@ -325,6 +331,7 @@
 <script src="js/library.js"></script>
 <script src="js/calcui.js"></script>
 <script src="js/print.js"></script>
+<script src="js/focus.js"></script>
 <script src="js/keys.js"></script>
 <script src="js/app.js"></script>
 </body>

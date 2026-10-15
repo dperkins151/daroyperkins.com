@@ -315,8 +315,34 @@ await page.click('#tabs-list input[data-tab="210.52"]');
 ok(/1 of 30 tabbed/.test(await page.textContent("#tabs-progress")), "ticking a tab updates the count");
 await page.reload(); await page.waitForSelector("#home-main:not(.hidden)"); await page.click('.tab-btn[data-tab="more"]');
 ok(await page.$eval('#tabs-list input[data-tab="210.52"]', (c) => c.checked), "tabs persist across reloads");
-// backup nudge + full backup
+// focus block: pick 15 min, start, reload keeps it running, pause banks time, a block that ran out while away completes once and logs minutes
 await page.click('.tab-btn[data-tab="home"]');
+ok((await page.textContent("#focus-clock")).trim() === "25:00" && (await page.textContent("#focus-start")).trim() === "Start", "focus block idle at 25:00");
+await page.click('#focus-len .seg-btn[data-len="15"]');
+ok((await page.textContent("#focus-clock")).trim() === "15:00", "block length switches to 15 min");
+await page.click("#focus-start");
+ok((await page.$eval("#focus-start", (b) => b.textContent.trim() + "/" + b.dataset.state)) === "Pause/running" && (await page.$eval('#focus-len .seg-btn[data-len="45"]', (b) => b.disabled)), "running: button reads Pause, lengths locked");
+await page.reload(); await page.waitForSelector("#home-main:not(.hidden)");
+const fRun = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.focus")));
+ok(fRun && fRun.len === 15 && fRun.startedAt && (await page.$eval("#focus-start", (b) => b.dataset.state)) === "running", "reload resumes the running block from its stored start time");
+await page.click("#focus-start");   // pause
+const fPaused = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.focus")));
+ok(fPaused.startedAt === null && fPaused.accumulated >= 0 && fPaused.accumulated < 60 && (await page.textContent("#focus-start")).trim() === "Resume", "pause banks the elapsed seconds and clears the start");
+// simulate: resumed 16 minutes ago, phone asleep since → on open the block is complete and logged exactly once
+await page.evaluate(() => { const f = JSON.parse(localStorage.getItem("jhq.focus")); f.startedAt = Date.now() - 16 * 60000; localStorage.setItem("jhq.focus", JSON.stringify(f)); });
+await page.reload(); await page.waitForSelector("#home-main:not(.hidden)");
+const fDone = await page.evaluate(() => ({ f: JSON.parse(localStorage.getItem("jhq.focus")), a: JSON.parse(localStorage.getItem("jhq.activity"))[JHQ.util.todayKey()] }));
+ok(fDone.f.completedAt && fDone.f.startedAt === null && (await page.textContent("#focus-clock")).trim() === "0:00" && (await page.textContent("#focus-start")).trim() === "Start another", "block that ran out while away shows done at 0:00");
+ok(fDone.a.blocks === 1 && fDone.a.minutes === 15 && /today 1 block · 15 min/.test(await page.textContent("#focus-sub")), "completed block logged once: 1 block · 15 min today");
+await page.reload(); await page.waitForSelector("#home-main:not(.hidden)");
+const fAgain = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.activity"))[JHQ.util.todayKey()]);
+ok(fAgain.blocks === 1 && fAgain.minutes === 15, "reloading a finished block does not log it twice");
+ok(/15 min focused/.test(await page.textContent("#prog-days-sub")), "Progress 14-day caption counts the focused minutes");
+await page.click("#focus-start");
+ok((await page.textContent("#focus-clock")).trim() === "14:59" || (await page.textContent("#focus-clock")).trim() === "15:00", "Start another begins a fresh block of the same length");
+await page.click("#focus-reset");
+ok((await page.textContent("#focus-clock")).trim() === "15:00" && (await page.textContent("#focus-start")).trim() === "Start", "reset returns to an idle block");
+// backup nudge + full backup
 ok(!(await page.$eval("#backup-nudge", (e) => e.classList.contains("hidden"))) && /No backup yet/.test(await page.textContent("#backup-nudge")), "Home nudges when progress exists and no backup was made");
 await page.click('.tab-btn[data-tab="more"]');
 const [dlAll] = await Promise.all([page.waitForEvent("download"), page.click("#export-all")]);
