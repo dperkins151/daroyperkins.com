@@ -1,8 +1,15 @@
 {
  "app": "Journeyman HQ",
- "current": "1.14.0",
+ "current": "1.15.0",
  "generated": "2026-10-15",
  "versions": [
+  {
+   "version": "1.15.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Half sim: 35 questions in 105 minutes with the same topic mix and pass rule — for days without 3½ hours"
+   ]
+  },
   {
    "version": "1.14.0",
    "date": "2026-10-15",

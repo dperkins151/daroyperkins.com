@@ -33,6 +33,9 @@ test("pace: seconds per question on sims vs the 180 s PSI budget", () => {
   assert.equal(stats.pace([att("sim", 70, bt(7, 7), { elapsedSec: 70 * 170 })]).status, "ok");
   assert.equal(stats.pace([att("sim", 70, bt(7, 7), { elapsedSec: 70 * 200 })]).status, "slow");
   assert.equal(stats.pace([att("drill", 70, bt(7, 7), { elapsedSec: 100 })]).status, "none", "drills don't count");
+  const half = att("half", 70, bt(7, 7), { elapsedSec: 35 * 150, questionIds: new Array(35).fill("q") });
+  assert.equal(stats.pace([half]).secPerQ, 150, "half sims count toward pace");
+  assert.deepEqual(stats.simTrend([half]).map((s) => s.half), [true], "half sims appear in the trend, marked");
 });
 
 test("daily: last N days oldest first, zeros for idle days", () => {

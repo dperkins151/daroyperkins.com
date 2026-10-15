@@ -8,9 +8,9 @@
   // lookup drills measure book speed, not knowledge: excluded from every stat here
   const graded = (attempts) => (attempts || []).filter((a) => a && a.result && a.result.score && a.submittedAt && a.mode !== "lookup");
 
-  /** Full-sim scores in order, last `limit`: [{ at, pct, verdict }]. */
+  /** Full and half sim scores in order, last `limit`: [{ at, pct, verdict, half }]. */
   function simTrend(attempts, limit = 10) {
-    return graded(attempts).filter((a) => a.mode === "sim").slice(-limit).map((a) => ({ at: a.submittedAt, pct: Math.round(a.result.score.pct), verdict: a.result.verdict }));
+    return graded(attempts).filter((a) => a.mode === "sim" || a.mode === "half").slice(-limit).map((a) => ({ at: a.submittedAt, pct: Math.round(a.result.score.pct), verdict: a.result.verdict, half: a.mode === "half" }));
   }
 
   /** Per-topic accuracy per attempt (any mode) where the topic had ≥1 question, last `window` attempts.
@@ -34,7 +34,7 @@
 
   /** Average seconds per question on the last `limit` full sims, vs the PSI budget. */
   function pace(attempts, limit = 5) {
-    const sims = graded(attempts).filter((a) => a.mode === "sim" && a.elapsedSec > 0 && a.questionIds && a.questionIds.length).slice(-limit);
+    const sims = graded(attempts).filter((a) => (a.mode === "sim" || a.mode === "half") && a.elapsedSec > 0 && a.questionIds && a.questionIds.length).slice(-limit);
     if (!sims.length) return { secPerQ: null, budget: PSI_SEC_PER_Q, sims: 0, status: "none" };
     const per = sims.map((a) => a.elapsedSec / a.questionIds.length);
     const secPerQ = Math.round(per.reduce((s, x) => s + x, 0) / per.length);

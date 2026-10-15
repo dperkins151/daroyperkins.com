@@ -83,7 +83,7 @@
     if (!graded.length) return;
     // full-sim scores: one bar per sim, 70% line
     const sims = S.simTrend(attempts, 10);
-    $("prog-sim").innerHTML = sims.length ? '<div class="spark-line" style="bottom:70%"></div>' + sims.map((s) => `<div class="spark-bar ${s.verdict}" style="height:${Math.max(4, s.pct)}%" title="${esc(fmtDate(s.at))} · ${s.pct}%"><span>${s.pct}</span></div>`).join("") : '<div class="empty small">No full sims yet — scores land here.</div>';
+    $("prog-sim").innerHTML = sims.length ? '<div class="spark-line" style="bottom:70%"></div>' + sims.map((s) => `<div class="spark-bar ${s.verdict} ${s.half ? "half" : ""}" style="height:${Math.max(4, s.pct)}%" title="${esc(fmtDate(s.at))} · ${s.pct}%${s.half ? " · half sim" : ""}"><span>${s.pct}</span></div>`).join("") : '<div class="empty small">No full sims yet — scores land here.</div>';
     $("prog-sim-sub").textContent = sims.length ? (sims.length === 1 ? "1 sim" : sims.length + " sims") + " · best " + Math.max(...sims.map((s) => s.pct)) + "% · need 70%" : "";
     // pace
     const p = S.pace(attempts);

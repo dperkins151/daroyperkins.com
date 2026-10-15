@@ -133,6 +133,17 @@ await page.click('.tab-btn[data-tab="more"]');
 ok(!(await page.$eval("#missed-deck", (e) => e.classList.contains("hidden"))) && new RegExp("^" + nMissed + " cards").test((await page.textContent("#missed-deck-sub")).trim()), "More tab manages the Missed deck");
 await page.click('.tab-btn[data-tab="exam"]');
 
+// Half sim: 35 questions, 105 minutes, same pass rule
+await page.click("#half-start"); await page.waitForSelector("#exam-run:not(.hidden)");
+ok((await page.textContent("#ex-pos")).trim() === "1 / 35" && /^1:45:0\d$|^1:44:5\d$/.test((await page.textContent("#ex-timer")).trim()), "half sim: 35 questions, 105-minute timer: " + (await page.textContent("#ex-timer")).trim());
+const halfIds = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempt.inprogress")).questionIds);
+const halfTopics = await page.evaluate((ids) => { const m = {}; JHQ.data.allQuestions().forEach((q) => { m[q.id] = q.topic; }); const c = {}; ids.forEach((i) => { c[m[i]] = (c[m[i]] || 0) + 1; }); return c; }, halfIds);
+ok(halfTopics.theory === 10 && halfTopics.wiring === 10 && halfTopics.methods === 5 && halfTopics.equipment === 4 && halfTopics.special === 3 && halfTopics.general === 3, "half blueprint 10/10/5/4/3/3: " + JSON.stringify(halfTopics));
+for (let i = 0; i < 35; i++) { await page.click(".choice >> nth=0"); await page.click("#ex-next"); }
+await page.click("#ex-submit"); await page.waitForSelector("#exam-result:not(.hidden)");
+ok(/need 70% · half sim/.test(await page.textContent("#res-verdict")), "half sim graded with the pass rule: " + (await page.textContent("#res-verdict")).trim());
+await page.click("#res-done"); ok(/Half simulation/.test(await page.textContent("#attempt-list")), "history lists the half sim");
+
 // Quick drill
 await page.click("#drill-start"); await page.waitForSelector("#exam-run:not(.hidden)");
 ok((await page.textContent("#ex-pos")).trim() === "1 / 10", "quick drill is 10 questions");
@@ -177,7 +188,7 @@ ok(/\d+ missed in the last 7 days/.test(await page.textContent("#act-misses")), 
 // Progress card
 ok(!(await page.$eval("#progress", (e) => e.classList.contains("hidden"))), "progress card shows once attempts exist");
 ok((await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts"))[0].elapsedSec)) > 0, "sim elapsed time is recorded (timer no longer loses time on each answer)");
-ok((await page.$$eval("#prog-sim .spark-bar", (b) => b.length)) === 1, "one sim bar in the score chart");
+ok((await page.$$eval("#prog-sim .spark-bar", (b) => b.length)) === 2 && (await page.$$eval("#prog-sim .spark-bar.half", (b) => b.length)) === 1, "full + half sim bars in the score chart (half dashed)");
 ok(/^\d+ s \/ question$/.test((await page.textContent("#prog-pace")).trim()) && /PSI budget 180 s/.test(await page.textContent("#prog-pace-sub")), "pace vs PSI budget: " + (await page.textContent("#prog-pace")).trim());
 ok((await page.$$eval("#prog-topics .prog-topic", (r) => r.length)) === 6, "six topic trend rows");
 ok((await page.$$eval("#prog-days .day-col", (c) => c.length)) === 14 && /1 active day · \d+ cards · \d+ questions/.test(await page.textContent("#prog-days-sub")), "14-day activity strip: " + (await page.textContent("#prog-days-sub")).trim());

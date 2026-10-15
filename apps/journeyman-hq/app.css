@@ -254,3 +254,5 @@ button:focus-visible, [tabindex]:focus-visible, a:focus-visible { outline: 2px s
 .q-tools { display: flex; gap: 6px; }
 #q-guess[aria-pressed="true"] { border-color: var(--red); color: var(--red); }
 .rv-cell.guessed { border-style: dashed; }
+/* half sim bars */
+.spark-bar.half { border-style: dashed; }

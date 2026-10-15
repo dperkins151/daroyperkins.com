@@ -7,7 +7,17 @@
   let timer = null;
   let lastResult = null;
   let resView = "missed";   // "missed" | "all" — result-screen list filter
-  const MODE = { sim: "Full simulation", drill: "Quick drill", misses: "Missed drill", lookup: "Lookup drill" };
+  const MODE = { sim: "Full simulation", half: "Half simulation", drill: "Quick drill", misses: "Missed drill", lookup: "Lookup drill" };
+  /** Half of the blueprint: each topic rounded, then the largest topics absorb the rounding so the total is exactly half. */
+  function halfBlueprint(bp) {
+    const target = Math.round(Object.values(bp).reduce((s, n) => s + n, 0) / 2);
+    const out = {}; Object.entries(bp).forEach(([t, n]) => { out[t] = Math.max(1, Math.round(n / 2)); });
+    const order = Object.keys(out).sort((a, b) => bp[b] - bp[a]);
+    let diff = target - Object.values(out).reduce((s, n) => s + n, 0), i = 0;
+    while (diff !== 0 && i < 100) { const t = order[i % order.length]; if (diff > 0) { out[t]++; diff--; } else if (out[t] > 1) { out[t]--; diff++; } i++; }
+    return out;
+  }
+
   const MISS_DAYS = 7, MISS_N = 10;
   function modeName(m) { return MODE[m] || m; }
   /** Bank questions plus any generated items carried by the attempt (lookup drill). */
@@ -67,6 +77,7 @@
     }
     let blueprint, timeLimitSec;
     if (mode === "sim") { blueprint = cfg.blueprint; timeLimitSec = cfg.minutes * 60; }
+    else if (mode === "half") { blueprint = halfBlueprint(cfg.blueprint); timeLimitSec = Math.round((cfg.minutes * 60) / 2); }
     else {
       // quick drill: 10 questions biased to weak topics + misses; untimed
       const weak = JHQ.grader.weakTopics(JHQ.store.attempts(), JHQ.data.state.topics).filter((t) => t.status === "weak").map((t) => t.topic);
@@ -88,6 +99,7 @@
     };
   }
 
+  function startHalf() { const a = build("half"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startSim() { const a = build("sim"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startDrill() { const a = build("drill"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
   function startMisses() { const a = build("misses"); if (!a) return; attempt = a; persist(); show("exam-run"); renderQ(); startTimer(); }
@@ -201,7 +213,7 @@
     show("exam-result");
     const hero = $("res-pct"); hero.textContent = Math.round(r.score.pct) + "%";
     hero.className = "hero-num " + (r.verdict === "pass" ? "pass" : r.verdict === "fail" ? "fail" : "");
-    $("res-verdict").textContent = (r.verdict === "pass" ? "PASS" : r.verdict === "fail" ? "FAIL" : r.verdict.toUpperCase()) + " · " + r.score.correct + "/" + r.score.total + (rec.mode === "sim" ? " · need " + r.score.passPct + "%" : " · " + modeName(rec.mode).toLowerCase() + (rec.focus ? " · " + JHQ.data.topicName(rec.focus) : ""));
+    $("res-verdict").textContent = (r.verdict === "pass" ? "PASS" : r.verdict === "fail" ? "FAIL" : r.verdict.toUpperCase()) + " · " + r.score.correct + "/" + r.score.total + (rec.mode === "sim" || rec.mode === "half" ? " · need " + r.score.passPct + "%" + (rec.mode === "half" ? " · half sim" : "") : " · " + modeName(rec.mode).toLowerCase() + (rec.focus ? " · " + JHQ.data.topicName(rec.focus) : ""));
     const lucky = r.score.lucky || 0;
     $("res-sub").textContent = fmtClock(rec.elapsedSec) + (r.timing && r.timing.timedOut ? " · time expired" : "") + (r.unanswered.length ? " · " + r.unanswered.length + " unanswered" : "") + (lucky ? " · right by knowledge " + (r.score.correct - lucky) + ", by luck " + lucky + " (" + r.score.knowledgePct + "% without the guesses)" : "") + (r.rails.length ? " · " + r.rails.filter((s) => !/right by guess/.test(s)).join("; ") : "");
     const topics = Object.values(r.byTopic).sort((a, b) => a.pct - b.pct);
@@ -248,6 +260,7 @@
     $("drill-start").addEventListener("click", () => { if (JHQ.store.inProgress() && !confirm("Discard the attempt in progress and start a drill?")) return; startDrill(); });
     $("misses-start").addEventListener("click", () => { if (JHQ.store.inProgress() && !confirm("Discard the attempt in progress and drill your misses?")) return; startMisses(); });
     $("lookup-start").addEventListener("click", () => { if (JHQ.store.inProgress() && !confirm("Discard the attempt in progress and start a lookup drill?")) return; startLookup(); });
+    $("half-start").addEventListener("click", () => { if (JHQ.store.inProgress() && !confirm("Discard the attempt in progress and start a half sim?")) return; startHalf(); });
     $("exam-resume").addEventListener("click", resume);
     $("exam-abandon").addEventListener("click", abandon);
     $("ex-prev").addEventListener("click", () => { if (attempt.idx > 0) { attempt.idx--; persist(); renderQ(); } });
@@ -267,5 +280,5 @@
   function render() { if (!attempt) show("exam-lobby"); }
   function active() { return !!attempt; }
 
-  JHQ.exam = { render, bind, startSim, startDrill, startTopicDrill, startMisses, startLookup, resume, active, showResult, modeName, missPool };
+  JHQ.exam = { render, bind, startSim, startHalf, halfBlueprint, startDrill, startTopicDrill, startMisses, startLookup, resume, active, showResult, modeName, missPool };
 })(typeof window !== "undefined" ? window : globalThis);
