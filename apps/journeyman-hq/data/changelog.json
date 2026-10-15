@@ -1,8 +1,15 @@
 {
  "app": "Journeyman HQ",
- "current": "1.15.0",
+ "current": "1.16.0",
  "generated": "2026-10-15",
  "versions": [
+  {
+   "version": "1.16.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Weekly report on Home: one tap builds a plain-text summary of the week (sims, pace, weakest topics, cards, plan, streak) to copy and paste"
+   ]
+  },
   {
    "version": "1.15.0",
    "date": "2026-10-15",

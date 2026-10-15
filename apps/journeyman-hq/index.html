@@ -17,6 +17,10 @@
 <body>
 
 <div id="sr-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+<div id="report" class="sheet-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="report-title">
+  <div class="sheet"><h2 id="report-title">Weekly report</h2><p class="hint small">Plain text, nothing leaves the phone until you paste it.</p><textarea id="report-text" rows="9" readonly></textarea>
+  <div class="btn-row"><button id="report-copy" class="primary-btn">Copy</button><button id="report-close" class="secondary-btn">Close</button></div><p id="report-status" class="status hidden"></p></div>
+</div>
 <div id="whatsnew" class="sheet-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="wn-title">
   <div class="sheet"><h2 id="wn-title">What's new</h2><div id="wn-body" class="wn-body"></div><button id="wn-ok" class="primary-btn">Got it</button></div>
 </div>
@@ -85,6 +89,7 @@
       <h2 class="section-h">Recent attempts</h2>
       <div id="home-attempts" class="list"></div>
       <p id="backup-nudge" class="hint small hidden"></p>
+      <div class="btn-row"><button id="report-open" class="secondary-btn">Weekly report (copy as text)</button></div>
     </div>
   </section>
 

@@ -185,6 +185,13 @@ await page.click('.tab-btn[data-tab="home"]');
 ok((await page.$$eval("#weak-topics .topic-row", (r) => r.length)) >= 1, "weak topics rendered on dashboard");
 ok((await page.textContent("#st-streak")).trim() === "1", "streak = 1 after today's activity");
 ok(/\d+ missed in the last 7 days/.test(await page.textContent("#act-misses")), "home action shows the misses count: " + (await page.textContent("#act-misses")).trim());
+// Weekly report: plain text from this week's data, copy with fallback
+await page.click("#report-open"); await page.waitForSelector("#report:not(.hidden)");
+const reportTxt = await page.$eval("#report-text", (t) => t.value);
+ok(/^Journeyman HQ — week of /.test(reportTxt) && /Sims: 1 \(best \d+%, last \d+%\) · Half sims: 1/.test(reportTxt) && /Plan: day 1 of 46/.test(reportTxt) && !/undefined|NaN/.test(reportTxt), "weekly report text built: " + reportTxt.split("\n")[1]);
+await page.click("#report-copy"); await page.waitForSelector("#report-status:not(.hidden)");
+ok(/Copied|copy it by hand/.test(await page.textContent("#report-status")), "copy reports its outcome: " + (await page.textContent("#report-status")).trim());
+await page.click("#report-close"); ok(await page.$eval("#report", (e) => e.classList.contains("hidden")), "report sheet closes");
 // Progress card
 ok(!(await page.$eval("#progress", (e) => e.classList.contains("hidden"))), "progress card shows once attempts exist");
 ok((await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts"))[0].elapsedSec)) > 0, "sim elapsed time is recorded (timer no longer loses time on each answer)");

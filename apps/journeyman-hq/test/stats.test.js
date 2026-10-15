@@ -38,6 +38,25 @@ test("pace: seconds per question on sims vs the 180 s PSI budget", () => {
   assert.deepEqual(stats.simTrend([half]).map((s) => s.half), [true], "half sims appear in the trend, marked");
 });
 
+test("weeklyReport: plain text with the week's sims, pace, weakest topics, activity, plan and streak", () => {
+  const key = (d) => d.toISOString().slice(0, 10);
+  const now = new Date("2026-10-15T12:00:00Z");
+  const a = (mode, pct, daysAgo, extra = {}) => Object.assign({ mode, submittedAt: new Date(now.getTime() - daysAgo * 86400000).toISOString(), result: { score: { pct }, verdict: pct >= 70 ? "pass" : "fail", byTopic: bt(Math.round(pct / 10), Math.round(pct / 10)) }, elapsedSec: 70 * 150, questionIds: new Array(70).fill("q") }, extra);
+  const attempts = [a("sim", 55, 10), a("sim", 65, 3), a("half", 72, 2, { questionIds: new Array(35).fill("q"), elapsedSec: 35 * 160 }), a("drill", 80, 1), a("lookup", 90, 1), a("sim", 75, 0)];
+  const txt = stats.weeklyReport({ attempts, activity: { "2026-10-15": { cards: 12, questions: 70 }, "2026-10-13": { cards: 5 } }, topics, todayKey: key, now, daysToExam: 30, cardsDue: 7, missedDeck: 20, plan: { day: 10, total: 46, pct: 34 }, streak: 3, appVersion: "1.16.0" });
+  const L = txt.split("\n");
+  assert.match(L[0], /^Journeyman HQ — week of Oct 9–Oct 15 · 30 days to exam$/);
+  assert.match(L[1], /^Sims: 2 \(best 75%, last 75%\) · Half sims: 1 \(best 72%\) · Drills: 1 · Lookup drills: 1$/, L[1]);
+  assert.match(L[2], /^Pace: \d+ s\/question \(budget 180, (ok|fast|slow)\)$/);
+  assert.match(L[3], /^Weakest: (Theory|Wiring) \d+%/);
+  assert.match(L[4], /^Cards: 17 reviewed, 70 questions answered over 2 active days · 7 due now · Missed deck 20$/, L[4]);
+  assert.equal(L[5], "Plan: day 10 of 46 · 34% of tasks done");
+  assert.equal(L[6], "Streak: 3 days · Journeyman HQ 1.16.0");
+  assert.ok(!/undefined|NaN/.test(txt));
+  const empty = stats.weeklyReport({ attempts: [], activity: {}, topics, todayKey: key, now });
+  assert.match(empty, /Sims: 0 · Half sims: 0 · Drills: 0 · Lookup drills: 0/); assert.match(empty, /no timed sims yet/); assert.match(empty, /no attempt data/);
+});
+
 test("daily: last N days oldest first, zeros for idle days", () => {
   const key = (d) => d.toISOString().slice(0, 10);
   const now = new Date("2026-10-15T12:00:00Z");

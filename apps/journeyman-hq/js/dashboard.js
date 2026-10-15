@@ -75,6 +75,24 @@
       </div>`).join("") : '<div class="empty">No attempts yet.</div>';
   }
 
+  function buildReport() {
+    const st = JHQ.store, s = st.settings(), attempts = st.attempts();
+    const cards = JHQ.data.allCards(), srs = st.srs();
+    const plan = JHQ.data.state.plan, done = st.plan();
+    const totalTasks = plan ? plan.days.reduce((n, d) => n + d.tasks.length, 0) : 0, doneTasks = Object.keys(done).filter((k) => done[k] && !k.startsWith("buf.")).length;
+    return JHQ.stats.weeklyReport({
+      attempts, activity: st.activity(), topics: JHQ.data.state.topics, todayKey, now: new Date(),
+      daysToExam: s.examDate ? daysBetween(todayKey(), s.examDate) : null,
+      cardsDue: JHQ.srs.dueCount(cards.map((c) => c.id), srs), missedDeck: JHQ.data.missedCards().length,
+      plan: plan ? { day: JHQ.plan.currentDay(), total: JHQ.plan.length(), pct: pct(doneTasks, totalTasks) } : null,
+      streak: streak(st.activity()), appVersion: JHQ.data.state.manifest ? JHQ.data.state.manifest.appVersion : null,
+    });
+  }
+  async function copyText(text) {
+    try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(text); return true; } } catch (e) {}
+    try { const ta = $("report-text"); ta.focus(); ta.select(); return document.execCommand("copy"); } catch (e) { return false; }
+  }
+
   function renderProgress(attempts, act) {
     const S = JHQ.stats, topics = JHQ.data.state.topics;
     const box = $("progress");
@@ -108,6 +126,10 @@
       const s = st.settings(); s.examDate = v; s.createdAt = s.createdAt || new Date().toISOString(); st.saveSettings(s); JHQ.app.refresh();
     });
     $("cd-edit").addEventListener("click", () => JHQ.app.go("more"));
+    $("report-open").addEventListener("click", () => { $("report-text").value = buildReport(); $("report").classList.remove("hidden"); $("report-copy").focus(); });
+    $("report-close").addEventListener("click", () => $("report").classList.add("hidden"));
+    $("report").addEventListener("click", (e) => { if (e.target === $("report")) $("report").classList.add("hidden"); });
+    $("report-copy").addEventListener("click", async () => { const ok = await copyText($("report-text").value); JHQ.util.flash($("report-status"), ok ? "Copied." : "Couldn't copy — select the text and copy it by hand.", ok); });
     document.querySelectorAll(".action[data-go]").forEach((b) => b.addEventListener("click", () => {
       const g = b.dataset.go;
       if (g === "drill") { JHQ.app.go("exam"); JHQ.exam.startDrill(); }

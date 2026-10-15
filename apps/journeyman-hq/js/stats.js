@@ -52,7 +52,35 @@
     return out;
   }
 
-  const api = { simTrend, topicTrend, pace, daily, PSI_SEC_PER_Q };
+  /**
+   * Plain-text weekly report. ctx: { attempts, activity, topics, todayKey(fn), now, daysToExam, cardsDue, missedDeck, plan: {day, total, pct}, streak, appVersion }
+   * Pure: nothing leaves the phone unless the user pastes it.
+   */
+  function weeklyReport(ctx) {
+    const now = ctx.now || new Date();
+    const since = new Date(now.getTime() - 6 * DAY); since.setHours(0, 0, 0, 0);
+    const fmt = (d) => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    const week = graded(ctx.attempts).filter((a) => new Date(a.submittedAt) >= since);
+    const sims = week.filter((a) => a.mode === "sim"), halves = week.filter((a) => a.mode === "half"), drills = week.filter((a) => a.mode === "drill" || a.mode === "misses");
+    const lookups = (ctx.attempts || []).filter((a) => a && a.mode === "lookup" && a.submittedAt && new Date(a.submittedAt) >= since);
+    const pct = (a) => Math.round(a.result.score.pct) + "%";
+    const best = (xs) => (xs.length ? Math.max(...xs.map((a) => Math.round(a.result.score.pct))) + "%" : null);
+    const p = pace(ctx.attempts);
+    const weak = topicTrend(ctx.attempts, ctx.topics || {}, 10).slice(0, 2);
+    const days = daily(ctx.activity, ctx.todayKey, 7, now);
+    const cards = days.reduce((s, d) => s + d.cards, 0), qs = days.reduce((s, d) => s + d.questions, 0), active = days.filter((d) => d.cards + d.questions).length;
+    const lines = [];
+    lines.push("Journeyman HQ — week of " + fmt(since) + "–" + fmt(now) + (ctx.daysToExam != null ? " · " + (ctx.daysToExam >= 0 ? ctx.daysToExam + " days to exam" : "exam date passed") : ""));
+    lines.push("Sims: " + sims.length + (sims.length ? " (best " + best(sims) + ", last " + pct(sims[sims.length - 1]) + ")" : "") + " · Half sims: " + halves.length + (halves.length ? " (best " + best(halves) + ")" : "") + " · Drills: " + drills.length + " · Lookup drills: " + lookups.length);
+    lines.push("Pace: " + (p.secPerQ != null ? p.secPerQ + " s/question (budget " + p.budget + ", " + p.status + ")" : "no timed sims yet"));
+    lines.push("Weakest: " + (weak.length ? weak.map((t) => t.name + " " + t.latest + "%" + (t.delta != null ? " (" + (t.delta > 0 ? "+" : "") + t.delta + ")" : "")).join(", ") : "no attempt data"));
+    lines.push("Cards: " + cards + " reviewed, " + qs + " questions answered over " + active + " active day" + (active === 1 ? "" : "s") + " · " + (ctx.cardsDue != null ? ctx.cardsDue + " due now" : "") + (ctx.missedDeck != null ? " · Missed deck " + ctx.missedDeck : ""));
+    if (ctx.plan) lines.push("Plan: day " + ctx.plan.day + " of " + ctx.plan.total + " · " + ctx.plan.pct + "% of tasks done");
+    lines.push("Streak: " + (ctx.streak || 0) + " day" + (ctx.streak === 1 ? "" : "s") + (ctx.appVersion ? " · Journeyman HQ " + ctx.appVersion : ""));
+    return lines.join("\n");
+  }
+
+  const api = { simTrend, topicTrend, pace, daily, weeklyReport, PSI_SEC_PER_Q };
   JHQ.stats = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

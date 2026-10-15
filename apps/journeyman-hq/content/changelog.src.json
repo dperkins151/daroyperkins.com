@@ -2,6 +2,13 @@
   "note": "One entry per app version, newest first. Plain lines Roy will read on the phone after an update; no PR numbers or internals. Validated by tools/build-banks.mjs and shipped as data/changelog.json.",
   "versions": [
     {
+      "version": "1.16.0",
+      "date": "2026-10-15",
+      "lines": [
+        "Weekly report on Home: one tap builds a plain-text summary of the week (sims, pace, weakest topics, cards, plan, streak) to copy and paste"
+      ]
+    },
+    {
       "version": "1.15.0",
       "date": "2026-10-15",
       "lines": [
