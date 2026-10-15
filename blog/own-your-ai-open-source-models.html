@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Own Your AI: The Case for Open-Source Models — DaRoy Perkins</title>
+  <meta name="description" content="Closed models rent you intelligence by the token. Open models let you own it — privately, at flat cost, tuned for your work. The smart setup uses both.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://daroyperkins.com/blog/own-your-ai-open-source-models.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="DaRoy Perkins">
+  <meta property="og:title" content="Own Your AI: The Case for Open-Source Models — DaRoy Perkins">
+  <meta property="og:description" content="Closed models rent you intelligence by the token. Open models let you own it — privately, at flat cost, tuned for your work. The smart setup uses both.">
+  <meta property="og:url" content="https://daroyperkins.com/blog/own-your-ai-open-source-models.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Own Your AI: The Case for Open-Source Models — DaRoy Perkins">
+  <meta name="twitter:description" content="Closed models rent you intelligence by the token. Open models let you own it — privately, at flat cost, tuned for your work. The smart setup uses both.">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Own Your AI: The Case for Open-Source Models",
+  "description": "Closed models rent you intelligence by the token. Open models let you own it \u2014 privately, at flat cost, tuned for your work. The smart setup uses both.",
+  "author": {
+    "@type": "Person",
+    "name": "DaRoy Perkins",
+    "url": "https://daroyperkins.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "DaRoy Perkins",
+    "url": "https://daroyperkins.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://daroyperkins.com/blog/own-your-ai-open-source-models.html"
+  },
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15"
+}
+  </script>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"><span class="bolt">⚡</span> DaRoy Perkins</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="index.html">Writing</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="article">
+    <div class="wrap">
+      <p><a href="index.html">← All writing</a></p>
+      <h1>Own Your AI: The Case for Open-Source Models</h1>
+      <p class="meta">Oct 2026 · DaRoy Perkins</p>
+
+      <p><strong>Closed models rent you intelligence by the token. Open models let you own it.</strong></p>
+
+      <p>Let me say the quiet part first: the best closed models — the frontier systems you can only reach through an API — are still ahead on the hardest jobs. Best reasoning, broadest multimodal skills, easiest setup. One call and you're working.</p>
+
+      <p>So why care about open-source models at all?</p>
+
+      <p>Because "best on the hardest job" is not the only question that matters. On a jobsite, you don't judge a tool only by its max power. You judge it by who owns it, what it costs to run all day, whether it works with no signal, and whether the rental company can change the price — or take it back — in the middle of your project.</p>
+
+      <p>By those measures, open models aren't the cheap alternative anymore. They're a different kind of advantage.</p>
+
+      <h2>A quick definition</h2>
+      <p>Most of what people call "open-source AI" today is more precisely <em>open-weight</em>: the trained model itself is published, so you can download it, run it on your own hardware, and keep it forever. The license varies — some are permissive like MIT or Apache 2.0, some carry conditions — so read the license the way you'd read a contract. The families leading the field right now include Meta's Llama, Alibaba's Qwen, DeepSeek, Mistral, and Google's Gemma.</p>
+
+      <h2>The advantages</h2>
+
+      <h3>1. Your data stays yours</h3>
+      <p>This is the big one. When you call a closed API, your words leave your machine and travel to someone else's server — under their terms, on their infrastructure.</p>
+      <p>Run an open model locally and nothing leaves the building.</p>
+      <p>For a business, that's bid documents, payroll, client information, and pricing that never goes out the door. For a personal agent — one that knows your money, your schedule, your family, your health — it's the difference between trusting a policy and not needing to. Privacy you can verify beats privacy you're promised.</p>
+
+      <h3>2. The meter stops running</h3>
+      <p>Closed AI charges by the token. That sounds cheap until it's running all day — summarizing, classifying, drafting, checking, answering the same routine questions a thousand times. Then the meter never stops, and the bill is whatever usage — and pricing — turns out to be that month.</p>
+      <p>An open model on your own hardware flips that math. The cost is the machine, and the machine is a flat, known number. The routine work — which is most of the work — runs at close to zero marginal cost. No surprise invoice for having a busy week.</p>
+
+      <h3>3. Nobody can take it back</h3>
+      <p>APIs get deprecated. Prices change. Terms change. A model your whole workflow depends on can be retired on a vendor's schedule, not yours.</p>
+      <p>Downloaded weights don't do that. You can pin a version and run it for years. If a vendor disappears tomorrow, your system still boots on Monday morning. That's not paranoia — that's the same reason a contractor owns his core tools instead of renting everything.</p>
+
+      <h3>4. You can tune it for your work</h3>
+      <p>A frontier model knows a little about everything. An open model can be fine-tuned, specialized, and shaped around one job until it beats the generalist at that job.</p>
+      <p>Teach it your vocabulary. Your cost codes. Your documents, your formats, your second language for talking to your crew. A smaller model trained on the work you actually do can be faster, cheaper, and more accurate on that work than a giant built for everybody.</p>
+
+      <h3>5. It works where you work</h3>
+      <p>No signal, no problem. An open model on a laptop or a small server in the trailer runs offline — on a rooftop, in a rural field, in a building with no connectivity yet. Cloud AI is brilliant right up until the connection isn't there. Owned AI degrades to... still working.</p>
+
+      <h3>6. You can inspect what you're trusting</h3>
+      <p>Open weights and a global community mean thousands of people are testing, benchmarking, forking, and improving these models in public — often weekly. Bugs and weaknesses get found out loud. That's not a guarantee of safety, but it's a very different trust model from a black box you're asked to take on faith.</p>
+
+      <blockquote class="pullquote">"Privacy you can verify beats privacy you're promised."</blockquote>
+
+      <h2>The honest trade-offs</h2>
+      <p>Owning the tool means maintaining the tool.</p>
+      <ul>
+        <li><strong>You become the IT department.</strong> Hardware, updates, and upkeep are yours.</li>
+        <li><strong>The frontier still leads.</strong> On the hardest reasoning and the most polished multimodal work, closed models are ahead — the gap has narrowed a lot, but it hasn't vanished.</li>
+        <li><strong>Easy is worth something.</strong> An API call takes minutes to set up. Self-hosting takes real work to do well.</li>
+      </ul>
+      <p>Pretending those costs don't exist is how people end up with an expensive space heater instead of a system.</p>
+
+      <h2>The smart setup isn't either/or — it's both</h2>
+      <p>Here's where I landed, and I'd argue it's where the field is landing too:</p>
+      <p><strong>Use the best brain available for the hard jobs. Use an open model for everything it can own.</strong></p>
+      <ul>
+        <li><strong>Frontier closed model:</strong> deep reasoning, hard judgment calls, the work where quality is worth paying per token.</li>
+        <li><strong>Open local model:</strong> routine questions, private data, repetitive tasks, specialized jobs — and a working fallback when the internet or the API is down.</li>
+      </ul>
+      <p>That's not a downgrade and it's not a compromise. It's an architecture. The open model isn't replacing the frontier brain; it's giving it a home team — private, always on, flat-cost, and under your control.</p>
+      <p>Think of it like equipment. You own the tools you use every day. You rent the specialized lift for the one job that needs it. Nobody calls that indecision. They call it running a job right.</p>
+
+      <h2>The superintendent's take</h2>
+      <p>Every trade learns the same lesson: if a tool is critical to your livelihood, eventually you need to own it — or at least be able to run without whoever rents it to you.</p>
+      <p>AI just hit that point. The models got good enough, small enough, and open enough that owning your intelligence is now a real option for a regular builder, not just a tech giant.</p>
+      <p>Rent the frontier when you need it. Own the rest.</p>
+      <p>Stop renting all of your intelligence.</p>
+
+      <h2>Related writing</h2>
+      <ul>
+        <li><a href="stop-briefing-your-ai-twice.html">Stop Briefing Your AI Twice</a> — one shared brief every assistant reads, so you never start from zero.</li>
+        <li><a href="brief-built-my-website.html">My Brief Built My Website</a> — shipping a personal site in an afternoon, from the brief up.</li>
+      </ul>
+
+      <h2>Sources</h2>
+      <ul>
+        <li>Hugging Face, <em>Best Open-Source LLM Models in 2026</em> — picks by use case, coding, local deployment, agentic work, and license, including Qwen and Gemma under Apache 2.0. (<a href="https://huggingface.co/blog/daya-shankar/open-source-llms">huggingface.co</a>)</li>
+        <li>TechTarget, <em>How open source AI models benefit developer innovation</em> — lower entry costs, code integrity and inspectability, collective development, flexibility, and independence from vendor lock-in. (<a href="https://www.techtarget.com/ai/tip/How-open-source-AI-models-benefit-developer-innovation">techtarget.com</a>)</li>
+      </ul>
+
+      <div class="bio-footer">
+        I'm Roy — commercial solar superintendent, 14 years and 35 MW+ in the trade, building TradeStack and studying for my Maryland Journeyman Electrician license. I write about running jobsites and building software that survives the field.
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 DaRoy Perkins</span>
+    <span>Built for the field. ⚡</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
