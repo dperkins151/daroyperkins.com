@@ -7,7 +7,7 @@ import { createRequire } from "node:module";
 const require = createRequire("/opt/node22/lib/node_modules/");
 const { chromium } = require("playwright");
 const root = path.resolve(new URL(".", import.meta.url).pathname, "..");
-const types = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".json": "application/json" };
+const types = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".json": "application/json", ".webmanifest": "application/manifest+json", ".png": "image/png", ".svg": "image/svg+xml" };
 const srv = createServer(async (req, res) => {
   let p = decodeURIComponent(new URL(req.url, "http://x").pathname); if (p === "/") p = "/index.html";
   try { const b = await readFile(path.join(root, p)); res.writeHead(200, { "content-type": types[path.extname(p)] || "application/octet-stream" }); res.end(b); }
@@ -105,10 +105,22 @@ const mv = await page.textContent("#manifest-view");
 ok(mv.includes(manifest.app + " " + manifest.appVersion), "manifest view shows app + version " + manifest.appVersion);
 ok(mv.includes("questions · v" + manifest.banks.questions.version) && mv.includes(String(manifest.banks.questions.count) + " items"), "manifest lists questions bank v" + manifest.banks.questions.version + " with " + manifest.banks.questions.count + " items");
 
+// PWA: manifest + service worker + offline
+const mf = await page.evaluate(async () => (await fetch("manifest.webmanifest")).ok); ok(mf, "web manifest is served");
+await page.waitForFunction(() => navigator.serviceWorker && navigator.serviceWorker.controller, null, { timeout: 15000 }).catch(() => {});
+if (!(await page.evaluate(() => !!navigator.serviceWorker.controller))) { await page.reload(); await page.waitForFunction(() => !!navigator.serviceWorker.controller, null, { timeout: 15000 }); }
+ok(true, "service worker controls the page");
+await page.context().setOffline(true);
+await page.reload(); await page.waitForSelector("#home-main:not(.hidden)", { timeout: 15000 });
+ok(true, "offline reload: app shell + data load from the service worker cache");
+ok(!(await page.$eval("#offline-chip", (c) => c.classList.contains("hidden"))), "offline chip shown while offline");
+await page.click('.tab-btn[data-tab="cards"]'); await page.waitForSelector("#deck-list .row"); ok(true, "decks render offline (bank JSON cached)");
+await page.context().setOffline(false);
+await page.click('.tab-btn[data-tab="home"]');
 // network rail: only same-origin static files
 const foreign = requests.filter((u) => !u.startsWith(base));
 ok(foreign.length === 0, "zero external requests (" + requests.length + " same-origin)");
-ok(requests.every((u) => /\.(html|css|js|json)$|\/$/.test(u.split("?")[0])), "only static files fetched");
+ok(requests.every((u) => /\.(html|css|js|json|webmanifest|png|svg)$|\/$/.test(u.split("?")[0])), "only static files fetched");
 ok(errors.length === 0, "no page errors" + (errors.length ? ": " + errors.join(" | ") : ""));
 await page.click('.tab-btn[data-tab="home"]'); await page.waitForTimeout(100);
 await page.screenshot({ path: path.join(root, "dist", "smoke-home.png"), fullPage: true }).catch(() => {});

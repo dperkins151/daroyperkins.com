@@ -1,6 +1,6 @@
 # Content review queue — Journeyman HQ v2 banks
 
-Generated 2026-10-06. Items flagged `review: true` are uncertain and must be verified against the NEC 2020 book before Roy relies on them. Everything else was drafted from NEC 2020 article references and basic theory; Luigi samples for accuracy, Roy spot-checks.
+Generated 2026-10-15. Items flagged `review: true` are uncertain and must be verified against the NEC 2020 book before Roy relies on them. Everything else was drafted from NEC 2020 article references and basic theory; Luigi samples for accuracy, Roy spot-checks.
 
 | Bank | Items | Flagged |
 |---|---|---|

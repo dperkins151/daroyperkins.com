@@ -35,6 +35,22 @@
     if (JHQ.store.inProgress()) banner("You have an exam attempt in progress — open Exam to resume.");
   }
 
-  JHQ.app = { go, refresh, banner };
-  document.addEventListener("DOMContentLoaded", boot);
+  function installPWA() {
+    if (!("serviceWorker" in navigator)) return;
+    navigator.serviceWorker.register("sw.js").then((reg) => {
+      const show = () => { $("update").classList.remove("hidden"); };
+      if (reg.waiting && navigator.serviceWorker.controller) show();
+      reg.addEventListener("updatefound", () => { const w = reg.installing; w && w.addEventListener("statechange", () => { if (w.state === "installed" && navigator.serviceWorker.controller) show(); }); });
+      $("update-btn").addEventListener("click", () => { (reg.waiting || reg.installing) ? reg.waiting && reg.waiting.postMessage("skipWaiting") : location.reload(); });
+      // Reload only when an UPDATED worker takes over; a first install must not interrupt the current page.
+      const hadController = !!navigator.serviceWorker.controller; let reloading = false;
+      navigator.serviceWorker.addEventListener("controllerchange", () => { if (!hadController || reloading) return; reloading = true; location.reload(); });
+      setInterval(() => reg.update().catch(() => {}), 6 * 3600 * 1000);
+    }).catch(() => {});
+    const chip = document.createElement("span"); chip.className = "offline-chip hidden"; chip.textContent = "offline"; chip.id = "offline-chip";
+    document.querySelector(".topbar-inner .brand").appendChild(chip);
+    const sync = () => chip.classList.toggle("hidden", navigator.onLine); window.addEventListener("online", sync); window.addEventListener("offline", sync); sync();
+  }
+  JHQ.app = { go, refresh, banner, installPWA };
+  document.addEventListener("DOMContentLoaded", () => { boot(); installPWA(); });
 })(typeof window !== "undefined" ? window : globalThis);
