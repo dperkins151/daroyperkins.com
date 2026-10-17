@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One Report, Three Systems — DaRoy Perkins</title>
+  <meta name="description" content="Excel, Procore, WorkMax — the same production numbers typed three times a night. Now entered once, carried across by AI, and reviewed by the human whose name is on them.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://daroyperkins.com/blog/one-report-three-systems.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="DaRoy Perkins">
+  <meta property="og:title" content="One Report, Three Systems — DaRoy Perkins">
+  <meta property="og:description" content="Excel, Procore, WorkMax — the same production numbers typed three times a night. Now entered once, carried across by AI, and reviewed by the human whose name is on them.">
+  <meta property="og:url" content="https://daroyperkins.com/blog/one-report-three-systems.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="One Report, Three Systems — DaRoy Perkins">
+  <meta name="twitter:description" content="Excel, Procore, WorkMax — the same production numbers typed three times a night. Now entered once, carried across by AI, and reviewed by the human whose name is on them.">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "One Report, Three Systems",
+  "description": "Excel, Procore, WorkMax — the same production numbers typed three times a night. Now entered once, carried across by AI, and reviewed by the human whose name is on them.",
+  "author": {
+    "@type": "Person",
+    "name": "DaRoy Perkins",
+    "url": "https://daroyperkins.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "DaRoy Perkins",
+    "url": "https://daroyperkins.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://daroyperkins.com/blog/one-report-three-systems.html"
+  },
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17"
+}
+  </script>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"><span class="bolt">⚡</span> DaRoy Perkins</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="index.html">Writing</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="article">
+    <div class="wrap">
+      <p><a href="index.html">← All writing</a></p>
+      <h1>One Report, Three Systems</h1>
+      <p class="meta">Oct 2026</p>
+
+      <p>I'm a superintendent on a 1.4 MW commercial rooftop solar project. The work on the roof is the job everybody sees. The job nobody sees starts when the crew goes home: the reporting.</p>
+
+      <p>Every day ends with the same chain. The Excel production report — crew, quantities installed, hours by cost code. The Procore daily log — the same manpower, rolled up by cost code for the office. WorkMax — the time records that payroll runs on. Three systems, three formats, one set of facts. None of them talk to each other, so for a long time the integration layer was me, retyping the same numbers three times at the end of a ten-hour day.</p>
+
+      <h2>The workflow now</h2>
+      <p>I enter the day's production once, in the Excel report — it comes first because it's the one with the detail: who was on what, what got installed, where the hours went. Then my AI assistant builds the other two from it. The Procore log gets its manpower by cost code. The WorkMax side gets checked against the time records. I review the whole package, correct what needs correcting, and send it up the chain — the daily to my PM, the weekly roll-up to the senior PM.</p>
+      <p>Nothing about this required new software. The systems were already bought and paid for. What was missing was something to carry the numbers across the gaps between them.</p>
+
+      <h2>What I still check myself</h2>
+      <p>This is the part that matters more than the automation:</p>
+      <p><strong>Payroll is the source of truth.</strong> If the production report and the time records disagree about who worked, the time records win, every time. The AI knows this rule because I gave it the rule.</p>
+      <p><strong>Cost codes get a human eye.</strong> Racking, modules, wire management, ballast — charge a crew's day to the wrong code and the job's cost picture is wrong for weeks before anybody notices. I read every line.</p>
+      <p><strong>Quantities get checked against the roof.</strong> I walked it that day. If the report says we set more modules than the crew could physically set, that's mine to catch, not the software's.</p>
+
+      <h2>Where it breaks</h2>
+      <p>It only knows what I feed it. A last-minute crew change I forget to mention doesn't exist to it. A material delivery that arrived with no paperwork doesn't exist to it. Weather that shut us down at 2 p.m. exists only if I say so. That's not a flaw in the tool — it's the boundary of the job split. The AI carries numbers. I carry the day.</p>
+      <p>It also means the review is not a courtesy step. The day I stop reading the output is the day a wrong number goes to the office with my name on it.</p>
+
+      <h2>The point</h2>
+      <p>Most field leaders I know aren't short on software. They're short on hours, and the hours leak out at the seams between systems that were never built to agree. You don't need a platform migration to fix that. You need one source of truth, clear rules about which system wins, and something — these days, an AI assistant — to do the carrying.</p>
+      <p>The retyping is gone. The judgment stayed. That's the whole trade, and it's a good one.</p>
+
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 DaRoy Perkins</span>
+    <span>Built for the field. ⚡</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
