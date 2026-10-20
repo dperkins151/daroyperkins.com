@@ -154,6 +154,8 @@ section { padding: 72px 0; }
 .card h3 { font-size: 22px; margin-bottom: 10px; }
 .card p { color: var(--muted); }
 .card p strong { color: var(--text); }
+.card .venture-link { display: inline-block; margin-top: 14px; color: var(--amber); font-weight: 600; text-decoration: none; }
+.card .venture-link:hover { color: var(--amber-light); text-decoration: underline; }
 .tag {
   display: inline-block;
   font-size: 12px;
@@ -299,6 +301,8 @@ footer {
   color: var(--muted);
   font-size: 14px;
 }
+footer .wrap a { color: var(--muted); text-decoration: none; }
+footer .wrap a:hover { color: var(--amber-light); }
 footer .wrap {
   display: flex;
   justify-content: space-between;
