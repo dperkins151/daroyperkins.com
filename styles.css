@@ -176,6 +176,9 @@ section { padding: 72px 0; }
 .stat b { font-family: var(--font-head); font-size: 28px; color: var(--text); display: block; margin-bottom: 4px; }
 .stat span { color: var(--muted); font-size: 13px; }
 .work-meta { color: var(--amber); font-weight: 600; font-size: 14px; letter-spacing: 0.02em; margin-bottom: 8px; }
+.job-photo { margin: 16px 0 6px; max-width: 420px; }
+.job-photo img { display: block; width: 100%; border-radius: 12px; }
+.job-photo figcaption { color: var(--muted); font-size: 13px; margin-top: 8px; }
 
 .job { margin-bottom: 40px; }
 .job h2 { font-size: 26px; margin-bottom: 10px; }
