@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Any Agent, Any Model: Run Your AI Coding Setup From an iPhone — DaRoy Perkins</title>
+  <meta name="description" content="The vendor-neutral version of the iPhone agent setup: one small cloud server, your phone as the window, sessions that survive disconnects — with any AI coding agent and any model: Claude Code, Codex, Gemini CLI, Aider, or a local model.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://daroyperkins.com/blog/any-agent-from-iphone.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="DaRoy Perkins">
+  <meta property="og:title" content="Any Agent, Any Model: Run Your AI Coding Setup From an iPhone — DaRoy Perkins">
+  <meta property="og:description" content="The vendor-neutral version of the iPhone agent setup: one small cloud server, your phone as the window, sessions that survive disconnects — with any AI coding agent and any model: Claude Code, Codex, Gemini CLI, Aider, or a local model.">
+  <meta property="og:url" content="https://daroyperkins.com/blog/any-agent-from-iphone.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Any Agent, Any Model: Run Your AI Coding Setup From an iPhone — DaRoy Perkins">
+  <meta name="twitter:description" content="The vendor-neutral version of the iPhone agent setup: one small cloud server, your phone as the window, sessions that survive disconnects — with any AI coding agent and any model: Claude Code, Codex, Gemini CLI, Aider, or a local model.">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Any Agent, Any Model: Run Your AI Coding Setup From an iPhone",
+  "description": "The vendor-neutral version of the iPhone agent setup: one small cloud server, your phone as the window, sessions that survive disconnects \u2014 with any AI coding agent and any model: Claude Code, Codex, Gemini CLI, Aider, or a local model.",
+  "author": {
+    "@type": "Person",
+    "name": "DaRoy Perkins",
+    "url": "https://daroyperkins.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "DaRoy Perkins",
+    "url": "https://daroyperkins.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://daroyperkins.com/blog/any-agent-from-iphone.html"
+  },
+  "datePublished": "2026-10-22",
+  "dateModified": "2026-10-22"
+}
+  </script>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .article pre { background: #16181d; color: #f2efe9; padding: 14px 16px; border-radius: 10px; overflow-x: auto; font-size: 13.5px; line-height: 1.55; }
+    .article code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .article p code, .article li code, .article td code { background: #f0ece4; color: #16181d; padding: 1px 5px; border-radius: 5px; font-size: .92em; }
+    .article pre code { background: none; padding: 0; }
+    .article table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 14.5px; display: block; overflow-x: auto; }
+    .article th, .article td { border: 1px solid #e5e0d8; padding: 7px 10px; text-align: left; }
+    .article th { background: #faf8f5; }
+    .article hr { border: none; border-top: 1px solid #e5e0d8; margin: 28px 0; }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"><span class="bolt">⚡</span> DaRoy Perkins</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../portfolio.html">Portfolio</a></li>
+      <li><a href="index.html">Writing</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+<main>
+  <article class="article">
+    <div class="wrap">
+      <p><a href="index.html">← All writing</a></p>
+      <h1>Any Agent, Any Model: Run Your AI Coding Setup From an iPhone</h1>
+      <p class="meta">Oct 2026 · DaRoy Perkins</p>
+
+<hr />
+<h2>The Mission</h2>
+<p>Run an AI coding agent from your iPhone using a cloud server. No laptop needed. Full terminal, full power, accessible from anywhere — the jobsite, the truck, home.</p>
+<p>This is the vendor-neutral version of the pattern. I first wrote it up as a Claude Code guide, and Claude Code is still one of the examples below — but the setup itself doesn't belong to any one tool. The pieces are boring on purpose: a small cloud server is the computer, your phone is just the window into it, and your sessions live on the server so they survive every disconnect. Pick the agent you like, pick the model you like. The plumbing is the same.</p>
+<p>The examples below use four real harnesses — Claude Code, OpenAI's Codex CLI, Google's Gemini CLI, and Aider — because they're the ones with public, documented install routes. The steps are written pattern-first: do the step generically, then take your harness's version of it.</p>
+<hr />
+<h2>What You'll Have When Done</h2>
+<ul>
+<li>A cloud server (a DigitalOcean droplet in NYC) that stays on when your phone doesn't</li>
+<li>An AI coding agent installed and authenticated — your pick of harness and model</li>
+<li>SSH access from your iPhone via Termius</li>
+<li>Browser-based terminal access (optional)</li>
+<li>Persistent sessions that survive disconnects</li>
+<li>MCP browser tools so your agent can browse the web</li>
+<li>A standing context file, so your agent already knows your work when a session starts</li>
+<li>Your codebase cloned and ready to build</li>
+</ul>
+<p><strong>Total monthly cost:</strong> ~$6–36/mo for most people (server + one agent subscription, or pay-per-use API credit). It can run lower — even $0 for the model itself — if you go the local-model route in Part 5.
+<strong>First 2 months:</strong> The droplet is free via the $200 DigitalOcean signup credit.</p>
+<hr />
+<h2>Part 1: Choose Your Cloud Server</h2>
+<h3>Why You Need a Cloud Server</h3>
+<p>AI coding agents require a real Linux environment with process spawning, filesystem access, and streaming API calls. iOS is sandboxed and can't run them natively. The workaround is the whole idea: install the agent on a remote server and SSH in from your phone.</p>
+<h3>Provider Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Cheapest Useful Plan</th>
+<th>US Datacenter</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DigitalOcean</strong></td>
+<td>$6/mo (1 vCPU, 1GB, 25GB SSD)</td>
+<td>NYC, SF, Atlanta</td>
+<td>Simplest UI, $200 free credit</td>
+</tr>
+<tr>
+<td><strong>Vultr</strong></td>
+<td>$6/mo (1 vCPU, 1GB, 25GB NVMe)</td>
+<td>NJ, NY, Atlanta, Miami</td>
+<td>NVMe storage, more US locations</td>
+</tr>
+<tr>
+<td><strong>Hetzner</strong></td>
+<td>~$4/mo (2 vCPU, 4GB, 40GB NVMe)</td>
+<td>EU only (cheapest tier)</td>
+<td>Best specs per dollar, but higher latency from US</td>
+</tr>
+<tr>
+<td><strong>GitHub Codespaces</strong></td>
+<td>Free (120 core-hours/mo)</td>
+<td>N/A (cloud)</td>
+<td>Zero cost, but limited hours</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommended:</strong> DigitalOcean — simplest setup, $200 free credit covers 12+ months of a $16/mo droplet, NYC datacenter gives low latency from the US East Coast.</p>
+<hr />
+<h2>Part 2: Create the DigitalOcean Droplet</h2>
+<h3>Step 1: Sign Up</h3>
+<ol>
+<li>Go to <strong>digitalocean.com</strong> (not the sponsored Google results — scroll past the ads)</li>
+<li>Create an account</li>
+<li>Claim the <strong>$200 free credit</strong> (60-day trial)</li>
+<li>Add a payment method (required to activate, won't be charged until credit runs out)</li>
+</ol>
+<h3>Step 2: Create Droplet</h3>
+<p>On the "Create Droplets" page, configure:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Region</strong></td>
+<td>New York — NYC1</td>
+</tr>
+<tr>
+<td><strong>Image</strong></td>
+<td>Ubuntu 24.04 (LTS) x64</td>
+</tr>
+<tr>
+<td><strong>Droplet Type</strong></td>
+<td>Shared CPU → Basic</td>
+</tr>
+<tr>
+<td><strong>CPU Options</strong></td>
+<td>Premium Intel (NVMe SSD)</td>
+</tr>
+<tr>
+<td><strong>Plan</strong></td>
+<td>$16/mo — 2 vCPU, 2GB RAM, 70GB NVMe, 2TB transfer</td>
+</tr>
+<tr>
+<td><strong>Authentication</strong></td>
+<td>SSH Key (not password — see Part 3)</td>
+</tr>
+<tr>
+<td><strong>Backups</strong></td>
+<td>Skip (your code lives in Git)</td>
+</tr>
+<tr>
+<td><strong>Monitoring</strong></td>
+<td>Check the free monitoring box</td>
+</tr>
+<tr>
+<td><strong>Managed Database</strong></td>
+<td>Skip the $15/mo add-on</td>
+</tr>
+<tr>
+<td><strong>Hostname</strong></td>
+<td>Something memorable like <code>tradestack-dev</code></td>
+</tr>
+</tbody>
+</table>
+<h3>What NOT to Select</h3>
+<ul>
+<li>Don't pick the $32/mo plan (overkill for a dev terminal box)</li>
+<li>Don't use password authentication (SSH keys are more secure and easier from Termius)</li>
+<li>Don't add the managed database (you'll install PostgreSQL directly on the droplet)</li>
+</ul>
+<hr />
+<h2>Part 3: Set Up Termius on iPhone</h2>
+<p>Termius is the SSH client you'll use to connect to your droplet from your phone. It doesn't care which agent runs on the other end — it's just the door.</p>
+<h3>Step 1: Install Termius</h3>
+<p>Download <strong>Termius</strong> from the App Store (free tier works fine).</p>
+<h3>Step 2: Generate an SSH Key</h3>
+<ol>
+<li>Open Termius → tap <strong>Vaults</strong> tab (bottom left)</li>
+<li>Tap <strong>Keychain</strong></li>
+<li>Tap the <strong>+</strong> button → <strong>Generate Key</strong></li>
+<li>Name it something like <code>tradestack-do</code></li>
+<li>Leave defaults (ED25519 or RSA) → tap <strong>Save</strong></li>
+</ol>
+<h3>Step 3: Copy the Public Key to DigitalOcean</h3>
+<ol>
+<li>Tap the key you just created</li>
+<li>Tap <strong>Export to Clipboard</strong> (copy the public key)</li>
+<li>Go back to the DigitalOcean droplet creation page in Safari</li>
+<li>Under "Authentication" → select <strong>SSH Key</strong> → paste your public key</li>
+<li>Finish creating the droplet</li>
+<li><strong>Copy the IP address</strong> DigitalOcean gives you</li>
+</ol>
+<h3>Step 4: Add Your Droplet as a Host</h3>
+<ol>
+<li>In Termius → tap <strong>Hosts</strong> → tap <strong>+</strong></li>
+<li>Fill in:
+   - <strong>Hostname:</strong> your droplet IP address
+   - <strong>Username:</strong> <code>root</code>
+   - <strong>SSH Key:</strong> select the key you generated (<code>tradestack-do</code>)
+   - Leave Password blank</li>
+<li>Tap the <strong>blue checkmark</strong> to save</li>
+</ol>
+<h3>Step 5: Connect</h3>
+<p>Tap the host to SSH in. You should see a <code>root@your-hostname:~#</code> prompt.</p>
+<hr />
+<h2>Part 4: Server Setup + Install Your Agent</h2>
+<p>Once you're SSH'd into your droplet, set up a persistent session first so you don't lose progress if your phone disconnects:</p>
+<pre><code class="language-bash">apt update &amp;&amp; apt upgrade -y
+apt install -y tmux git curl wget htop unzip build-essential
+tmux new -s setup
+</code></pre>
+<h3>Install Node.js 20</h3>
+<p>Some agents install themselves without Node (Claude Code's native installer, for one), but several harnesses ship as npm packages, and you'll want Node for your own projects either way:</p>
+<pre><code class="language-bash">curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt install -y nodejs
+node -v  # Should show v20.x
+</code></pre>
+<h3>Install Your Agent</h3>
+<p>The step is the same everywhere: install the harness on the server, verify it runs, fix the PATH if the shell can't find it. Take your pick — install one, or install two and compare; they coexist fine.</p>
+<p><strong>Claude Code</strong> (Anthropic) — native installer:</p>
+<pre><code class="language-bash">curl -fsSL https://claude.ai/install.sh | bash
+echo 'export PATH=&quot;$HOME/.local/bin:$PATH&quot;' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+claude --version
+</code></pre>
+<p><strong>Codex CLI</strong> (OpenAI) — npm package:</p>
+<pre><code class="language-bash">npm i -g @openai/codex
+codex --version
+</code></pre>
+<p><strong>Gemini CLI</strong> (Google) — npm package:</p>
+<pre><code class="language-bash">npm i -g @google/gemini-cli
+gemini --version
+</code></pre>
+<p><strong>Aider</strong> (open source, model-flexible) — Python:</p>
+<pre><code class="language-bash">python -m pip install aider-install
+aider --version
+</code></pre>
+<p>(<code>pip install aider-chat</code> is the other documented route to the same tool.)</p>
+<p>Whichever you picked, the check is identical: the version command answers, and the agent launches inside your tmux session. If the shell says "command not found," the install landed somewhere your PATH doesn't look — for npm packages that's the global npm bin folder; for Claude Code it's <code>~/.local/bin</code>, which the export line above handles.</p>
+<h3>Install PostgreSQL (Optional, for Database Projects)</h3>
+<pre><code class="language-bash">apt install -y postgresql postgresql-contrib
+systemctl enable postgresql
+systemctl start postgresql
+</code></pre>
+<h3>Configure tmux</h3>
+<p>Create a tmux config for better phone terminal experience:</p>
+<pre><code class="language-bash">cat &gt; ~/.tmux.conf &lt;&lt; 'EOF'
+set -g mouse on
+set -g history-limit 50000
+set -g status-bg colour235
+set -g status-fg colour136
+set -g status-left '#[fg=green]#S '
+set -g status-right '#[fg=yellow]%H:%M '
+bind | split-window -h
+bind - split-window -v
+set -g detach-on-destroy off
+EOF
+</code></pre>
+<h3>Harden SSH + Firewall</h3>
+<pre><code class="language-bash"># Disable password auth (SSH keys only)
+sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+systemctl restart sshd
+
+# Enable firewall
+ufw allow OpenSSH
+ufw --force enable
+</code></pre>
+<hr />
+<h2>Part 5: Authenticate Your Agent</h2>
+<p>Every harness needs to know whose models it's spending. There are three routes, and most harnesses offer at least two of them. Pick one per harness — you can mix routes across harnesses on the same server.</p>
+<h3>Option A: Subscription Sign-In (Simplest if it works)</h3>
+<p>Several harnesses let you sign in with a subscription account instead of an API key — flat monthly cost, no per-token meter. Claude Code signs in with a Claude Pro or Max account. Codex CLI signs in with a ChatGPT account. The flow is the same shape everywhere:</p>
+<ol>
+<li>Run the agent in your terminal</li>
+<li>It will display a long sign-in URL (or open a sign-in flow)</li>
+<li>Long-press the URL in Termius to copy it</li>
+<li>Open Safari → paste the <strong>entire</strong> URL (make sure nothing gets cut off)</li>
+<li>Log in with your subscription account</li>
+<li>Copy the auth code back to the terminal prompt, if it gives you one</li>
+</ol>
+<p><strong>Common issue:</strong> The URL is very long and can get truncated when copying. If you get an "invalid request" error from the sign-in page, the URL was cut off. Try again, or use Option B.</p>
+<h3>Option B: API Key (Works with Everything)</h3>
+<p>The universal route: every major model provider issues API keys, and every harness accepts them, usually through an environment variable. This is pay-per-use — powerful, and the meter is always running.</p>
+<ol>
+<li>Open Safari → go to your provider's console (Anthropic, OpenAI, and Google AI Studio all issue keys)</li>
+<li>Sign in → find <strong>API Keys</strong> → create a new key</li>
+<li>Copy the key</li>
+<li>Back in Termius, set the variable your harness reads:</li>
+</ol>
+<pre><code class="language-bash">export ANTHROPIC_API_KEY=&lt;your key&gt;    # Claude Code / Aider with Claude models
+export OPENAI_API_KEY=&lt;your key&gt;       # Codex CLI / Aider with OpenAI models
+export GEMINI_API_KEY=&lt;your key&gt;       # Gemini CLI / Aider with Gemini models
+</code></pre>
+<p><strong>Important:</strong> When pasting an API key, make sure your phone keyboard doesn't insert spaces in the middle of the key. Use the Termius text input bar at the bottom for cleaner pasting.</p>
+<ol start="5">
+<li>Save the ones you use permanently, the same way as any other environment variable:</li>
+</ol>
+<pre><code class="language-bash">echo 'export ANTHROPIC_API_KEY=&lt;your key&gt;' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<h3>Option C: Local Models — Turn the Meter Off</h3>
+<p>If the harness accepts a custom or OpenAI-compatible model endpoint, you can point it at a model you run yourself with Ollama, and no API bill ever arrives. Aider documents Ollama support directly, and endpoint-flexible harnesses follow the same pattern:</p>
+<pre><code class="language-bash">curl -fsSL https://ollama.com/install.sh | sh
+ollama pull qwen3-coder
+</code></pre>
+<p>Then configure your harness to use the local endpoint and that model name — each harness keeps this in its own settings, so follow its docs for the exact field.</p>
+<p>Honest limits: a $6–16 droplet cannot run a serious coding model. The local route makes sense on a bigger server or on a machine at home that your droplet can reach. What it buys you is real: private code never leaves your hardware, and the per-token meter is gone. What it costs you is frontier-level capability on the hardest work. Plenty of people run both — a frontier model for the hard jobs, a local model for everything else.</p>
+<h3>What It Costs to Authenticate</h3>
+<ul>
+<li><strong>Subscription:</strong> one flat plan per vendor you use (Claude Pro is $20/mo, Max runs $100–200/mo; ChatGPT plans cover Codex sign-in) — predictable, no per-token math</li>
+<li><strong>API keys:</strong> pay-per-use at each provider's published per-token rates — cheap for light use, unbounded for heavy use</li>
+<li><strong>Local models:</strong> $0 in model fees; you pay for the hardware that runs them</li>
+</ul>
+<p>None of these routes cares that you're connecting from a phone. The server is authenticated once; you just visit it.</p>
+<hr />
+<h2>Part 6: The Context Layer + Clone Your Project</h2>
+<p>Installing the agent gets you a smart stranger. The context layer is what turns it into your agent: standing instructions it reads every session, so you stop re-explaining your work every time you connect.</p>
+<h3>Step 1: Give Your Agent a Standing Instruction File</h3>
+<p>Every major harness reads a standing instruction file at session start. The convention is the same; only the filename changes:</p>
+<table>
+<thead>
+<tr>
+<th>Harness</th>
+<th>Standing instruction file</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td><code>CLAUDE.md</code></td>
+</tr>
+<tr>
+<td>Codex CLI</td>
+<td><code>AGENTS.md</code></td>
+</tr>
+<tr>
+<td>Gemini CLI</td>
+<td><code>GEMINI.md</code></td>
+</tr>
+<tr>
+<td>Aider</td>
+<td>A conventions file (e.g. <code>CONVENTIONS.md</code>) it is told to read</td>
+</tr>
+</tbody>
+</table>
+<p>You keep one in your home folder for the system-level stuff — who you are, your projects, how you like work done — and the pattern some harnesses support is a global file plus a per-project file that overrides it. Write it once, in plain language: your name, what you're building, your rules, your preferences. Every session starts oriented instead of cold.</p>
+<h3>Step 2 (Optional, Deeper): A Full Personalization System</h3>
+<p>If you want more than a file — persistent memory, custom skills, goal tracking — frameworks exist that build that layer on top of a harness. The one I run is <strong>PAI (Personal AI Infrastructure)</strong>, Daniel Miessler's open-source framework for Claude Code: think of the harness as the engine and the framework as everything that makes it yours. Its shape is worth copying in any harness:</p>
+<ul>
+<li><strong>Persistent memory</strong> — decisions and learnings carry across sessions</li>
+<li><strong>Custom skills</strong> — packaged instructions for the work you repeat</li>
+<li><strong>Goal orientation</strong> — your mission, beliefs, and strategies loaded into every session</li>
+<li><strong>Your context, in files you own</strong> — mission, beliefs, strategies, editable any time</li>
+</ul>
+<p>Whatever harness you chose, build toward that shape: context in plain files, under your control, that the agent reads before it works.</p>
+<h3>Step 3: Clone Your Projects</h3>
+<pre><code class="language-bash">mkdir -p ~/projects
+cd ~/projects
+git clone https://github.com/YOUR_USERNAME/your-repo.git
+cd your-repo
+</code></pre>
+<p>For private repos, authenticate with a GitHub Personal Access Token (generate one at github.com/settings/tokens) and use it as the password when Git prompts during the clone.</p>
+<h3>Step 4: Orient Your Agent on the Codebase</h3>
+<p>Drop a project-level instruction file in the repo root — the same filename your harness reads (see the table above). It tells the agent about the project's architecture, conventions, tech stack, and current priorities. The global file handles who you are; the repo file handles what this project is.</p>
+<p>Then launch the agent in the project folder and tell it: <em>"Read the instruction files and orient on the codebase."</em></p>
+<h3>Context Layer + Your Project = Full Stack</h3>
+<ul>
+<li><strong>Who you are</strong> — goals, mission, beliefs (from your global context)</li>
+<li><strong>What you're building</strong> — architecture, conventions, priorities (from the repo's file)</li>
+<li><strong>Persistent memory</strong> — what happened in past sessions carries forward, if your setup keeps it</li>
+<li><strong>One pattern, any harness</strong> — swap the agent and the context files still describe the same you</li>
+</ul>
+<hr />
+<h2>Part 7: Add Browser Access via MCP</h2>
+<p>MCP (Model Context Protocol) is a shared protocol — the same tool servers plug into many different harnesses, so this part is nearly identical no matter which agent you picked. The two most useful servers for a headless box: web browsing and URL fetching.</p>
+<h3>Add Playwright (Headless Browser)</h3>
+<p>Lets your agent navigate websites, fill forms, click buttons, take screenshots, and extract data — all without a display.</p>
+<pre><code class="language-bash">npm install -g @playwright/mcp
+claude mcp add playwright -- npx @playwright/mcp@latest --headless
+</code></pre>
+<h3>Add Fetch Tool</h3>
+<p>Lets your agent grab and read any URL:</p>
+<pre><code class="language-bash">apt install -y pipx
+pipx install uv
+claude mcp add fetch -- uvx mcp-server-fetch
+</code></pre>
+<h3>A Note on Syntax</h3>
+<p>Those two <code>claude mcp add</code> commands are Claude Code's form. The server definitions underneath — a name, the command <code>npx</code> or <code>uvx</code>, and its arguments — are the portable part: other harnesses take the same definitions in their own MCP configuration (a settings file or their own add command). Copy the command and args, not the wrapper.</p>
+<h3>Restart Your Agent</h3>
+<p>After adding MCP servers, restart the agent session for them to load.</p>
+<h3>What This Unlocks</h3>
+<ul>
+<li>Browse documentation while building features</li>
+<li>Test your web app's UI automatically</li>
+<li>Scrape websites for research</li>
+<li>Pull data from web services</li>
+<li>Read API docs, Stack Overflow, GitHub issues</li>
+</ul>
+<hr />
+<h2>Part 8: Daily Workflow</h2>
+<h3>Starting a Session</h3>
+<ol>
+<li>Open <strong>Termius</strong> on your iPhone</li>
+<li>Tap your droplet host to connect</li>
+<li>Reattach to your session:</li>
+</ol>
+<pre><code class="language-bash">tmux attach -t setup
+</code></pre>
+<ol start="4">
+<li>You're right back where you left off — your agent, your project directory, everything intact</li>
+</ol>
+<h3>If Your Phone Disconnects</h3>
+<p>No problem. Your tmux session keeps running on the server. Just SSH back in and reattach:</p>
+<pre><code class="language-bash">tmux attach -t setup
+</code></pre>
+<p>This is the step that makes the whole setup field-proof: the signal drops in a stairwell, the agent never notices.</p>
+<h3>Starting Fresh</h3>
+<pre><code class="language-bash">tmux new -s agent
+cd ~/projects/your-repo
+# launch your agent: claude, codex, gemini, or aider
+</code></pre>
+<h3>tmux Cheat Sheet</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Keys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Detach (leave session running)</td>
+<td><code>Ctrl+B</code> then <code>D</code></td>
+</tr>
+<tr>
+<td>Split screen vertical</td>
+<td><code>Ctrl+B</code> then <code>|</code></td>
+</tr>
+<tr>
+<td>Split screen horizontal</td>
+<td><code>Ctrl+B</code> then <code>-</code></td>
+</tr>
+<tr>
+<td>New window</td>
+<td><code>Ctrl+B</code> then <code>C</code></td>
+</tr>
+<tr>
+<td>Switch windows</td>
+<td><code>Ctrl+B</code> then <code>0-9</code></td>
+</tr>
+<tr>
+<td>Scroll up</td>
+<td><code>Ctrl+B</code> then <code>[</code> then arrow keys</td>
+</tr>
+<tr>
+<td>Exit scroll mode</td>
+<td><code>Q</code></td>
+</tr>
+<tr>
+<td>List all sessions</td>
+<td><code>tmux ls</code></td>
+</tr>
+<tr>
+<td>Kill a session</td>
+<td><code>tmux kill-session -t name</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Part 9: Optional — Browser-Based Terminal (ttyd)</h2>
+<p>If you want to access your terminal from any browser without Termius:</p>
+<pre><code class="language-bash">apt install -y ttyd
+</code></pre>
+<p>Run it with basic auth on a random port:</p>
+<pre><code class="language-bash">ttyd -p 9473 -c your_username:YourStrongPassword tmux attach -t setup
+</code></pre>
+<p>Then open Safari: <code>http://YOUR_DROPLET_IP:9473</code></p>
+<p><strong>Security notes:</strong>
+- Use a random high port (not 80, 8080, etc.)
+- Always use the <code>-c</code> flag for basic authentication
+- Open the port in your firewall: <code>ufw allow 9473/tcp</code>
+- For production use, put it behind HTTPS with a reverse proxy</p>
+<hr />
+<h2>Part 10: Cost Breakdown</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Monthly Cost</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cloud server (DigitalOcean droplet)</td>
+<td>$6–16/mo</td>
+<td>Free for the first stretch via the $200 signup credit</td>
+</tr>
+<tr>
+<td>Termius</td>
+<td>$0</td>
+<td>Free tier is sufficient</td>
+</tr>
+<tr>
+<td>Agent subscription (if you sign in with one)</td>
+<td>$20–200/mo</td>
+<td>Depends on vendor and plan — Claude Pro is $20/mo; heavier plans run more</td>
+</tr>
+<tr>
+<td>API usage (if you use keys instead)</td>
+<td>Pay-per-use</td>
+<td>Each provider's published per-token rates; replaces the subscription line, doesn't stack on it</td>
+</tr>
+<tr>
+<td>Local models (Ollama route)</td>
+<td>$0 in model fees</td>
+<td>You supply the hardware; needs more than the $6–16 droplet to be useful</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>~$6–36/mo typical</strong></td>
+<td>Server + one subscription covers most people; the range stretches if you run premium plans or heavy API volume</td>
+</tr>
+</tbody>
+</table>
+<p>The honest summary: the server is the fixed cost. Everything after that is a choice — subscription, metered API, or your own hardware — and you can change your mind per harness without rebuilding anything.</p>
+<hr />
+<h2>Troubleshooting</h2>
+<h3>"command not found" when running your agent</h3>
+<p>Its install location isn't on your PATH. npm-installed agents live in npm's global bin folder; Claude Code's installer uses <code>~/.local/bin</code>:</p>
+<pre><code class="language-bash">echo 'export PATH=&quot;$HOME/.local/bin:$PATH&quot;' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<h3>Sign-in URL gives an "Invalid Request" error</h3>
+<p>The URL got truncated during copy/paste. Use the API key method instead (Part 5, Option B) — it's the more reliable route from a phone anyway.</p>
+<h3>API key has spaces inserted by phone keyboard</h3>
+<p>iPhone keyboards sometimes auto-insert spaces in long strings. Use the Termius text input bar at the bottom of the screen, or type the export command and carefully paste the key without spaces.</p>
+<h3>Can't connect via SSH</h3>
+<ul>
+<li>Check the droplet is running in the DigitalOcean dashboard</li>
+<li>Verify the IP address is correct</li>
+<li>Make sure you selected the right SSH key in Termius</li>
+<li>Try destroying and recreating the droplet if all else fails</li>
+</ul>
+<h3>tmux session gone</h3>
+<pre><code class="language-bash">tmux ls          # List existing sessions
+tmux new -s dev  # Create a new one
+</code></pre>
+<h3>Agent not responding</h3>
+<pre><code class="language-bash"># Verify the install (use your harness's name)
+claude --version   # or: codex --version / gemini --version / aider --version
+</code></pre>
+<p>Exit the session and relaunch the agent; check for an update command in its help if problems persist.</p>
+<h3>Running out of disk space</h3>
+<pre><code class="language-bash">df -h             # Check usage
+apt autoremove    # Clean up
+docker system prune  # If using Docker
+</code></pre>
+<hr />
+<h2>What You've Built</h2>
+<p>You now have a full cloud development environment accessible from your iPhone:</p>
+<ul>
+<li><strong>Termius</strong> → SSH into your server from anywhere</li>
+<li><strong>tmux</strong> → Sessions persist through disconnects</li>
+<li><strong>Your agent</strong> → An AI coding agent — whichever harness and model you chose — with your full codebase and your standing context in reach</li>
+<li><strong>MCP tools</strong> → Your agent can browse the web and fetch URLs</li>
+<li><strong>Git</strong> → Push code, create branches, manage your repo</li>
+</ul>
+<p>This is a real dev setup. The same thing people run on $2,000 MacBooks, running on a $6/month server, controlled from your phone — and none of it is locked to one company's agent. Swap the harness next year and the server, the sessions, and the context files are still yours.</p>
+
+      <h2>Related writing</h2>
+      <ul>
+        <li>Claude Code from iPhone — Complete Setup Guide — this same setup, Claude Code-specific, step by step.</li>
+        <li><a href="own-your-ai-open-source-models.html">Own Your AI: The Case for Open-Source Models</a> — rent the frontier when you need it, own the rest.</li>
+      </ul>
+      <div class="bio-footer">
+        I'm Roy — commercial solar superintendent, 14 years and 35 MW+ in the trade, building TradeStack and studying for my Maryland Journeyman Electrician license. I write about running jobsites and building software that survives the field.
+      </div>
+    </div>
+  </article>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 DaRoy Perkins</span>
+    <span>Built for the field. ⚡</span>
+  </div>
+</footer>
+<script>
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
