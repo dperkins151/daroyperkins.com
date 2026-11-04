@@ -259,6 +259,7 @@
         <div class="q">${esc(q.q)}</div>
         <div class="ans">${right ? `<span class="ok">✓ You: ${esc(q.choices[a])}</span>` : (a == null ? '<span class="bad">No answer</span>' : `<span class="bad">You: ${esc(q.choices[a])}</span>`) + `<br><span class="ok">Correct: ${esc(q.choices[q.answer])}</span>`}</div>
         ${q.explain ? `<div class="explain">${esc(q.explain)}</div>` : ""}
+        ${isLookup ? "" : (JHQ.store.customCards().some((c) => c.origin === id) ? '<button class="link-btn" disabled>Already a card</button>' : `<button class="link-btn" data-savecard="${esc(id)}">Save as card</button>`)}
       </div>`;
     }).join("") : '<div class="empty">Clean sheet — nothing missed.</div>';
   }

@@ -146,7 +146,7 @@
     $("browse-ref").textContent = "NEC " + r.ref + " · " + JHQ.data.topicName(r.topic);
     $("browse-cards").disabled = !r.cards.length; $("browse-drill").disabled = !r.questions.length;
     $("browse-cards-list").innerHTML = r.cards.length ? r.cards.map((id) => { const c = cmap[id]; return c ? `<div class="missed-row"><div class="q">${esc(c.front)}</div><div class="explain">${esc(c.back)}</div></div>` : ""; }).join("") : '<div class="empty">No cards cite this reference yet.</div>';
-    $("browse-q-list").innerHTML = r.questions.length ? r.questions.map((id) => { const q = qmap[id]; return q ? `<div class="missed-row"><div class="q">${esc(q.q)}</div><div class="ans"><span class="ok">${esc(q.choices[q.answer])}</span></div>${q.explain ? `<div class="explain">${esc(q.explain)}</div>` : ""}</div>` : ""; }).join("") : '<div class="empty">No questions cite this reference yet.</div>';
+    $("browse-q-list").innerHTML = r.questions.length ? r.questions.map((id) => { const q = qmap[id]; return q ? `<div class="missed-row"><div class="q">${esc(q.q)}</div><div class="ans"><span class="ok">${esc(q.choices[q.answer])}</span></div>${q.explain ? `<div class="explain">${esc(q.explain)}</div>` : ""}${JHQ.store.customCards().some((c) => c.origin === id) ? '<button class="link-btn" disabled>Already a card</button>' : `<button class="link-btn" data-savecard="${esc(id)}">Save as card</button>`}</div>` : ""; }).join("") : '<div class="empty">No questions cite this reference yet.</div>';
     $("cards-picker").classList.add("hidden"); $("browse-article").classList.remove("hidden"); window.scrollTo(0, 0);
   }
   function closeRef() { browseRef = null; $("browse-article").classList.add("hidden"); $("cards-picker").classList.remove("hidden"); }

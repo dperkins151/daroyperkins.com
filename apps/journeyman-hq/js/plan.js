@@ -57,5 +57,11 @@
     if (todayEl && !render._scrolled) { render._scrolled = true; setTimeout(() => todayEl.scrollIntoView({ block: "center", behavior: "smooth" }), 50); }
   }
 
-  JHQ.plan = { render, bind() {}, currentDay, schedule, length };
+  function exportIcs() {
+    const s = JHQ.store.settings();
+    const txt = JHQ.schedule.ics(schedule(), { examKey: s.examDate || null, stamp: new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z") });
+    JHQ.util.download("journeyman-hq-plan.ics", txt, "text/calendar");
+  }
+  function bind() { $("plan-ics").addEventListener("click", exportIcs); }
+  JHQ.plan = { render, bind, currentDay, schedule, length, exportIcs };
 })(typeof window !== "undefined" ? window : globalThis);

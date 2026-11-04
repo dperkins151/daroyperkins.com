@@ -120,6 +120,13 @@ ok((await page.$$eval("#res-missed .missed-row.right", (r) => r.length)) === 70 
 ok((await page.$$eval("#res-missed .missed-row .chip", (c) => c.filter((x) => /flagged/.test(x.textContent)).length)) === 1, "the flagged question carries its marker");
 await page.click("#res-view-missed");
 ok((await page.$$eval("#res-missed .missed-row", (r) => r.length)) === nMissedRows, "back to misses only");
+// save a result row as one of my cards (deduped)
+const saveQid = await page.$eval("#res-missed [data-savecard]", (b) => b.dataset.savecard);
+await page.click("#res-missed [data-savecard]");
+const savedCards = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.custom.cards") || "[]"));
+ok(savedCards.length === 1 && savedCards[0].origin === saveQid && /^Answer: /.test(savedCards[0].back) && savedCards[0].source === "custom", "Save as card creates a prefilled custom card from the question");
+ok(/Saved as card/.test(await page.$eval(`#res-missed .missed-row[data-qid="${saveQid}"] .link-btn`, (b) => b.textContent)), "button confirms the save");
+ok((await page.evaluate((id) => JHQ.library.saveQuestionAsCard(id).reason, saveQid)) === "already a card", "saving the same question again is refused");
 ok(!(await page.$eval("#res-loop", (e) => e.classList.contains("hidden"))) && /missed → flashcards/.test(await page.textContent("#res-loop-text")), "result links misses to the flashcard loop: " + (await page.textContent("#res-loop-text")).trim());
 await page.click("#res-done"); await page.waitForSelector("#attempt-list .row");
 ok(true, "attempt history lists the sim");
@@ -142,7 +149,7 @@ ok(Object.keys(missMap).length === expectMissed.size && [...expectMissed].every(
 await page.click('.tab-btn[data-tab="cards"]'); await page.waitForSelector('#deck-list [data-deck="__missed"]');
 ok(new RegExp("^" + nMissed + " cards").test((await page.textContent('#deck-list [data-deck="__missed"] .sub')).trim()), "Missed questions deck lists " + nMissed + " cards");
 await page.click('#deck-list [data-deck="__missed"]'); await page.waitForSelector("#flashcard:not(.hidden)");
-ok((await page.textContent("#fc-source")).trim() === "missed once", "miss card shows its source chip");
+ok(/^missed (once|\d+×)$/.test((await page.textContent("#fc-source")).trim()), "miss card shows its source chip: " + (await page.textContent("#fc-source")).trim() + " (a question missed in both the article drill and the sim reads 2×)");
 await page.click("#flashcard"); await page.waitForSelector("#fc-grade:not(.hidden)");
 ok(/^Answer: /.test(await page.textContent("#fc-text")), "miss card back leads with the correct answer");
 await page.click('.grade-btn[data-grade="4"]');
@@ -188,7 +195,7 @@ ok(/Missed drill/.test(await page.textContent("#attempt-list")), "attempt histor
 const missedBefore = await page.evaluate(() => localStorage.getItem("jhq.missed"));
 await page.click("#lookup-start"); await page.waitForSelector("#exam-run:not(.hidden)");
 ok((await page.textContent("#ex-pos")).trim() === "1 / 10" && /^Which NEC reference covers this\?/.test(await page.textContent("#q-text")), "lookup drill: 10 generated prompts");
-ok((await page.$$eval(".choice", (b) => b.map((x) => x.textContent))).every((t) => /\d{3}/.test(t)), "choices are NEC references");
+ok((await page.$$eval(".choice", (b) => b.map((x) => x.textContent))).every((t) => /(^|\D)(90|\d{3})(\.\d+)?/.test(t)), "choices are NEC references (Art. 90 has two digits)");
 await page.waitForTimeout(1100);
 for (let i = 0; i < 10; i++) { await page.click(".choice >> nth=0"); await page.click("#ex-next"); }
 await page.click("#ex-submit"); await page.waitForSelector("#exam-result:not(.hidden)");
@@ -206,16 +213,40 @@ ok((await page.$$eval("#weak-topics .topic-row", (r) => r.length)) >= 1, "weak t
 ok((await page.textContent("#st-streak")).trim() === "1", "streak = 1 after today's activity");
 ok(/\d+ missed in the last 7 days/.test(await page.textContent("#act-misses")), "home action shows the misses count: " + (await page.textContent("#act-misses")).trim());
 // Weekly report: plain text from this week's data, copy with fallback
+await page.evaluate(() => { navigator.share = (d) => { window.__shared = d; return Promise.resolve(); }; });   // headless has no share sheet: stub the Web Share API
 await page.click("#report-open"); await page.waitForSelector("#report:not(.hidden)");
 const reportTxt = await page.$eval("#report-text", (t) => t.value);
+ok(!(await page.$eval("#report-share", (b) => b.classList.contains("hidden"))), "Share… offered when the browser has a share sheet");
+await page.click("#report-share"); await page.waitForFunction(() => !!window.__shared);
+const shared = await page.evaluate(() => window.__shared);
+ok(shared.title === "Weekly report" && shared.text === reportTxt, "share hands the sheet exactly the report title + text");
+await page.evaluate(() => { navigator.share = (d) => Promise.reject(Object.assign(new Error("closed"), { name: "AbortError" })); });
+await page.click("#report-share"); await page.waitForTimeout(100);
+ok(await page.$eval("#report-status", (e) => e.classList.contains("hidden")), "closing the share sheet says nothing");
+await page.evaluate(() => { navigator.share = (d) => Promise.reject(new Error("nope")); });
+await page.click("#report-share"); await page.waitForSelector("#report-status:not(.hidden)");
+ok(/use Copy/.test(await page.textContent("#report-status")), "a failed share points to Copy");
+await page.evaluate(() => { delete navigator.share; }); await page.click("#report-close"); await page.click("#report-open"); await page.waitForSelector("#report:not(.hidden)");
+ok(await page.$eval("#report-share", (b) => b.classList.contains("hidden")), "no share sheet in the browser → no Share button");
+await page.waitForFunction(() => document.getElementById("report-status").classList.contains("hidden"), null, { timeout: 6000 });   // the "use Copy" flash clears before the Copy check below
 ok(/^Journeyman HQ — week of /.test(reportTxt) && /Sims: 1 \(best \d+%, last \d+%\) · Half sims: 1/.test(reportTxt) && /Plan: day 1 of 46/.test(reportTxt) && !/undefined|NaN/.test(reportTxt), "weekly report text built: " + reportTxt.split("\n")[1]);
 await page.click("#report-copy"); await page.waitForSelector("#report-status:not(.hidden)");
 ok(/Copied|copy it by hand/.test(await page.textContent("#report-status")), "copy reports its outcome: " + (await page.textContent("#report-status")).trim());
 await page.click("#report-close"); ok(await page.$eval("#report", (e) => e.classList.contains("hidden")), "report sheet closes");
+// print study sheet: built on demand, print media shows only the sheet
+await page.evaluate(() => { window.print = () => {}; });   // headless: just make sure nothing throws
+await page.click("#print-open");
+ok((await page.$$eval("#print-sheet .p-tabs li", (l) => l.length)) === 30 && (await page.$$eval("#print-sheet h3", (h) => h.length)) === 6 && /Journeyman HQ — week of/.test(await page.textContent("#print-sheet .p-report")), "study sheet built: 30 tabs, 6 formula groups, this week's report");
+await page.emulateMedia({ media: "print" });
+ok((await page.$eval("#print-sheet", (e) => getComputedStyle(e).display)) === "block" && (await page.$eval(".tabbar", (e) => getComputedStyle(e).display)) === "none", "print media shows the sheet and hides the app chrome");
+await page.emulateMedia({ media: "screen" });
+ok((await page.$eval("#print-sheet", (e) => getComputedStyle(e).display)) === "none", "screen media hides the sheet again");
 // Progress card
 ok(!(await page.$eval("#progress", (e) => e.classList.contains("hidden"))), "progress card shows once attempts exist");
 ok((await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempts")).find((a) => a.mode === "sim").elapsedSec)) > 0, "sim elapsed time is recorded (timer no longer loses time on each answer)");
 ok((await page.$$eval("#prog-sim .spark-bar", (b) => b.length)) === 2 && (await page.$$eval("#prog-sim .spark-bar.half", (b) => b.length)) === 1, "full + half sim bars in the score chart (half dashed)");
+const simLucky = simRec.result.score.lucky || 0;
+ok((await page.$$eval("#prog-sim .spark-bar .know", (k) => k.length)) === (simLucky ? 1 : 0) && (simLucky ? /red tick = without guesses/.test(await page.textContent("#prog-sim-sub")) : true), "knowledge marker drawn only when a sim had lucky guesses (" + simLucky + ")");
 ok(/^\d+ s \/ question$/.test((await page.textContent("#prog-pace")).trim()) && /PSI budget 180 s/.test(await page.textContent("#prog-pace-sub")), "pace vs PSI budget: " + (await page.textContent("#prog-pace")).trim());
 ok((await page.$$eval("#prog-topics .prog-topic", (r) => r.length)) === 6, "six topic trend rows");
 ok((await page.$$eval("#prog-days .day-col", (c) => c.length)) === 14 && /1 active day · \d+ cards · \d+ questions/.test(await page.textContent("#prog-days-sub")), "14-day activity strip: " + (await page.textContent("#prog-days-sub")).trim());
@@ -246,6 +277,11 @@ await page.click('.day[data-day="1"] .day-head').catch(() => {});
 const cb = await page.$('.day[data-day="1"] input[data-k]'); if (!(await cb.isVisible())) await page.click('.day[data-day="1"] .day-head');
 await page.click('.day[data-day="1"] input[data-k="1.0"]');
 ok((await page.textContent("#plan-pct")).trim() !== "0%", "plan progress updates: " + (await page.textContent("#plan-pct")));
+// calendar export
+const [dlIcs] = await Promise.all([page.waitForEvent("download"), page.click("#plan-ics")]);
+const icsPath = path.join(root, "dist", "smoke-plan.ics"); await dlIcs.saveAs(icsPath);
+const icsTxt = await readFile(icsPath, "utf8");
+ok(dlIcs.suggestedFilename() === "journeyman-hq-plan.ics" && icsTxt.startsWith("BEGIN:VCALENDAR\r\n") && (icsTxt.match(/BEGIN:VEVENT/g) || []).length === 47 && /SUMMARY:EXAM DAY/.test(icsTxt), ".ics export: 46 study days + exam day");
 // move the exam to 12 days out: plan compresses, the checked task survives
 await page.click('.tab-btn[data-tab="more"]'); const d12 = new Date(); d12.setDate(d12.getDate() + 11);
 await page.fill("#set-date", d12.toISOString().slice(0, 10)); await page.click("#set-save"); await page.waitForSelector("#set-status.ok");
@@ -260,9 +296,39 @@ await page.click('.tab-btn[data-tab="more"]');
 await page.fill("#ac-article", "250.66"); await page.fill("#ac-front", "Test front"); await page.fill("#ac-back", "Test back");
 await page.click('#add-card-form button[type="submit"]'); await page.waitForSelector("#ac-status.ok");
 const custom = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.custom.cards")));
-ok(custom.length === 1 && custom[0].source === "custom", "custom card saved");
+ok(custom.length === 2 && custom.every((c) => c.source === "custom") && custom.some((c) => !c.origin && c.front === "Test front"), "custom card saved (alongside the one saved from a result)");
 const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#export-custom")]);
 ok(/journeyman-hq-my-content/.test(dl.suggestedFilename()), "export downloads JSON: " + dl.suggestedFilename());
+// Search the bank: article number, keyword, ref chip → article page, drill the hits, save a card from a row, Esc clears
+await page.click('.tab-btn[data-tab="cards"]'); await page.waitForSelector("#cards-picker:not(.hidden)");
+await page.fill("#search-q", "210.52"); await page.waitForSelector("#search-out:not(.hidden) [data-qid]");
+const sArt = await page.evaluate(() => { const r = JHQ.search.search("210.52", JHQ.data.allQuestions(), JHQ.data.allCards(), { limit: 1000 }); return { q: r.totalQuestions, c: r.totalCards, refs: r.refs.map((x) => x.ref), ids: r.questions.map((x) => x.id) }; });
+ok(sArt.q >= 1 && (await page.textContent("#search-count")).trim() === sArt.q + " question" + (sArt.q === 1 ? "" : "s") + " · " + sArt.c + " card" + (sArt.c === 1 ? "" : "s") && (await page.$$eval("#search-out [data-qid]", (r) => r.length)) === Math.min(20, sArt.q), "article search 210.52 → " + sArt.q + " questions · " + sArt.c + " cards");
+ok(sArt.refs.includes("210.52") && (await page.$$eval("#search-out .missed-row", (r) => r.every((x) => /210\.52/.test(x.textContent)))), "every hit cites 210.52 (article tag or text) and the ref chip is offered");
+await page.click('#search-out [data-ref="210.52"]'); await page.waitForSelector("#browse-article:not(.hidden)");
+ok(/NEC 210\.52/.test(await page.textContent("#browse-ref")), "ref chip opens the article page"); await page.click("#browse-back"); await page.waitForSelector("#cards-picker:not(.hidden)");
+const sWord = await page.evaluate(() => { const r = JHQ.search.search("receptacle", JHQ.data.allQuestions(), JHQ.data.allCards(), { limit: 1000 }); return { q: r.totalQuestions, c: r.totalCards, ids: r.questions.map((x) => x.id), cids: r.cards.map((x) => x.id) }; });
+// (210.52 is the receptacle article, so wait on the count line, not on a row mentioning the word)
+await page.fill("#search-q", "receptacle"); await page.waitForFunction((n) => (document.querySelector("#search-count")?.textContent || "").trim().startsWith(n + " questions"), sWord.q);
+const sRows = await page.evaluate(() => ({ q: [...document.querySelectorAll("#search-out [data-qid]")].map((e) => e.dataset.qid), c: [...document.querySelectorAll("#search-out [data-cid]")].map((e) => e.dataset.cid) }));
+ok(sWord.q >= 2 && (await page.textContent("#search-count")).trim().startsWith(sWord.q + " questions") && sRows.q.length === Math.min(20, sWord.q) && sRows.q.every((id) => sWord.ids.includes(id)) && sRows.c.length === Math.min(20, sWord.c) && sRows.c.every((id) => sWord.cids.includes(id)), "keyword search 'receptacle' → " + sWord.q + " questions · " + sWord.c + " cards; rows are the top hits (stem, choices, explanation, card front/back)");
+const beforeSave = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.custom.cards")).length);
+const searchQid = await page.$eval("#search-out [data-savecard]", (b) => b.dataset.savecard); await page.click("#search-out [data-savecard]");
+await page.waitForFunction((n) => JSON.parse(localStorage.getItem("jhq.custom.cards")).length === n + 1, beforeSave);
+ok((await page.evaluate((id) => JSON.parse(localStorage.getItem("jhq.custom.cards")).some((c) => c.origin === id), searchQid)) && (await page.$eval(`#search-out [data-qid="${searchQid}"] .link-btn`, (b) => b.disabled && /Already a card/.test(b.textContent))), "Save as card from a search row, list refreshed to 'Already a card'");
+await page.click("#search-drill"); await page.waitForSelector("#exam-run:not(.hidden)");
+const sIds = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.attempt.inprogress")).questionIds);
+ok(sIds.length === Math.min(10, sWord.q) && sIds.every((i) => sWord.ids.includes(i)), "Drill the hits runs " + sIds.length + " of the matching questions");
+for (let i = 0; i < sIds.length; i++) { await page.click(".choice >> nth=0"); await page.click("#ex-next"); }
+await page.click("#ex-submit"); await page.waitForSelector("#exam-result:not(.hidden)"); ok(/search: receptacle/.test(await page.textContent("#res-verdict")), "search drill labelled in the result"); await page.click("#res-done");
+await page.click('.tab-btn[data-tab="cards"]'); await page.focus("#search-q"); await page.keyboard.press("Escape");
+ok((await page.$eval("#search-q", (i) => i.value)) === "" && (await page.$eval("#search-out", (e) => e.classList.contains("hidden"))), "Esc clears the search");
+// calc scratchpad: voltage drop worked example, then motor OCPD
+await page.click('.tab-btn[data-tab="more"]');
+await page.fill('#calc-form [data-k="amps"]', "16"); await page.fill('#calc-form [data-k="length"]', "150"); await page.fill('#calc-form [data-k="cmil"]', "6530"); await page.fill('#calc-form [data-k="volts"]', "120");
+ok(/^9\.48/.test((await page.textContent("#calc-out .calc-val")).trim()) && /7\.9 %/.test(await page.textContent("#calc-out")), "voltage drop calc shows 9.48 V and 7.9 %: " + (await page.textContent("#calc-out .calc-val")).trim());
+await page.click('.seg-btn[data-calc="motor"]'); await page.fill('#calc-form [data-k="flc"]', "14");
+ok(/^35/.test((await page.textContent("#calc-out .calc-val")).trim()) && /17\.5 A/.test(await page.textContent("#calc-out")), "motor OCPD calc: 35 A max, conductors 17.5 A");
 // sunlight mode: toggle → light theme now and after reload, toggle back
 await page.click('.tab-btn[data-tab="more"]');
 const bgDark = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
@@ -287,8 +353,34 @@ await page.click('#tabs-list input[data-tab="210.52"]');
 ok(/1 of 30 tabbed/.test(await page.textContent("#tabs-progress")), "ticking a tab updates the count");
 await page.reload(); await page.waitForSelector("#home-main:not(.hidden)"); await page.click('.tab-btn[data-tab="more"]');
 ok(await page.$eval('#tabs-list input[data-tab="210.52"]', (c) => c.checked), "tabs persist across reloads");
-// backup nudge + full backup
+// focus block: pick 15 min, start, reload keeps it running, pause banks time, a block that ran out while away completes once and logs minutes
 await page.click('.tab-btn[data-tab="home"]');
+ok((await page.textContent("#focus-clock")).trim() === "25:00" && (await page.textContent("#focus-start")).trim() === "Start", "focus block idle at 25:00");
+await page.click('#focus-len .seg-btn[data-len="15"]');
+ok((await page.textContent("#focus-clock")).trim() === "15:00", "block length switches to 15 min");
+await page.click("#focus-start");
+ok((await page.$eval("#focus-start", (b) => b.textContent.trim() + "/" + b.dataset.state)) === "Pause/running" && (await page.$eval('#focus-len .seg-btn[data-len="45"]', (b) => b.disabled)), "running: button reads Pause, lengths locked");
+await page.reload(); await page.waitForSelector("#home-main:not(.hidden)");
+const fRun = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.focus")));
+ok(fRun && fRun.len === 15 && fRun.startedAt && (await page.$eval("#focus-start", (b) => b.dataset.state)) === "running", "reload resumes the running block from its stored start time");
+await page.click("#focus-start");   // pause
+const fPaused = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.focus")));
+ok(fPaused.startedAt === null && fPaused.accumulated >= 0 && fPaused.accumulated < 60 && (await page.textContent("#focus-start")).trim() === "Resume", "pause banks the elapsed seconds and clears the start");
+// simulate: resumed 16 minutes ago, phone asleep since → on open the block is complete and logged exactly once
+await page.evaluate(() => { const f = JSON.parse(localStorage.getItem("jhq.focus")); f.startedAt = Date.now() - 16 * 60000; localStorage.setItem("jhq.focus", JSON.stringify(f)); });
+await page.reload(); await page.waitForSelector("#home-main:not(.hidden)");
+const fDone = await page.evaluate(() => ({ f: JSON.parse(localStorage.getItem("jhq.focus")), a: JSON.parse(localStorage.getItem("jhq.activity"))[JHQ.util.todayKey()] }));
+ok(fDone.f.completedAt && fDone.f.startedAt === null && (await page.textContent("#focus-clock")).trim() === "0:00" && (await page.textContent("#focus-start")).trim() === "Start another", "block that ran out while away shows done at 0:00");
+ok(fDone.a.blocks === 1 && fDone.a.minutes === 15 && /today 1 block · 15 min/.test(await page.textContent("#focus-sub")), "completed block logged once: 1 block · 15 min today");
+await page.reload(); await page.waitForSelector("#home-main:not(.hidden)");
+const fAgain = await page.evaluate(() => JSON.parse(localStorage.getItem("jhq.activity"))[JHQ.util.todayKey()]);
+ok(fAgain.blocks === 1 && fAgain.minutes === 15, "reloading a finished block does not log it twice");
+ok(/15 min focused/.test(await page.textContent("#prog-days-sub")), "Progress 14-day caption counts the focused minutes");
+await page.click("#focus-start");
+ok((await page.textContent("#focus-clock")).trim() === "14:59" || (await page.textContent("#focus-clock")).trim() === "15:00", "Start another begins a fresh block of the same length");
+await page.click("#focus-reset");
+ok((await page.textContent("#focus-clock")).trim() === "15:00" && (await page.textContent("#focus-start")).trim() === "Start", "reset returns to an idle block");
+// backup nudge + full backup
 ok(!(await page.$eval("#backup-nudge", (e) => e.classList.contains("hidden"))) && /No backup yet/.test(await page.textContent("#backup-nudge")), "Home nudges when progress exists and no backup was made");
 await page.click('.tab-btn[data-tab="more"]');
 const [dlAll] = await Promise.all([page.waitForEvent("download"), page.click("#export-all")]);

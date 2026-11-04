@@ -55,6 +55,19 @@ test("exam today or in the past → one calendar day holding everything", () => 
   assert.equal(S.build(plan, START, "2026-09-20").length, 1);
 });
 
+test("ics: one all-day VEVENT per day + the exam, CRLF, escaped and folded", () => {
+  const s = S.build(plan, START, "2026-10-12");
+  const txt = S.ics(s, { examKey: "2026-10-12", stamp: "20261015T120000Z" });
+  assert.ok(txt.startsWith("BEGIN:VCALENDAR\r\nVERSION:2.0\r\n")); assert.ok(txt.endsWith("END:VCALENDAR\r\n"));
+  assert.equal((txt.match(/BEGIN:VEVENT/g) || []).length, 13, "12 days + exam day");
+  assert.ok(txt.includes("DTSTART;VALUE=DATE:20261001\r\nDTEND;VALUE=DATE:20261002\r\n"));
+  assert.ok(txt.includes("UID:jhq-2026-10-01@journeyman-hq")); assert.ok(txt.includes("UID:jhq-exam-2026-10-12@journeyman-hq"));
+  assert.ok(/SUMMARY:Study: Day 1 \+ Day 2 \+ Day 3/.test(txt), "merged titles kept");
+  assert.ok(txt.includes("DESCRIPTION:1. t1a\\n2. t1b\\n3. t1c\\n4. t2a"), "tasks numbered, newlines escaped");
+  assert.ok(!txt.split("\r\n").some((l) => l.length > 75), "every line folded to 75 octets or fewer");
+  assert.ok(txt.includes("SUMMARY:EXAM DAY — Maryland Journeyman Electrician (PSI)"));
+});
+
 test("currentIndex: by date, clamped at both ends", () => {
   const s = S.build(plan, START, "2026-11-14");
   assert.equal(S.currentIndex(s, "2026-09-01"), 1); assert.equal(S.currentIndex(s, "2026-10-01"), 1);

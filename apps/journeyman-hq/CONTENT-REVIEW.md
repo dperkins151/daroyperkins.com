@@ -19,6 +19,12 @@ Questions by topic: theory 65 · wiring 74 · methods 47 · equipment 38 · spec
 | F-M101 | 314.16(B) | Verify the 2020 wording in 314.16(B)(5) for the 'more than four EGCs' quarter-allowance; the rest is settled. |
 | F-S102 | 690.7(A) / Table 690.7(A) | Confirm the Table 690.7(A) factor for −16 to −20 °C (1.18) and the 600 V dwelling limit wording in 2020 690.7. Method is settled. |
 
+## Near-duplicate stems
+
+Same words and the same numbers at ≥ 0.75 similarity (≥ 0.9 fails the build). Number variants of one template are not listed.
+
+None.
+
 ## Resolved
 
 | ID | Date | Outcome | Detail | Source |

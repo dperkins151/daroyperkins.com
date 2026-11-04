@@ -81,7 +81,25 @@
     return i >= 0 ? i + 1 : schedule.length;
   }
 
-  const api = { build, currentIndex, addDays, between, keyOf };
+  // ---- calendar export (RFC 5545, all-day events, no time zone needed) ----
+  const icsEsc = (s) => String(s || "").replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+  const fold = (line) => { const out = []; let i = 0; while (i < line.length) { out.push((i ? " " : "") + line.slice(i, i + (i ? 74 : 75))); i += i ? 74 : 75; } return out.join("\r\n"); };
+  const ymd = (key) => key.replace(/-/g, "");
+  /** Build an iCalendar file for the schedule: one all-day event per calendar day (title, tasks in the description). */
+  function ics(schedule, { name = "Journeyman HQ", examKey = null, stamp = "20260101T000000Z" } = {}) {
+    const L = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Journeyman HQ//study plan//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", fold("X-WR-CALNAME:" + icsEsc(name + " study plan"))];
+    const ev = (uid, date, summary, desc) => {
+      L.push("BEGIN:VEVENT", "UID:" + uid, "DTSTAMP:" + stamp, "DTSTART;VALUE=DATE:" + ymd(date), "DTEND;VALUE=DATE:" + ymd(addDays(date, 1)), fold("SUMMARY:" + icsEsc(summary)));
+      if (desc) L.push(fold("DESCRIPTION:" + icsEsc(desc)));
+      L.push("END:VEVENT");
+    };
+    (schedule || []).forEach((d) => ev("jhq-" + d.date + "@journeyman-hq", d.date, (d.buffer ? "Review: " : "Study: ") + d.title, d.tasks.map((t, i) => (i + 1) + ". " + t.text).join("\n")));
+    if (examKey) ev("jhq-exam-" + examKey + "@journeyman-hq", examKey, "EXAM DAY — Maryland Journeyman Electrician (PSI)", "70 questions · 210 minutes · 70% to pass. Light flashcard pass only; eat, hydrate, arrive early.");
+    L.push("END:VCALENDAR");
+    return L.join("\r\n") + "\r\n";
+  }
+
+  const api = { build, currentIndex, addDays, between, keyOf, ics };
   JHQ.schedule = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

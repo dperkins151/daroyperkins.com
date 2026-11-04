@@ -8,13 +8,13 @@ node --test test/*.test.js
 VERSION=$(node -p "require('./data/manifest.json').appVersion")
 # PWA: icons + service worker stamped with app version and the live bank files (shell precache list)
 node tools/make-icons.mjs >/dev/null
-SHELL_LIST=$(node -p "JSON.stringify(['./','index.html','app.css','manifest.webmanifest','icons/icon-180.png','icons/icon-192.png','icons/icon-512.png','icons/icon.svg'].concat(require('fs').readdirSync('js').map(f=>'js/'+f)).concat(Object.values(require('./data/manifest.json').banks).map(b=>'data/'+b.file)).concat(['data/manifest.json','data/changelog.json','data/tabs.json']))")
+SHELL_LIST=$(node -p "JSON.stringify(['./','index.html','app.css','manifest.webmanifest','icons/icon-180.png','icons/icon-192.png','icons/icon-512.png','icons/icon.svg'].concat(require('fs').readdirSync('js').map(f=>'js/'+f)).concat(Object.values(require('./data/manifest.json').banks).map(b=>'data/'+b.file)).concat((require('./data/'+require('./data/manifest.json').banks.questions.file).files||[]).map(f=>'data/'+f)).concat(['data/manifest.json','data/changelog.json','data/tabs.json']))")
 BANK_STAMP=$(cat data/*.json | sha256sum | cut -c1-8)
 sed -e "s#__VERSION__#${VERSION}-${BANK_STAMP}#" -e "s#__SHELL__#${SHELL_LIST}#" sw.template.js > sw.js
 node --check sw.js
 OUT="dist/journeyman-hq-v${VERSION}.zip"
 mkdir -p dist
-rm -f "$OUT"
+rm -f dist/journeyman-hq-v*.zip     # one zip in dist: the current version replaces every older one
 # Bundle = runtime files only. No sources, tests, tools, or docs. No secrets exist in this app.
 zip -r -X "$OUT" index.html app.css js data README.md manifest.webmanifest sw.js icons >/dev/null
 # secret scan on the bundle contents (fail closed)

@@ -11,6 +11,9 @@ test("simTrend: sims only, in order, capped", () => {
   const attempts = [att("sim", 60, bt(5, 7)), att("drill", 80, bt(8, 8)), att("sim", 75, bt(7, 8)), { mode: "sim", submittedAt: null, result: { score: { pct: 100 } } }];
   const t = stats.simTrend(attempts);
   assert.deepEqual(t.map((x) => x.pct), [60, 75]); assert.equal(t[1].verdict, "pass");
+  assert.deepEqual(t.map((x) => x.knowledgePct), [60, 75], "no guess data → knowledge equals raw");
+  const g = stats.simTrend([att("sim", 80, bt(8, 8), { result: { score: { pct: 80, knowledgePct: 71.4, lucky: 6 }, verdict: "pass", byTopic: bt(8, 8) } })]);
+  assert.equal(g[0].knowledgePct, 71); assert.equal(g[0].lucky, 6);
   assert.equal(stats.simTrend(attempts, 1).length, 1);
 });
 
@@ -53,6 +56,9 @@ test("weeklyReport: plain text with the week's sims, pace, weakest topics, activ
   assert.equal(L[5], "Plan: day 10 of 46 · 34% of tasks done");
   assert.equal(L[6], "Streak: 3 days · Journeyman HQ 1.16.0");
   assert.ok(!/undefined|NaN/.test(txt));
+  assert.ok(!/Focus:/.test(txt), "no focus line without blocks");
+  const withFocus = stats.weeklyReport({ attempts, activity: { "2026-10-15": { cards: 1, blocks: 2, minutes: 50 }, "2026-10-12": { blocks: 1, minutes: 15 } }, topics, todayKey: key, now });
+  assert.match(withFocus, /^Focus: 3 blocks · 65 min$/m);
   const empty = stats.weeklyReport({ attempts: [], activity: {}, topics, todayKey: key, now });
   assert.match(empty, /Sims: 0 · Half sims: 0 · Drills: 0 · Lookup drills: 0/); assert.match(empty, /no timed sims yet/); assert.match(empty, /no attempt data/);
 });
@@ -73,7 +79,7 @@ test("mostMissed: seen ≥ 2 only, sorted by rate then misses, text for the revi
 test("daily: last N days oldest first, zeros for idle days", () => {
   const key = (d) => d.toISOString().slice(0, 10);
   const now = new Date("2026-10-15T12:00:00Z");
-  const act = { "2026-10-15": { cards: 12, questions: 10 }, "2026-10-13": { cards: 5 } };
+  const act = { "2026-10-15": { cards: 12, questions: 10, blocks: 2, minutes: 50 }, "2026-10-13": { cards: 5 } };
   const d = stats.daily(act, key, 3, now);
-  assert.deepEqual(d, [{ key: "2026-10-13", cards: 5, questions: 0 }, { key: "2026-10-14", cards: 0, questions: 0 }, { key: "2026-10-15", cards: 12, questions: 10 }]);
+  assert.deepEqual(d, [{ key: "2026-10-13", cards: 5, questions: 0, blocks: 0, minutes: 0 }, { key: "2026-10-14", cards: 0, questions: 0, blocks: 0, minutes: 0 }, { key: "2026-10-15", cards: 12, questions: 10, blocks: 2, minutes: 50 }]);
 });

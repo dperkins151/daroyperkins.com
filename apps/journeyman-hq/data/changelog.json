@@ -1,8 +1,71 @@
 {
  "app": "Journeyman HQ",
- "current": "1.19.0",
+ "current": "1.28.0",
  "generated": "2026-10-15",
  "versions": [
+  {
+   "version": "1.28.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Share… on the weekly report and most-missed list hands the text to your phone's share sheet (text, email, Slack); Copy stays"
+   ]
+  },
+  {
+   "version": "1.27.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Search the bank (Cards): a word or an article number finds every question and card, with one-tap drill, card run, article page and Save as card"
+   ]
+  },
+  {
+   "version": "1.26.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Focus block (Home): 15 / 25 / 45-minute study timer that survives closing the app; finished blocks count as study minutes for the day"
+   ]
+  },
+  {
+   "version": "1.25.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Print study sheet (Home): tab checklist, formula sheet and this week's report on one page"
+   ]
+  },
+  {
+   "version": "1.24.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Plan → Add to calendar (.ics): every study day and exam day as all-day events for your phone's calendar"
+   ]
+  },
+  {
+   "version": "1.23.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Save any question as one of your cards from a result or an article page (prefilled, no duplicates)"
+   ]
+  },
+  {
+   "version": "1.22.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Question bank now ships as one file per topic (faster first load, lighter offline cache); nothing changes on screen"
+   ]
+  },
+  {
+   "version": "1.21.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Progress chart marks each sim's score without the lucky guesses, so you can watch luck shrink"
+   ]
+  },
+  {
+   "version": "1.20.0",
+   "date": "2026-10-15",
+   "lines": [
+    "Calc scratchpad (More): voltage drop, minimum circular mils, current from kVA, box fill, conduit fill and motor OCPD with every step shown"
+   ]
+  },
   {
    "version": "1.19.0",
    "date": "2026-10-15",

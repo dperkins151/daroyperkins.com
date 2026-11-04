@@ -89,7 +89,14 @@
     });
   }
   /** Generic text sheet (weekly report, most-missed list): title + text + Copy. */
-  function openSheet(title, text) { $("report-title").textContent = title; $("report-text").value = text; $("report").classList.remove("hidden"); $("report-copy").focus(); }
+  function openSheet(title, text) { $("report-title").textContent = title; $("report-text").value = text; $("report-share").classList.toggle("hidden", !canShare()); $("report").classList.remove("hidden"); $("report-copy").focus(); }
+  /** Phone share sheet (Web Share API) — only offered when the browser has one; nothing of ours sends anything. */
+  function canShare() { return typeof navigator !== "undefined" && typeof navigator.share === "function"; }
+  async function shareText(title, text) {
+    if (!canShare()) return false;
+    try { await navigator.share({ title, text }); return true; }
+    catch (e) { if (e && e.name === "AbortError") return null; return false; }   // null = user closed the sheet: say nothing
+  }
   async function copyText(text) {
     try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(text); return true; } } catch (e) {}
     try { const ta = $("report-text"); ta.focus(); ta.select(); return document.execCommand("copy"); } catch (e) { return false; }
@@ -103,8 +110,9 @@
     if (!graded.length) return;
     // full-sim scores: one bar per sim, 70% line
     const sims = S.simTrend(attempts, 10);
-    $("prog-sim").innerHTML = sims.length ? '<div class="spark-line" style="bottom:70%"></div>' + sims.map((s) => `<div class="spark-bar ${s.verdict} ${s.half ? "half" : ""}" style="height:${Math.max(4, s.pct)}%" title="${esc(fmtDate(s.at))} · ${s.pct}%${s.half ? " · half sim" : ""}"><span>${s.pct}</span></div>`).join("") : '<div class="empty small">No full sims yet — scores land here.</div>';
-    $("prog-sim-sub").textContent = sims.length ? (sims.length === 1 ? "1 sim" : sims.length + " sims") + " · best " + Math.max(...sims.map((s) => s.pct)) + "% · need 70%" : "";
+    const anyLucky = sims.some((s) => s.lucky > 0);
+    $("prog-sim").innerHTML = sims.length ? '<div class="spark-line" style="bottom:70%"></div>' + sims.map((s) => `<div class="spark-bar ${s.verdict} ${s.half ? "half" : ""}" style="height:${Math.max(4, s.pct)}%" title="${esc(fmtDate(s.at))} · ${s.pct}%${s.lucky ? " · " + s.knowledgePct + "% without " + s.lucky + " lucky guess" + (s.lucky === 1 ? "" : "es") : ""}${s.half ? " · half sim" : ""}">${s.lucky ? `<i class="know" style="bottom:${Math.round((s.knowledgePct / Math.max(4, s.pct)) * 100)}%" title="${s.knowledgePct}% by knowledge"></i>` : ""}<span>${s.pct}${s.lucky ? `<b class="know-n">${s.knowledgePct}</b>` : ""}</span></div>`).join("") : '<div class="empty small">No full sims yet — scores land here.</div>';
+    $("prog-sim-sub").textContent = sims.length ? (sims.length === 1 ? "1 sim" : sims.length + " sims") + " · best " + Math.max(...sims.map((s) => s.pct)) + "% · need 70%" + (anyLucky ? " · red tick = without guesses" : "") : "";
     // pace
     const p = S.pace(attempts);
     if (p.secPerQ == null) { $("prog-pace").textContent = "—"; $("prog-pace-sub").textContent = "runs a full sim to measure"; $("prog-pace-fill").style.width = "0%"; $("prog-pace-fill").className = "bar-fill"; }
@@ -117,7 +125,8 @@
     const max = Math.max(1, ...days.map((d) => d.cards + d.questions));
     $("prog-days").innerHTML = days.map((d) => `<div class="day-col" title="${d.key} · ${d.cards} cards · ${d.questions} questions"><div class="day-bar" style="height:${Math.round(((d.cards + d.questions) / max) * 100)}%"><div class="day-q" style="height:${d.cards + d.questions ? Math.round((d.questions / (d.cards + d.questions)) * 100) : 0}%"></div></div></div>`).join("");
     const tc = days.reduce((s, d) => s + d.cards, 0), tq = days.reduce((s, d) => s + d.questions, 0), active = days.filter((d) => d.cards + d.questions).length;
-    $("prog-days-sub").textContent = active + " active day" + (active === 1 ? "" : "s") + " · " + tc + " cards · " + tq + " questions";
+    const tm = days.reduce((s, d) => s + d.minutes, 0);
+    $("prog-days-sub").textContent = active + " active day" + (active === 1 ? "" : "s") + " · " + tc + " cards · " + tq + " questions" + (tm ? " · " + tm + " min focused" : "");
   }
 
   function bind() {
@@ -129,9 +138,11 @@
     });
     $("cd-edit").addEventListener("click", () => JHQ.app.go("more"));
     $("report-open").addEventListener("click", () => openSheet("Weekly report", buildReport()));
+    JHQ.print.bind();
     $("report-close").addEventListener("click", () => $("report").classList.add("hidden"));
     $("report").addEventListener("click", (e) => { if (e.target === $("report")) $("report").classList.add("hidden"); });
     $("report-copy").addEventListener("click", async () => { const ok = await copyText($("report-text").value); JHQ.util.flash($("report-status"), ok ? "Copied." : "Couldn't copy — select the text and copy it by hand.", ok); });
+    $("report-share").addEventListener("click", async () => { const r = await shareText($("report-title").textContent, $("report-text").value); if (r === false) JHQ.util.flash($("report-status"), "Couldn't open the share sheet — use Copy.", false); });
     document.querySelectorAll(".action[data-go]").forEach((b) => b.addEventListener("click", () => {
       const g = b.dataset.go;
       if (g === "drill") { JHQ.app.go("exam"); JHQ.exam.startDrill(); }
@@ -142,5 +153,5 @@
     }));
   }
 
-  JHQ.dashboard = { render, bind, streak, openSheet };
+  JHQ.dashboard = { render, bind, streak, openSheet, shareText, canShare };
 })(typeof window !== "undefined" ? window : globalThis);
