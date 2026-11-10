@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procore Daily-Log Automation — DaRoy Perkins</title>
+  <meta name="description" content="The Procore daily log writes itself from the field record — manpower by cost code, quantities, notes — with a human review before anything posts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://daroyperkins.com/blog/use-case-procore-daily-log-automation.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="DaRoy Perkins">
+  <meta property="og:title" content="Procore Daily-Log Automation — DaRoy Perkins">
+  <meta property="og:description" content="The Procore daily log writes itself from the field record — manpower by cost code, quantities, notes — with a human review before anything posts.">
+  <meta property="og:url" content="https://daroyperkins.com/blog/use-case-procore-daily-log-automation.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Procore Daily-Log Automation — DaRoy Perkins">
+  <meta name="twitter:description" content="The Procore daily log writes itself from the field record — manpower by cost code, quantities, notes — with a human review before anything posts.">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Procore Daily-Log Automation",
+  "description": "The Procore daily log writes itself from the field record — manpower by cost code, quantities, notes — with a human review before anything posts.",
+  "author": {
+    "@type": "Person",
+    "name": "DaRoy Perkins",
+    "url": "https://daroyperkins.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "DaRoy Perkins",
+    "url": "https://daroyperkins.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://daroyperkins.com/blog/use-case-procore-daily-log-automation.html"
+  },
+  "datePublished": "2026-10-16",
+  "dateModified": "2026-11-10"
+}
+  </script>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"><span class="bolt">⚡</span> DaRoy Perkins</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../portfolio.html">Portfolio</a></li>
+      <li><a href="../resume.html">Resume</a></li>
+      <li><a href="index.html">Writing</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="article">
+    <div class="wrap">
+      <p><a href="index.html">← All writing</a></p>
+      <h1>Procore Daily-Log Automation</h1>
+      <p class="meta">Featured use case · Agents in the Trades</p>
+<span class="tag">Reporting</span>
+<p class="dek">Delivery tickets get photographed and emailed in during the day. By the time the superintendent sits down, the agent has already drafted the daily log — manpower, materials received, and notes — waiting for review instead of a blank form.</p>
+
+  <div class="stat-row">
+    <div class="stat"><b>3–5 hrs/wk</b><span>Time saved (typical)</span></div>
+    <div class="stat"><b>Medium</b><span>Setup difficulty</span></div>
+    <div class="stat"><b>Superintendent</b><span>Who runs it</span></div>
+  </div>
+
+  <h2>The problem</h2>
+  <p>The daily log is the document of record for the job, and on most sites it gets written at the end of the day, from memory, by the person who is already the busiest on site. Manpower counts get reconstructed from whoever happened to be standing nearby. The delivery ticket for the morning's modules is in a truck visor, or folded into a pocket, or already in the dumpster. The log that reaches the office reads fine and matches the day only loosely.</p>
+  <p>The information isn't missing — it passes through the site all day long. Tickets get signed, headcounts happen at the gate, work gets done in specific areas. It just never lands in one place while it's still fresh. By Friday, reconstructing Tuesday is guesswork, and when a quantity is disputed two months later, the log is what's left to argue from.</p>
+
+  <h2>How the agent workflow works</h2>
+  <ol>
+    <li>Every delivery ticket gets photographed at the gate or the laydown yard, before the truck leaves, and emailed to a dedicated project inbox. A phone photo is fine — readable beats pretty.</li>
+    <li>The agent watches that inbox. Each photo is run through OCR and image reading: vendor, ticket number, date, material description, quantity, and unit are pulled into structured fields.</li>
+    <li>Manpower comes in the same way. The roster or time record for the day — from the timekeeping system or a simple emailed headcount by crew and cost code — is rolled up into the log's manpower section.</li>
+    <li>The agent assembles a draft daily log in the same structure the project platform uses: manpower by cost code, materials received with quantities and ticket numbers, plus a notes field summarizing the day's deliveries and any flagged exceptions.</li>
+    <li>The superintendent reviews the draft — typically a few minutes — corrects anything the photos didn't capture, adds the day's work narrative, and posts it. Nothing reaches the official log without that review.</li>
+  </ol>
+
+  <h2>What you need to set it up</h2>
+  <ul>
+    <li>A dedicated project email inbox that the agent can read on a schedule.</li>
+    <li>An agent or automation platform with OCR/image reading and email access, connected to your daily-log platform or producing a draft in its format.</li>
+    <li>A simple site rule, agreed with the crew: every ticket gets photographed before the truck leaves. This habit is the whole system.</li>
+    <li>A defined reviewer — usually the superintendent — who approves every draft before it posts.</li>
+  </ul>
+
+  <h2>Where it breaks</h2>
+  <p>Handwritten ticket annotations are the weak point. OCR reads printed quantities well; a driver's scrawled correction, a grease-smudged number, or a photo taken at an angle in bad light will be misread or dropped, sometimes silently. Carbon-copy tickets with faint print are worse. The agent also cannot verify that what the ticket says matches what actually came off the truck — a short shipment signed for in a rush will be logged as received in full, because the paperwork says so. And if nobody photographs the ticket, the delivery simply does not exist for the system. The draft is a transcription tool, not an inspection. The reviewer's pass over quantities against what they saw on the ground is not optional overhead; it is the control that makes the log trustworthy.</p>
+
+  <h2>The bottom line</h2>
+  <p>For a superintendent writing daily logs from memory every evening, this returns the end of the day and produces a log built from the day's own paperwork instead of recollection. The technology is the easy half — the photo habit at the gate is what makes it work.</p>
+      <p class="meta-note" style="color: var(--muted); font-size: 14px;">First published at <a href="https://agentsinthetrades.com/">Agents in the Trades</a>.</p>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 DaRoy Perkins</span>
+    <span>Built for the field. ⚡</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>

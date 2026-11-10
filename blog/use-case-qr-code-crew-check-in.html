@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR-Code Crew Check-In — DaRoy Perkins</title>
+  <meta name="description" content="The sign-in sheet on a clipboard at the gate trailer misses half the crew. A QR code at the gate fixes time, attendance, and the morning count.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://daroyperkins.com/blog/use-case-qr-code-crew-check-in.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="DaRoy Perkins">
+  <meta property="og:title" content="QR-Code Crew Check-In — DaRoy Perkins">
+  <meta property="og:description" content="The sign-in sheet on a clipboard at the gate trailer misses half the crew. A QR code at the gate fixes time, attendance, and the morning count.">
+  <meta property="og:url" content="https://daroyperkins.com/blog/use-case-qr-code-crew-check-in.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="QR-Code Crew Check-In — DaRoy Perkins">
+  <meta name="twitter:description" content="The sign-in sheet on a clipboard at the gate trailer misses half the crew. A QR code at the gate fixes time, attendance, and the morning count.">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "QR-Code Crew Check-In",
+  "description": "The sign-in sheet on a clipboard at the gate trailer misses half the crew. A QR code at the gate fixes time, attendance, and the morning count.",
+  "author": {
+    "@type": "Person",
+    "name": "DaRoy Perkins",
+    "url": "https://daroyperkins.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "DaRoy Perkins",
+    "url": "https://daroyperkins.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://daroyperkins.com/blog/use-case-qr-code-crew-check-in.html"
+  },
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-11-10"
+}
+  </script>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"><span class="bolt">⚡</span> DaRoy Perkins</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../portfolio.html">Portfolio</a></li>
+      <li><a href="../resume.html">Resume</a></li>
+      <li><a href="index.html">Writing</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="article">
+    <div class="wrap">
+      <p><a href="index.html">← All writing</a></p>
+      <h1>QR-Code Crew Check-In</h1>
+      <p class="meta">Featured use case · Agents in the Trades</p>
+<span class="tag">Field Ops</span>
+<p class="dek">On a commercial solar site, the sign-in sheet lives on a clipboard at the gate trailer. Half the crew signs in. The other half arrives while the foreman is on the radio with a delivery driver. By...</p>
+
+  <h2>The problem</h2>
+  <p>On a commercial solar site, the sign-in sheet lives on a clipboard at the gate trailer. Half the crew signs in. The other half arrives while the foreman is on the radio with a delivery driver. By 3:30 the superintendent is writing the daily log from memory: how many electricians, how many laborers, how many from the pile-driving sub, and what they worked on.</p>
+  <p>The headcount ends up as a guess. Labor hours by cost code get reconstructed later from timecards that don&#x27;t match the log. When a dispute comes up over who was on site the day a trench was backfilled before inspection, the paper sheet is illegible or missing.</p>
+  <p>The problem isn&#x27;t that people won&#x27;t sign in. The sign-in method is slow, unreadable, and disconnected from the daily record.</p>
+<h2>How the agent workflow works</h2>
+  <p>A QR code is posted at the site entrance, laminated and mounted at scanning height. Each crew member scans it with a phone and fills a short form: name, company or crew, and the cost code or work area they are starting in. A scan at the end of the day records departure.</p>
+  <p>The agent watches the form responses as they come in. It does four things:</p>
+  <ol>
+<li>Reads each new check-in and matches the name and crew against the approved roster for the job.</li>
+<li>Builds a running headcount by crew and cost code through the day.</li>
+<li>Flags anything odd: a name not on the roster, a crew with no check-in when the schedule shows them working, a check-in with no check-out, or a cost code that doesn&#x27;t match the day&#x27;s planned work.</li>
+<li>Drafts the headcount section of the daily log at a set time, say 2:30 p.m., so the superintendent has something to correct instead of something to write.</li>
+</ol>
+  <p>The human checkpoint is the superintendent or foreman. They review the flags, resolve unknown names, fix cost codes where a crew changed tasks midday, and approve the draft before it is saved to the daily record. The agent never posts to the log on its own and never edits payroll or timecards. It produces a draft and a list of questions.</p>
+<h2>What you need to set it up</h2>
+  <ul>
+<li>A form tool that can generate a QR code and write responses to a spreadsheet. Most form and spreadsheet subscriptions you already have will do this.</li>
+<li>A current roster of people and crews approved for the site, kept in the same spreadsheet.</li>
+<li>Your cost code list, entered as a dropdown so people pick rather than type.</li>
+<li>An AI agent or automation tool that can read the spreadsheet on a schedule and write a draft summary to a document or message.</li>
+<li>A laminated QR sign at each gate, plus a short note for subs explaining what to do.</li>
+</ul>
+  <p>Setup time is a few hours for the form, roster, and sign. Plan another few hours across the first week to tune the flag rules against real check-ins.</p>
+<h2>Where it breaks</h2>
+  <p>Cell coverage. Many solar sites sit in open ground with weak signal. If the gate has no service, scans fail and people skip it. Test at the gate at 6 a.m. before you rely on it, and consider a hotspot or a printed fallback sheet.</p>
+  <p>Buddy scans. One person scans for three others, or someone scans from the truck and never enters the site. The agent can&#x27;t see who is physically present. It only sees who submitted. If headcount affects safety or billing, the foreman still walks the site.</p>
+  <p>Missed check-outs. People leave without scanning out. Expect this to be the most common gap. The agent will flag it, but the fix is a foreman habit, not software.</p>
+  <p>Roster drift. A sub sends two new hires and nobody updates the roster. The agent flags them as unknown, which is correct, but a pile of daily flags gets ignored. Keep the roster current or the flags lose meaning.</p>
+  <p>Cost code errors. Crews pick the first code in the dropdown or the one they used yesterday. The agent can compare against the schedule, but it can&#x27;t know a crew moved to a different task at noon.</p>
+  <p>Privacy and policy. Check-in data is time and location data on workers. Tell crews what is collected and who sees it, and confirm it fits your contract and any labor agreements.</p>
+<h2>The bottom line</h2>
+  <p>This replaces the clipboard and the end-of-day guess with a draft the superintendent can verify in a few minutes. It does not replace walking the site or confirming who is really there.</p>
+  <p>Start with one gate and one crew mix for a week. Compare the agent&#x27;s headcount against what the foreman counts by eye. If they track, expand it. If they don&#x27;t, the gaps will show you whether the issue is signal, habits, or the roster.</p>
+      <p class="meta-note" style="color: var(--muted); font-size: 14px;">First published at <a href="https://agentsinthetrades.com/">Agents in the Trades</a>.</p>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 DaRoy Perkins</span>
+    <span>Built for the field. ⚡</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
